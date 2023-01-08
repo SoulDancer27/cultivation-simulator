@@ -7,7 +7,7 @@ export default function PlayerStatsPane() {
   const { age, health, attack, defence } = stats;
   return (
     <Box>
-      <Typography>Nameless Cultivator</Typography>
+      <Typography>Nameless Hero</Typography>
       <Typography>Age: {parsePlayerAge(age)}</Typography>
       <Typography>Hp: {health.toFixed(2)}</Typography>
       <Typography>Atk: {attack.toFixed(2)}</Typography>
