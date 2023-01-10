@@ -1,10 +1,11 @@
-import { PlayerStats } from "Context/PlayerContext/PlayerContext";
+import { PlayerStats } from "./Player";
 
 const Trainings: TrainingType[] = [
   {
     name: "Basic health training",
     stats: {
       health: 1,
+      healthRegen: 0.01,
     },
   },
   {

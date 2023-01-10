@@ -1,27 +1,14 @@
 import React from "react";
-import { TrainingType } from "Variables/Trainings";
-
-export type PlayerAction = "idle" | "training";
-
-export type PlayerState = { action: PlayerAction; training?: TrainingType };
-
-export type PlayerStats = {
-  age: number;
-  health: number;
-  defence: number;
-  attack: number;
-};
-
-export type PlayerContextType = {
-  stats: PlayerStats;
-  state: PlayerState;
-};
+import { PlayerContextType } from "GameConstants/Player";
+import { yearSpan } from "GameConstants/Constants";
 
 export const playerContext: PlayerContextType = {
   stats: {
     // just set at 10 years
-    age: (3600000 / 70) * 10,
+    age: yearSpan * 10,
     health: 10,
+    currentHealth: 10,
+    healthRegen: 0.5,
     defence: 0,
     attack: 1,
   },

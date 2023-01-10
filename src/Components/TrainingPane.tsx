@@ -1,10 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext, {
-  PlayerState,
-} from "Context/PlayerContext/PlayerContext";
+import PlayerContext from "Context/PlayerContext/PlayerContext";
 import React, { Dispatch, SetStateAction } from "react";
 import PlayerStatsDictionary from "Utils/PlayerStatsDictionary";
-import Trainings, { TrainingType } from "Variables/Trainings";
+import Trainings, { TrainingType } from "GameConstants/Trainings";
+import { PlayerState } from "GameConstants/Player";
 
 export default function TrainingPane() {
   const [activeTrainingName, setActiveTrainingName] =
@@ -43,14 +42,15 @@ function TrainingButton(props: TrainingButtonProps) {
   }
 
   const handleClick = () => {
-    const newPlayerState: PlayerState = {
-      action: "training",
-      training: { name, stats },
-    };
+    const newPlayerState: PlayerState = isActive
+      ? { action: "idle" }
+      : {
+          action: "training",
+          training: { name, stats },
+        };
     updateContext({ state: newPlayerState });
-    setActiveTrainingName(name);
+    setActiveTrainingName(isActive ? "" : name);
   };
-
   return (
     <Box bgcolor={isActive ? "lightgray" : "white"} onClick={handleClick}>
       <Typography>{name}</Typography>
