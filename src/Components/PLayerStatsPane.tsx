@@ -4,7 +4,7 @@ import { monthSpan, yearSpan } from "GameConstants/Constants";
 import React from "react";
 
 export default function PlayerStatsPane() {
-  const { stats } = React.useContext(PlayerContext);
+  const { stats, realm } = React.useContext(PlayerContext);
   const { age, health, attack, defence, currentHealth, healthRegen } = stats;
   return (
     <Box>
@@ -16,6 +16,7 @@ export default function PlayerStatsPane() {
       <Typography>Hp.regen {healthRegen.toFixed(2)}</Typography>
       <Typography>Atk: {attack.toFixed(2)}</Typography>
       <Typography>Def: {defence.toFixed(2)}</Typography>
+      <Typography>Current Realm: {realm.name}</Typography>
     </Box>
   );
 }

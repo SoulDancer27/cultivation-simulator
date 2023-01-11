@@ -12,6 +12,10 @@ export const playerContext: PlayerContextType = {
     defence: 0,
     attack: 1,
   },
+  realm: {
+    name: "Mortal 0",
+    power: {},
+  },
   state: { action: "idle" },
 };
 

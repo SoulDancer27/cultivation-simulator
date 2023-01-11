@@ -17,7 +17,13 @@ export type PlayerStats = {
   attack: number;
 };
 
+export type PlayerRealm = {
+  name: string;
+  power: Partial<PlayerStats>;
+};
+
 export type PlayerContextType = {
   stats: PlayerStats;
+  realm: PlayerRealm;
   state: PlayerState;
 };

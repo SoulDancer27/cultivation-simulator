@@ -6,8 +6,8 @@ import Trainings, { TrainingType } from "GameConstants/Trainings";
 import { PlayerState } from "GameConstants/Player";
 
 export default function TrainingPane() {
-  const [activeTrainingName, setActiveTrainingName] =
-    React.useState<string>("");
+  const { state, updateContext } = React.useContext(PlayerContext);
+  const currentTrainingName = state.training?.name || "";
   return (
     <Box>
       <Typography>Train</Typography>
@@ -15,8 +15,7 @@ export default function TrainingPane() {
         <TrainingButton
           name={training.name}
           stats={training.stats}
-          isActive={activeTrainingName === training.name}
-          setActiveTrainingName={setActiveTrainingName}
+          isActive={currentTrainingName === training.name}
           key={training.name}
         />
       ))}
@@ -26,11 +25,10 @@ export default function TrainingPane() {
 
 type TrainingButtonProps = TrainingType & {
   isActive: boolean;
-  setActiveTrainingName: Dispatch<SetStateAction<string>>;
 };
 
 function TrainingButton(props: TrainingButtonProps) {
-  const { name, stats, isActive, setActiveTrainingName } = props;
+  const { name, stats, isActive } = props;
   const { updateContext } = React.useContext(PlayerContext);
 
   const TrainingDescription: TrainingButtonStatsLine[] = [];
@@ -49,7 +47,6 @@ function TrainingButton(props: TrainingButtonProps) {
           training: { name, stats },
         };
     updateContext({ state: newPlayerState });
-    setActiveTrainingName(isActive ? "" : name);
   };
   return (
     <Box bgcolor={isActive ? "lightgray" : "white"} onClick={handleClick}>

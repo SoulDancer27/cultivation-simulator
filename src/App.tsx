@@ -6,6 +6,7 @@ import GameContextLoader from "Context/GameContextLoader";
 import PlayerStatsPane from "Components/PlayerStatsPane";
 import TrainingPane from "Components/TrainingPane";
 import EnemyPane from "Components/EnemyPane";
+import RealmBreakthroughPane from "Components/RealmBreakthroughPane";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <PlayerStatsPane />
           <TrainingPane />
           <EnemyPane />
+          <RealmBreakthroughPane />
         </GameContextLoader>
       </PlayerContextLoader>
     </ThemeProvider>
