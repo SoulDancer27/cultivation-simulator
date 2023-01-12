@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 import React from "react";
 import PlayerContextLoader from "Context/PlayerContextLoader";
@@ -13,10 +13,14 @@ export default function App() {
     <ThemeProvider theme={LightTheme}>
       <PlayerContextLoader>
         <GameContextLoader>
-          <PlayerStatsPane />
-          <TrainingPane />
-          <EnemyPane />
-          <RealmBreakthroughPane />
+          <Box display="flex">
+            <Box marginRight={10}>
+              <PlayerStatsPane />
+              <TrainingPane />
+              <EnemyPane />
+            </Box>
+            <RealmBreakthroughPane />
+          </Box>
         </GameContextLoader>
       </PlayerContextLoader>
     </ThemeProvider>

@@ -1,11 +1,13 @@
+import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
 import { TrainingType } from "./Trainings";
-export type PlayerAction = "idle" | "training" | "fighting";
+export type PlayerAction = "idle" | "training" | "fighting" | "breakthrough";
 
 export type PlayerState = {
   action: PlayerAction;
   training?: TrainingType;
   enemy?: EnemyType;
+  realm?: CultivationRealmType;
 };
 
 export type PlayerStats = {

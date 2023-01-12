@@ -2,21 +2,33 @@ import { Box, Typography } from "@mui/material";
 import PlayerContext from "Context/PlayerContext/PlayerContext";
 import { monthSpan, yearSpan } from "GameConstants/Constants";
 import React from "react";
+import {
+  playerAttack,
+  playerDefence,
+  playerHealth,
+  playerHealthRegen,
+} from "Utils/PlayerStats";
 
 export default function PlayerStatsPane() {
-  const { stats, realm } = React.useContext(PlayerContext);
-  const { age, health, attack, defence, currentHealth, healthRegen } = stats;
+  const player = React.useContext(PlayerContext);
+  const { age, currentHealth } = player.stats;
+  const health = playerHealth(player);
+  const attack = playerAttack(player);
+  const defence = playerDefence(player);
+  const healthRegen = playerHealthRegen(player);
+  const realm = player.realm.name;
+
   return (
     <Box>
       <Typography>Nameless Hero</Typography>
       <Typography>Age: {parsePlayerAge(age)}</Typography>
+      <Typography>Realm: {realm}</Typography>
       <Typography>
         Hp: {currentHealth.toFixed(2)} / {health.toFixed(2)}
       </Typography>
       <Typography>Hp.regen {healthRegen.toFixed(2)}</Typography>
       <Typography>Atk: {attack.toFixed(2)}</Typography>
       <Typography>Def: {defence.toFixed(2)}</Typography>
-      <Typography>Current Realm: {realm.name}</Typography>
     </Box>
   );
 }

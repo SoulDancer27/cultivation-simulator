@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import PlayerContext from "Context/PlayerContext/PlayerContext";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import PlayerStatsDictionary from "Utils/PlayerStatsDictionary";
 import Trainings, { TrainingType } from "GameConstants/Trainings";
 import { PlayerState } from "GameConstants/Player";
 
 export default function TrainingPane() {
-  const { state, updateContext } = React.useContext(PlayerContext);
+  const { state } = React.useContext(PlayerContext);
   const currentTrainingName = state.training?.name || "";
   return (
     <Box>
@@ -29,13 +29,13 @@ type TrainingButtonProps = TrainingType & {
 
 function TrainingButton(props: TrainingButtonProps) {
   const { name, stats, isActive } = props;
-  const { updateContext } = React.useContext(PlayerContext);
+  const { updateContext, realm } = React.useContext(PlayerContext);
 
   const TrainingDescription: TrainingButtonStatsLine[] = [];
   for (const [key, value] of Object.entries(stats)) {
     TrainingDescription.push({
       text: PlayerStatsDictionary[key],
-      effect: value,
+      effect: value * (realm.power[key] || 1),
     });
   }
 

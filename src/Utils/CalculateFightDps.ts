@@ -5,10 +5,11 @@ type AttackerStats = {
 
 type DefenderStats = {
   defence: number;
+  healthRegen: number;
 };
 export default function CalculateFightDps(
   attacker: AttackerStats,
   defender: DefenderStats
 ) {
-  return attacker.attack / (1 + 0.01 * defender.defence);
+  return attacker.attack / (1 + 0.01 * defender.defence) - defender.healthRegen;
 }

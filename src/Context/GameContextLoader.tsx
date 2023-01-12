@@ -1,6 +1,15 @@
 import { defaultUpdateInterval } from "GameConstants/Constants";
+import { CultivationRealms } from "GameConstants/CultivationRealms";
 import React from "react";
+import BreakthroughDps from "Utils/BreakthroughDps";
 import CalculateFightDps from "Utils/CalculateFightDps";
+import {
+  playerAttack,
+  playerDefence,
+  playerHealth,
+  playerHealthRegen,
+} from "Utils/PlayerStats";
+import TribulationDps from "Utils/RealmTribulationDps";
 import GameContext, {
   gameContext,
   GameContextType,
@@ -9,7 +18,8 @@ import PlayerContext from "./PlayerContext/PlayerContext";
 
 // Wrapper for loading player save data
 export default function GameContextLoader(props: any) {
-  let { stats, state, updateContext } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  let { stats, state, realm, updateContext } = player;
   const [timer, setTimer] = React.useState(gameContext);
   /** Updates player context using shallow merge of UserContext attributes. */
   const updateGameContext = (newData: Partial<GameContextType>) =>
@@ -35,10 +45,13 @@ export default function GameContextLoader(props: any) {
     const elapsedTime = timer.currentTime - timer.previousTime;
     stats.age += elapsedTime;
     // Regen health if health is not full
-    if (stats.currentHealth <= stats.health)
+    if (
+      stats.currentHealth <= stats.health &&
+      ["idle", "training"].includes(state.action)
+    )
       stats.currentHealth = Math.min(
-        stats.currentHealth + (stats.healthRegen * elapsedTime) / 1000,
-        stats.health
+        stats.currentHealth + (playerHealthRegen(player) * elapsedTime) / 1000,
+        playerHealth(player)
       );
 
     if (state.action === "training" && state.training) {
@@ -49,22 +62,21 @@ export default function GameContextLoader(props: any) {
     if (state.action === "fighting" && state.enemy) {
       // Calculate damage dealt by both parties
       const playerDps = CalculateFightDps(
-        { attack: stats.attack },
-        { defence: state.enemy.defence }
+        { attack: playerAttack(player) },
+        { defence: state.enemy.defence, healthRegen: state.enemy.healthRegen }
       );
       const enemyDps = CalculateFightDps(
         { attack: state.enemy.attack },
-        { defence: stats.defence }
+        {
+          defence: playerDefence(player),
+          healthRegen: playerHealthRegen(player),
+        }
       );
       const playerDamage = (playerDps * elapsedTime) / 1000;
       const enemyDamage = (enemyDps * elapsedTime) / 1000;
 
-      const newEnemyHealth = Math.min(
-        state.enemy.health -
-          playerDamage +
-          (state.enemy.healthRegen * elapsedTime) / 1000,
-        state.enemy.health
-      );
+      const newEnemyHealth = state.enemy.health - playerDamage;
+
       const newPlayerHealth = stats.currentHealth - enemyDamage;
 
       // Victory condition
@@ -83,7 +95,50 @@ export default function GameContextLoader(props: any) {
         state.enemy.health = newEnemyHealth;
       }
     }
-    updateContext({ stats, state });
+    if (state.action === "breakthrough" && state.realm) {
+      // Calculate damage dealt by both parties
+      const playerDps = BreakthroughDps(
+        { attack: playerAttack(player) },
+        { defence: state.realm.defence, healthRegen: state.realm.healthRegen }
+      );
+      const realmDps = TribulationDps(
+        { attack: state.realm.attack },
+        {
+          defence: playerDefence(player),
+          healthRegen: playerHealthRegen(player),
+        }
+      );
+      const playerDamage = (playerDps * elapsedTime) / 1000;
+      const realmDamage = (realmDps * elapsedTime) / 1000;
+
+      const newRealmHealth = state.realm.health - playerDamage;
+      const newPlayerHealth = stats.currentHealth - realmDamage;
+
+      // Victory condition
+      if (newRealmHealth <= 0) {
+        // Update player realm
+        const newRealm = CultivationRealms.find(
+          (item) => item.name === state.realm?.name
+        );
+        if (newRealm) {
+          realm.name = newRealm.name;
+          realm.power = newRealm.realmPowers;
+        }
+        state = { action: "idle", realm: undefined };
+        alert("Breakthrough success!");
+      }
+      // Loss condition
+      else if (newPlayerHealth <= 0) {
+        state = { action: "idle", realm: undefined };
+        alert("Breakthrough failed, you are not strong enough yet");
+      }
+      // Update Hp values for both parties
+      else {
+        stats.currentHealth = newPlayerHealth;
+        state.realm.health = newRealmHealth;
+      }
+    }
+    updateContext({ stats, state, realm });
   }, [timer]);
 
   return (
