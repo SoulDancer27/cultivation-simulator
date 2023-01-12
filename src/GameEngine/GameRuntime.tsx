@@ -65,9 +65,7 @@ export default function GameRuntime(props: any) {
 
     if (state.action === "breakthrough" && state.realm) {
       const breakthroughResult = breakthroughManager({
-        state,
-        stats,
-        realm,
+        player,
         elapsedTime,
       });
       state = breakthroughResult.state;
@@ -77,11 +75,6 @@ export default function GameRuntime(props: any) {
 
     updateContext({ stats, state, realm, baseStats });
   }, [timer]);
-
-  // Recalculate stats based on conditions change
-  React.useEffect(() => {
-    stats = playerStats(player);
-  }, [baseStats, realm]);
 
   return (
     <GameContext.Provider

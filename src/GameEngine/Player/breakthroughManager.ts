@@ -1,10 +1,14 @@
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import { PlayerRealm, PlayerState, PlayerStats } from "GameConstants/Player";
+import {
+  PlayerContextType,
+  PlayerRealm,
+  PlayerState,
+  PlayerStats,
+} from "GameConstants/Player";
+import { playerStats } from "./playerStats";
 
 type BreakthroughState = {
-  stats: PlayerStats;
-  state: PlayerState;
-  realm: PlayerRealm;
+  player: PlayerContextType;
   elapsedTime: number;
 };
 
@@ -17,7 +21,8 @@ type BreakthroughResult = {
 export default function breakthroughManager(
   props: BreakthroughState
 ): BreakthroughResult {
-  let { stats, state, elapsedTime, realm } = props;
+  const { player, elapsedTime } = props;
+  let { stats, state, realm } = player;
   // Typeguard
   if (state.action !== "breakthrough" || !state.realm)
     return { state, stats, realm };
@@ -51,6 +56,8 @@ export default function breakthroughManager(
       realm.power = newRealm.realmPowers;
     }
     state = { action: "idle", realm: undefined };
+    // Update player stats
+    stats = playerStats(player);
     alert("Breakthrough success!");
   }
   // Loss condition

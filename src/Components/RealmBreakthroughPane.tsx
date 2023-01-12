@@ -33,7 +33,7 @@ export default function RealmBreakthroughPane() {
 
 function BreakthroughCard(props: { realm: CultivationRealmType }) {
   const { realm } = props;
-  const { name, health, healthRegen, attack, defence } = realm;
+  const { name, healthRegen, attack, defence } = realm;
   const { state, updateContext } = React.useContext(PlayerContext);
   const isActive = state.action === "breakthrough";
   const currentHealth = state.realm?.health.toFixed(2) || realm.health;
