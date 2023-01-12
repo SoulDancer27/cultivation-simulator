@@ -1,5 +1,6 @@
-import { PlayerStats } from "./Player";
+import { PlayerBaseStats } from "./Player";
 
+// Provide bonuses to base stats
 const Trainings: TrainingType[] = [
   {
     name: "Basic health training",
@@ -26,5 +27,5 @@ export default Trainings;
 
 export type TrainingType = {
   name: string;
-  stats: Partial<PlayerStats>;
+  stats: Partial<PlayerBaseStats>;
 };

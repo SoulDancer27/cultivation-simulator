@@ -1,13 +1,14 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext from "Context/PlayerContext/PlayerContext";
+import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
-import PlayerStatsDictionary from "Utils/PlayerStatsDictionary";
 import Trainings, { TrainingType } from "GameConstants/Trainings";
 import { PlayerState } from "GameConstants/Player";
+import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 
 export default function TrainingPane() {
   const { state } = React.useContext(PlayerContext);
-  const currentTrainingName = state.training?.name || "";
+  const currentTrainingName =
+    state.action === "training" ? state.training?.name || "" : "";
   return (
     <Box>
       <Typography>Train</Typography>

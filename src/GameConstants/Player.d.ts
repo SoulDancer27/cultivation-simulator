@@ -12,8 +12,16 @@ export type PlayerState = {
 
 export type PlayerStats = {
   age: number;
-  health: number;
   currentHealth: number;
+  // Calculated values. Are stored to not recalculate them on every game tick
+  health: number;
+  healthRegen: number;
+  defence: number;
+  attack: number;
+};
+
+export type PlayerBaseStats = {
+  health: number;
   healthRegen: number;
   defence: number;
   attack: number;
@@ -21,11 +29,12 @@ export type PlayerStats = {
 
 export type PlayerRealm = {
   name: string;
-  power: Partial<PlayerStats>;
+  power: Partial<PlayerBaseStats>;
 };
 
 export type PlayerContextType = {
   stats: PlayerStats;
+  baseStats: PlayerBaseStats;
   realm: PlayerRealm;
   state: PlayerState;
 };

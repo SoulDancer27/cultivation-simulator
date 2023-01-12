@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import PlayerContext from "Context/PlayerContext/PlayerContext";
+import PlayerContext from "GameEngine/Player/PlayerContext";
 import { Enemies, EnemyType } from "GameConstants/Enemies";
 import React from "react";
 

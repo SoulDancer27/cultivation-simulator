@@ -4,10 +4,15 @@ import { yearSpan } from "GameConstants/Constants";
 
 export const playerContext: PlayerContextType = {
   stats: {
-    // just set at 10 years
     age: yearSpan * 10,
-    health: 10,
     currentHealth: 10,
+    health: 10,
+    healthRegen: 0.5,
+    defence: 0,
+    attack: 1,
+  },
+  baseStats: {
+    health: 10,
     healthRegen: 0.5,
     defence: 0,
     attack: 1,

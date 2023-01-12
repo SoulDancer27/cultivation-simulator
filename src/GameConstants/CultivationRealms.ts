@@ -1,4 +1,4 @@
-import { PlayerStats } from "./Player";
+import { PlayerBaseStats } from "./Player";
 
 export type CultivationRealmType = {
   name: string;
@@ -6,7 +6,7 @@ export type CultivationRealmType = {
   healthRegen: number;
   defence: number;
   attack: number;
-  realmPowers: Partial<PlayerStats>;
+  realmPowers: Partial<PlayerBaseStats>;
 };
 
 export const CultivationRealms: CultivationRealmType[] = [

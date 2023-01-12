@@ -1,7 +1,7 @@
 import { defaultAutosaveInterval } from "GameConstants/Constants";
 import { PlayerContextType } from "GameConstants/Player";
 import React from "react";
-import PlayerContext, { playerContext } from "./PlayerContext/PlayerContext";
+import PlayerContext, { playerContext } from "./Player/PlayerContext";
 
 // Wrapper for loading player save data
 export default function PlayerContextLoader(props: any) {

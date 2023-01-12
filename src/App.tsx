@@ -1,18 +1,19 @@
 import { Box, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 import React from "react";
-import PlayerContextLoader from "Context/PlayerContextLoader";
-import GameContextLoader from "Context/GameContextLoader";
+
 import PlayerStatsPane from "Components/PlayerStatsPane";
 import TrainingPane from "Components/TrainingPane";
 import EnemyPane from "Components/EnemyPane";
 import RealmBreakthroughPane from "Components/RealmBreakthroughPane";
+import SaveLoader from "GameEngine/SaveLoader";
+import GameRuntime from "GameEngine/GameRuntime";
 
 export default function App() {
   return (
     <ThemeProvider theme={LightTheme}>
-      <PlayerContextLoader>
-        <GameContextLoader>
+      <SaveLoader>
+        <GameRuntime>
           <Box display="flex">
             <Box marginRight={10}>
               <PlayerStatsPane />
@@ -21,8 +22,8 @@ export default function App() {
             </Box>
             <RealmBreakthroughPane />
           </Box>
-        </GameContextLoader>
-      </PlayerContextLoader>
+        </GameRuntime>
+      </SaveLoader>
     </ThemeProvider>
   );
 }
