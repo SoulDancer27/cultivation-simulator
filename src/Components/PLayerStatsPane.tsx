@@ -5,7 +5,8 @@ import React from "react";
 
 export default function PlayerStatsPane() {
   const { stats, realm } = React.useContext(PlayerContext);
-  const { age, currentHealth, health, attack, defence, healthRegen } = stats;
+  const { age, currentHealth, health, attack, defence, healthRegen, insight } =
+    stats;
 
   return (
     <Box>
@@ -18,6 +19,7 @@ export default function PlayerStatsPane() {
       <Typography>Hp.regen {healthRegen.toFixed(2)}</Typography>
       <Typography>Atk: {attack.toFixed(2)}</Typography>
       <Typography>Def: {defence.toFixed(2)}</Typography>
+      <Typography>Insight: {insight.toFixed(2)}</Typography>
     </Box>
   );
 }

@@ -21,6 +21,7 @@ export const CultivationRealms: CultivationRealmType[] = [
       healthRegen: 1,
       defence: 1,
       attack: 1,
+      insight: 1,
     },
   },
   {
@@ -34,6 +35,7 @@ export const CultivationRealms: CultivationRealmType[] = [
       healthRegen: 1.2,
       defence: 1.2,
       attack: 1.2,
+      insight: 1.2,
     },
   },
   {
@@ -47,6 +49,7 @@ export const CultivationRealms: CultivationRealmType[] = [
       healthRegen: 1.44,
       defence: 1.44,
       attack: 1.44,
+      insight: 1.44,
     },
   },
   {
@@ -60,6 +63,7 @@ export const CultivationRealms: CultivationRealmType[] = [
       healthRegen: 1.73,
       defence: 1.73,
       attack: 1.73,
+      insight: 1.73,
     },
   },
 ];

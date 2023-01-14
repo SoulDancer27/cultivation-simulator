@@ -42,8 +42,14 @@ export default function breakthroughManager(
   const playerDamage = (playerDps * elapsedTime) / 1000;
   const realmDamage = (realmDps * elapsedTime) / 1000;
 
-  const newRealmHealth = state.realm.health - playerDamage;
-  const newPlayerHealth = stats.currentHealth - realmDamage;
+  const newRealmHealth = Math.min(
+    state.realm.currentHealth - playerDamage,
+    state.realm.health
+  );
+  const newPlayerHealth = Math.min(
+    stats.currentHealth - realmDamage,
+    stats.health
+  );
 
   // Victory condition
   if (newRealmHealth <= 0) {
@@ -68,7 +74,7 @@ export default function breakthroughManager(
   // Update Hp values for both parties
   else {
     stats.currentHealth = newPlayerHealth;
-    state.realm.health = newRealmHealth;
+    state.realm.currentHealth = newRealmHealth;
   }
   return { state, stats, realm };
 }

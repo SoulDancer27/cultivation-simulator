@@ -4,22 +4,10 @@ import { Enemies, EnemyType } from "GameConstants/Enemies";
 import React from "react";
 
 export default function EnemyPane() {
-  const [activeEnemyName, setActiveEnemyName] = React.useState<string>("");
-  const { state } = React.useContext(PlayerContext);
-
-  React.useEffect(() => {
-    setActiveEnemyName(state.enemy?.name || "");
-  }, [state.enemy?.name]);
-
   return (
     <Box>
       {Enemies.map((enemy) => (
-        <EnemyCard
-          enemy={enemy}
-          isActive={activeEnemyName === enemy.name}
-          setActiveEnemyName={setActiveEnemyName}
-          key={enemy.name}
-        />
+        <EnemyCard enemy={enemy} key={enemy.name} />
       ))}
     </Box>
   );
@@ -27,19 +15,28 @@ export default function EnemyPane() {
 
 type EnemyCardProps = {
   enemy: EnemyType;
-  isActive: boolean;
-  setActiveEnemyName: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function EnemyCard(props: EnemyCardProps) {
-  const { enemy, isActive, setActiveEnemyName } = props;
+  const { enemy } = props;
   const { name, health, attack, defence, healthRegen } = enemy;
-  const { state } = React.useContext(PlayerContext);
+  const { state, updateContext } = React.useContext(PlayerContext);
+  const currentEnemy = state.enemy;
+  const isActive = currentEnemy && currentEnemy.name === name;
   const currentHealth = isActive
-    ? state.enemy
-      ? state.enemy.health.toFixed(2)
-      : health
+    ? currentEnemy.currentHealth.toFixed(2)
     : health;
+
+  function handleClick() {
+    updateContext({
+      state: {
+        action: isActive ? "idle" : "fighting",
+        enemy: isActive
+          ? undefined
+          : { ...structuredClone(enemy), currentHealth: enemy.health },
+      },
+    });
+  }
   return (
     <Box>
       <Typography>{name}</Typography>
@@ -47,34 +44,9 @@ function EnemyCard(props: EnemyCardProps) {
       <Typography>Hp.regen: {healthRegen}</Typography>
       <Typography>Atk: {attack}</Typography>
       <Typography>Def: {defence}</Typography>
-      <FightButton
-        enemy={enemy}
-        isActive={isActive}
-        setActiveEnemyName={setActiveEnemyName}
-      />
+      <Button onClick={handleClick} variant="outlined">
+        {isActive ? "Flee" : "Fight"}
+      </Button>
     </Box>
-  );
-}
-
-function FightButton(props: {
-  enemy: EnemyType;
-  isActive: boolean;
-  setActiveEnemyName: React.Dispatch<React.SetStateAction<string>>;
-}) {
-  const { enemy, isActive, setActiveEnemyName } = props;
-  const { updateContext } = React.useContext(PlayerContext);
-  function handleClick() {
-    setActiveEnemyName(isActive ? "" : enemy.name);
-    updateContext({
-      state: {
-        action: isActive ? "idle" : "fighting",
-        enemy: isActive ? undefined : structuredClone(enemy),
-      },
-    });
-  }
-  return (
-    <Button onClick={handleClick} variant="outlined">
-      {isActive ? "Flee" : "Fight"}
-    </Button>
   );
 }

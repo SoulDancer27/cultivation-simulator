@@ -12,9 +12,13 @@ export type PlayerAction =
 export type PlayerState = {
   action: PlayerAction;
   training?: TrainingType;
-  enemy?: EnemyType;
-  realm?: CultivationRealmType;
+  enemy?: PlayerEnemyType;
+  realm?: PlayerCultivationRealmType;
   manual?: PlayerCultivationManual;
+};
+
+type PlayerCultivationRealmType = CultivationRealmType & {
+  currentHealth: number;
 };
 
 export type PlayerStats = {
@@ -25,6 +29,7 @@ export type PlayerStats = {
   healthRegen: number;
   defence: number;
   attack: number;
+  insight: number;
 };
 
 export type PlayerBaseStats = {
@@ -32,6 +37,12 @@ export type PlayerBaseStats = {
   healthRegen: number;
   defence: number;
   attack: number;
+  // multiplier for cultivation experience gain
+  insight: number;
+};
+
+export type PlayerEnemyType = EnemyType & {
+  currentHealth: number;
 };
 
 export type PlayerRealm = {

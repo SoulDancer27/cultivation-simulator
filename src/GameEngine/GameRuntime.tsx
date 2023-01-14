@@ -5,6 +5,7 @@ import GameContext, {
   GameContextType,
 } from "./GameContext/GameContext";
 import breakthroughManager from "./Player/breakthroughManager";
+import cultivationManager from "./Player/cultivationManager";
 import fightManager from "./Player/fightManager";
 import PlayerContext from "./Player/PlayerContext";
 import { playerStats } from "./Player/playerStats";
@@ -71,6 +72,12 @@ export default function GameRuntime(props: any) {
       state = breakthroughResult.state;
       stats = breakthroughResult.stats;
       realm = breakthroughResult.realm;
+    }
+
+    if (state.action === "cultivating" && state.manual) {
+      const cultivationResult = cultivationManager({ player, elapsedTime });
+      stats = cultivationResult.player.stats;
+      state = cultivationResult.player.state;
     }
 
     updateContext({ stats, state, realm, baseStats });

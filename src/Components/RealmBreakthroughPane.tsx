@@ -36,10 +36,12 @@ function BreakthroughCard(props: { realm: CultivationRealmType }) {
   const { name, healthRegen, attack, defence } = realm;
   const { state, updateContext } = React.useContext(PlayerContext);
   const isActive = state.action === "breakthrough";
-  const currentHealth = state.realm?.health.toFixed(2) || realm.health;
+  const currentHealth = state.realm?.currentHealth.toFixed(2) || realm.health;
   const handleClick = () => {
     state.action = isActive ? "idle" : "breakthrough";
-    state.realm = isActive ? undefined : structuredClone(realm);
+    state.realm = isActive
+      ? undefined
+      : { ...structuredClone(realm), currentHealth: realm.health };
     updateContext({ state });
   };
   return (

@@ -29,3 +29,11 @@ export type CultivationManualType = {
   // Cumulative bonus to base stats
   stats: Partial<PlayerBaseStats>;
 };
+
+export function levelExp(level, realm, rarity) {
+  return 10 * level;
+}
+
+export function totalExp(level) {
+  return 5 * (1 + level) * level;
+}

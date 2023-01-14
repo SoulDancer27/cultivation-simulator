@@ -30,9 +30,15 @@ export default function fightManager(props: FightState): FightResult {
   const playerDamage = (playerDps * elapsedTime) / 1000;
   const enemyDamage = (enemyDps * elapsedTime) / 1000;
 
-  const newEnemyHealth = state.enemy.health - playerDamage;
+  const newEnemyHealth = Math.min(
+    state.enemy.currentHealth - playerDamage,
+    state.enemy.health
+  );
 
-  const newPlayerHealth = stats.currentHealth - enemyDamage;
+  const newPlayerHealth = Math.min(
+    stats.currentHealth - enemyDamage,
+    stats.health
+  );
 
   // Victory condition
   if (newEnemyHealth <= 0) {
@@ -47,7 +53,7 @@ export default function fightManager(props: FightState): FightResult {
   // Update Hp values for both parties
   else {
     stats.currentHealth = newPlayerHealth;
-    state.enemy.health = newEnemyHealth;
+    state.enemy.currentHealth = newEnemyHealth;
   }
   return { state, stats };
 }
