@@ -1,6 +1,7 @@
 import React from "react";
 import { PlayerContextType } from "GameConstants/Player";
 import { yearSpan } from "GameConstants/Constants";
+import { CultivationManuals } from "GameConstants/CultivationManuals";
 
 export const playerContext: PlayerContextType = {
   stats: {
@@ -21,6 +22,11 @@ export const playerContext: PlayerContextType = {
     name: "Mortal 0",
     power: {},
   },
+  manuals: CultivationManuals.map((manual) => ({
+    manual,
+    learningProgress: { exp: 0, level: 0 },
+    isEquipped: false,
+  })),
   state: { action: "idle" },
 };
 

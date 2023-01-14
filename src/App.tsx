@@ -8,6 +8,7 @@ import EnemyPane from "Components/EnemyPane";
 import RealmBreakthroughPane from "Components/RealmBreakthroughPane";
 import SaveLoader from "GameEngine/SaveLoader";
 import GameRuntime from "GameEngine/GameRuntime";
+import CultivationPane from "Components/CultivationPane";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
               <EnemyPane />
             </Box>
             <RealmBreakthroughPane />
+            <CultivationPane />
           </Box>
         </GameRuntime>
       </SaveLoader>
