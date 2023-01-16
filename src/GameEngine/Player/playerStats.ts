@@ -71,8 +71,8 @@ export function getStatStructure(
   stat: string,
   player: PlayerContextType
 ): StatStructure {
-  const { stats, realm, manuals } = player;
-  const baseStat = stats[stat];
+  const { baseStats, realm, manuals } = player;
+  const baseStat = baseStats[stat];
   const realmBonus = realm.power[stat] || 1;
   const manualsBonus = manualsMultiplier(stat, manuals);
   return {
