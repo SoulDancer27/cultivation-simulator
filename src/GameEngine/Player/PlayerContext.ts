@@ -29,6 +29,7 @@ export const playerContext: PlayerContextType = {
     learningProgress: { exp: 0, level: 0 },
     isEquipped: false,
   })),
+  inventory: [],
   state: { action: "idle" },
 };
 

@@ -1,6 +1,5 @@
 import { Box, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
-import React from "react";
 
 import PlayerStatsPane from "Components/PlayerStatsPane";
 import TrainingPane from "Components/TrainingPane";
@@ -9,6 +8,8 @@ import RealmBreakthroughPane from "Components/RealmBreakthroughPane";
 import SaveLoader from "GameEngine/SaveLoader";
 import GameRuntime from "GameEngine/GameRuntime";
 import CultivationPane from "Components/CultivationPane";
+import TreasuresList from "Components/TreasuresList";
+import Inventory from "Components/Inventory";
 
 export default function App() {
   return (
@@ -23,6 +24,8 @@ export default function App() {
             </Box>
             <RealmBreakthroughPane />
             <CultivationPane />
+            <TreasuresList />
+            <Inventory />
           </Box>
         </GameRuntime>
       </SaveLoader>

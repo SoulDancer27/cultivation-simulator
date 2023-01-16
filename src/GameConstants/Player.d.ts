@@ -2,6 +2,7 @@ import { CultivationManualType } from "./CultivationManuals";
 import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
 import { TrainingType } from "./Trainings";
+import { TreasureType } from "./Treasures";
 export type PlayerAction =
   | "idle"
   | "training"
@@ -59,10 +60,13 @@ export type PlayerCultivationManual = {
   isEquipped: boolean;
 };
 
+type InventoryItem = { type: "treasure"; id: number; stats: TreasureType };
+
 export type PlayerContextType = {
   stats: PlayerStats;
   baseStats: PlayerBaseStats;
   realm: PlayerRealm;
   manuals?: PlayerCultivationManual[];
+  inventory: InventoryItem[];
   state: PlayerState;
 };
