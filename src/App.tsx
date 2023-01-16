@@ -1,4 +1,4 @@
-import { Box, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
 import PlayerStatsPane from "Components/PlayerStatsPane";
@@ -13,22 +13,28 @@ import Inventory from "Components/Inventory";
 
 export default function App() {
   return (
-    <ThemeProvider theme={LightTheme}>
-      <SaveLoader>
-        <GameRuntime>
-          <Box display="flex">
-            <Box marginRight={10}>
+    <CssBaseline>
+      <ThemeProvider theme={LightTheme}>
+        <SaveLoader>
+          <GameRuntime>
+            <Box
+              display="flex"
+              bgcolor="rgb(240, 240, 240)"
+              width="100vw"
+              height="100vh"
+            >
               <PlayerStatsPane />
+
               <TrainingPane />
               <EnemyPane />
+              <RealmBreakthroughPane />
+              <CultivationPane />
+              <TreasuresList />
+              <Inventory />
             </Box>
-            <RealmBreakthroughPane />
-            <CultivationPane />
-            <TreasuresList />
-            <Inventory />
-          </Box>
-        </GameRuntime>
-      </SaveLoader>
-    </ThemeProvider>
+          </GameRuntime>
+        </SaveLoader>
+      </ThemeProvider>
+    </CssBaseline>
   );
 }

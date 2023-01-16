@@ -60,3 +60,24 @@ export function manualsMultiplier(
   });
   return totalPower;
 }
+
+type StatStructure = {
+  base: number;
+  realm: number;
+  manuals: number;
+};
+
+export function getStatStructure(
+  stat: string,
+  player: PlayerContextType
+): StatStructure {
+  const { stats, realm, manuals } = player;
+  const baseStat = stats[stat];
+  const realmBonus = realm.power[stat] || 1;
+  const manualsBonus = manualsMultiplier(stat, manuals);
+  return {
+    base: baseStat,
+    realm: realmBonus,
+    manuals: manualsBonus,
+  };
+}

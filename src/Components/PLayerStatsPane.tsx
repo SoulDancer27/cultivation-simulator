@@ -1,25 +1,47 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { monthSpan, yearSpan } from "GameConstants/Constants";
 import React from "react";
+import HealthBar from "./PlayerStatsPane/HealthBar";
+import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
 
 export default function PlayerStatsPane() {
-  const { stats, realm } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  const { stats, realm } = player;
   const { age, currentHealth, health, attack, defence, healthRegen, insight } =
     stats;
+  const theme = useTheme();
 
   return (
-    <Box>
-      <Typography>Nameless Hero</Typography>
-      <Typography>Age: {parsePlayerAge(age)}</Typography>
-      <Typography>Realm: {realm.name}</Typography>
-      <Typography>
-        Hp: {currentHealth.toFixed(2)} / {health.toFixed(2)}
-      </Typography>
-      <Typography>Hp.regen {healthRegen.toFixed(2)}</Typography>
-      <Typography>Atk: {attack.toFixed(2)}</Typography>
-      <Typography>Def: {defence.toFixed(2)}</Typography>
-      <Typography>Insight: {insight.toFixed(2)}</Typography>
+    <Box width={512} padding={theme.spacing(2)}>
+      <Typography variant="h5">Age: {parsePlayerAge(age)}</Typography>
+      <Typography variant="h5">Realm: {realm.name}</Typography>
+      <Paper elevation={12} sx={{ padding: theme.spacing(1) }}>
+        <StatDetailsTooltip stat="health">
+          <Box>
+            <HealthBar
+              label={`Health: ${currentHealth.toFixed(2)} / ${health.toFixed(
+                2
+              )}`}
+              value={(currentHealth / health) * 100}
+            />
+          </Box>
+        </StatDetailsTooltip>
+        <StatDetailsTooltip stat="healthRegen">
+          <Typography>Health regen {healthRegen.toFixed(2)}</Typography>
+        </StatDetailsTooltip>
+        <StatDetailsTooltip stat="attack">
+          <Typography>Attack: {attack.toFixed(2)}</Typography>
+        </StatDetailsTooltip>
+
+        <StatDetailsTooltip stat="defence">
+          <Typography>Defence: {defence.toFixed(2)}</Typography>
+        </StatDetailsTooltip>
+
+        <StatDetailsTooltip stat="insight">
+          <Typography>Insight: {insight.toFixed(2)}</Typography>
+        </StatDetailsTooltip>
+      </Paper>
     </Box>
   );
 }
