@@ -15,7 +15,7 @@ export default function HealthBar(
           {props.label}
         </Typography>
       </Box>
-      <Box sx={{ width: "60%", m: 1 }}>
+      <Box sx={{ width: "50%", m: 1 }}>
         <LinearProgress variant="determinate" color="success" {...props} />
       </Box>
     </Box>

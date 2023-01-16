@@ -13,7 +13,7 @@ export default function TreasuresList() {
   };
   return (
     <Box>
-      {Treasures.map((item) => {
+      {Treasures.map((item, index) => {
         const TreasureDescription: TreasureDescriptionLine[] = [];
         for (const [key, value] of Object.entries(item.stats)) {
           TreasureDescription.push({
@@ -22,11 +22,11 @@ export default function TreasuresList() {
           });
         }
         return (
-          <Box>
+          <Box key={index}>
             <Typography>{item.name}</Typography>
-            {TreasureDescription.map((line) => {
+            {TreasureDescription.map((line, index) => {
               return (
-                <Typography>
+                <Typography key={index}>
                   {line.text}: {line.effect}
                 </Typography>
               );

@@ -10,6 +10,7 @@ export default function StatDetailsTooltip(
   const player = React.useContext(PlayerContext);
   const statStructure = getStatStructure(props.stat, player);
   const theme = useTheme();
+
   return (
     <HtmlTooltip
       title={
@@ -21,6 +22,7 @@ export default function StatDetailsTooltip(
           <Typography>
             Realm bonus:
             <Typography
+              component="span"
               color={
                 statStructure.realm >= 1
                   ? theme.palette.success.main
@@ -35,6 +37,7 @@ export default function StatDetailsTooltip(
           <Typography>
             Manuals bonus:
             <Typography
+              component="span"
               color={
                 statStructure.manuals >= 1
                   ? theme.palette.success.main
