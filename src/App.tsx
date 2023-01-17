@@ -1,4 +1,4 @@
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
 import PlayerStatsPane from "Components/PlayerStatsPane";
@@ -14,11 +14,15 @@ import TopBar from "Components/TopBar";
 import useWindowDimensions, {
   getWindowDimensions,
 } from "Utils/useWindowDimensions";
+import PlayerLocationPane from "Components/PlayerLocationPane";
+import getSpacing from "Utils/getSpacing";
+import ActionsPane from "Components/ActionsPane";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
   useWindowDimensions();
   const { width, height } = getWindowDimensions();
+  const theme = useTheme();
   return (
     <CssBaseline>
       <ThemeProvider theme={LightTheme}>
@@ -28,14 +32,23 @@ export default function App() {
               <TopBar />
 
               <Box display="flex">
-                <PlayerStatsPane />
+                <Box borderRight={"1px solid gray"}>
+                  <PlayerStatsPane />
+                  <PlayerLocationPane />
+                </Box>
+                <Box width={width - 512} height={height - getSpacing(theme, 8)}>
+                  <ActionsPane />
+                </Box>
 
+                {/*
                 <TrainingPane />
                 <EnemyPane />
                 <RealmBreakthroughPane />
                 <CultivationPane />
                 <TreasuresList />
                 <Inventory />
+
+  */}
               </Box>
             </Box>
           </GameRuntime>

@@ -17,8 +17,7 @@ export default function PlayerStatsPane() {
   return (
     <Box
       width={512}
-      height={height - getSpacing(theme, 8)}
-      borderRight={"1px solid gray"}
+      height={height - getSpacing(theme, 24)}
       paddingTop={theme.spacing(1)}
       paddingLeft={theme.spacing(1)}
     >
