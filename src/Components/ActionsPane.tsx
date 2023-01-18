@@ -1,4 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
+import ActivityPane from "./ActivityPane";
 import TrainingPane from "./TrainingPane";
 
 export default function ActionsPane() {
@@ -7,6 +8,8 @@ export default function ActionsPane() {
     <Box paddingLeft={theme.spacing(2)} paddingTop={theme.spacing(2)}>
       <Typography variant="h3">Actions</Typography>
       <TrainingPane />
+      <Typography variant="h5">Village</Typography>
+      <ActivityPane />
     </Box>
   );
 }

@@ -1,9 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
-import Trainings, { TrainingType } from "GameConstants/Trainings";
-import { PlayerState } from "GameConstants/Player";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import Trainings from "GameConstants/Trainings";
 import TrainingButton from "./TrainingPane/TrainingButton";
 
 export default function TrainingPane() {

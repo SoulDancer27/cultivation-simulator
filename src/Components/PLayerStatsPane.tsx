@@ -1,8 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
-import getSpacing from "Utils/getSpacing";
-import { getWindowDimensions } from "Utils/useWindowDimensions";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
 
@@ -12,12 +10,10 @@ export default function PlayerStatsPane() {
   const { currentHealth, health, attack, defence, healthRegen, insight } =
     stats;
   const theme = useTheme();
-  const { height } = getWindowDimensions();
 
   return (
     <Box
       width={512}
-      height={height - getSpacing(theme, 24)}
       paddingTop={theme.spacing(1)}
       paddingLeft={theme.spacing(1)}
     >

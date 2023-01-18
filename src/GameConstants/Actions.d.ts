@@ -5,6 +5,6 @@ export type Action = {
   description: string;
   result: {
     baseStats?: Partial<PlayerBaseStats>;
-    items?: Array<InventoryItem>;
+    items?: Omit<InventoryItem, "id">[];
   };
 };

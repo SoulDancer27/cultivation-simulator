@@ -2,13 +2,8 @@ import { Box, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
 import PlayerStatsPane from "Components/PlayerStatsPane";
-import TrainingPane from "Components/TrainingPane";
-import EnemyPane from "Components/EnemyPane";
-import RealmBreakthroughPane from "Components/RealmBreakthroughPane";
 import SaveLoader from "GameEngine/SaveLoader";
 import GameRuntime from "GameEngine/GameRuntime";
-import CultivationPane from "Components/CultivationPane";
-import TreasuresList from "Components/TreasuresList";
 import Inventory from "Components/Inventory";
 import TopBar from "Components/TopBar";
 import useWindowDimensions, {
@@ -34,6 +29,7 @@ export default function App() {
               <Box display="flex">
                 <Box borderRight={"1px solid gray"}>
                   <PlayerStatsPane />
+                  <Inventory />
                   <PlayerLocationPane />
                 </Box>
                 <Box width={width - 512} height={height - getSpacing(theme, 8)}>

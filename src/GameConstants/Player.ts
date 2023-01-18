@@ -1,3 +1,4 @@
+import { Action } from "./Actions";
 import { CultivationManualType } from "./CultivationManuals";
 import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
@@ -8,7 +9,8 @@ export type PlayerAction =
   | "training"
   | "fighting"
   | "breakthrough"
-  | "cultivating";
+  | "cultivating"
+  | "activity";
 
 export type PlayerState = {
   action: PlayerAction;
@@ -16,9 +18,10 @@ export type PlayerState = {
   enemy?: PlayerEnemyType;
   realm?: PlayerCultivationRealmType;
   manual?: PlayerCultivationManual;
+  activity?: Action;
 };
 
-type PlayerCultivationRealmType = CultivationRealmType & {
+export type PlayerCultivationRealmType = CultivationRealmType & {
   currentHealth: number;
 };
 
@@ -60,7 +63,19 @@ export type PlayerCultivationManual = {
   isEquipped: boolean;
 };
 
-type InventoryItem = { type: "treasure"; id: number; stats: TreasureType };
+export type InventoryItem = InventoryTreasure | InventoryMoney;
+
+export type InventoryTreasure = {
+  type: "treasure";
+  id: number;
+  stats: TreasureType;
+};
+export type InventoryMoney = {
+  type: "money";
+  id: number;
+  name: string;
+  amount: number;
+};
 
 export type PlayerContextType = {
   stats: PlayerStats;
@@ -70,3 +85,12 @@ export type PlayerContextType = {
   inventory: InventoryItem[];
   state: PlayerState;
 };
+
+// Lazy type guards
+export function isInventoryTreasure(item: any): item is InventoryTreasure {
+  return item.type === "treasure" && item.id && item.stats;
+}
+
+export function isInventoryMoney(item: any): item is InventoryMoney {
+  return item.type === "money" && item.id && item.name && item.amount;
+}

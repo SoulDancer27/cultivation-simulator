@@ -6,6 +6,13 @@ const Villages: Village[] = [
     description:
       "A tiny village in the fields. The villagers are poor, but kind and hardworking",
     imagePath: "village.png",
+    actions: [
+      {
+        name: "Run Errands",
+        description: "",
+        result: { items: [{ type: "money", name: "Copper Coin", amount: 1 }] },
+      },
+    ],
   },
 ];
 
