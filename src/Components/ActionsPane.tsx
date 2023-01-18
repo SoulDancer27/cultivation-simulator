@@ -1,10 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import TrainingPane from "./TrainingPane";
 
 export default function ActionsPane() {
+  const theme = useTheme();
   return (
-    <Box>
-      <Typography variant="h5">Actions</Typography>
+    <Box paddingLeft={theme.spacing(2)} paddingTop={theme.spacing(2)}>
+      <Typography variant="h3">Actions</Typography>
       <TrainingPane />
     </Box>
   );

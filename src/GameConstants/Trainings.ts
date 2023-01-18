@@ -3,20 +3,20 @@ import { PlayerBaseStats } from "./Player";
 // Provide bonuses to base stats
 const Trainings: TrainingType[] = [
   {
-    name: "Basic health training",
+    name: "Breathing Practice",
     stats: {
       health: 1,
       healthRegen: 0.01,
     },
   },
   {
-    name: "Basic attack training",
+    name: "Attack",
     stats: {
       attack: 0.1,
     },
   },
   {
-    name: "Basic defence training",
+    name: "Defence",
     stats: {
       defence: 0.1,
     },
