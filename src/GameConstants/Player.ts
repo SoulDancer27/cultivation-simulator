@@ -1,4 +1,4 @@
-import { Action } from "./Actions";
+import { Action } from "./Activities";
 import { CultivationManualType } from "./CultivationManuals";
 import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";

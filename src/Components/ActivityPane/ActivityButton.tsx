@@ -4,14 +4,14 @@ import PlayerContext from "GameEngine/Player/PlayerContext";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
-type ActivityButtonProps = { action: PlayerActivity };
+type ActivityButtonProps = { activity: PlayerActivity };
 
 export default function ActivityButton(props: ActivityButtonProps) {
-  const { action } = props;
-  const { name, result } = action;
+  const { activity } = props;
+  const { name, result } = activity;
   const { updateContext, realm, state } = React.useContext(PlayerContext);
   const theme = useTheme();
-  const isActive = state.activity && state.activity.name === action.name;
+  const isActive = state.activity && state.activity.name === activity.name;
 
   const ActivityStatsDescription: ActivityButtonStatsLine[] = [];
   if (result.baseStats) {
@@ -38,13 +38,13 @@ export default function ActivityButton(props: ActivityButtonProps) {
       ? { action: "idle" }
       : {
           action: "activity",
-          activity: { ...action, currentTime: undefined },
+          activity: { ...activity, currentTime: undefined },
         };
     updateContext({ state: newPlayerState });
   };
 
   // Determine remaining time for timed activities
-  let remainingTime: number | undefined = action.requiredTime;
+  let remainingTime: number | undefined = activity.requiredTime;
   if (state.activity && isActive) {
     if (state.activity.requiredTime)
       remainingTime = state.activity.requiredTime;

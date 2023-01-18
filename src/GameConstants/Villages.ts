@@ -1,4 +1,4 @@
-import { Action } from "./Actions";
+import { Action } from "./Activities";
 
 const Villages: Village[] = [
   {
@@ -6,7 +6,7 @@ const Villages: Village[] = [
     description:
       "A tiny village in the fields. The villagers are poor, but kind and hardworking",
     imagePath: "village.png",
-    actions: [
+    activities: [
       {
         name: "Run Errands",
         description: "",
@@ -34,7 +34,7 @@ type Village = {
   name: string;
   description: string;
   imagePath: string;
-  actions?: Array<Action>;
+  activities?: Array<Action>;
 };
 
 export default Villages;
