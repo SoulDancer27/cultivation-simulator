@@ -18,8 +18,10 @@ export type PlayerState = {
   enemy?: PlayerEnemyType;
   realm?: PlayerCultivationRealmType;
   manual?: PlayerCultivationManual;
-  activity?: Action;
+  activity?: PlayerActivity;
 };
+
+export type PlayerActivity = Action & { currentTime?: number };
 
 export type PlayerCultivationRealmType = CultivationRealmType & {
   currentHealth: number;

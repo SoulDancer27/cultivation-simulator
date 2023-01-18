@@ -12,6 +12,20 @@ const Villages: Village[] = [
         description: "",
         result: { items: [{ type: "money", name: "Copper Coin", amount: 1 }] },
       },
+      {
+        name: "Use Training Grounds",
+        description: "",
+        result: { baseStats: { attack: 0.07, defence: 0.07 } },
+      },
+      {
+        name: "Help in the fields",
+        description: "",
+        requiredTime: 10,
+        result: {
+          baseStats: { attack: 0.2, defence: 0.2 },
+          items: [{ type: "money", name: "Copper Coin", amount: 5 }],
+        },
+      },
     ],
   },
 ];

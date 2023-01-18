@@ -1,17 +1,17 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { Action } from "GameConstants/Actions";
-import { PlayerState } from "GameConstants/Player";
+import { PlayerActivity, PlayerState } from "GameConstants/Player";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
-type ActivityButtonProps = { action: Action; isActive: boolean };
+type ActivityButtonProps = { action: PlayerActivity };
 
 export default function ActivityButton(props: ActivityButtonProps) {
-  const { action, isActive } = props;
+  const { action } = props;
   const { name, result } = action;
-  const { updateContext, realm } = React.useContext(PlayerContext);
+  const { updateContext, realm, state } = React.useContext(PlayerContext);
   const theme = useTheme();
+  const isActive = state.activity && state.activity.name === action.name;
 
   const ActivityStatsDescription: ActivityButtonStatsLine[] = [];
   if (result.baseStats) {
@@ -38,10 +38,20 @@ export default function ActivityButton(props: ActivityButtonProps) {
       ? { action: "idle" }
       : {
           action: "activity",
-          activity: action,
+          activity: { ...action, currentTime: undefined },
         };
     updateContext({ state: newPlayerState });
   };
+
+  // Determine remaining time for timed activities
+  let remainingTime: number | undefined = action.requiredTime;
+  if (state.activity && isActive) {
+    if (state.activity.requiredTime)
+      remainingTime = state.activity.requiredTime;
+    if (state.activity.requiredTime && state.activity.currentTime)
+      remainingTime = state.activity.requiredTime - state.activity.currentTime;
+  }
+
   return (
     <Paper
       elevation={8}
@@ -60,6 +70,13 @@ export default function ActivityButton(props: ActivityButtonProps) {
         <Typography variant="body1" marginLeft={theme.spacing(2)}>
           {name}
         </Typography>
+        {remainingTime && (
+          <Typography marginLeft={theme.spacing(2)} variant="body2">
+            Time:
+            {remainingTime.toFixed(2)}
+            sec
+          </Typography>
+        )}
         {ActivityStatsDescription.map((item) => (
           <Typography
             key={item.text}

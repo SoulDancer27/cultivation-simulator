@@ -27,6 +27,51 @@ export default function activityManager(props: ActivityState): ActivityResult {
     return { state, stats, inventory, baseStats };
 
   const activity = state.activity;
+  // If activity is timed
+  if (activity.requiredTime) {
+    if (!state.activity.currentTime) state.activity.currentTime = 0;
+    state.activity.currentTime += elapsedTime / 1000;
+    // Action not completed yet
+    if (state.activity.currentTime < activity.requiredTime)
+      return { stats, state, baseStats, inventory };
+    // Action finished. Process reward
+    else {
+      activity.currentTime = 0;
+      // If activity increaces base stats
+      if (activity.result.baseStats) {
+        for (const [key, value] of Object.entries(activity.result.baseStats)) {
+          baseStats[key] += value;
+        }
+        // Update calculated stat values based on new baseStats
+        stats = playerStats(player);
+      }
+      // Process reward
+      if (activity.result.items) {
+        for (let item of activity.result.items) {
+          // Process money type reward
+          if (item.type === "money") {
+            const amountToAdd = item.amount;
+            const itemIndex = inventory.findIndex(
+              (value) => value.type === "money" && value.name === item.name
+            );
+            const currentItem = inventory[itemIndex];
+            if (itemIndex === -1) {
+              /* don't have this type of money yet */ inventory.push({
+                type: "money",
+                id: Date.now(),
+                name: item.name,
+                amount: amountToAdd,
+              });
+            } else if (currentItem && isInventoryMoney(currentItem)) {
+              /* player already possess this type of money */
+              currentItem.amount += amountToAdd;
+            }
+          }
+        }
+      }
+    }
+    return { stats, state, baseStats, inventory };
+  }
   // If activity increaces base stats
   if (activity.result.baseStats) {
     for (const [key, value] of Object.entries(activity.result.baseStats)) {
@@ -54,8 +99,7 @@ export default function activityManager(props: ActivityState): ActivityResult {
             amount: amountToAdd,
           });
         } else if (currentItem && isInventoryMoney(currentItem)) {
-
-        /* player already possess this type of money */
+          /* player already possess this type of money */
           currentItem.amount += amountToAdd;
         }
       }
