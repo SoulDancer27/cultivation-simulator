@@ -6,6 +6,7 @@ import {
   InventoryItem,
   PlayerBaseStats,
 } from "GameConstants/Player";
+import Treasures from "GameConstants/Treasures";
 import { playerStats } from "./playerStats";
 
 type ActivityState = {
@@ -65,6 +66,17 @@ export default function activityManager(props: ActivityState): ActivityResult {
             } else if (currentItem && isInventoryMoney(currentItem)) {
               /* player already possess this type of money */
               currentItem.amount += amountToAdd;
+            }
+          }
+          // process treasure type rewards
+          if (item.type === "treasure") {
+            const treasure = Treasures.find((i) => i.name === item.name);
+            if (treasure) {
+              inventory.push({
+                type: "treasure",
+                id: Date.now(),
+                stats: treasure,
+              });
             }
           }
         }

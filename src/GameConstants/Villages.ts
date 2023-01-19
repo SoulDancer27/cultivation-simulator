@@ -26,6 +26,15 @@ const Villages: Village[] = [
           items: [{ type: "money", name: "Copper Coin", amount: 5 }],
         },
       },
+      {
+        name: "Help in the forge",
+        description: "",
+        requiredTime: 10,
+        result: {
+          baseStats: { attack: 0.2, defence: 0.2 },
+          items: [{ type: "treasure", name: "Rusty Sword", amount: 1 }],
+        },
+      },
     ],
   },
 ];
