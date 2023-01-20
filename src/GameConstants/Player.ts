@@ -70,6 +70,7 @@ export type InventoryItem = InventoryTreasure | InventoryMoney;
 export type InventoryTreasure = {
   type: "treasure";
   id: number;
+  isEquipped?: boolean;
   stats: Treasure;
 };
 export type InventoryMoney = {

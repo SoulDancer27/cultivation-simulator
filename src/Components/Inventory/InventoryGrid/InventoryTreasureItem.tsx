@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import { InventoryTreasure } from "GameConstants/Player";
+import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
@@ -34,6 +34,15 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     inventory.splice(index, 1);
     updateContext({ inventory });
     setAnchorEl(null);
+  };
+
+  const equipItem = (id: number) => {
+    const index = inventory.findIndex((item) => item.id === id);
+    if (index === -1) return;
+    const item = inventory[index];
+    if (!isInventoryTreasure(item)) return;
+    item.isEquipped = !item.isEquipped;
+    updateContext({ inventory });
   };
 
   const open = Boolean(anchorEl);
@@ -85,6 +94,13 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
                 {item.text} {item.effect}
               </Typography>
             ))}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => equipItem(props.id)}
+            >
+              Equip
+            </Button>
             <Button
               variant="contained"
               color="warning"

@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { InventoryItem } from "GameConstants/Player";
 import InventoryGridItem from "./InventoryGrid/InventoryGridItem";
 
-export default function InventoryGrid() {
-  const { inventory } = React.useContext(PlayerContext);
+export default function InventoryGrid(props: { inventory: InventoryItem[] }) {
+  const { inventory } = props;
+
   const length =
     inventory.length === 0 ? 36 : Math.ceil(inventory.length / 36) * 36;
   const tileIndex = Array(length)
