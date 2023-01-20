@@ -32,7 +32,13 @@ const Villages: Village[] = [
         requiredTime: 10,
         result: {
           baseStats: { attack: 0.2, defence: 0.2 },
-          items: [{ type: "treasure", name: "Rusty Sword", amount: 1 }],
+          items: [
+            { type: "treasure", name: "Rusty Sword", amount: 1 },
+            { type: "treasure", name: "Rusty Armor", amount: 1 },
+            { type: "treasure", name: "Rusty Helmet", amount: 1 },
+            { type: "treasure", name: "Copper Ring", amount: 1 },
+            { type: "treasure", name: "Copper Pendant", amount: 1 },
+          ],
         },
       },
     ],

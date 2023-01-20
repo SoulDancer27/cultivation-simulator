@@ -3,7 +3,7 @@ import { CultivationManualType } from "./CultivationManuals";
 import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
 import { TrainingType } from "./Trainings";
-import { TreasureType } from "./Treasures";
+import { Treasure } from "./Treasures";
 export type PlayerAction =
   | "idle"
   | "training"
@@ -70,7 +70,7 @@ export type InventoryItem = InventoryTreasure | InventoryMoney;
 export type InventoryTreasure = {
   type: "treasure";
   id: number;
-  stats: TreasureType;
+  stats: Treasure;
 };
 export type InventoryMoney = {
   type: "money";

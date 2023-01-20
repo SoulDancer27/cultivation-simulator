@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import Treasures, { TreasureType } from "GameConstants/Treasures";
+import Treasures, { Treasure } from "GameConstants/Treasures";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
@@ -7,7 +7,7 @@ import React from "react";
 export default function TreasuresList() {
   const { updateContext, inventory } = React.useContext(PlayerContext);
 
-  const takeTreasure = (treasure: TreasureType) => {
+  const takeTreasure = (treasure: Treasure) => {
     inventory.push({ type: "treasure", id: Date.now(), stats: treasure });
     updateContext({ inventory });
   };
