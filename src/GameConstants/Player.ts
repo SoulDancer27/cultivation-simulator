@@ -69,13 +69,13 @@ export type InventoryItem = InventoryTreasure | InventoryMoney;
 
 export type InventoryTreasure = {
   type: "treasure";
-  id: number;
+  id: string;
   isEquipped?: boolean;
   stats: Treasure;
 };
 export type InventoryMoney = {
   type: "money";
-  id: number;
+  id: string;
   name: string;
   amount: number;
 };

@@ -4,12 +4,13 @@ import {
   ClickAwayListener,
   Popper,
   Typography,
-  useTheme,
 } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
 import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
+import { TreasureType } from "GameConstants/Treasures";
 import PlayerContext from "GameEngine/Player/PlayerContext";
+import { playerStats } from "GameEngine/Player/playerStats";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import EmptyCell from "./EmptyCell";
@@ -18,7 +19,8 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   const { stats: treasure } = props;
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { inventory, updateContext } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  let { inventory, stats, updateContext } = player;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -28,7 +30,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     setAnchorEl(null);
   };
 
-  const dropItem = (id: number) => {
+  const dropItem = (id: string) => {
     const index = inventory.findIndex((item) => item.id === id);
     if (index === -1) return;
     inventory.splice(index, 1);
@@ -36,13 +38,21 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     setAnchorEl(null);
   };
 
-  const equipItem = (id: number) => {
+  const equipItem = (id: string, type: TreasureType) => {
     const index = inventory.findIndex((item) => item.id === id);
     if (index === -1) return;
-    const item = inventory[index];
-    if (!isInventoryTreasure(item)) return;
-    item.isEquipped = !item.isEquipped;
-    updateContext({ inventory });
+    // Check equipped items
+    const equippedIndex = inventory.findIndex(
+      (item) =>
+        isInventoryTreasure(item) && item.isEquipped && item.stats.type === type
+    );
+    // Unequip item of the same type
+    if (equippedIndex !== -1)
+      (inventory[equippedIndex] as InventoryTreasure).isEquipped = false;
+    (inventory[index] as InventoryTreasure).isEquipped = true;
+    stats = playerStats(player);
+    updateContext({ inventory, stats });
+    setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
@@ -97,7 +107,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => equipItem(props.id)}
+              onClick={() => equipItem(props.id, props.stats.type)}
             >
               Equip
             </Button>

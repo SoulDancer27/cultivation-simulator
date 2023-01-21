@@ -4,7 +4,6 @@ import LightTheme from "Themes/LightTheme";
 import PlayerStatsPane from "Components/PlayerStatsPane";
 import SaveLoader from "GameEngine/SaveLoader";
 import GameRuntime from "GameEngine/GameRuntime";
-import Inventory from "Components/Inventory";
 import TopBar from "Components/TopBar";
 import useWindowDimensions, {
   getWindowDimensions,
@@ -12,6 +11,7 @@ import useWindowDimensions, {
 import PlayerLocationPane from "Components/PlayerLocationPane";
 import getSpacing from "Utils/getSpacing";
 import ActionsPane from "Components/ActionsPane";
+import PlayerStatsLayout from "Components/PlayerStatsLayout";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
@@ -29,7 +29,7 @@ export default function App() {
               <Box display="flex">
                 <Box borderRight={"1px solid gray"}>
                   <PlayerStatsPane />
-                  <Inventory />
+                  <PlayerStatsLayout />
                   <PlayerLocationPane />
                 </Box>
                 <Box width={width - 512} height={height - getSpacing(theme, 8)}>

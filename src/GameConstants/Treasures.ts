@@ -98,6 +98,6 @@ type TreasureGrade =
   | "Legendary"
   | "Divine";
 
-type TreasureType = "weapon" | "armor" | "helmet" | "ring" | "pendant";
+export type TreasureType = "weapon" | "armor" | "helmet" | "ring" | "pendant";
 
 export default Treasures;

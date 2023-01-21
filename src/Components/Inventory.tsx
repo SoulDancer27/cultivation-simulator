@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { isInventoryTreasure } from "GameConstants/Player";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
@@ -9,7 +9,6 @@ import InventoryGrid from "./Inventory/InventoryGrid";
 export type InventoryFilters = "all" | "money" | "treasure";
 
 export default function Inventory() {
-  const theme = useTheme();
   const { inventory } = React.useContext(PlayerContext);
   const [type, setType] = React.useState<InventoryFilters>("all");
   // Filter equipped items
@@ -34,7 +33,7 @@ export default function Inventory() {
 
   React.useEffect(() => {
     setPages((pages) => {
-      const total = Math.ceil(displayedInventory.length / 36);
+      const total = Math.max(Math.ceil(displayedInventory.length / 36), 1);
       return { current: Math.min(pages.current, total), total };
     });
   }, [displayedInventory.length]);
@@ -46,10 +45,7 @@ export default function Inventory() {
   );
 
   return (
-    <Box paddingLeft={theme.spacing(1)}>
-      <Typography variant="h5" marginTop={theme.spacing(2)}>
-        Inventory
-      </Typography>
+    <Box>
       <Box display="flex">
         <InventoryGrid inventory={inventoryPage} />
         <InventoryFiltersPane type={type} setType={setType} />

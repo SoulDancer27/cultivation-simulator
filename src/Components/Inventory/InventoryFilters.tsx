@@ -1,4 +1,4 @@
-import { Box, Button, useTheme } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { InventoryFilters } from "Components/Inventory";
 
 type Props = {
@@ -8,7 +8,6 @@ type Props = {
 
 export default function InventoryFiltersPane(props: Props) {
   const { type, setType } = props;
-  const theme = useTheme();
   return (
     <Box width={128} height={512 - 128}>
       <Button

@@ -49,6 +49,21 @@ export default function StatDetailsTooltip(
               x{statStructure.manuals}
             </Typography>
           </Typography>
+          <Typography>
+            Treasures bonus:
+            <Typography
+              component="span"
+              color={
+                statStructure.treasures >= 0
+                  ? theme.palette.success.main
+                  : theme.palette.error.main
+              }
+              display="inline"
+            >
+              {" "}
+              +{statStructure.treasures}
+            </Typography>
+          </Typography>
         </>
       }
     >

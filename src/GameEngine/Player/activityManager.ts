@@ -7,6 +7,7 @@ import {
   PlayerBaseStats,
 } from "GameConstants/Player";
 import Treasures from "GameConstants/Treasures";
+import { v4 as uuid } from "uuid";
 import { playerStats } from "./playerStats";
 
 type ActivityState = {
@@ -59,7 +60,7 @@ export default function activityManager(props: ActivityState): ActivityResult {
             if (itemIndex === -1) {
               /* don't have this type of money yet */ inventory.push({
                 type: "money",
-                id: Date.now(),
+                id: uuid(),
                 name: item.name,
                 amount: amountToAdd,
               });
@@ -74,7 +75,7 @@ export default function activityManager(props: ActivityState): ActivityResult {
             if (treasure) {
               inventory.push({
                 type: "treasure",
-                id: Date.now(),
+                id: uuid(),
                 stats: treasure,
               });
             }
@@ -106,7 +107,7 @@ export default function activityManager(props: ActivityState): ActivityResult {
         if (itemIndex === -1) {
           /* don't have this type of money yet */ inventory.push({
             type: "money",
-            id: Date.now(),
+            id: uuid(),
             name: item.name,
             amount: amountToAdd,
           });
