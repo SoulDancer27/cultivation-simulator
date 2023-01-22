@@ -13,7 +13,23 @@ import React from "react";
 export default function ActiveManual() {
   const { state } = React.useContext(PlayerContext);
   const theme = useTheme();
-  if (state.action !== "cultivating" || !state.manual) return <Box />;
+  if (state.action !== "cultivating" || !state.manual)
+    return (
+      <Box
+        width="60%"
+        border="1px solid gray"
+        height={theme.spacing(10)}
+        borderRadius={theme.spacing(1)}
+      >
+        <Typography
+          variant="h5"
+          marginTop={theme.spacing(2)}
+          marginLeft={theme.spacing(2)}
+        >
+          No manual selected
+        </Typography>
+      </Box>
+    );
   const { rarity, realm, maxLevel } = state.manual.manual;
 
   const { exp, level } = state.manual.learningProgress;

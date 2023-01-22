@@ -1,22 +1,43 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { CultivationRealms } from "GameConstants/CultivationRealms";
 import PlayerContext from "GameEngine/Player/PlayerContext";
+import { playerStats } from "GameEngine/Player/playerStats";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
 export default function ManualsList() {
-  const { manuals, updateContext } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  let { manuals, updateContext, stats } = player;
+  const theme = useTheme();
   if (!manuals) return <Box />;
-  const storedManuals = manuals.filter((item) => !item.isEquipped);
+  let storedManuals = manuals.filter((item) => !item.isEquipped);
+
+  // Sort manuals by realm
+  storedManuals.sort((a, b) => {
+    const aIndex = CultivationRealms.findIndex(
+      (item) => item.name === a.manual.realm
+    );
+    const bIndex = CultivationRealms.findIndex(
+      (item) => item.name === b.manual.realm
+    );
+    return bIndex - aIndex;
+  });
+  const canSelect = manuals.filter((item) => item.isEquipped).length < 10;
 
   const equipButtonClick = (name: string) => {
+    if (!canSelect || !manuals) return;
     const index = manuals.findIndex((item) => item.manual.name === name);
     if (index === -1) return;
     manuals[index].isEquipped = !manuals[index].isEquipped;
-    updateContext({ manuals });
+    stats = playerStats(player);
+    updateContext({ manuals, stats });
   };
 
   return (
     <Box>
+      <Typography variant="h5" marginY={theme.spacing(2)}>
+        Known manuals
+      </Typography>
       {storedManuals.map((item) => {
         const { manual, learningProgress } = item;
         const ManualStatsDescription: ManualStatsDescription[] = [];
@@ -27,21 +48,36 @@ export default function ManualsList() {
           });
         }
         return (
-          <Box key={manual.name}>
-            <Typography>{manual.name}</Typography>
-            <Typography>
-              Level: {learningProgress.level} / {manual.maxLevel}
-            </Typography>
-            {ManualStatsDescription.map((stat) => {
-              return (
-                <Typography key={stat.text}>
-                  {stat.text}: {stat.effect}
-                </Typography>
-              );
-            })}
+          <Box
+            key={manual.name}
+            display="flex"
+            alignItems={"center"}
+            width={500}
+          >
+            <Box>
+              <Typography>
+                {manual.name} {manual.realm} ({manual.rarity})
+              </Typography>
+              <Typography>
+                Level: {learningProgress.level} / {manual.maxLevel}
+              </Typography>
+              {ManualStatsDescription.map((stat) => {
+                return (
+                  <Typography key={stat.text}>
+                    {stat.text}: {(stat.effect * 100).toFixed(2)}%
+                  </Typography>
+                );
+              })}
+            </Box>
             <Button
               variant="outlined"
               onClick={() => equipButtonClick(manual.name)}
+              sx={{
+                maxHeight: theme.spacing(4),
+                minHeight: theme.spacing(4),
+                margin: "auto",
+              }}
+              disabled={!canSelect}
             >
               Select
             </Button>

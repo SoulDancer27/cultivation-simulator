@@ -1,50 +1,34 @@
-import { Box, Button, Typography } from "@mui/material";
-import { PlayerCultivationManual } from "GameConstants/Player";
+import { Box, Typography, useTheme } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
+import { getWindowDimensions } from "Utils/useWindowDimensions";
+import EquippedManualCard from "./EquippedManuals/EquippedManualCard";
+import PlaceholderCard from "./EquippedManuals/PlaceholderCard";
 
 export default function EquippedManuals() {
   const { manuals } = React.useContext(PlayerContext);
-  if (!manuals) return <Box />;
-  const equipped = manuals.filter((item) => item.isEquipped);
+  const { width } = getWindowDimensions();
+  const theme = useTheme();
+  const equippedManuals = manuals?.filter((manual) => manual.isEquipped);
+  const tileIndex = Array(10)
+    .fill(0)
+    .map((element, index) => index);
   return (
-    <Box>
-      {equipped.map((item) => (
-        <EquippedManualCard {...item} key={item.manual.name} />
-      ))}
-    </Box>
-  );
-}
-
-function EquippedManualCard(props: PlayerCultivationManual) {
-  const { manual } = props;
-  let { manuals, state, updateContext } = React.useContext(PlayerContext);
-
-  const selectButtonClick = () => {
-    if (!manuals) return;
-    const index = manuals.findIndex((item) => item.manual.name === manual.name);
-    if (index === -1) return;
-    updateContext({ state: { action: "cultivating", manual: manuals[index] } });
-  };
-
-  const unequipButtonClick = () => {
-    if (!manuals) return;
-    const index = manuals.findIndex((item) => item.manual.name === manual.name);
-    if (index === -1) return;
-    manuals[index].isEquipped = !manuals[index].isEquipped;
-    if (state.manual && state.manual.manual.name === manual.name)
-      state = { action: "idle" };
-    updateContext({ manuals, state });
-  };
-  return (
-    <Box>
-      <Typography>{manual.name}</Typography>
-      <Button variant="contained" onClick={selectButtonClick}>
-        Study
-      </Button>
-      <Button variant="outlined" onClick={unequipButtonClick}>
-        Unequip
-      </Button>
-    </Box>
+    <>
+      <Typography
+        variant="h5"
+        marginTop={theme.spacing(2)}
+        marginBottom={theme.spacing(2)}
+      >
+        Equipped Manuals
+      </Typography>
+      <Box display="flex" flexWrap={"wrap"} maxWidth={width - 512}>
+        {tileIndex.map((index) => {
+          if (equippedManuals && equippedManuals[index])
+            return <EquippedManualCard {...equippedManuals[index]} />;
+          return <PlaceholderCard />;
+        })}
+      </Box>
+    </>
   );
 }
