@@ -6,7 +6,6 @@ export default function ActionsPane() {
   const theme = useTheme();
   return (
     <Box paddingLeft={theme.spacing(2)} paddingTop={theme.spacing(2)}>
-      <Typography variant="h3">Actions</Typography>
       <TrainingPane />
       <Typography variant="h5">Village</Typography>
       <ActivityPane />

@@ -12,12 +12,16 @@ import PlayerLocationPane from "Components/PlayerLocationPane";
 import getSpacing from "Utils/getSpacing";
 import ActionsPane from "Components/ActionsPane";
 import PlayerStatsLayout from "Components/PlayerStatsLayout";
+import MainNavigationBar from "Components/MainNavigationBar";
+import React from "react";
+import ManualsPane from "Components/ManualsPane";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
   useWindowDimensions();
   const { width, height } = getWindowDimensions();
   const theme = useTheme();
+  const [pane, setPane] = React.useState<ActivePane>("actions");
   return (
     <CssBaseline>
       <ThemeProvider theme={LightTheme}>
@@ -33,7 +37,9 @@ export default function App() {
                   <PlayerLocationPane />
                 </Box>
                 <Box width={width - 512} height={height - getSpacing(theme, 8)}>
-                  <ActionsPane />
+                  <MainNavigationBar pane={pane} setPane={setPane} />
+                  {pane === "actions" ? <ActionsPane /> : ""}
+                  {pane === "manuals" ? <ManualsPane /> : ""}
                 </Box>
 
                 {/*
@@ -53,3 +59,5 @@ export default function App() {
     </CssBaseline>
   );
 }
+
+export type ActivePane = "actions" | "manuals";
