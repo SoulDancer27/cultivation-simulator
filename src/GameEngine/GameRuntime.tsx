@@ -3,7 +3,6 @@ import React from "react";
 
 import useAgeManager from "./Player/useAgeManager";
 import useDefaultRegenManager from "./Player/useDefaultRegenManager";
-import useTrainingManager from "./Player/useTrainingManager";
 import useFightManager from "./Player/useFightManager";
 import useCultivationManager from "./Player/useCultivationManager";
 import useActivityManager from "./Player/useActivityManager";
@@ -39,7 +38,6 @@ export default function GameRuntime(props: any) {
   // Run game managers
   useAgeManager(timer);
   useDefaultRegenManager(timer);
-  useTrainingManager(timer);
   useFightManager(timer);
   useCultivationManager(timer);
   useActivityManager(timer);
