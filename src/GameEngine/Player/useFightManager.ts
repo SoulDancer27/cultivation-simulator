@@ -1,10 +1,10 @@
-import GameContext from "GameEngine/GameContext/GameContext";
 import React from "react";
 import PlayerContext from "./PlayerContext";
+import { GameTimer } from "GameEngine/GameRuntime";
 
-export default function useFightManager() {
+export default function useFightManager(timer: GameTimer) {
   let { stats, state, updateContext } = React.useContext(PlayerContext);
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
     const elapsedTime = currentTime - previousTime;

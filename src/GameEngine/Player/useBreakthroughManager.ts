@@ -1,19 +1,13 @@
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import {
-  PlayerContextType,
-  PlayerRealm,
-  PlayerState,
-  PlayerStats,
-} from "GameConstants/Player";
 import { playerStats } from "./playerStats";
-import GameContext from "GameEngine/GameContext/GameContext";
 import React from "react";
 import PlayerContext from "./PlayerContext";
+import { GameTimer } from "GameEngine/GameRuntime";
 
-export default function useBreakthroughManager() {
+export default function useBreakthroughManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   let { stats, state, realm, updateContext } = player;
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "breakthrough" || !state.realm) return;
     const elapsedTime = currentTime - previousTime;

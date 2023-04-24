@@ -1,21 +1,22 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
+import { Activity } from "GameConstants/Activities";
 import { PlayerState } from "GameConstants/Player";
-import { TrainingType } from "GameConstants/Trainings";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
-type TrainingButtonProps = TrainingType & {
+type TrainingButtonProps = Activity & {
   isActive: boolean;
 };
 
 export default function TrainingButton(props: TrainingButtonProps) {
-  const { name, stats, isActive } = props;
+  const { name, result, isActive } = props;
   const { updateContext, realm } = React.useContext(PlayerContext);
   const theme = useTheme();
+  if (!result.baseStats) return;
 
   const TrainingDescription: TrainingButtonStatsLine[] = [];
-  for (const [key, value] of Object.entries(stats)) {
+  for (const [key, value] of Object.entries(result.baseStats)) {
     TrainingDescription.push({
       text: PlayerStatsDictionary[key],
       effect: value * (realm.power[key] || 1),
@@ -26,8 +27,8 @@ export default function TrainingButton(props: TrainingButtonProps) {
     const newPlayerState: PlayerState = isActive
       ? { action: "idle" }
       : {
-          action: "training",
-          training: { name, stats },
+          action: "activity",
+          activity: { name, source: "trainings" },
         };
     updateContext({ state: newPlayerState });
   };

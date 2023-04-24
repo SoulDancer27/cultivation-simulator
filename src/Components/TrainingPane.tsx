@@ -3,11 +3,13 @@ import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import Trainings from "GameConstants/Trainings";
 import TrainingButton from "./TrainingPane/TrainingButton";
+import GameContext from "GameEngine/GameContext/GameContext";
 
 export default function TrainingPane() {
+  /*
   const { state } = React.useContext(PlayerContext);
   const currentTrainingName =
-    state.action === "training" ? state.training?.name || "" : "";
+    state.action === "activity" ? state?.activity?.name || "" : "";
   return (
     <Box>
       <Typography variant="h5">Train</Typography>
@@ -15,7 +17,7 @@ export default function TrainingPane() {
         {Trainings.map((training) => (
           <TrainingButton
             name={training.name}
-            stats={training.stats}
+            stats={training.result.baseStats}
             isActive={currentTrainingName === training.name}
             key={training.name}
           />
@@ -23,4 +25,5 @@ export default function TrainingPane() {
       </Box>
     </Box>
   );
+  */
 }

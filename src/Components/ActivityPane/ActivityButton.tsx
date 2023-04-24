@@ -18,7 +18,7 @@ export default function ActivityButton(props: ActivityButtonProps) {
     for (const [key, value] of Object.entries(result.baseStats)) {
       ActivityStatsDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value * (realm.power[key] || 1),
+        effect: (value as any) * (realm.power[key] || 1),
       });
     }
   }
@@ -44,12 +44,11 @@ export default function ActivityButton(props: ActivityButtonProps) {
   };
 
   // Determine remaining time for timed activities
-  let remainingTime: number | undefined = activity.requiredTime;
+  let remainingTime: number | undefined = activity.time;
   if (state.activity && isActive) {
-    if (state.activity.requiredTime)
-      remainingTime = state.activity.requiredTime;
-    if (state.activity.requiredTime && state.activity.currentTime)
-      remainingTime = state.activity.requiredTime - state.activity.currentTime;
+    if (state.activity.time) remainingTime = state.activity.time;
+    if (state.activity.time && state.activity.currentTime)
+      remainingTime = state.activity.time - state.activity.currentTime;
   }
 
   return (

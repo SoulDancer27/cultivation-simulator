@@ -90,13 +90,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
             <Typography variant="body2">{realmName}</Typography>
           </Box>
         </Box>
-        <Popper
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onResize={undefined}
-          onResizeCapture={undefined}
-        >
+        <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
             <Typography>{treasure.name}</Typography>
             {TreasureDescription.map((item) => (

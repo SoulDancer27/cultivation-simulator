@@ -1,31 +1,35 @@
-import { PlayerBaseStats } from "./Player";
+import { Activity } from "./Activities";
 
 // Provide bonuses to base stats
-const Trainings: TrainingType[] = [
+const Trainings: Activity[] = [
   {
     name: "Breathing Practice",
-    stats: {
-      health: 1,
-      healthRegen: 0.01,
+    time: 1,
+    result: {
+      baseStats: {
+        health: 1,
+        healthRegen: 0.01,
+      },
     },
   },
   {
     name: "Attack",
-    stats: {
-      attack: 0.1,
+    time: 1,
+    result: {
+      baseStats: {
+        attack: 0.1,
+      },
     },
   },
   {
     name: "Defence",
-    stats: {
-      defence: 0.1,
+    time: 1,
+    result: {
+      baseStats: {
+        defence: 0.1,
+      },
     },
   },
 ];
 
 export default Trainings;
-
-export type TrainingType = {
-  name: string;
-  stats: Partial<PlayerBaseStats>;
-};

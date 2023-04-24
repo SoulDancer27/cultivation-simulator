@@ -1,14 +1,13 @@
 import { levelExp, totalExp } from "GameConstants/CultivationManuals";
-import { PlayerContextType } from "GameConstants/Player";
 import { playerStats } from "./playerStats";
-import GameContext from "GameEngine/GameContext/GameContext";
 import React from "react";
 import PlayerContext from "./PlayerContext";
+import { GameTimer } from "GameEngine/GameRuntime";
 
-export default function useCultivationManager() {
+export default function useCultivationManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   let { stats, state, updateContext } = player;
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "cultivating" || !state.manual) return;
     // Update age

@@ -1,10 +1,10 @@
-import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "./PlayerContext";
 import React from "react";
+import { GameTimer } from "GameEngine/GameRuntime";
 
-export default function useDefaultRegenManager() {
+export default function useDefaultRegenManager(timer: GameTimer) {
   const { stats, state, updateContext } = React.useContext(PlayerContext);
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Regen health if health is not full
     const elapsedTime = currentTime - previousTime;

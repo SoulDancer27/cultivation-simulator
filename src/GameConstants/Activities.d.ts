@@ -1,9 +1,10 @@
 import { PlayerBaseStats } from "./Player";
 
-export type Action = {
+export type Activity = {
   name: string;
-  description: string;
+  description?: string;
   time: number; // in seconds
+  currentTime?: number;
   price?: {
     items?: Omit<InventoryItem, "id">[];
   };

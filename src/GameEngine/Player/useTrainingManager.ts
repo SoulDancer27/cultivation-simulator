@@ -1,12 +1,12 @@
-import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "./PlayerContext";
 import { playerStats } from "./playerStats";
 import React from "react";
+import { GameTimer } from "GameEngine/GameRuntime";
 
-export default function useTrainingManager() {
+export default function useTrainingManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   let { state, baseStats, stats, updateContext } = player;
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     const elapsedTime = currentTime - previousTime;
     if (state.action !== "training" || !state?.training) return;

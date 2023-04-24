@@ -1,20 +1,20 @@
-import React from 'react';
+import { Activity } from "GameConstants/Activities";
+import Trainings from "GameConstants/Trainings";
+import React from "react";
 
 export type GameContextType = {
-  previousTime: number;
-  currentTime: number;
-}
+  trainings: Activity[];
+};
 
 export const gameContext: GameContextType = {
-  previousTime: Date.now(),
-  currentTime: Date.now()
-}
+  trainings: Trainings,
+};
 
 /** Context initializator */
 export const GameContext = React.createContext({
   ...gameContext,
-  updateContext: (newData: Partial<GameContextType>) => { },
-  setContext: (value: React.SetStateAction<GameContextType>) => { },
+  updateContext: (newData: Partial<GameContextType>) => {},
+  setContext: (value: React.SetStateAction<GameContextType>) => {},
 });
 
 export default GameContext;

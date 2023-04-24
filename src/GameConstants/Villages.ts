@@ -1,4 +1,4 @@
-import { Action } from "./Activities";
+import { Activity } from "./Activities";
 
 const Villages: Village[] = [
   {
@@ -51,7 +51,7 @@ type Village = {
   name: string;
   description: string;
   imagePath: string;
-  activities?: Array<Action>;
+  activities?: Array<Activity>;
 };
 
 export default Villages;

@@ -8,23 +8,31 @@ import {
 import Treasures from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 import { playerStats } from "./playerStats";
-import GameContext from "GameEngine/GameContext/GameContext";
 import React from "react";
 import PlayerContext from "./PlayerContext";
+import { GameTimer } from "GameEngine/GameRuntime";
+import GameContext from "GameEngine/GameContext/GameContext";
+import { Activity } from "GameConstants/Activities";
 
-export default function useActivityManager() {
+export default function useActivityManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
+  const game = React.useContext(GameContext);
   let { state, baseStats, stats, inventory, updateContext } = player;
-  const { currentTime, previousTime } = React.useContext(GameContext);
+  const { currentTime, previousTime } = timer;
+
   React.useEffect(() => {
-    if (state.action !== "activity" || !state.activity) return;
+    if (!["activity", "training"].includes(state.action)) return;
+    if (!state.activity) return;
     const elapsedTime = currentTime - previousTime;
-    let activity = state.activity;
-    if (!state.activity.currentTime) state.activity.currentTime = 0;
-    state.activity.currentTime += elapsedTime / 1000;
+    let activity = game[state.activity.source].find(
+      (item: Activity) => state.activity && item.name === state.activity.name
+    );
+    if (!activity) return;
+    if (!activity.currentTime) activity.currentTime = 0;
+    activity.currentTime += elapsedTime / 1000;
     // Action not completed yet
-    if (state.activity.currentTime < activity.time) {
-      updateContext({ state });
+    if (activity.currentTime < activity.time) {
+      game.updateContext({ ...game });
       return;
     }
     // Action finished. Process reward

@@ -81,13 +81,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
             {manual.realm}
           </Typography>
         </Box>
-        <Popper
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onResize={undefined}
-          onResizeCapture={undefined}
-        >
+        <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
             <Button onClick={selectButtonClick} color="success">
               Study

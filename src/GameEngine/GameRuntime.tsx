@@ -1,9 +1,6 @@
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import React from "react";
-import GameContext, {
-  gameContext,
-  GameContextType,
-} from "./GameContext/GameContext";
+
 import useAgeManager from "./Player/useAgeManager";
 import useDefaultRegenManager from "./Player/useDefaultRegenManager";
 import useTrainingManager from "./Player/useTrainingManager";
@@ -12,11 +9,17 @@ import useCultivationManager from "./Player/useCultivationManager";
 import useActivityManager from "./Player/useActivityManager";
 import useBreakthroughManager from "./Player/useBreakthroughManager";
 
+export type GameTimer = {
+  previousTime: number;
+  currentTime: number;
+};
+
 // Wrapper for loading player save data
 export default function GameRuntime(props: any) {
-  const [timer, setTimer] = React.useState(gameContext);
-  const updateGameContext = (newData: Partial<GameContextType>) =>
-    setTimer((data) => ({ ...data, ...newData }));
+  const [timer, setTimer] = React.useState<GameTimer>({
+    previousTime: Date.now(),
+    currentTime: Date.now(),
+  });
 
   // Initializing the game loop
   React.useEffect(() => {
@@ -34,23 +37,13 @@ export default function GameRuntime(props: any) {
   }, []);
 
   // Run game managers
-  useAgeManager();
-  useDefaultRegenManager();
-  useTrainingManager();
-  useFightManager();
-  useCultivationManager();
-  useActivityManager();
-  useBreakthroughManager();
+  useAgeManager(timer);
+  useDefaultRegenManager(timer);
+  useTrainingManager(timer);
+  useFightManager(timer);
+  useCultivationManager(timer);
+  useActivityManager(timer);
+  useBreakthroughManager(timer);
 
-  return (
-    <GameContext.Provider
-      value={{
-        ...timer,
-        updateContext: updateGameContext,
-        setContext: setTimer,
-      }}
-    >
-      {props.children}
-    </GameContext.Provider>
-  );
+  return <>{props.children}</>;
 }
