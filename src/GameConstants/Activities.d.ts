@@ -3,7 +3,10 @@ import { PlayerBaseStats } from "./Player";
 export type Action = {
   name: string;
   description: string;
-  requiredTime?: number; // in seconds
+  time: number; // in seconds
+  price?: {
+    items?: Omit<InventoryItem, "id">[];
+  };
   result: {
     baseStats?: Partial<PlayerBaseStats>;
     items?: Omit<InventoryItem, "id">[];
