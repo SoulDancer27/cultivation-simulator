@@ -5,17 +5,30 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function ProgressBar(
-  props: LinearProgressProps & { label: string; value: number }
-) {
+type Props = {
+  label: string;
+  value: number;
+  rightLabel?: boolean;
+} & LinearProgressProps;
+
+export default function ProgressBar(props: Props) {
+  const { label, rightLabel, ...rest } = props;
+  const isRight = rightLabel;
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Typography variant="body1" color="text.primary">
-        {props.label}
-      </Typography>
+      {!isRight && (
+        <Typography variant="body1" color="text.primary">
+          {label}
+        </Typography>
+      )}
       <Box sx={{ width: "60%", m: 1 }}>
-        <LinearProgress variant="determinate" color="primary" {...props} />
+        <LinearProgress variant="determinate" color="primary" {...rest} />
       </Box>
+      {isRight && (
+        <Typography variant="body1" color="text.primary">
+          {label}
+        </Typography>
+      )}
     </Box>
   );
 }

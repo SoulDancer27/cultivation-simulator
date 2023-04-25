@@ -6,10 +6,19 @@ export type Activity = {
   time: number; // in seconds
   currentTime?: number;
   price?: {
-    items?: Omit<InventoryItem, "id">[];
+    baseStats?: Partial<PlayerBaseStats>;
+    items?: ActivityItem[];
   };
   result: {
     baseStats?: Partial<PlayerBaseStats>;
-    items?: Omit<InventoryItem, "id">[];
+    items?: ActivityItem[];
   };
 };
+
+type TreasureReward = {
+  type: "treasure";
+  name: string;
+  amount: number;
+};
+
+type ActivityItem = Omit<InventoryMoney, "id"> | TreasureReward;
