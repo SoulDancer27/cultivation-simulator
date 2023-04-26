@@ -3,7 +3,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { InventoryPages } from "Components/Inventory";
+import { InventoryPages } from "Components/PLayerStatsLayout/Inventory";
 
 type Props = {
   pages: InventoryPages;

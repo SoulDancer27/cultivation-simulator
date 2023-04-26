@@ -1,7 +1,7 @@
 import { levelExp, totalExp } from "GameConstants/CultivationManuals";
-import { playerStats } from "./playerStats";
+import { playerStats } from "../Player/playerStats";
 import React from "react";
-import PlayerContext from "./PlayerContext";
+import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 
 export default function useCultivationManager(timer: GameTimer) {

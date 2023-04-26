@@ -10,19 +10,19 @@ const Villages: Village[] = [
       {
         name: "Run Errands",
         description: "",
-        time: 0.1,
+        baseTime: 0.1,
         result: { items: [{ type: "money", name: "Copper Coin", amount: 1 }] },
       },
       {
         name: "Use Training Grounds",
         description: "",
-        time: 0.1,
+        baseTime: 0.1,
         result: { baseStats: { attack: 0.07, defence: 0.07 } },
       },
       {
         name: "Help in the fields",
         description: "",
-        time: 10,
+        baseTime: 10,
         result: {
           baseStats: { attack: 0.2, defence: 0.2 },
           items: [{ type: "money", name: "Copper Coin", amount: 5 }],
@@ -31,7 +31,7 @@ const Villages: Village[] = [
       {
         name: "Help in the forge",
         description: "",
-        time: 10,
+        baseTime: 10,
         result: {
           baseStats: { attack: 0.2, defence: 0.2 },
           items: [

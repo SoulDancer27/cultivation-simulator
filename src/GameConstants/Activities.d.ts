@@ -1,16 +1,20 @@
-import { PlayerBaseStats } from "./Player";
+import PlayerContext from "GameEngine/Player/PlayerContext";
+import { PlayerBaseStats, PlayerSkills } from "./Player";
 
 export type Activity = {
   name: string;
   description?: string;
-  time: number; // in seconds
+  baseTime: number; // in seconds
+  time?: (player?: PlayerContext) => number; // calculate completion time based on props
   currentTime?: number;
+  timesCompleted?: number;
   price?: {
     baseStats?: Partial<PlayerBaseStats>;
     items?: ActivityItem[];
   };
   result: {
     baseStats?: Partial<PlayerBaseStats>;
+    skills?: Partial<PlayerSkills>;
     items?: ActivityItem[];
   };
 };

@@ -37,11 +37,15 @@ export type PlayerStats = {
 
 export type PlayerBaseStats = {
   health: number;
+  attack: number;
   healthRegen: number;
   defence: number;
-  attack: number;
   // multiplier for cultivation experience gain
   insight: number;
+};
+
+export type PlayerSkills = {
+  training: number;
 };
 
 export type PlayerEnemyType = EnemyType & {
@@ -80,6 +84,7 @@ export type InventoryMoney = {
 export type PlayerContextType = {
   stats: PlayerStats;
   baseStats: PlayerBaseStats;
+  skills: PlayerSkills;
   realm: PlayerRealm;
   manuals?: PlayerCultivationManual[];
   inventory: InventoryItem[];

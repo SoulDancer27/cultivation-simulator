@@ -1,7 +1,7 @@
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import { playerStats } from "./playerStats";
+import { playerStats } from "../Player/playerStats";
 import React from "react";
-import PlayerContext from "./PlayerContext";
+import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 
 export default function useBreakthroughManager(timer: GameTimer) {

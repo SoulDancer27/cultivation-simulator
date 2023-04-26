@@ -4,6 +4,8 @@ import GameContext, {
   GameContextType,
   gameContext,
 } from "./GameContext/GameContext";
+import { Activity } from "GameConstants/Activities";
+import Trainings from "GameConstants/Trainings";
 
 // Wrapper for loading player save data
 export default function WorldLoader(props: any) {
@@ -15,7 +17,19 @@ export default function WorldLoader(props: any) {
   const [loaded, setLoaded] = React.useState<boolean>(false);
   React.useEffect(() => {
     const gameData = localStorage.getItem("game");
-    if (gameData) setData(JSON.parse(gameData));
+    if (gameData) {
+      let storageData = JSON.parse(gameData);
+      // Load functions
+      storageData.trainings = storageData.trainings.map((item: Activity) => {
+        const indexOf = Trainings.findIndex(
+          (training) => training.name === item.name
+        );
+        if (indexOf !== -1 && Trainings[indexOf].time)
+          item.time = Trainings[indexOf].time;
+        return item;
+      });
+      setData(storageData);
+    }
     setLoaded(true);
   }, []);
   // Autosave

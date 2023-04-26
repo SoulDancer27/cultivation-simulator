@@ -23,6 +23,7 @@ export default function TrainingPane() {
           <Activity
             activity={training}
             isActive={activityName === training.name}
+            showTimesCompleted
             source="trainings"
             key={training.name}
           />

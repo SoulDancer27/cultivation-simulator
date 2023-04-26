@@ -14,11 +14,14 @@ export const playerContext: PlayerContextType = {
     insight: 1,
   },
   baseStats: {
+    attack: 1,
     health: 10,
     healthRegen: 0.5,
     defence: 0,
-    attack: 1,
     insight: 1,
+  },
+  skills: {
+    training: 0,
   },
   realm: {
     name: "Mortal 0",

@@ -1,12 +1,12 @@
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import React from "react";
 
-import useAgeManager from "./Player/useAgeManager";
-import useDefaultRegenManager from "./Player/useDefaultRegenManager";
-import useFightManager from "./Player/useFightManager";
-import useCultivationManager from "./Player/useCultivationManager";
-import useActivityManager from "./Player/useActivityManager";
-import useBreakthroughManager from "./Player/useBreakthroughManager";
+import useAgeManager from "./Managers/useAgeManager";
+import useDefaultRegenManager from "./Managers/useDefaultRegenManager";
+import useFightManager from "./Managers/useFightManager";
+import useCultivationManager from "./Managers/useCultivationManager";
+import useActivityManager from "./Managers/useActivityManager";
+import useBreakthroughManager from "./Managers/useBreakthroughManager";
 
 export type GameTimer = {
   previousTime: number;

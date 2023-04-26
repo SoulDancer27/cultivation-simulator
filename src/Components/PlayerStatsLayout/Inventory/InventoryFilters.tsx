@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { InventoryFilters } from "Components/Inventory";
+import { InventoryFilters } from "Components/PLayerStatsLayout/Inventory";
 
 type Props = {
   type: InventoryFilters;

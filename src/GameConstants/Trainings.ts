@@ -1,20 +1,51 @@
 import { Activity } from "./Activities";
+import { monthSpan } from "./Constants";
+import { PlayerContextType } from "./Player";
 
 // Provide bonuses to base stats
-const Trainings: Activity[] = [
+let Trainings: Activity[] = [
   {
-    name: "Breathing Practice",
-    time: 1,
+    name: "Breathing Practice 1",
+    baseTime: monthSpan,
     result: {
       baseStats: {
         health: 1,
         healthRegen: 0.01,
       },
+      skills: {
+        training: 0.01,
+      },
+    },
+  },
+  {
+    name: "Breathing Practice 2",
+    baseTime: 5 * monthSpan,
+    result: {
+      baseStats: {
+        health: 5,
+        healthRegen: 0.05,
+      },
+      skills: {
+        training: 0.05,
+      },
+    },
+  },
+  {
+    name: "Breathing Practice 3",
+    baseTime: 25 * monthSpan,
+    result: {
+      baseStats: {
+        health: 25,
+        healthRegen: 0.25,
+      },
+      skills: {
+        training: 0.25,
+      },
     },
   },
   {
     name: "Attack",
-    time: 0.5,
+    baseTime: 500,
     result: {
       baseStats: {
         attack: 0.1,
@@ -23,7 +54,7 @@ const Trainings: Activity[] = [
   },
   {
     name: "Defence",
-    time: 0.5,
+    baseTime: 0.5,
     result: {
       baseStats: {
         defence: 0.1,
@@ -33,14 +64,14 @@ const Trainings: Activity[] = [
   },
   {
     name: "Run errands",
-    time: 0.1,
+    baseTime: 0.1,
     result: {
       items: [{ type: "money", name: "Copper Coin", amount: 1 }],
     },
   },
   {
     name: "Sacrifice Gold",
-    time: 1,
+    baseTime: 1,
     result: {
       baseStats: {
         defence: 0.1,
@@ -60,7 +91,7 @@ const Trainings: Activity[] = [
   },
   {
     name: "Sacrifice Sword",
-    time: 1,
+    baseTime: 1,
     result: {
       baseStats: {
         attack: 10,
@@ -77,5 +108,15 @@ const Trainings: Activity[] = [
     },
   },
 ];
+
+Trainings = Trainings.map((item) => {
+  if (!item.time)
+    item.time = function (player: PlayerContextType) {
+      const { skills } = player;
+      const multi = 1 + skills.training;
+      return this.baseTime / multi;
+    };
+  return item;
+});
 
 export default Trainings;

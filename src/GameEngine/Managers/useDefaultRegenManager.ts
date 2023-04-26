@@ -1,4 +1,4 @@
-import PlayerContext from "./PlayerContext";
+import PlayerContext from "../Player/PlayerContext";
 import React from "react";
 import { GameTimer } from "GameEngine/GameRuntime";
 
