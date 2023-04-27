@@ -26,6 +26,10 @@ export default function WorldLoader(props: any) {
         );
         if (indexOf !== -1 && Trainings[indexOf].time)
           item.time = Trainings[indexOf].time;
+        if (Trainings[indexOf].result.baseStatsMulti)
+          item.result.baseStatsMulti = Trainings[indexOf].result.baseStatsMulti;
+        if (Trainings[indexOf].result.skillsMulti)
+          item.result.skillsMulti = Trainings[indexOf].result.skillsMulti;
         return item;
       });
       setData(storageData);

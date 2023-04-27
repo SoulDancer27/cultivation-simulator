@@ -1,6 +1,7 @@
+import { isTemplateMiddle } from "typescript";
 import { Activity } from "./Activities";
 import { monthSpan } from "./Constants";
-import { PlayerContextType } from "./Player";
+import { PlayerBaseStats, PlayerContextType } from "./Player";
 
 // Provide bonuses to base stats
 let Trainings: Activity[] = [
@@ -116,7 +117,20 @@ Trainings = Trainings.map((item) => {
       const multi = 1 + skills.training;
       return this.baseTime / multi;
     };
+  if (item.result.baseStats && !item.result.baseStatsMulti)
+    item.result.baseStatsMulti = function (): number {
+      return 1 / divisionCoeff(item.timesCompleted || 0);
+    };
+  if (item.result.skills && !item.result.skillsMulti)
+    item.result.skillsMulti = function (): number {
+      return 1 / divisionCoeff(item.timesCompleted || 0);
+    };
   return item;
 });
+
+function divisionCoeff(timesCompleted: number) {
+  if (timesCompleted <= 10) return 1;
+  return 0.233 * (1 + Math.sqrt(timesCompleted));
+}
 
 export default Trainings;

@@ -30,10 +30,10 @@ export default function useActivityManager(timer: GameTimer) {
         activity,
         player
       );
+
       activity.currentTime = currentTime;
       activity.timesCompleted =
         (activity?.timesCompleted || 0) + timesCompleted;
-      console.log(activity.timesCompleted);
       // Action not completed yet
       if (timesCompleted === 0) {
         game.updateContext({ ...game });
@@ -63,10 +63,14 @@ export default function useActivityManager(timer: GameTimer) {
           baseStats = addBaseStats(
             baseStats,
             activity.result.baseStats,
-            timesCompleted
+            timesCompleted * activity?.result?.baseStatsMulti() || 1
           );
         if (activity.result.skills)
-          skills = addSkillsExp(skills, activity.result.skills, timesCompleted);
+          skills = addSkillsExp(
+            skills,
+            activity.result.skills,
+            timesCompleted * activity?.result?.skillsMulti() || 1
+          );
         // Process reward
         if (activity.result.items) {
           inventory = rewardItems(

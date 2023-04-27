@@ -41,7 +41,7 @@ export default function ActivityPanel(props: Props) {
     for (const [key, value] of Object.entries(result.baseStats)) {
       StatsRewardDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value,
+        effect: value * (result?.baseStatsMulti ? result.baseStatsMulti() : 1),
       });
     }
   }
@@ -61,7 +61,7 @@ export default function ActivityPanel(props: Props) {
     for (const [key, value] of Object.entries(result.skills)) {
       SkillsRewardDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value,
+        effect: value * (result?.skillsMulti ? result.skillsMulti() : 1),
       });
     }
   }
@@ -137,7 +137,7 @@ export default function ActivityPanel(props: Props) {
                     >
                       {item.text}{" "}
                       {requiredTime > 1
-                        ? item.effect
+                        ? item.effect.toPrecision(3)
                         : (item.effect / requiredTime).toPrecision(3)}
                     </Typography>
                   ))}
@@ -168,7 +168,7 @@ export default function ActivityPanel(props: Props) {
                     >
                       {item.text}{" "}
                       {requiredTime > 1
-                        ? item.effect
+                        ? item.effect.toPrecision(3)
                         : (item.effect / requiredTime).toPrecision(3)}
                     </Typography>
                   ))}

@@ -14,7 +14,9 @@ export type Activity = {
   };
   result: {
     baseStats?: Partial<PlayerBaseStats>;
+    baseStatsMulti?: (player?: PlayerContext) => number;
     skills?: Partial<PlayerSkills>;
+    skillsMulti?: (player?: PlayerContext) => number;
     items?: ActivityItem[];
   };
 };
