@@ -37,12 +37,13 @@ export default function ActiveManual() {
   const expForNextLevel = levelExp(level + 1, rarity, realm);
 
   const ManualStatsDescription: ManualStatsDescription[] = [];
-  for (const [key, value] of Object.entries(state.manual.manual.stats)) {
-    ManualStatsDescription.push({
-      text: PlayerStatsDictionary[key],
-      effect: value * state.manual.learningProgress.level,
-    });
-  }
+  if (state.manual.manual.stats)
+    for (const [key, value] of Object.entries(state.manual.manual.stats)) {
+      ManualStatsDescription.push({
+        text: PlayerStatsDictionary[key],
+        effect: value * state.manual.learningProgress.level,
+      });
+    }
   return (
     <Box width="60%" border="1px solid gray" borderRadius={theme.spacing(1)}>
       <Box

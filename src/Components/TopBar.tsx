@@ -1,5 +1,5 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { monthSpan, yearSpan } from "GameConstants/Constants";
+import { month, year } from "GameConstants/Constants";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 
@@ -16,11 +16,8 @@ export default function TopBar() {
   );
 }
 function parseAge(time: number): string {
-  const years = Math.floor(time / yearSpan);
+  const years = Math.floor(time / year);
   // Just in case to not overflow 12 due to rounding
-  const months = Math.min(
-    Math.floor((time - years * yearSpan) / monthSpan),
-    12
-  );
+  const months = Math.min(Math.floor((time - years * year) / month), 12);
   return `${years} years ${months} months`;
 }

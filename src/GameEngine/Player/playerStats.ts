@@ -74,7 +74,8 @@ export function manualsMultiplier(
   manuals.forEach((value) => {
     if (value.isEquipped) {
       const manualPower =
-        (value.manual.stats[stat] || 0) * value.learningProgress.level;
+        (value.manual.stats ? value.manual.stats[stat] : 0) *
+        value.learningProgress.level;
       totalPower += manualPower;
     }
   });

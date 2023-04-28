@@ -41,7 +41,8 @@ export default function ActivityPanel(props: Props) {
     for (const [key, value] of Object.entries(result.baseStats)) {
       StatsRewardDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value * (result?.baseStatsMulti ? result.baseStatsMulti() : 1),
+        effect:
+          value * (activity?.baseStatsMulti ? activity.baseStatsMulti() : 1),
       });
     }
   }
@@ -61,7 +62,7 @@ export default function ActivityPanel(props: Props) {
     for (const [key, value] of Object.entries(result.skills)) {
       SkillsRewardDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value * (result?.skillsMulti ? result.skillsMulti() : 1),
+        effect: value * (activity?.skillsMulti ? activity.skillsMulti() : 1),
       });
     }
   }
@@ -95,11 +96,11 @@ export default function ActivityPanel(props: Props) {
   let remainingTime = requiredTime - currentTime;
 
   // Change some displayed effects if action is really fast
-  const fastAction = (requiredTime / defaultUpdateInterval) * 1000 < 5;
+  const fastAction = requiredTime / defaultUpdateInterval < 5;
   const progressBarLabel =
     requiredTime < 1000
       ? (1000 / requiredTime).toFixed(2) + "/s"
-      : parseTime(remainingTime) + "/" + parseTime(requiredTime);
+      : parseTime(requiredTime);
   return (
     <Paper
       elevation={8}
@@ -136,12 +137,12 @@ export default function ActivityPanel(props: Props) {
                       display="inline"
                     >
                       {item.text}{" "}
-                      {requiredTime > 1
+                      {requiredTime > 1000
                         ? item.effect.toPrecision(3)
-                        : (item.effect / requiredTime).toPrecision(3)}
+                        : ((item.effect / requiredTime) * 1000).toPrecision(3)}
                     </Typography>
                   ))}
-                  {requiredTime < 1 ? "/s" : ""}
+                  {requiredTime < 1000 ? "/s" : ""}
                 </Box>
               )}
               {ItemRewardDescription.length > 0 && (
@@ -167,12 +168,12 @@ export default function ActivityPanel(props: Props) {
                       display="inline"
                     >
                       {item.text}{" "}
-                      {requiredTime > 1
+                      {requiredTime > 1000
                         ? item.effect.toPrecision(3)
-                        : (item.effect / requiredTime).toPrecision(3)}
+                        : ((item.effect / requiredTime) * 1000).toPrecision(3)}
                     </Typography>
                   ))}
-                  {requiredTime < 1 ? "/s" : ""}
+                  {requiredTime < 1000 ? "/s" : ""}
                 </Box>
               )}
             </Box>

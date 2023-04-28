@@ -1,4 +1,4 @@
-import { PlayerBaseStats } from "./Player";
+import { PlayerBaseStats, PlayerSkills } from "./Player";
 
 export const CultivationManuals: CultivationManualType[] = [
   {
@@ -27,7 +27,8 @@ export type CultivationManualType = {
   rarity: string;
   maxLevel: number;
   // Cumulative bonus to base stats
-  stats: Partial<PlayerBaseStats>;
+  stats?: Partial<PlayerBaseStats>;
+  skills?: Partial<PlayerSkills>;
 };
 
 export function levelExp(level, realm, rarity) {

@@ -41,12 +41,13 @@ export default function ManualsList() {
       {storedManuals.map((item) => {
         const { manual, learningProgress } = item;
         const ManualStatsDescription: ManualStatsDescription[] = [];
-        for (const [key, value] of Object.entries(manual.stats)) {
-          ManualStatsDescription.push({
-            text: PlayerStatsDictionary[key],
-            effect: value * learningProgress.level,
-          });
-        }
+        if (manual.stats)
+          for (const [key, value] of Object.entries(manual.stats)) {
+            ManualStatsDescription.push({
+              text: PlayerStatsDictionary[key],
+              effect: value * learningProgress.level,
+            });
+          }
         return (
           <Box
             key={manual.name}

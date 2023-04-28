@@ -1,11 +1,11 @@
 import React from "react";
 import { PlayerContextType } from "GameConstants/Player";
-import { yearSpan } from "GameConstants/Constants";
+import { year } from "GameConstants/Constants";
 import { CultivationManuals } from "GameConstants/CultivationManuals";
 
 export const playerContext: PlayerContextType = {
   stats: {
-    age: yearSpan * 10,
+    age: year * 10,
     currentHealth: 10,
     health: 10,
     healthRegen: 0.5,

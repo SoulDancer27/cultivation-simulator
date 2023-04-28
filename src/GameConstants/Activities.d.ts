@@ -8,15 +8,15 @@ export type Activity = {
   time?: (player?: PlayerContext) => number; // calculate completion time based on props
   currentTime?: number;
   timesCompleted?: number;
+  baseStatsMulti?: (player?: PlayerContext) => number;
+  skillsMulti?: (player?: PlayerContext) => number;
   price?: {
     baseStats?: Partial<PlayerBaseStats>;
     items?: ActivityItem[];
   };
   result: {
     baseStats?: Partial<PlayerBaseStats>;
-    baseStatsMulti?: (player?: PlayerContext) => number;
     skills?: Partial<PlayerSkills>;
-    skillsMulti?: (player?: PlayerContext) => number;
     items?: ActivityItem[];
   };
 };

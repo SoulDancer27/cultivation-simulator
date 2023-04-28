@@ -59,17 +59,17 @@ export default function useActivityManager(timer: GameTimer) {
         }
 
         // If activity increaces base stats
-        if (activity.result.baseStats)
-          baseStats = addBaseStats(
-            baseStats,
-            activity.result.baseStats,
-            timesCompleted * activity?.result?.baseStatsMulti() || 1
-          );
+        if (activity.result.baseStats) console.log(activity?.baseStatsMulti());
+        baseStats = addBaseStats(
+          baseStats,
+          activity.result.baseStats,
+          timesCompleted * activity?.baseStatsMulti() || 1
+        );
         if (activity.result.skills)
           skills = addSkillsExp(
             skills,
             activity.result.skills,
-            timesCompleted * activity?.result?.skillsMulti() || 1
+            timesCompleted * activity?.skillsMulti() || 1
           );
         // Process reward
         if (activity.result.items) {
