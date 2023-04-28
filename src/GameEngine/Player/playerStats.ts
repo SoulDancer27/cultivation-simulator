@@ -72,11 +72,13 @@ export function manualsMultiplier(
   let totalPower = 1;
   if (!manuals) return 1;
   manuals.forEach((value) => {
-    if (value.isEquipped) {
+    try {
+      if (!value.isEquipped || !value.manual.stats) throw new Error("skip");
       const manualPower =
-        (value.manual.stats ? value.manual.stats[stat] : 0) *
-        value.learningProgress.level;
+        (value.manual.stats[stat] || 0) * value.learningProgress.level;
       totalPower += manualPower;
+    } catch (error) {
+      /* do nothing*/
     }
   });
   return totalPower;
