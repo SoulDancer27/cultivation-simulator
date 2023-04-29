@@ -5,6 +5,7 @@ export const CultivationManuals: CultivationManualType[] = [
     name: "Fist Strike",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/red.png",
     maxLevel: 10,
     stats: {
       attack: 0.01,
@@ -14,9 +15,31 @@ export const CultivationManuals: CultivationManualType[] = [
     name: "Block",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/yellow.png",
     maxLevel: 10,
     stats: {
-      defence: 0.05,
+      defence: 0.01,
+    },
+  },
+  {
+    name: "Meditation",
+    realm: "Mortal 1",
+    rarity: "common",
+    imagePath: "/manuals/green.png",
+    maxLevel: 10,
+    stats: {
+      health: 0.01,
+      healthRegen: 0.01,
+    },
+  },
+  {
+    name: "Training Guidance",
+    realm: "Mortal 1",
+    rarity: "common",
+    imagePath: "/manuals/purple.png",
+    maxLevel: 10,
+    skills: {
+      training: 0.01,
     },
   },
 ];
@@ -25,6 +48,7 @@ export type CultivationManualType = {
   name: string;
   realm: string;
   rarity: string;
+  imagePath?: string;
   maxLevel: number;
   // Cumulative bonus to base stats
   stats?: Partial<PlayerBaseStats>;

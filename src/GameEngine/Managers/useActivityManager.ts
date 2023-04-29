@@ -9,11 +9,20 @@ import rewardItems from "GameEngine/shared/rewardItems";
 import addBaseStats from "GameEngine/shared/addBaseStats";
 import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
+import { playerSkills } from "GameEngine/Player/playerSkills";
 
 export default function useActivityManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   const game = React.useContext(GameContext);
-  let { state, baseStats, stats, inventory, skills, updateContext } = player;
+  let {
+    state,
+    baseStats,
+    stats,
+    inventory,
+    baseSkills,
+    skills,
+    updateContext,
+  } = player;
 
   React.useEffect(() => {
     try {
@@ -59,15 +68,15 @@ export default function useActivityManager(timer: GameTimer) {
         }
 
         // If activity increaces base stats
-        if (activity.result.baseStats) console.log(activity?.baseStatsMulti());
-        baseStats = addBaseStats(
-          baseStats,
-          activity.result.baseStats,
-          timesCompleted * activity?.baseStatsMulti() || 1
-        );
+        if (activity.result.baseStats)
+          baseStats = addBaseStats(
+            baseStats,
+            activity.result.baseStats,
+            timesCompleted * activity?.baseStatsMulti() || 1
+          );
         if (activity.result.skills)
-          skills = addSkillsExp(
-            skills,
+          baseSkills = addSkillsExp(
+            baseSkills,
             activity.result.skills,
             timesCompleted * activity?.skillsMulti() || 1
           );
@@ -82,7 +91,8 @@ export default function useActivityManager(timer: GameTimer) {
       }
       // Update calculated stat values based on new baseStats
       stats = playerStats(player);
-      updateContext({ stats, baseStats, skills, inventory });
+      skills = playerSkills(player);
+      updateContext({ stats, baseStats, baseSkills, skills, inventory });
     } catch (error) {
       console.log(error);
     }

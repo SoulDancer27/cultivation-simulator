@@ -85,6 +85,7 @@ export type PlayerContextType = {
   stats: PlayerStats;
   baseStats: PlayerBaseStats;
   skills: PlayerSkills;
+  baseSkills: PlayerSkills;
   realm: PlayerRealm;
   manuals?: PlayerCultivationManual[];
   inventory: InventoryItem[];

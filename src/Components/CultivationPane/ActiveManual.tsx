@@ -30,18 +30,19 @@ export default function ActiveManual() {
         </Typography>
       </Box>
     );
-  const { rarity, realm, maxLevel } = state.manual.manual;
+  const { manual, learningProgress } = state.manual;
+  const { rarity, realm, maxLevel } = manual;
 
-  const { exp, level } = state.manual.learningProgress;
+  const { exp, level } = learningProgress;
   const expForPrevLevel = totalExp(level);
   const expForNextLevel = levelExp(level + 1, rarity, realm);
 
   const ManualStatsDescription: ManualStatsDescription[] = [];
-  if (state.manual.manual.stats)
-    for (const [key, value] of Object.entries(state.manual.manual.stats)) {
+  if (manual.stats)
+    for (const [key, value] of Object.entries(manual.stats)) {
       ManualStatsDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value * state.manual.learningProgress.level,
+        effect: value * learningProgress.level,
       });
     }
   return (
@@ -52,7 +53,21 @@ export default function ActiveManual() {
         marginLeft={theme.spacing(2)}
         alignItems="center"
       >
-        <Typography variant="h5">{state.manual.manual.name}</Typography>
+        <Box
+          width={100}
+          minHeight={60}
+          marginY={theme.spacing(1)}
+          display="flex"
+          justifyContent={"center"}
+        >
+          <img
+            src={manual.imagePath || "/manuals/placeholder.png"}
+            width="60px"
+            height="auto"
+            alt=""
+          ></img>
+        </Box>
+        <Typography variant="h5">{manual.name}</Typography>
         <Typography marginLeft={theme.spacing(2)}>
           Level: {level} / {maxLevel}
         </Typography>
@@ -76,7 +91,7 @@ export default function ActiveManual() {
         display="flex"
       >
         <Typography>
-          {state.manual.manual.realm} ({state.manual.manual.rarity})
+          {manual.realm} ({manual.rarity})
         </Typography>
         {ManualStatsDescription.map((stat) => {
           return (

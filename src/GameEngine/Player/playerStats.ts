@@ -7,7 +7,7 @@ import {
 } from "GameConstants/Player";
 
 export function playerHealth(player: PlayerContextType) {
-  const cultivationMulti = manualsMultiplier("health", player.manuals);
+  const cultivationMulti = manualsStatsMultiplier("health", player.manuals);
   const realmMulti = player.realm.power.health || 1;
   const treasuresPower = treasuresBonus("health", player.inventory);
   return (
@@ -16,7 +16,7 @@ export function playerHealth(player: PlayerContextType) {
 }
 
 export function playerAttack(player: PlayerContextType) {
-  const cultivationMulti = manualsMultiplier("attack", player.manuals);
+  const cultivationMulti = manualsStatsMultiplier("attack", player.manuals);
   const realmMulti = player.realm.power.attack || 1;
   const treasuresPower = treasuresBonus("attack", player.inventory);
   return (
@@ -25,7 +25,7 @@ export function playerAttack(player: PlayerContextType) {
 }
 
 export function playerDefence(player: PlayerContextType) {
-  const cultivationMulti = manualsMultiplier("defence", player.manuals);
+  const cultivationMulti = manualsStatsMultiplier("defence", player.manuals);
   const realmMulti = player.realm.power.defence || 1;
   const treasuresPower = treasuresBonus("defence", player.inventory);
   return (
@@ -34,7 +34,10 @@ export function playerDefence(player: PlayerContextType) {
 }
 
 export function playerHealthRegen(player: PlayerContextType) {
-  const cultivationMulti = manualsMultiplier("healthRegen", player.manuals);
+  const cultivationMulti = manualsStatsMultiplier(
+    "healthRegen",
+    player.manuals
+  );
   const realmMulti = player.realm.power.healthRegen || 1;
   const treasuresPower = treasuresBonus("healthRegen", player.inventory);
   return (
@@ -44,7 +47,7 @@ export function playerHealthRegen(player: PlayerContextType) {
 }
 
 export function playerInsight(player: PlayerContextType) {
-  const cultivationMulti = manualsMultiplier("insight", player.manuals);
+  const cultivationMulti = manualsStatsMultiplier("insight", player.manuals);
   const realmMulti = player.realm.power.insight || 1;
   const treasuresPower = treasuresBonus("insight", player.inventory);
   return (
@@ -64,7 +67,7 @@ export function playerStats(player: PlayerContextType): PlayerStats {
   return stats;
 }
 
-export function manualsMultiplier(
+export function manualsStatsMultiplier(
   stat: string,
   manuals: PlayerCultivationManual[] | undefined
 ) {
@@ -113,7 +116,7 @@ export function getStatStructure(
   const { baseStats, realm, manuals, inventory } = player;
   const baseStat = baseStats[stat];
   const realmBonus = realm.power[stat] || 1;
-  const manualsBonus = manualsMultiplier(stat, manuals);
+  const manualsBonus = manualsStatsMultiplier(stat, manuals);
   const treasuresPower = treasuresBonus(stat, inventory);
   return {
     base: baseStat,

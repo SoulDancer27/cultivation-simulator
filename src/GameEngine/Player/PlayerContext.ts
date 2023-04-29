@@ -23,6 +23,9 @@ export const playerContext: PlayerContextType = {
   skills: {
     training: 0,
   },
+  baseSkills: {
+    training: 0,
+  },
   realm: {
     name: "Mortal 0",
     power: {},

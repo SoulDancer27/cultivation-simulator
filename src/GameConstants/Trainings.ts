@@ -51,7 +51,7 @@ let Trainings: Activity[] = [
         defence: 0.1,
       },
       skills: {
-        training: 0.03,
+        training: 0.01,
       },
     },
   },

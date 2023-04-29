@@ -3,10 +3,11 @@ import { playerStats } from "../Player/playerStats";
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
+import { playerSkills } from "GameEngine/Player/playerSkills";
 
 export default function useCultivationManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
-  let { stats, state, updateContext } = player;
+  let { stats, state, skills, updateContext } = player;
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "cultivating" || !state.manual) return;
@@ -29,8 +30,9 @@ export default function useCultivationManager(timer: GameTimer) {
     // update player stats on reaching new level
     if (newLevel !== level) {
       state.manual.learningProgress.level = newLevel;
-      stats = playerStats(player);
+      if (manual.stats) stats = playerStats(player);
+      if (manual.skills) skills = playerSkills(player);
     }
-    updateContext({ state, stats });
+    updateContext({ state, stats, skills });
   }, [currentTime]);
 }

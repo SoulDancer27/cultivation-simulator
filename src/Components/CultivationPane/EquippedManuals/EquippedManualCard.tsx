@@ -51,8 +51,8 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box
         border="1px solid gray"
-        width={100}
-        height={150}
+        width={120}
+        height={200}
         borderRadius={theme.spacing(1)}
         onClick={handleClick}
       >
@@ -64,7 +64,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
           justifyContent={"center"}
         >
           <img
-            src="/manuals/placeholder.png"
+            src={manual.imagePath || "/manuals/placeholder.png"}
             width="60px"
             height="auto"
             alt=""
