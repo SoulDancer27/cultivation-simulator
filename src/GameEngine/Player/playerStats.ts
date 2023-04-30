@@ -8,7 +8,7 @@ import {
 
 export function playerHealth(player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier("health", player.manuals);
-  const realmMulti = player.realm.power.health || 1;
+  const realmMulti = player.realm.power["health"] || 1;
   const treasuresPower = treasuresBonus("health", player.inventory);
   return (
     player.baseStats.health * realmMulti * cultivationMulti + treasuresPower
@@ -17,7 +17,7 @@ export function playerHealth(player: PlayerContextType) {
 
 export function playerAttack(player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier("attack", player.manuals);
-  const realmMulti = player.realm.power.attack || 1;
+  const realmMulti = player.realm.power["attack"] || 1;
   const treasuresPower = treasuresBonus("attack", player.inventory);
   return (
     player.baseStats.attack * realmMulti * cultivationMulti + treasuresPower
@@ -26,7 +26,7 @@ export function playerAttack(player: PlayerContextType) {
 
 export function playerDefence(player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier("defence", player.manuals);
-  const realmMulti = player.realm.power.defence || 1;
+  const realmMulti = player.realm.power["defence"] || 1;
   const treasuresPower = treasuresBonus("defence", player.inventory);
   return (
     player.baseStats.defence * realmMulti * cultivationMulti + treasuresPower
@@ -38,7 +38,7 @@ export function playerHealthRegen(player: PlayerContextType) {
     "healthRegen",
     player.manuals
   );
-  const realmMulti = player.realm.power.healthRegen || 1;
+  const realmMulti = player.realm.power["healthRegen"] || 1;
   const treasuresPower = treasuresBonus("healthRegen", player.inventory);
   return (
     player.baseStats.healthRegen * realmMulti * cultivationMulti +
@@ -48,7 +48,7 @@ export function playerHealthRegen(player: PlayerContextType) {
 
 export function playerInsight(player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier("insight", player.manuals);
-  const realmMulti = player.realm.power.insight || 1;
+  const realmMulti = player.realm.power["insight"] || 1;
   const treasuresPower = treasuresBonus("insight", player.inventory);
   return (
     player.baseStats.insight * realmMulti * cultivationMulti + treasuresPower

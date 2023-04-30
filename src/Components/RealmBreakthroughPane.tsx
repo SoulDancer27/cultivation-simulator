@@ -1,29 +1,19 @@
 import { Box, Button, Typography } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
-import {
-  CultivationRealms,
-  CultivationRealmType,
-} from "GameConstants/CultivationRealms";
+import { CultivationRealms } from "GameConstants/CultivationRealms";
 import React from "react";
+import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 
 export default function RealmBreakthroughPane() {
   const { realm } = React.useContext(PlayerContext);
-  const currentRealm = CultivationRealms.find(
-    (value) => value.name === realm.name
-  );
-  const currentRealmIndex =
-    currentRealm && CultivationRealms.indexOf(currentRealm);
-  const nextRealm =
-    currentRealmIndex !== undefined
-      ? CultivationRealms.length >= currentRealmIndex + 2
-        ? CultivationRealms[currentRealmIndex + 1]
-        : undefined
-      : undefined;
+  const currentRealm = CultivationRealms[realm.index];
+  const nextRealmIndex =
+    CultivationRealms.length >= realm.index + 2 ? realm.index + 1 : undefined;
 
   return (
     <Box>
-      {nextRealm ? (
-        <BreakthroughCard realm={nextRealm} />
+      {nextRealmIndex ? (
+        <BreakthroughCard realmIndex={nextRealmIndex} />
       ) : (
         "You reached a pinnacle of power!"
       )}
@@ -31,27 +21,50 @@ export default function RealmBreakthroughPane() {
   );
 }
 
-function BreakthroughCard(props: { realm: CultivationRealmType }) {
-  const { realm } = props;
-  const { name, healthRegen, attack, defence } = realm;
+function BreakthroughCard(props: { realmIndex: number }) {
+  const { realmIndex } = props;
+  const realm = CultivationRealms[realmIndex];
+  const power = calculateTribulationPower(realmIndex, CultivationRealms);
+  const { healthRegen, attack, defence, health } = power;
   const { state, updateContext } = React.useContext(PlayerContext);
   const isActive = state.action === "breakthrough";
-  const currentHealth = state.realm?.currentHealth.toFixed(2) || realm.health;
+  const currentHealth = state.realm?.currentHealth || health;
   const handleClick = () => {
     state.action = isActive ? "idle" : "breakthrough";
     state.realm = isActive
       ? undefined
-      : { ...structuredClone(realm), currentHealth: realm.health };
+      : {
+          ...realm,
+          index: realmIndex,
+          currentHealth: health,
+          health,
+          attack,
+          defence,
+          healthRegen,
+        };
     updateContext({ state });
   };
+
+  // Effective values to display
+  let stepReached = 1;
+  let multiplier = 1;
+  if (state.realm?.tribulation) {
+    stepReached = state.realm.tribulation.stepReached || 0;
+    multiplier = state.realm.tribulation.multiplier;
+  }
+  const powerFactor = multiplier ** stepReached;
+  const effCurrentHealth = currentHealth;
+  const effHealthRegen = healthRegen * powerFactor;
+  const effAttack = attack * powerFactor;
+  const effDefence = defence * powerFactor;
   return (
     <Box>
-      <Typography>{name}</Typography>
+      <Typography>{realm.name}</Typography>
       <Typography>Tribulation power:</Typography>
-      <Typography>Hp: {currentHealth}</Typography>
-      <Typography>Hp.regen: {healthRegen}</Typography>
-      <Typography>Atk: {attack}</Typography>
-      <Typography>Def: {defence}</Typography>
+      <Typography>Hp: {effCurrentHealth.toFixed(2)}</Typography>
+      <Typography>Hp.regen: {effHealthRegen.toFixed(2)}</Typography>
+      <Typography>Atk: {effAttack.toFixed(2)}</Typography>
+      <Typography>Def: {effDefence.toFixed(2)}</Typography>
       <Button onClick={handleClick} variant="outlined">
         {isActive ? "Stop" : "Breakthrough"}
       </Button>

@@ -27,7 +27,7 @@ export const playerContext: PlayerContextType = {
     training: 0,
   },
   realm: {
-    name: "Mortal 0",
+    index: 0,
     power: {},
   },
   manuals: CultivationManuals.map((manual) => ({

@@ -7,11 +7,12 @@ import { PlayerBaseStats, PlayerContextType } from "./Player";
 let Trainings: Activity[] = [
   {
     name: "Running",
-    baseTime: 5 * day,
+    baseTime: 0.5 * day,
     result: {
       baseStats: {
         health: 0.5,
-        attack: 0.1,
+        attack: 1,
+        healthRegen: 0.1,
       },
       skills: {
         training: 0.01,

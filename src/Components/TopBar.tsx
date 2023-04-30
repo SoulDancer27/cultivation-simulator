@@ -1,16 +1,20 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { month, year } from "GameConstants/Constants";
+import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 
 export default function TopBar() {
   const theme = useTheme();
   const { stats, realm } = React.useContext(PlayerContext);
+  const { cultivationRealms } = React.useContext(GameContext);
   return (
     <Paper elevation={8}>
       <Box height={theme.spacing(8)} width="100vw">
         <Typography variant="h5">Age: {parseAge(stats.age)}</Typography>
-        <Typography variant="h5">Realm: {realm.name}</Typography>
+        <Typography variant="h5">
+          Realm: {cultivationRealms[realm.index].name}
+        </Typography>
       </Box>
     </Paper>
   );

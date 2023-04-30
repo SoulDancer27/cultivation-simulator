@@ -1,21 +1,31 @@
 import { PlayerBaseStats } from "./Player";
 
-export type CultivationRealmType = {
+export type Tribulation = {
+  steps: number;
+  multiplier: number;
+  statsMulti: number;
+  stepReached?: number;
+};
+
+export type CultivationRealm = {
   name: string;
   health: number;
   healthRegen: number;
   defence: number;
   attack: number;
+  // Additional stats for heavenly tribulations
+  tribulation?: Tribulation;
   realmPowers: Partial<PlayerBaseStats>;
 };
 
-export const CultivationRealms: CultivationRealmType[] = [
+export const CultivationRealms: CultivationRealm[] = [
   {
     name: "Mortal 0",
     health: 0,
     healthRegen: 0,
     defence: 0,
     attack: 0,
+
     realmPowers: {
       health: 1,
       healthRegen: 1,
@@ -30,6 +40,11 @@ export const CultivationRealms: CultivationRealmType[] = [
     healthRegen: 0,
     defence: 0,
     attack: 3,
+    tribulation: {
+      steps: 25,
+      statsMulti: 1.05,
+      multiplier: 1.1,
+    },
     realmPowers: {
       health: 1.2,
       healthRegen: 1.2,
@@ -50,6 +65,11 @@ export const CultivationRealms: CultivationRealmType[] = [
       attack: 1.44,
       defence: 1.44,
       insight: 1.44,
+    },
+    tribulation: {
+      steps: 25,
+      statsMulti: 1.05,
+      multiplier: 1.1,
     },
   },
   {

@@ -6,7 +6,6 @@ import SkillDetailsTooltip from "./Skills/SkillDetailTooltip";
 export default function Skills() {
   const { skills } = React.useContext(PlayerContext);
   const { training } = skills;
-  console.log(training);
 
   return (
     <Box>

@@ -1,11 +1,13 @@
 import { Box, Button, Paper, useTheme } from "@mui/material";
-import { ActivePane } from "App";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import ActionsPane from "./ActionsPane";
 import ManualsPane from "./ManualsPane";
+import RealmBreakthroughPane from "./RealmBreakthroughPane";
+
+export type ActivePane = "actions" | "manuals" | "breakthrough";
 
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
@@ -36,10 +38,20 @@ export default function MainNavigationBar() {
           >
             Manuals
           </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            color={pane === "breakthrough" ? "success" : "primary"}
+            onClick={() => setPane("breakthrough")}
+            sx={{ margin: theme.spacing(2) }}
+          >
+            Breakthrough
+          </Button>
         </Box>
       </Paper>
       {pane === "actions" ? <ActionsPane /> : ""}
       {pane === "manuals" ? <ManualsPane /> : ""}
+      {pane === "breakthrough" ? <RealmBreakthroughPane /> : ""}
     </Box>
   );
 }

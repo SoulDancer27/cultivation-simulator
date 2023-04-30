@@ -44,5 +44,3 @@ export default function App() {
     </CssBaseline>
   );
 }
-
-export type ActivePane = "actions" | "manuals";
