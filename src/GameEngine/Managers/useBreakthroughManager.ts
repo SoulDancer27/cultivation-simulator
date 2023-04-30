@@ -7,8 +7,8 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import GameContext from "GameEngine/GameContext/GameContext";
-import { PlayerBaseStats, RealmTribulation } from "GameConstants/Player";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
+import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 
 export default function useBreakthroughManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
@@ -54,13 +54,14 @@ export default function useBreakthroughManager(timer: GameTimer) {
 
           const newStep = stepReached ? stepReached + 1 : 1;
           state.realm.tribulation.stepReached = newStep;
-          const newMulti = breakthrough.tribulation.multiplier ** newStep;
-          state.realm.health = breakthrough.health * newMulti;
-          state.realm.attack = breakthrough.attack * newMulti;
-          state.realm.defence = breakthrough.defence * newMulti;
-          state.realm.healthRegen = breakthrough.healthRegen * newMulti;
-          state.realm.currentHealth = state.realm.health;
+          const { health, healthRegen, attack, defence } =
+            calculateTribulationPower(breakthrough.index, cultivationRealms);
 
+          state.realm.health = health;
+          state.realm.healthRegen = healthRegen;
+          state.realm.attack = attack;
+          state.realm.defence = defence;
+          state.realm.currentHealth = state.realm.health;
           updateContext({ state });
           return;
         } else {
@@ -98,7 +99,7 @@ export default function useBreakthroughManager(timer: GameTimer) {
         const stepReached = state.realm.tribulation.stepReached;
         if (!stepReached) {
           state = { action: "idle", realm: undefined };
-          alert("Breakthrough failed, you are not strong enough yet");
+          updateContext({ state });
           // The breakthrough was successful, albeit not stages were finished
         } else {
           realm.index = breakthrough.index;

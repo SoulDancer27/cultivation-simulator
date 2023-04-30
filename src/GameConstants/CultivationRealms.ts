@@ -40,17 +40,17 @@ export const CultivationRealms: CultivationRealm[] = [
     healthRegen: 0,
     defence: 0,
     attack: 3,
-    tribulation: {
-      steps: 25,
-      statsMulti: 1.05,
-      multiplier: 1.1,
-    },
     realmPowers: {
       health: 1.2,
       healthRegen: 1.2,
       attack: 1.2,
       defence: 1.2,
       insight: 1.2,
+    },
+    tribulation: {
+      steps: 25,
+      statsMulti: 1.05,
+      multiplier: 1.1,
     },
   },
   {
