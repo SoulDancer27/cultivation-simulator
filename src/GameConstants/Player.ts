@@ -22,12 +22,6 @@ export type PlayerActivity = Activity & { currentTime?: number };
 
 export type RealmTribulation = {
   index: number;
-  health: number;
-  currentHealth: number;
-  healthRegen: number;
-  attack: number;
-  defence: number;
-  tribulation?: Tribulation;
 };
 
 export type PlayerStats = {

@@ -1,7 +1,3 @@
-import {
-  CultivationRealm,
-  CultivationRealms,
-} from "GameConstants/CultivationRealms";
 import { playerStats } from "../Player/playerStats";
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
@@ -9,6 +5,10 @@ import { GameTimer } from "GameEngine/GameRuntime";
 import GameContext from "GameEngine/GameContext/GameContext";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
+import {
+  BreakthroughDps,
+  TribulationDps,
+} from "GameEngine/shared/breakthrough";
 
 export default function useBreakthroughManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
@@ -20,13 +20,19 @@ export default function useBreakthroughManager(timer: GameTimer) {
     if (state.action !== "breakthrough" || !state.realm) return;
     const elapsedTime = currentTime - previousTime;
     // Calculate damage dealt by both parties
-    const breakthrough = state.realm;
+    const breakthrough = cultivationRealms[state.realm.index];
+
+    if (!breakthrough || !breakthrough.currentStats) return;
+
     const playerDps = BreakthroughDps(
       { attack: stats.attack },
-      { defence: breakthrough.defence, healthRegen: breakthrough.healthRegen }
+      {
+        defence: breakthrough.currentStats.defence,
+        healthRegen: breakthrough.currentStats.healthRegen,
+      }
     );
     const realmDps = TribulationDps(
-      { attack: breakthrough.attack },
+      { attack: breakthrough.currentStats.attack },
       {
         defence: stats.defence,
         healthRegen: stats.healthRegen,
@@ -34,10 +40,11 @@ export default function useBreakthroughManager(timer: GameTimer) {
     );
     const playerDamage = (playerDps * elapsedTime) / 1000;
     const realmDamage = (realmDps * elapsedTime) / 1000;
+    console.log(playerDps, realmDps);
 
     const newRealmHealth = Math.min(
-      breakthrough.currentHealth - playerDamage,
-      breakthrough.health
+      breakthrough.currentStats.currentHealth - playerDamage,
+      breakthrough.currentStats.health
     );
     const newPlayerHealth = Math.min(
       stats.currentHealth - realmDamage,
@@ -47,119 +54,85 @@ export default function useBreakthroughManager(timer: GameTimer) {
     // Victory condition
     if (newRealmHealth <= 0) {
       // Check if the tribulation has layers
-      if (breakthrough.tribulation && state.realm.tribulation) {
-        const stepReached = state.realm.tribulation.stepReached;
+      if (breakthrough.tribulation) {
+        const stepReached = breakthrough.tribulation.stepReached;
         if (!stepReached || breakthrough.tribulation.steps > stepReached) {
           // Proceed to the next step
 
-          const newStep = stepReached ? stepReached + 1 : 1;
-          state.realm.tribulation.stepReached = newStep;
+          const newStep = stepReached !== undefined ? stepReached + 1 : 1;
+          breakthrough.tribulation.stepReached = newStep;
           const { health, healthRegen, attack, defence } =
-            calculateTribulationPower(breakthrough.index, cultivationRealms);
+            calculateTribulationPower(state.realm.index, cultivationRealms);
 
-          state.realm.health = health;
-          state.realm.healthRegen = healthRegen;
-          state.realm.attack = attack;
-          state.realm.defence = defence;
-          state.realm.currentHealth = state.realm.health;
-          updateContext({ state });
+          breakthrough.currentStats.health = health;
+          breakthrough.currentStats.healthRegen = healthRegen;
+          breakthrough.currentStats.attack = attack;
+          breakthrough.currentStats.defence = defence;
+          breakthrough.currentStats.currentHealth = health;
+          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
           return;
         } else {
           // All steps finished update player realm and game context
-          realm.index = breakthrough.index;
-          if (cultivationRealms[realm.index].tribulation)
-            (cultivationRealms[realm.index] as any).tribulation.stepReached =
+          realm.index = state.realm.index;
+          if (breakthrough.tribulation)
+            breakthrough.tribulation.stepReached =
               breakthrough.tribulation.steps;
-          realm.power = calculateRealmPower(
-            breakthrough.index,
-            cultivationRealms
-          );
+          realm.power = calculateRealmPower(realm.index, cultivationRealms);
           state = { action: "idle", realm: undefined };
+          breakthrough.currentStats = undefined;
           // Update player stats
           stats = playerStats(player);
           updateContext({ stats, state, realm });
-          updateGameContext({ cultivationRealms });
+          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
           alert("Breakthrough success!");
           return;
         }
       }
       // Update player realm
-      realm.index = breakthrough.index;
+      realm.index = state.realm.index;
       state = { action: "idle", realm: undefined };
       // Update player stats
-      realm.power = calculateRealmPower(breakthrough.index, cultivationRealms);
+      realm.power = calculateRealmPower(realm.index, cultivationRealms);
       stats = playerStats(player);
+      breakthrough.currentStats = undefined;
       updateContext({ stats, state, realm });
+      updateGameContext({ cultivationRealms: cultivationRealms.slice() });
       alert("Breakthrough success!");
     }
 
     // Loss condition
     else if (newPlayerHealth <= 0) {
-      if (breakthrough.tribulation && state.realm.tribulation) {
-        const stepReached = state.realm.tribulation.stepReached;
+      if (breakthrough.tribulation) {
+        const stepReached = breakthrough.tribulation.stepReached;
         if (!stepReached) {
           state = { action: "idle", realm: undefined };
           updateContext({ state });
           // The breakthrough was successful, albeit not stages were finished
         } else {
-          realm.index = breakthrough.index;
-          if (cultivationRealms[realm.index].tribulation)
-            (cultivationRealms[realm.index] as any).tribulation.stepReached =
-              state.realm.tribulation.stepReached;
-          realm.power = calculateRealmPower(
-            breakthrough.index,
-            CultivationRealms
-          );
+          realm.index = state.realm.index;
+          realm.power = calculateRealmPower(realm.index, cultivationRealms);
           state = { action: "idle", realm: undefined };
           // Update player stats
           stats = playerStats(player);
+          breakthrough.currentStats = undefined;
+          (breakthrough.tribulation as any).stepReached -= 1;
           updateContext({ stats, state, realm });
 
-          updateGameContext({ cultivationRealms });
+          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
           alert("Breakthrough success!");
           return;
         }
       }
       state = { action: "idle", realm: undefined };
+      breakthrough.currentStats = undefined;
       alert("Breakthrough failed, you are not strong enough yet");
     }
     // Update Hp values for both parties
     else {
       stats.currentHealth = newPlayerHealth;
-      state.realm.currentHealth = newRealmHealth;
+      breakthrough.currentStats.currentHealth = newRealmHealth;
       updateContext({ stats, state, realm });
+      updateGameContext({ cultivationRealms });
     }
   }, [currentTime]);
-}
-
-// Realm tribulation damage to the player during breakthrough attempt
-type PlayerDefenceStats = {
-  defence: number;
-  healthRegen: number;
-};
-
-type RealmTribulationStats = {
-  attack: number;
-};
-export function TribulationDps(
-  realm: RealmTribulationStats,
-  player: PlayerDefenceStats
-) {
-  return realm.attack / (1 + 0.01 * player.defence) - player.healthRegen;
-}
-
-// Stats that matter for the fighting actor
-type PlayerBreakthroughStats = {
-  attack: number;
-};
-
-type RealmDefenceStats = {
-  defence: number;
-  healthRegen: number;
-};
-export function BreakthroughDps(
-  player: PlayerBreakthroughStats,
-  realm: RealmDefenceStats
-) {
-  return player.attack / (1 + 0.01 * realm.defence) - realm.healthRegen;
 }

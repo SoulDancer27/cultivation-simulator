@@ -1,6 +1,5 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import PlayerContext from "GameEngine/Player/PlayerContext";
-import { CultivationRealms } from "GameConstants/CultivationRealms";
 import React from "react";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import BreakthroughAnimation from "./RealmBreakthroughPane/BreakthroughAnimation";
@@ -10,17 +9,19 @@ import GameContext from "GameEngine/GameContext/GameContext";
 import HtmlTooltip from "./shared/HtmlTooltip";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Placeholder from "./RealmBreakthroughPane/Placeholder";
+import calculateMaxTribulationStage from "./RealmBreakthroughPane/calculateMaxTribulationStage";
 
 export default function RealmBreakthroughPane() {
   const theme = useTheme();
   const { realm } = React.useContext(PlayerContext);
   const { cultivationRealms, updateContext: updateGameContext } =
     React.useContext(GameContext);
-  const currentRealm = cultivationRealms[realm.index];
+
   const nextRealmIndex =
     cultivationRealms.length >= realm.index + 2 ? realm.index + 1 : undefined;
   const { height } = getWindowDimensions();
-  if (!nextRealmIndex) return <></>;
+
   // Passed tribulation statistics
   let PassedTribulations: Array<{
     name: string;
@@ -36,9 +37,12 @@ export default function RealmBreakthroughPane() {
     PassedTribulations.push({
       name: r.name,
       stepReached: r.tribulation.stepReached || 0,
-      statMulti: r.tribulation.statsMulti * (r.tribulation.stepReached || 0),
-      tribulationMulti:
-        r.tribulation.multiplier * (r.tribulation.stepReached || 0),
+      statMulti: r.tribulation.stepReached
+        ? r.tribulation.statsMulti ** r.tribulation.stepReached
+        : 1,
+      tribulationMulti: r.tribulation.stepReached
+        ? r.tribulation.multiplier ** r.tribulation.stepReached
+        : 1,
     });
   }
 
@@ -52,49 +56,53 @@ export default function RealmBreakthroughPane() {
     TotalTribulations.tribulationMulti *= trib.tribulationMulti || 1;
   }
 
+  const currentPower = calculateRealmPower(realm.index, cultivationRealms);
+
+  if (!nextRealmIndex)
+    return (
+      <Placeholder
+        currentPower={currentPower}
+        PassedTribulations={PassedTribulations}
+      ></Placeholder>
+    );
+
   // Tribulation logic
   const nextRealm = cultivationRealms[nextRealmIndex];
   const power = calculateTribulationPower(nextRealmIndex, cultivationRealms);
-  const { healthRegen, attack, defence } = power;
+  const { healthRegen, attack, defence, health } = power;
 
-  const { state, updateContext } = React.useContext(PlayerContext);
-  const health = state.realm?.health || power.health;
+  const { state, stats, updateContext } = React.useContext(PlayerContext);
   const isActive = state.action === "breakthrough";
-  const currentHealth = state.realm?.currentHealth || health;
+  const currentHealth = nextRealm.currentStats?.currentHealth || health;
   const handleClick = () => {
-    state.action = isActive ? "idle" : "breakthrough";
-    state.realm = isActive
-      ? undefined
-      : {
-          index: nextRealmIndex,
-          currentHealth: health,
-          health,
-          attack,
-          defence,
-          healthRegen,
-          tribulation: nextRealm.tribulation,
-        };
-    if (isActive && cultivationRealms[nextRealmIndex].tribulation)
-      cultivationRealms[nextRealmIndex].tribulation!.stepReached = 0;
+    if (isActive) {
+      state.action = "idle";
+      state.realm = undefined;
+      // Reset last tribulation state
+      cultivationRealms[nextRealmIndex].currentStats = undefined;
+      if (cultivationRealms[nextRealmIndex].tribulation)
+        (cultivationRealms[nextRealmIndex] as any).tribulation.stepReached =
+          undefined;
+    } else {
+      state.action = "breakthrough";
+      state.realm = { index: nextRealmIndex };
+      const { health, healthRegen, attack, defence } = nextRealm.baseStats;
+      cultivationRealms[nextRealmIndex].currentStats = {
+        health,
+        currentHealth: health,
+        healthRegen,
+        attack,
+        defence,
+      };
+      if (cultivationRealms[nextRealmIndex].tribulation)
+        (cultivationRealms[nextRealmIndex] as any).tribulation.stepReached = 0;
+    }
     updateContext({ state });
-    updateGameContext({ cultivationRealms });
+    updateGameContext({ cultivationRealms: cultivationRealms.slice() });
   };
 
-  // Effective values to display
-  let stepReached = 1;
-  let multiplier = 1;
-  if (state.realm?.tribulation) {
-    stepReached = state.realm.tribulation.stepReached || 0;
-    multiplier = state.realm.tribulation.multiplier;
-  }
-  const powerFactor = multiplier ** stepReached;
-  const effCurrentHealth = currentHealth;
-  const effHealthRegen = healthRegen * powerFactor;
-  const effAttack = attack * powerFactor;
-  const effDefence = defence * powerFactor;
-
   // Cultivation realm power to display
-  const currentPower = calculateRealmPower(realm.index, cultivationRealms);
+
   const nextPower = calculateRealmPower(nextRealmIndex, cultivationRealms);
 
   return (
@@ -153,9 +161,11 @@ export default function RealmBreakthroughPane() {
                     title={
                       <>
                         <Typography>Multipliers:</Typography>
-                        <Typography>Player stats: {item.statMulti}</Typography>
                         <Typography>
-                          Tribulation power: {item.tribulationMulti}
+                          Player stats: {item.statMulti.toFixed(2)}
+                        </Typography>
+                        <Typography>
+                          Tribulation power: {item.tribulationMulti.toFixed(2)}
                         </Typography>
                       </>
                     }
@@ -171,16 +181,37 @@ export default function RealmBreakthroughPane() {
             </Box>
             <Box width={100} height={400}>
               <BreakthroughAnimation
-                progress={health ? (health - effCurrentHealth) / health : 0}
+                progress={health ? (health - currentHealth) / health : 0}
+                isHeavenly={nextRealm.tribulation?.stepReached ? true : false}
               />
             </Box>
 
             <Box marginLeft={theme.spacing(4)}>
               <Typography variant="h6">Tribulation power:</Typography>
-              <Typography>Hp: {effCurrentHealth.toFixed(2)}</Typography>
-              <Typography>Hp.regen: {effHealthRegen.toFixed(2)}</Typography>
-              <Typography>Atk: {effAttack.toFixed(2)}</Typography>
-              <Typography>Def: {effDefence.toFixed(2)}</Typography>
+              <Typography>Hp: {currentHealth.toFixed(2)}</Typography>
+              <Typography>Hp.regen: {healthRegen.toFixed(2)}</Typography>
+              <Typography>Atk: {attack.toFixed(2)}</Typography>
+              <Typography>Def: {defence.toFixed(2)}</Typography>
+              <Typography variant="h6">
+                {nextRealm.tribulation
+                  ? `Tribulation stage: ${
+                      nextRealm.tribulation.stepReached || 0
+                    }/${nextRealm.tribulation.steps}`
+                  : ""}
+              </Typography>
+              <Typography variant="h6">
+                {nextRealm.tribulation
+                  ? `Power multi: ${
+                      nextRealm.tribulation.stepReached
+                        ? (
+                            TotalTribulations.tribulationMulti *
+                            nextRealm.tribulation.multiplier **
+                              nextRealm.tribulation.stepReached
+                          ).toFixed(2)
+                        : 1
+                    }`
+                  : ""}
+              </Typography>
             </Box>
           </Box>
         </Box>
@@ -188,6 +219,16 @@ export default function RealmBreakthroughPane() {
           <Button variant="outlined" onClick={handleClick} size={"large"}>
             {!isActive ? "Breakthrough" : "Stop"}
           </Button>
+          {nextRealm.tribulation && !isActive && (
+            <Typography>
+              estim. stage{" "}
+              {calculateMaxTribulationStage({
+                stats,
+                cultivationRealms,
+                nextRealmIndex,
+              })}
+            </Typography>
+          )}
         </Box>
         <Box
           border="1px solid gray"

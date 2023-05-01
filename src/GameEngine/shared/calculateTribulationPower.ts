@@ -6,12 +6,14 @@ export default function calculateTribulationPower(
 ): { health: number; attack: number; healthRegen: number; defence: number } {
   const currentRealm = realms[index];
   const power = {
-    health: currentRealm.health,
-    attack: currentRealm.attack,
-    healthRegen: currentRealm.healthRegen,
-    defence: currentRealm.defence,
+    health: currentRealm.baseStats.health,
+    attack: currentRealm.baseStats.attack,
+    healthRegen: currentRealm.baseStats.healthRegen,
+    defence: currentRealm.baseStats.defence,
   };
-  if (!currentRealm.tribulation) return power;
+  // First step doesn't get more difficult
+  if (!currentRealm.tribulation || !currentRealm.tribulation.stepReached)
+    return power;
   // Take all reached heavenly tribulation steps into account
   for (let i = 0; i <= index; i++) {
     const realm = realms[i];

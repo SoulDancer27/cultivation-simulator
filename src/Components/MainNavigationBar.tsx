@@ -6,13 +6,21 @@ import { getWindowDimensions } from "Utils/useWindowDimensions";
 import ActionsPane from "./ActionsPane";
 import ManualsPane from "./ManualsPane";
 import RealmBreakthroughPane from "./RealmBreakthroughPane";
+import GameContext from "GameEngine/GameContext/GameContext";
+import breakthroughSuccess from "./RealmBreakthroughPane/breakthroughSuccess";
 
 export type ActivePane = "actions" | "manuals" | "breakthrough";
 
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
   const theme = useTheme();
-  const { state } = React.useContext(PlayerContext);
+  const { state, stats, realm } = React.useContext(PlayerContext);
+  const { cultivationRealms } = React.useContext(GameContext);
+  // For the button color
+  const canBreakthrough = breakthroughSuccess(
+    stats,
+    cultivationRealms[realm.index + 1]
+  );
   let startingPane: ActivePane = "actions";
   if (state.action === "cultivating") startingPane = "manuals";
   const [pane, setPane] = React.useState<ActivePane>(startingPane);
@@ -41,7 +49,13 @@ export default function MainNavigationBar() {
           <Button
             variant="outlined"
             size="large"
-            color={pane === "breakthrough" ? "success" : "primary"}
+            color={
+              pane === "breakthrough"
+                ? "success"
+                : canBreakthrough
+                ? "warning"
+                : "primary"
+            }
             onClick={() => setPane("breakthrough")}
             sx={{ margin: theme.spacing(2) }}
           >

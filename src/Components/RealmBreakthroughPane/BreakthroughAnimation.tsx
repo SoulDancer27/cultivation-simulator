@@ -2,10 +2,11 @@ import { Box } from "@mui/material";
 
 type Props = {
   progress: number;
+  isHeavenly: boolean;
 };
 
 export default function BreakthroughAnimation(props: Props) {
-  const { progress } = props;
+  const { progress, isHeavenly } = props;
   const bar = 400 * progress || 0;
   return (
     <Box position={"relative"}>
@@ -42,7 +43,12 @@ export default function BreakthroughAnimation(props: Props) {
           bgcolor="lightgrey"
           sx={{ opacity: 0.3 }}
         />
-        <Box height={bar} minHeight={bar} maxHeight={bar} bgcolor={"green"} />
+        <Box
+          height={bar}
+          minHeight={bar}
+          maxHeight={bar}
+          bgcolor={isHeavenly ? "rgb(51,157,255)" : "rgb(0, 153, 0)"}
+        />
       </Box>
     </Box>
   );

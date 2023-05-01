@@ -7,25 +7,32 @@ export type Tribulation = {
   stepReached?: number;
 };
 
-export type CultivationRealm = {
-  name: string;
+export type Stats = {
   health: number;
   healthRegen: number;
-  defence: number;
   attack: number;
+  defence: number;
+};
+
+export type CultivationRealm = {
+  name: string;
+  baseStats: Stats;
+  currentStats?: Stats & { currentHealth: number };
   // Additional stats for heavenly tribulations
   tribulation?: Tribulation;
+  // Reward stats multipliers
   realmPowers: Partial<PlayerBaseStats>;
 };
 
 export const CultivationRealms: CultivationRealm[] = [
   {
     name: "Mortal 0",
-    health: 0,
-    healthRegen: 0,
-    defence: 0,
-    attack: 0,
-
+    baseStats: {
+      health: 0,
+      healthRegen: 0,
+      defence: 0,
+      attack: 0,
+    },
     realmPowers: {
       health: 1,
       healthRegen: 1,
@@ -36,10 +43,12 @@ export const CultivationRealms: CultivationRealm[] = [
   },
   {
     name: "Mortal 1",
-    health: 100,
-    healthRegen: 0,
-    defence: 0,
-    attack: 3,
+    baseStats: {
+      health: 100,
+      healthRegen: 0,
+      defence: 0,
+      attack: 3,
+    },
     realmPowers: {
       health: 1.2,
       healthRegen: 1.2,
@@ -55,10 +64,12 @@ export const CultivationRealms: CultivationRealm[] = [
   },
   {
     name: "Mortal 2",
-    health: 300,
-    healthRegen: 0,
-    defence: 0,
-    attack: 5,
+    baseStats: {
+      health: 300,
+      healthRegen: 0,
+      defence: 0,
+      attack: 5,
+    },
     realmPowers: {
       health: 1.44,
       healthRegen: 1.44,
@@ -67,17 +78,19 @@ export const CultivationRealms: CultivationRealm[] = [
       insight: 1.44,
     },
     tribulation: {
-      steps: 25,
+      steps: 20,
       statsMulti: 1.05,
       multiplier: 1.1,
     },
   },
   {
     name: "Mortal 3",
-    health: 500,
-    healthRegen: 1,
-    defence: 0,
-    attack: 8,
+    baseStats: {
+      health: 500,
+      healthRegen: 1,
+      defence: 0,
+      attack: 8,
+    },
     realmPowers: {
       health: 1.73,
       healthRegen: 1.73,
