@@ -6,6 +6,7 @@ import GameContext, {
 } from "./GameContext/GameContext";
 import { Activity } from "GameConstants/Activities";
 import Trainings from "GameConstants/Trainings";
+import Mining from "GameConstants/Mining";
 
 // Wrapper for loading player save data
 export default function WorldLoader(props: any) {
@@ -32,8 +33,20 @@ export default function WorldLoader(props: any) {
           item.skillsMulti = Trainings[indexOf].skillsMulti;
         return item;
       });
+      // Load functions
+      storageData.mining = storageData.mining.map((item: Activity) => {
+        const indexOf = Mining.findIndex((mining) => mining.name === item.name);
+        if (indexOf !== -1 && Mining[indexOf].time)
+          item.time = Mining[indexOf].time;
+        if (Mining[indexOf].baseStatsMulti)
+          item.baseStatsMulti = Mining[indexOf].baseStatsMulti;
+        if (Mining[indexOf].skillsMulti)
+          item.skillsMulti = Mining[indexOf].skillsMulti;
+        return item;
+      });
       setData(storageData);
     }
+
     setLoaded(true);
   }, []);
   // Autosave

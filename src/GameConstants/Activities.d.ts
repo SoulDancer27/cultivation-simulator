@@ -21,10 +21,10 @@ export type Activity = {
   };
 };
 
-type TreasureReward = {
-  type: "treasure";
+type ItemReward = {
+  type: "treasure" | "money" | "mineral";
   name: string;
   amount: number;
 };
 
-type ActivityItem = Omit<InventoryMoney, "id"> | TreasureReward;
+type ActivityItem = ItemReward;

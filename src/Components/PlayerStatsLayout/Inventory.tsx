@@ -6,7 +6,7 @@ import InventoryBottomPanel from "./Inventory/InventoryBottomPanel";
 import InventoryFiltersPane from "./Inventory/InventoryFilters";
 import InventoryGrid from "./Inventory/InventoryGrid";
 
-export type InventoryFilters = "all" | "money" | "treasure";
+export type InventoryFilters = "all" | "money" | "treasure" | "mineral";
 
 export default function Inventory() {
   const { inventory } = React.useContext(PlayerContext);

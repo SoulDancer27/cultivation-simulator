@@ -22,9 +22,11 @@ export const playerContext: PlayerContextType = {
   },
   skills: {
     training: 0,
+    mining: 0,
   },
   baseSkills: {
     training: 0,
+    mining: 0,
   },
   realm: {
     index: 0,

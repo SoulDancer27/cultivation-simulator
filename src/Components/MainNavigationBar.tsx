@@ -8,8 +8,9 @@ import ManualsPane from "./ManualsPane";
 import RealmBreakthroughPane from "./RealmBreakthroughPane";
 import GameContext from "GameEngine/GameContext/GameContext";
 import breakthroughSuccess from "./RealmBreakthroughPane/breakthroughSuccess";
+import MiningPage from "./MiningPage";
 
-export type ActivePane = "actions" | "manuals" | "breakthrough";
+export type ActivePane = "actions" | "manuals" | "breakthrough" | "mining";
 
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
@@ -61,11 +62,21 @@ export default function MainNavigationBar() {
           >
             Breakthrough
           </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            color={pane === "manuals" ? "success" : "primary"}
+            onClick={() => setPane("mining")}
+            sx={{ margin: theme.spacing(2) }}
+          >
+            Mining
+          </Button>
         </Box>
       </Paper>
       {pane === "actions" ? <ActionsPane /> : ""}
       {pane === "manuals" ? <ManualsPane /> : ""}
       {pane === "breakthrough" ? <RealmBreakthroughPane /> : ""}
+      {pane === "mining" ? <MiningPage /> : ""}
     </Box>
   );
 }

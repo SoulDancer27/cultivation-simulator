@@ -6,6 +6,7 @@ const PlayerStatsDictionary = {
   attack: "Atk",
   defence: "Def",
   training: "training",
+  mining: "mining",
 };
 
 export default PlayerStatsDictionary;

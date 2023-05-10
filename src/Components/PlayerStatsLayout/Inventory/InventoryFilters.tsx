@@ -34,6 +34,14 @@ export default function InventoryFiltersPane(props: Props) {
       >
         treasures
       </Button>
+      <Button
+        variant="outlined"
+        onClick={() => setType("mineral")}
+        color={type === "mineral" ? "success" : "primary"}
+        fullWidth
+      >
+        minerals
+      </Button>
     </Box>
   );
 }

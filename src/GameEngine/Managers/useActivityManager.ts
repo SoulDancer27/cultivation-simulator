@@ -72,13 +72,19 @@ export default function useActivityManager(timer: GameTimer) {
           baseStats = addBaseStats(
             baseStats,
             activity.result.baseStats,
-            timesCompleted * activity?.baseStatsMulti() || 1
+            timesCompleted *
+              (typeof activity.baseStatsMulti === "function"
+                ? activity.baseStatsMulti()
+                : 1)
           );
         if (activity.result.skills)
           baseSkills = addSkillsExp(
             baseSkills,
             activity.result.skills,
-            timesCompleted * activity?.skillsMulti() || 1
+            timesCompleted *
+              (typeof activity.skillsMulti === "function"
+                ? activity.skillsMulti()
+                : 1)
           );
         // Process reward
         if (activity.result.items) {

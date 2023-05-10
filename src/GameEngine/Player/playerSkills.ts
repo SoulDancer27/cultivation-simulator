@@ -9,9 +9,15 @@ export function playerTraining(player: PlayerContextType) {
   return player.baseSkills.training * cultivationMulti;
 }
 
+export function playerMining(player: PlayerContextType) {
+  const cultivationMulti = manualsSkillsMultiplier("mining", player.manuals);
+  return player.baseSkills.mining * cultivationMulti;
+}
+
 export function playerSkills(player: PlayerContextType): PlayerSkills {
   const skills = { ...player.skills };
   skills.training = playerTraining(player);
+  skills.mining = playerMining(player);
   return skills;
 }
 

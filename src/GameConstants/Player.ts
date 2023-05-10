@@ -46,6 +46,7 @@ export type PlayerBaseStats = {
 
 export type PlayerSkills = {
   training: number;
+  mining: number;
 };
 
 export type PlayerEnemyType = EnemyType & {
@@ -66,7 +67,10 @@ export type PlayerCultivationManual = {
   isEquipped: boolean;
 };
 
-export type InventoryItem = InventoryTreasure | InventoryMoney;
+export type InventoryItem =
+  | InventoryTreasure
+  | InventoryMoney
+  | InventoryMineral;
 
 export type InventoryTreasure = {
   type: "treasure";
@@ -76,6 +80,13 @@ export type InventoryTreasure = {
 };
 export type InventoryMoney = {
   type: "money";
+  id: string;
+  name: string;
+  amount: number;
+};
+
+export type InventoryMineral = {
+  type: "mineral";
   id: string;
   name: string;
   amount: number;
@@ -99,4 +110,8 @@ export function isInventoryTreasure(item: any): item is InventoryTreasure {
 
 export function isInventoryMoney(item: any): item is InventoryMoney {
   return item.type === "money" && item.id && item.name && item.amount;
+}
+
+export function isInventoryMineral(item: any): item is InventoryMineral {
+  return item.type === "mineral" && item.id && item.name && item.amount;
 }
