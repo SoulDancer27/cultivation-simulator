@@ -6,16 +6,19 @@ import {
 import Trainings from "GameConstants/Trainings";
 import Mining from "GameConstants/Mining";
 import React from "react";
+import Crafting from "GameConstants/Craft";
 
 export type GameContextType = {
   trainings: Activity[];
   mining: Activity[];
+  crafting: Activity[];
   cultivationRealms: CultivationRealm[];
 };
 
 export const gameContext: GameContextType = {
   trainings: Trainings,
   mining: Mining,
+  crafting: Crafting,
   cultivationRealms: CultivationRealms,
 };
 

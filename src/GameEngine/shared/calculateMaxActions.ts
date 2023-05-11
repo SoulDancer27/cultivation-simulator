@@ -1,5 +1,9 @@
 import { Activity } from "GameConstants/Activities";
-import { PlayerContextType, isInventoryMoney } from "GameConstants/Player";
+import {
+  PlayerContextType,
+  isCountableItem,
+  isInventoryMoney,
+} from "GameConstants/Player";
 
 // Calculate the number of times activity can be executed
 export default function calculateMaxActions(
@@ -18,13 +22,14 @@ export default function calculateMaxActions(
     if (action.price.items) {
       for (const item of action.price.items) {
         // Process money
-        if (item.type === "money") {
+        if (["money", "mineral"].includes(item.type)) {
           const itemIndex = player.inventory.findIndex(
-            (value) => value.type === "money" && value.name === item.name
+            (value) =>
+              value.type === item.type && (value as any).name === item.name
           );
           if (itemIndex === -1) return 0;
           const currentItem = player.inventory[itemIndex];
-          if (currentItem && isInventoryMoney(currentItem)) {
+          if (currentItem && isCountableItem(currentItem)) {
             const actionsNumber = Math.floor(currentItem.amount / item.amount);
             if (actionsNumber < maxActions) maxActions = actionsNumber;
           }

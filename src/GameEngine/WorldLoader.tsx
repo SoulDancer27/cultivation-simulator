@@ -7,6 +7,7 @@ import GameContext, {
 import { Activity } from "GameConstants/Activities";
 import Trainings from "GameConstants/Trainings";
 import Mining from "GameConstants/Mining";
+import Crafting from "GameConstants/Craft";
 
 // Wrapper for loading player save data
 export default function WorldLoader(props: any) {
@@ -42,6 +43,15 @@ export default function WorldLoader(props: any) {
           item.baseStatsMulti = Mining[indexOf].baseStatsMulti;
         if (Mining[indexOf].skillsMulti)
           item.skillsMulti = Mining[indexOf].skillsMulti;
+        return item;
+      });
+      storageData.crafting = storageData.crafting.map((item: Activity) => {
+        const indexOf = Crafting.findIndex((craft) => craft.name === item.name);
+        if (indexOf !== -1 && Crafting[indexOf].time)
+          item.time = Crafting[indexOf].time;
+        if (Crafting[indexOf].generators)
+          item.generators = Crafting[indexOf].generators;
+
         return item;
       });
       setData(storageData);

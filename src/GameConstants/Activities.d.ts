@@ -1,5 +1,5 @@
 import PlayerContext from "GameEngine/Player/PlayerContext";
-import { PlayerBaseStats, PlayerSkills } from "./Player";
+import { InventoryItem, PlayerBaseStats, PlayerSkills } from "./Player";
 
 export type Activity = {
   name: string;
@@ -8,8 +8,14 @@ export type Activity = {
   time?: (player?: PlayerContext) => number; // calculate completion time based on props
   currentTime?: number;
   timesCompleted?: number;
-  baseStatsMulti?: (player?: PlayerContext) => number;
-  skillsMulti?: (player?: PlayerContext) => number;
+  baseStatsMulti?: (player?: PlayerContextType) => number;
+  skillsMulti?: (player?: PlayerContextType) => number;
+  generators?: {
+    [key: string]: (
+      player?: PlayerContextType,
+      item: ActivityItem
+    ) => InventoryItem | undefined;
+  };
   price?: {
     baseStats?: Partial<PlayerBaseStats>;
     items?: ActivityItem[];

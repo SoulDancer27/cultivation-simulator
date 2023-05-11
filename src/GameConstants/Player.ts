@@ -103,6 +103,13 @@ export type PlayerContextType = {
   state: PlayerState;
 };
 
+export type CountableItemType = "money" | "mineral";
+export type CountableItem = {
+  type: CountableItemType;
+  name: string;
+  amount: number;
+};
+
 // Lazy type guards
 export function isInventoryTreasure(item: any): item is InventoryTreasure {
   return item.type === "treasure" && item.id && item.stats;
@@ -114,4 +121,8 @@ export function isInventoryMoney(item: any): item is InventoryMoney {
 
 export function isInventoryMineral(item: any): item is InventoryMineral {
   return item.type === "mineral" && item.id && item.name && item.amount;
+}
+
+export function isCountableItem(item: any): item is CountableItem {
+  return item.name && item.amount;
 }

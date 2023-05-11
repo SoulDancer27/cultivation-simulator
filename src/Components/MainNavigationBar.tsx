@@ -9,8 +9,14 @@ import RealmBreakthroughPane from "./RealmBreakthroughPane";
 import GameContext from "GameEngine/GameContext/GameContext";
 import breakthroughSuccess from "./RealmBreakthroughPane/breakthroughSuccess";
 import MiningPage from "./MiningPage";
+import CraftingPane from "./CraftingPane";
 
-export type ActivePane = "actions" | "manuals" | "breakthrough" | "mining";
+export type ActivePane =
+  | "actions"
+  | "manuals"
+  | "breakthrough"
+  | "mining"
+  | "crafting";
 
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
@@ -71,12 +77,22 @@ export default function MainNavigationBar() {
           >
             Mining
           </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            color={pane === "crafting" ? "success" : "primary"}
+            onClick={() => setPane("crafting")}
+            sx={{ margin: theme.spacing(2) }}
+          >
+            Crafting
+          </Button>
         </Box>
       </Paper>
       {pane === "actions" ? <ActionsPane /> : ""}
       {pane === "manuals" ? <ManualsPane /> : ""}
       {pane === "breakthrough" ? <RealmBreakthroughPane /> : ""}
       {pane === "mining" ? <MiningPage /> : ""}
+      {pane === "crafting" ? <CraftingPane /> : ""}
     </Box>
   );
 }

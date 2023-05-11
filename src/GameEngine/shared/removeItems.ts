@@ -1,7 +1,9 @@
 import { ActivityItem } from "GameConstants/Activities";
 import {
+  CountableItem,
   InventoryItem,
   InventoryMoney,
+  isCountableItem,
   isInventoryMoney,
 } from "GameConstants/Player";
 
@@ -14,16 +16,18 @@ export default function removeItems(
   for (let piece of price) {
     try {
       // Process money type reward
-      if (piece.type === "money") {
-        let item = piece as InventoryMoney;
+      if (["money", "mineral"].includes(piece.type)) {
+        let item = piece as CountableItem;
         const amountToRemove = item.amount * times;
         const itemIndex = inventory.findIndex(
-          (value) => value.type === "money" && value.name === item.name
+          (value) =>
+            value.type === piece.type &&
+            (value as CountableItem).name === item.name
         );
         const currentItem = inventory[itemIndex];
         if (itemIndex === -1) {
           throw new Error(`Not enough ${piece.name} to complete action`);
-        } else if (currentItem && isInventoryMoney(currentItem)) {
+        } else if (currentItem && isCountableItem(currentItem)) {
           /* player already possess this type of money */
           if (currentItem.amount < amountToRemove)
             throw new Error(`Not enough ${piece.name} to complete action`);

@@ -1,18 +1,21 @@
-import { ActivityItem } from "GameConstants/Activities";
+import { Activity, ActivityItem } from "GameConstants/Activities";
 import {
   CountableItem,
   InventoryItem,
+  PlayerContextType,
   isCountableItem,
 } from "GameConstants/Player";
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 
-export default function rewardItems(
-  inventory: InventoryItem[],
-  reward: ActivityItem[],
+export default function rewardActivityItems(
+  player: PlayerContextType,
+  activity: Activity,
   times: number
 ): InventoryItem[] {
-  for (let piece of reward) {
+  let inventory = player.inventory;
+  if (!activity.result.items) return [];
+  for (let piece of activity.result.items) {
     try {
       // Process money type reward
       if (["money", "mineral"].includes(piece.type)) {
@@ -38,14 +41,23 @@ export default function rewardItems(
       }
       // process treasure type rewards
       if (piece.type === "treasure") {
-        const treasure = Treasures.find((i: Treasure) => i.name === piece.name);
+        let treasure;
+        if (
+          activity.generators &&
+          typeof activity.generators[piece.name] === "function"
+        )
+          treasure = activity.generators[piece.name](player, piece);
+        else {
+          let item = Treasures.find((i: Treasure) => i.name === piece.name);
+          if (item) {
+            treasure.type = "treasure";
+            treasure.id = uuid();
+            treasure.treasure = item;
+          }
+        }
         if (treasure) {
           for (let i = 0; i < times * piece.amount; i++) {
-            inventory.push({
-              type: "treasure",
-              id: uuid(),
-              stats: treasure,
-            });
+            inventory.push(treasure);
           }
         }
       }

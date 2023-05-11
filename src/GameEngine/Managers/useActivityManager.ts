@@ -10,6 +10,7 @@ import addBaseStats from "GameEngine/shared/addBaseStats";
 import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
+import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 
 export default function useActivityManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
@@ -88,11 +89,7 @@ export default function useActivityManager(timer: GameTimer) {
           );
         // Process reward
         if (activity.result.items) {
-          inventory = rewardItems(
-            inventory,
-            activity.result.items,
-            timesCompleted
-          );
+          inventory = rewardActivityItems(player, activity, timesCompleted);
         }
       }
       // Update calculated stat values based on new baseStats
