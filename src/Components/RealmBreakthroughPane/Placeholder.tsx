@@ -31,7 +31,7 @@ export default function Placeholder(props: Props) {
           You have reached the pinnacle of cultivation
         </Typography>
         <Typography variant="h6">Passed tribulations</Typography>
-        {PassedTribulations.map((item, index) => {
+        {PassedTribulations.map((item) => {
           return (
             <HtmlTooltip
               key={item.name}

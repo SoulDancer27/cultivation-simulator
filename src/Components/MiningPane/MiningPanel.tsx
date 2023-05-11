@@ -1,5 +1,5 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { Activity, ActivityItem, ItemReward } from "GameConstants/Activities";
+import { Activity } from "GameConstants/Activities";
 import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
 import ProgressBar from "../shared/ProgressBar";
 import PlayerContext from "GameEngine/Player/PlayerContext";
@@ -16,7 +16,7 @@ type Props = {
   source: string;
 };
 export default function MiningPanel(props: Props) {
-  const { activity, isActive, source, showTimesCompleted } = props;
+  const { activity, isActive, source } = props;
   const player = React.useContext(PlayerContext);
   const { updateContext } = player;
   const { result, price } = activity;
@@ -93,7 +93,6 @@ export default function MiningPanel(props: Props) {
     ? activity.time(player)
     : activity.baseTime;
   const currentTime = activity.currentTime || 0;
-  let remainingTime = requiredTime - currentTime;
 
   // Change some displayed effects if action is really fast
   const fastAction = requiredTime / defaultUpdateInterval < 5;

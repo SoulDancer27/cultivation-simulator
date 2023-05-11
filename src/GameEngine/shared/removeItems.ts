@@ -2,9 +2,7 @@ import { ActivityItem } from "GameConstants/Activities";
 import {
   CountableItem,
   InventoryItem,
-  InventoryMoney,
   isCountableItem,
-  isInventoryMoney,
 } from "GameConstants/Player";
 
 // Removes an array of items from players inventory

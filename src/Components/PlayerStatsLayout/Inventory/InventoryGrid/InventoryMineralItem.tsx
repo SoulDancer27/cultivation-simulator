@@ -1,8 +1,7 @@
 import { Box, TooltipProps, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import Money from "GameConstants/Money";
-import { InventoryMineral, InventoryMoney } from "GameConstants/Player";
+import { InventoryMineral } from "GameConstants/Player";
 import EmptyCell from "./EmptyCell";
 import { Minerals } from "GameConstants/Minerals";
 

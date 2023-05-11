@@ -1,4 +1,4 @@
-import { Activity, ActivityItem } from "GameConstants/Activities";
+import { Activity } from "GameConstants/Activities";
 import {
   CountableItem,
   InventoryItem,
@@ -46,7 +46,7 @@ export default function rewardActivityItems(
           activity.generators &&
           typeof activity.generators[piece.name] === "function"
         )
-          treasure = activity.generators[piece.name](player, piece);
+          treasure = activity.generators[piece.name](activity, player, piece);
         else {
           let item = Treasures.find((i: Treasure) => i.name === piece.name);
           if (item) {

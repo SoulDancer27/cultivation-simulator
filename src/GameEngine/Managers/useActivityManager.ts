@@ -5,7 +5,6 @@ import { GameTimer } from "GameEngine/GameRuntime";
 import GameContext from "GameEngine/GameContext/GameContext";
 import { Activity } from "GameConstants/Activities";
 import removeItems from "GameEngine/shared/removeItems";
-import rewardItems from "GameEngine/shared/rewardItems";
 import addBaseStats from "GameEngine/shared/addBaseStats";
 import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
@@ -53,18 +52,19 @@ export default function useActivityManager(timer: GameTimer) {
       else {
         // Process activity price a bit of a hacky way
         if (activity.price) {
+          const priceMulti = activity.priceMulti || 1;
           if (activity.price.baseStats)
             baseStats = addBaseStats(
               baseStats,
               activity.price.baseStats,
-              -timesCompleted
+              -timesCompleted * priceMulti
             );
           // Process activity price in terms of items
           if (activity.price.items)
             inventory = removeItems(
               inventory,
               activity.price.items,
-              timesCompleted
+              timesCompleted * priceMulti
             );
         }
 

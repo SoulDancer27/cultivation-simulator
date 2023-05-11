@@ -154,7 +154,7 @@ export default function RealmBreakthroughPane() {
           <Box display="flex" alignItems={"center"}>
             <Box marginRight={theme.spacing(4)}>
               <Typography variant="h6">Passed tribulations</Typography>
-              {PassedTribulations.map((item, index) => {
+              {PassedTribulations.map((item) => {
                 return (
                   <HtmlTooltip
                     key={item.name}

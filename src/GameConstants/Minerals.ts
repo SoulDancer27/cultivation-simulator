@@ -1,6 +1,3 @@
-import { Activity } from "./Activities";
-import { day } from "./Constants";
-
 export const Minerals: Material[] = [
   {
     name: "Copper",

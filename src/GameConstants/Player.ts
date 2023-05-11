@@ -1,6 +1,5 @@
 import { Activity } from "./Activities";
 import { CultivationManualType } from "./CultivationManuals";
-import { Tribulation } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
 import { Treasure } from "./Treasures";
 export type PlayerAction =

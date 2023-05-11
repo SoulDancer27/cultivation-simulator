@@ -93,7 +93,6 @@ export default function ActivityPanel(props: Props) {
     ? activity.time(player)
     : activity.baseTime;
   const currentTime = activity.currentTime || 0;
-  let remainingTime = requiredTime - currentTime;
 
   // Change some displayed effects if action is really fast
   const fastAction = requiredTime / defaultUpdateInterval < 5;

@@ -1,9 +1,5 @@
 import { Activity } from "GameConstants/Activities";
-import {
-  PlayerContextType,
-  isCountableItem,
-  isInventoryMoney,
-} from "GameConstants/Player";
+import { PlayerContextType, isCountableItem } from "GameConstants/Player";
 
 // Calculate the number of times activity can be executed
 export default function calculateMaxActions(
@@ -13,9 +9,12 @@ export default function calculateMaxActions(
   try {
     let maxActions = Number.MAX_VALUE;
     if (!action.price) return maxActions;
+    const priceMulti = action.priceMulti || 1;
     if (action.price.baseStats) {
       for (const [key, value] of Object.entries(action.price.baseStats)) {
-        const actionsNumber = Math.floor(player.baseStats[key] / value);
+        const actionsNumber = Math.floor(
+          player.baseStats[key] / value / priceMulti
+        );
         if (actionsNumber < maxActions) maxActions = actionsNumber;
       }
     }
@@ -30,7 +29,9 @@ export default function calculateMaxActions(
           if (itemIndex === -1) return 0;
           const currentItem = player.inventory[itemIndex];
           if (currentItem && isCountableItem(currentItem)) {
-            const actionsNumber = Math.floor(currentItem.amount / item.amount);
+            const actionsNumber = Math.floor(
+              currentItem.amount / item.amount / priceMulti
+            );
             if (actionsNumber < maxActions) maxActions = actionsNumber;
           }
         }
@@ -40,7 +41,9 @@ export default function calculateMaxActions(
             (value) =>
               value.type === "treasure" && value.stats.name === item.name
           );
-          const actionsNumber = Math.floor(items.length / item.amount);
+          const actionsNumber = Math.floor(
+            items.length / item.amount / priceMulti
+          );
           if (actionsNumber < maxActions) maxActions = actionsNumber;
         }
       }

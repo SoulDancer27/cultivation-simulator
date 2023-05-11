@@ -10,7 +10,6 @@ export default function breakthroughSuccess(
   realm: CultivationRealm | undefined
 ) {
   if (!realm) return false;
-  const { currentHealth } = stats;
   const playerDps = BreakthroughDps(
     { attack: stats.attack },
     {
