@@ -29,7 +29,7 @@ export default function EquipmentCard(props: Props) {
         </Box>
       </Box>
     );
-  const { imagePath, size, x, y, name, realmIndex, grade } = treasure.stats;
+  const { imagePath, size, x, y, name, realmIndex } = treasure.stats;
   const realm = CultivationRealms[realmIndex];
 
   const TreasureDescription: TreasureDescriptionStatsLine[] = [];
@@ -63,9 +63,7 @@ export default function EquipmentCard(props: Props) {
             <Typography>
               {name} ({type})
             </Typography>
-            <Typography>
-              {realm.name} ({grade})
-            </Typography>
+            <Typography>{realm.name}</Typography>
           </Box>
           <Button
             variant="contained"

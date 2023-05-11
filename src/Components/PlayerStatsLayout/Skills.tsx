@@ -5,7 +5,7 @@ import SkillDetailsTooltip from "./Skills/SkillDetailTooltip";
 
 export default function Skills() {
   const { skills } = React.useContext(PlayerContext);
-  const { training, mining } = skills;
+  const { training, mining, crafting } = skills;
 
   return (
     <Box>
@@ -14,6 +14,9 @@ export default function Skills() {
       </SkillDetailsTooltip>
       <SkillDetailsTooltip skill="mining">
         <Typography>Mining: {mining.toFixed(2)}</Typography>
+      </SkillDetailsTooltip>
+      <SkillDetailsTooltip skill="crafting">
+        <Typography>Crafting: {crafting.toFixed(2)}</Typography>
       </SkillDetailsTooltip>
     </Box>
   );

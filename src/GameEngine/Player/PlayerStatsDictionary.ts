@@ -7,6 +7,7 @@ const PlayerStatsDictionary = {
   defence: "Def",
   training: "training",
   mining: "mining",
+  crafting: "crafting",
 };
 
 export default PlayerStatsDictionary;

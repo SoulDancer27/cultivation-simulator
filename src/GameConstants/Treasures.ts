@@ -10,7 +10,7 @@ const Treasures: Treasure[] = [
     size: 32,
     realmIndex: 0,
     type: "weapon",
-    grade: "Common",
+    quality: 10,
     stats: {
       attack: 5,
     },
@@ -24,7 +24,7 @@ const Treasures: Treasure[] = [
     size: 32,
     realmIndex: 0,
     type: "armor",
-    grade: "Common",
+    quality: 10,
     stats: {
       health: 50,
     },
@@ -38,7 +38,7 @@ const Treasures: Treasure[] = [
     size: 32,
     realmIndex: 0,
     type: "helmet",
-    grade: "Common",
+    quality: 10,
     stats: {
       defence: 10,
     },
@@ -52,7 +52,7 @@ const Treasures: Treasure[] = [
     size: 32,
     realmIndex: 0,
     type: "ring",
-    grade: "Common",
+    quality: 10,
     stats: {
       attack: 1,
       defence: 2,
@@ -67,7 +67,7 @@ const Treasures: Treasure[] = [
     size: 32,
     realmIndex: 0,
     type: "pendant",
-    grade: "Common",
+    quality: 10,
     stats: {
       health: 10,
       healthRegen: 0.2,
@@ -87,7 +87,7 @@ export type Treasure = {
   size: number;
   // Index in the realms array
   realmIndex: number;
-  grade: TreasureGrade;
+  quality: number;
 };
 
 type TreasureGrade =

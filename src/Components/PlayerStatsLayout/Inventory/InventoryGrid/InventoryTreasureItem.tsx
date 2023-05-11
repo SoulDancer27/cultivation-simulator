@@ -93,9 +93,10 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
         <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
             <Typography>{treasure.name}</Typography>
+            <Typography>Quality: {treasure.quality.toFixed(2)}</Typography>
             {TreasureDescription.map((item) => (
               <Typography key={item.text} variant="body1">
-                {item.text} {item.effect}
+                {item.text} {item.effect.toFixed(2)}
               </Typography>
             ))}
             <Button

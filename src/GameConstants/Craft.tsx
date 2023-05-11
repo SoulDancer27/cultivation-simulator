@@ -1,14 +1,18 @@
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { Activity, ActivityItem } from "./Activities";
+import divisionCoeff from "GameEngine/shared/divisionCoeff";
+import { Activity } from "./Activities";
 import { day } from "./Constants";
-import { InventoryTreasure, PlayerContextType } from "./Player";
-import Treasures, { Treasure } from "./Treasures";
-import { v4 as uuid } from "uuid";
+import CraftSword from "./Crafting/CraftSword";
+import { PlayerContextType } from "./Player";
 
 let Crafting: Activity[] = [
   {
-    name: "Generic",
+    name: "Craft Coins",
     baseTime: 10 * day,
+    time: function (player: PlayerContextType) {
+      const { skills } = player;
+      const multi = 1 + skills.crafting;
+      return this.baseTime / multi;
+    },
     price: {
       items: [
         {
@@ -19,6 +23,7 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
+      skills: { crafting: 0.01 },
       items: [{ name: "Copper Coin", amount: 1, type: "money" }],
     },
   },
@@ -36,29 +41,18 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
+      skills: { crafting: 0.1 },
       items: [{ name: "Rusty Sword", amount: 1, type: "treasure" }],
     },
   },
 ];
 
-function CraftSword(
-  player: PlayerContextType,
-  item: ActivityItem
-): InventoryTreasure | undefined {
-  try {
-    let treasure = Treasures.find((i: Treasure) => i.name === item.name);
-    if (!treasure) throw new Error(`${item.name} не найден`);
-    const invTreasure: InventoryTreasure = {
-      type: "treasure",
-      id: uuid(),
-      stats: treasure,
+Crafting = Crafting.map((item) => {
+  if (item.result.skills && !item.skillsMulti)
+    item.skillsMulti = function (): number {
+      return 1 / divisionCoeff(this.timesCompleted || 0);
     };
-    invTreasure.stats.stats.attack = Math.random();
-    return invTreasure;
-  } catch (error) {
-    console.log(error);
-  }
-  return undefined;
-}
+  return item;
+});
 
 export default Crafting;

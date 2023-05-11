@@ -2,6 +2,7 @@ import { isTemplateMiddle } from "typescript";
 import { Activity } from "./Activities";
 import { month, day } from "./Constants";
 import { PlayerBaseStats, PlayerContextType } from "./Player";
+import divisionCoeff from "GameEngine/shared/divisionCoeff";
 
 // Provide bonuses to base stats
 let Trainings: Activity[] = [
@@ -175,10 +176,5 @@ Trainings = Trainings.map((item) => {
     };
   return item;
 });
-
-function divisionCoeff(timesCompleted: number) {
-  if (timesCompleted <= 10) return 1;
-  return 0.233 * (1 + Math.sqrt(timesCompleted));
-}
 
 export default Trainings;

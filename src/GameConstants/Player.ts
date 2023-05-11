@@ -47,6 +47,7 @@ export type PlayerBaseStats = {
 export type PlayerSkills = {
   training: number;
   mining: number;
+  crafting: number;
 };
 
 export type PlayerEnemyType = EnemyType & {
