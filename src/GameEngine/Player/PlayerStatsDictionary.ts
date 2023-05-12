@@ -5,7 +5,9 @@ const PlayerStatsDictionary = {
   healthRegen: "Hp.regen",
   attack: "Atk",
   defence: "Def",
-  insight: "Insight",
+  training: "training",
+  mining: "mining",
+  crafting: "crafting",
 };
 
 export default PlayerStatsDictionary;

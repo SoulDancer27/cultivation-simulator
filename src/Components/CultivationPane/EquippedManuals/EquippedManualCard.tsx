@@ -51,8 +51,8 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box
         border="1px solid gray"
-        width={100}
-        height={150}
+        width={120}
+        height={200}
         borderRadius={theme.spacing(1)}
         onClick={handleClick}
       >
@@ -64,7 +64,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
           justifyContent={"center"}
         >
           <img
-            src="/manuals/placeholder.png"
+            src={manual.imagePath || "/manuals/placeholder.png"}
             width="60px"
             height="auto"
             alt=""
@@ -81,13 +81,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
             {manual.realm}
           </Typography>
         </Box>
-        <Popper
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onResize={undefined}
-          onResizeCapture={undefined}
-        >
+        <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
             <Button onClick={selectButtonClick} color="success">
               Study

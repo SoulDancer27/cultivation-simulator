@@ -1,12 +1,9 @@
-import { Action } from "./Activities";
+import { Activity } from "./Activities";
 import { CultivationManualType } from "./CultivationManuals";
-import { CultivationRealmType } from "./CultivationRealms";
 import { EnemyType } from "./Enemies";
-import { TrainingType } from "./Trainings";
 import { Treasure } from "./Treasures";
 export type PlayerAction =
   | "idle"
-  | "training"
   | "fighting"
   | "breakthrough"
   | "cultivating"
@@ -14,17 +11,16 @@ export type PlayerAction =
 
 export type PlayerState = {
   action: PlayerAction;
-  training?: TrainingType;
   enemy?: PlayerEnemyType;
-  realm?: PlayerCultivationRealmType;
+  realm?: RealmTribulation;
   manual?: PlayerCultivationManual;
-  activity?: PlayerActivity;
+  activity?: { name: string; source: string }; // player action source from global lists
 };
 
-export type PlayerActivity = Action & { currentTime?: number };
+export type PlayerActivity = Activity & { currentTime?: number };
 
-export type PlayerCultivationRealmType = CultivationRealmType & {
-  currentHealth: number;
+export type RealmTribulation = {
+  index: number;
 };
 
 export type PlayerStats = {
@@ -40,11 +36,17 @@ export type PlayerStats = {
 
 export type PlayerBaseStats = {
   health: number;
+  attack: number;
   healthRegen: number;
   defence: number;
-  attack: number;
   // multiplier for cultivation experience gain
   insight: number;
+};
+
+export type PlayerSkills = {
+  training: number;
+  mining: number;
+  crafting: number;
 };
 
 export type PlayerEnemyType = EnemyType & {
@@ -52,7 +54,7 @@ export type PlayerEnemyType = EnemyType & {
 };
 
 export type PlayerRealm = {
-  name: string;
+  index: number;
   power: Partial<PlayerBaseStats>;
 };
 
@@ -65,7 +67,10 @@ export type PlayerCultivationManual = {
   isEquipped: boolean;
 };
 
-export type InventoryItem = InventoryTreasure | InventoryMoney;
+export type InventoryItem =
+  | InventoryTreasure
+  | InventoryMoney
+  | InventoryMineral;
 
 export type InventoryTreasure = {
   type: "treasure";
@@ -80,13 +85,29 @@ export type InventoryMoney = {
   amount: number;
 };
 
+export type InventoryMineral = {
+  type: "mineral";
+  id: string;
+  name: string;
+  amount: number;
+};
+
 export type PlayerContextType = {
   stats: PlayerStats;
   baseStats: PlayerBaseStats;
+  skills: PlayerSkills;
+  baseSkills: PlayerSkills;
   realm: PlayerRealm;
   manuals?: PlayerCultivationManual[];
   inventory: InventoryItem[];
   state: PlayerState;
+};
+
+export type CountableItemType = "money" | "mineral";
+export type CountableItem = {
+  type: CountableItemType;
+  name: string;
+  amount: number;
 };
 
 // Lazy type guards
@@ -96,4 +117,12 @@ export function isInventoryTreasure(item: any): item is InventoryTreasure {
 
 export function isInventoryMoney(item: any): item is InventoryMoney {
   return item.type === "money" && item.id && item.name && item.amount;
+}
+
+export function isInventoryMineral(item: any): item is InventoryMineral {
+  return item.type === "mineral" && item.id && item.name && item.amount;
+}
+
+export function isCountableItem(item: any): item is CountableItem {
+  return item.name && item.amount;
 }

@@ -1,10 +1,11 @@
-import { PlayerBaseStats } from "./Player";
+import { PlayerBaseStats, PlayerSkills } from "./Player";
 
 export const CultivationManuals: CultivationManualType[] = [
   {
     name: "Fist Strike",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/red.png",
     maxLevel: 10,
     stats: {
       attack: 0.01,
@@ -14,108 +15,31 @@ export const CultivationManuals: CultivationManualType[] = [
     name: "Block",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/yellow.png",
     maxLevel: 10,
     stats: {
-      defence: 0.05,
+      defence: 0.01,
     },
   },
   {
-    name: "Block 1",
+    name: "Meditation",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/green.png",
     maxLevel: 10,
     stats: {
-      defence: 0.05,
+      health: 0.01,
+      healthRegen: 0.01,
     },
   },
   {
-    name: "Block 2",
+    name: "Training Guidance",
     realm: "Mortal 1",
     rarity: "common",
+    imagePath: "/manuals/purple.png",
     maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 3",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 4",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 5",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 6",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 7",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 8",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 9",
-    realm: "Mortal 1",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 10",
-    realm: "Mortal 3",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
-    },
-  },
-  {
-    name: "Block 11",
-    realm: "Mortal 2",
-    rarity: "common",
-    maxLevel: 10,
-    stats: {
-      defence: 0.05,
+    skills: {
+      training: 0.01,
     },
   },
 ];
@@ -124,9 +48,11 @@ export type CultivationManualType = {
   name: string;
   realm: string;
   rarity: string;
+  imagePath?: string;
   maxLevel: number;
   // Cumulative bonus to base stats
-  stats: Partial<PlayerBaseStats>;
+  stats?: Partial<PlayerBaseStats>;
+  skills?: Partial<PlayerSkills>;
 };
 
 export function levelExp(level, realm, rarity) {

@@ -1,4 +1,4 @@
-import { Action } from "./Activities";
+import { Activity } from "./Activities";
 
 const Villages: Village[] = [
   {
@@ -10,17 +10,19 @@ const Villages: Village[] = [
       {
         name: "Run Errands",
         description: "",
+        baseTime: 0.1,
         result: { items: [{ type: "money", name: "Copper Coin", amount: 1 }] },
       },
       {
         name: "Use Training Grounds",
         description: "",
+        baseTime: 0.1,
         result: { baseStats: { attack: 0.07, defence: 0.07 } },
       },
       {
         name: "Help in the fields",
         description: "",
-        requiredTime: 10,
+        baseTime: 10,
         result: {
           baseStats: { attack: 0.2, defence: 0.2 },
           items: [{ type: "money", name: "Copper Coin", amount: 5 }],
@@ -29,7 +31,7 @@ const Villages: Village[] = [
       {
         name: "Help in the forge",
         description: "",
-        requiredTime: 10,
+        baseTime: 10,
         result: {
           baseStats: { attack: 0.2, defence: 0.2 },
           items: [
@@ -49,7 +51,7 @@ type Village = {
   name: string;
   description: string;
   imagePath: string;
-  activities?: Array<Action>;
+  activities?: Array<Activity>;
 };
 
 export default Villages;

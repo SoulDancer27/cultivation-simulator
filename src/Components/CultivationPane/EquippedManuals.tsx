@@ -25,8 +25,10 @@ export default function EquippedManuals() {
       <Box display="flex" flexWrap={"wrap"} maxWidth={width - 512}>
         {tileIndex.map((index) => {
           if (equippedManuals && equippedManuals[index])
-            return <EquippedManualCard {...equippedManuals[index]} />;
-          return <PlaceholderCard />;
+            return (
+              <EquippedManualCard {...equippedManuals[index]} key={index} />
+            );
+          return <PlaceholderCard key={index} />;
         })}
       </Box>
     </>

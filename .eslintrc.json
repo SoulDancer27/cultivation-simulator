@@ -1,0 +1,18 @@
+{
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "overrides": [
+      {
+          "files": ["**/*.js", "**/*.ts", "**/*.tsx"],
+          "rules": {
+              "react-hooks/exhaustive-deps": "off",
+              "prefer-const": "off",
+              "@typescript-eslint/no-empty-function": "off",
+              "@typescript-eslint/explicit-module-boundary-types": "off",
+              "@typescript-eslint/no-explicit-any": "off"
+          }
+      }
+  ]
+  }

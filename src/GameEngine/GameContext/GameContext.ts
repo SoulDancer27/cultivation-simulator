@@ -1,20 +1,32 @@
-import React from 'react';
+import { Activity } from "GameConstants/Activities";
+import {
+  CultivationRealm,
+  CultivationRealms,
+} from "GameConstants/CultivationRealms";
+import Trainings from "GameConstants/Trainings";
+import Mining from "GameConstants/Mining";
+import React from "react";
+import Crafting from "GameConstants/Craft";
 
 export type GameContextType = {
-  previousTime: number;
-  currentTime: number;
-}
+  trainings: Activity[];
+  mining: Activity[];
+  crafting: Activity[];
+  cultivationRealms: CultivationRealm[];
+};
 
 export const gameContext: GameContextType = {
-  previousTime: Date.now(),
-  currentTime: Date.now()
-}
+  trainings: Trainings,
+  mining: Mining,
+  crafting: Crafting,
+  cultivationRealms: CultivationRealms,
+};
 
 /** Context initializator */
 export const GameContext = React.createContext({
   ...gameContext,
-  updateContext: (newData: Partial<GameContextType>) => { },
-  setContext: (value: React.SetStateAction<GameContextType>) => { },
+  updateContext: (newData: Partial<GameContextType>) => {},
+  setContext: (value: React.SetStateAction<GameContextType>) => {},
 });
 
 export default GameContext;

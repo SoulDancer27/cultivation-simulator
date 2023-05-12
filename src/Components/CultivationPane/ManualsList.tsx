@@ -41,12 +41,21 @@ export default function ManualsList() {
       {storedManuals.map((item) => {
         const { manual, learningProgress } = item;
         const ManualStatsDescription: ManualStatsDescription[] = [];
-        for (const [key, value] of Object.entries(manual.stats)) {
-          ManualStatsDescription.push({
-            text: PlayerStatsDictionary[key],
-            effect: value * learningProgress.level,
-          });
-        }
+        if (manual.stats)
+          for (const [key, value] of Object.entries(manual.stats)) {
+            ManualStatsDescription.push({
+              text: PlayerStatsDictionary[key],
+              effect: value * learningProgress.level,
+            });
+          }
+        const ManualSkillsDescription: ManualStatsDescription[] = [];
+        if (manual.skills)
+          for (const [key, value] of Object.entries(manual.skills)) {
+            ManualSkillsDescription.push({
+              text: PlayerStatsDictionary[key],
+              effect: value * learningProgress.level,
+            });
+          }
         return (
           <Box
             key={manual.name}
@@ -65,6 +74,13 @@ export default function ManualsList() {
                 return (
                   <Typography key={stat.text}>
                     {stat.text}: {(stat.effect * 100).toFixed(2)}%
+                  </Typography>
+                );
+              })}
+              {ManualSkillsDescription.map((skill) => {
+                return (
+                  <Typography key={skill.text}>
+                    {skill.text}: {(skill.effect * 100).toFixed(2)}%
                   </Typography>
                 );
               })}

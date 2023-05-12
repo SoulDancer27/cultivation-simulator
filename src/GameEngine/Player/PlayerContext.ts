@@ -1,11 +1,11 @@
 import React from "react";
 import { PlayerContextType } from "GameConstants/Player";
-import { yearSpan } from "GameConstants/Constants";
+import { year } from "GameConstants/Constants";
 import { CultivationManuals } from "GameConstants/CultivationManuals";
 
 export const playerContext: PlayerContextType = {
   stats: {
-    age: yearSpan * 10,
+    age: year * 10,
     currentHealth: 10,
     health: 10,
     healthRegen: 0.5,
@@ -14,14 +14,24 @@ export const playerContext: PlayerContextType = {
     insight: 1,
   },
   baseStats: {
+    attack: 1,
     health: 10,
     healthRegen: 0.5,
     defence: 0,
-    attack: 1,
     insight: 1,
   },
+  skills: {
+    training: 0,
+    mining: 0,
+    crafting: 0,
+  },
+  baseSkills: {
+    training: 0,
+    mining: 0,
+    crafting: 0,
+  },
   realm: {
-    name: "Mortal 0",
+    index: 0,
     power: {},
   },
   manuals: CultivationManuals.map((manual) => ({

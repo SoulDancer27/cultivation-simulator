@@ -1,9 +1,11 @@
 import { Box, Button, useTheme } from "@mui/material";
 import React from "react";
-import Equipment from "./Equipment";
-import Inventory from "./Inventory";
+import Equipment from "./PlayerStatsLayout/Equipment";
+import Inventory from "./PlayerStatsLayout/Inventory";
+import Stats from "./PlayerStatsLayout/Stats";
+import Skills from "./PlayerStatsLayout/Skills";
 
-type Layout = "inventory" | "equipment";
+type Layout = "inventory" | "equipment" | "stats" | "skills";
 
 export default function PlayerStatsLayout() {
   const [panel, selectPanel] = React.useState<Layout>("inventory");
@@ -27,10 +29,28 @@ export default function PlayerStatsLayout() {
         >
           Equipment
         </Button>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => selectPanel("stats")}
+          color={panel === "stats" ? "success" : "primary"}
+        >
+          Stats
+        </Button>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => selectPanel("skills")}
+          color={panel === "skills" ? "success" : "primary"}
+        >
+          Skills
+        </Button>
       </Box>
       <Box width={512} height={512}>
         {panel === "inventory" ? <Inventory /> : ""}
         {panel === "equipment" ? <Equipment /> : ""}
+        {panel === "stats" ? <Stats /> : ""}
+        {panel === "skills" ? <Skills /> : ""}
       </Box>
     </>
   );
