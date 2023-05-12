@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
-import Activity from "./shared/Activity";
+import Recipies from "./CraftingPane/Recipies";
 
 export default function CraftingPane() {
   const { crafting } = React.useContext(GameContext);
@@ -17,8 +17,9 @@ export default function CraftingPane() {
 
   return (
     <Box>
-      <Typography variant="h5">Train</Typography>
-      <Box display="flex" flexWrap={"wrap"}>
+      <Typography variant="h5">Craft</Typography>
+      <Recipies />
+      {/*  <Box display="flex" flexWrap={"wrap"}>
         {crafting.map((recipe) => (
           <Activity
             activity={recipe}
@@ -28,7 +29,7 @@ export default function CraftingPane() {
             key={recipe.name}
           />
         ))}
-      </Box>
+      </Box>*/}
     </Box>
   );
 }
