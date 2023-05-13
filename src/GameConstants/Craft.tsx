@@ -31,7 +31,6 @@ let Crafting: Activity[] = [
   {
     name: "Iron Sword",
     baseTime: 30 * day,
-    priceMulti: 1,
     generators: { "Rusty Sword": CraftSword },
     price: {
       items: [
@@ -52,7 +51,7 @@ let Crafting: Activity[] = [
 Crafting = Crafting.map((item) => {
   if (item.result.skills && !item.result.skillsMulti)
     item.result.skillsMulti = function (x): number {
-      const priceMulti = x.priceMulti || 1;
+      const priceMulti = x.price.priceMulti || 1;
       return (
         (1 + 0.1 * (Math.sqrt(priceMulti) - 1)) /
         divisionCoeff(x.timesCompleted || 0)

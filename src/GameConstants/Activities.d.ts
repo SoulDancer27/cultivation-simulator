@@ -24,8 +24,9 @@ export type Activity = {
   price?: {
     baseStats?: Partial<PlayerBaseStats>;
     items?: ActivityItem[];
+    priceMulti?: number; // price multiplier, has impact on some activities, like Crafting for example
   };
-  priceMulti?: number; // price multiplier, has impact on some activities, like Crafting for example, #todo move it to the activity.price
+
   // Activity result
   result: {
     baseStats?: Partial<PlayerBaseStats>;

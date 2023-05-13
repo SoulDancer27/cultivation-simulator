@@ -21,7 +21,7 @@ export default function CraftSword(
     const itemQuality = quality(
       treasure.realmIndex,
       player.skills.crafting,
-      activity.priceMulti
+      activity?.price?.priceMulti || 1
     );
     invTreasure.stats.quality = itemQuality;
     invTreasure.stats.stats.attack = itemQuality / 2;

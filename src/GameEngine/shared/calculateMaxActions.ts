@@ -9,7 +9,7 @@ export default function calculateMaxActions(
   try {
     let maxActions = Number.MAX_VALUE;
     if (!action.price) return maxActions;
-    const priceMulti = action.priceMulti || 1;
+    const priceMulti = action.price.priceMulti || 1;
     if (action.price.baseStats) {
       for (const [key, value] of Object.entries(action.price.baseStats)) {
         const actionsNumber = Math.floor(
