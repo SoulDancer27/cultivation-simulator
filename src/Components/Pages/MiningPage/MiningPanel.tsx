@@ -63,7 +63,10 @@ export default function MiningPanel(props: Props) {
       StatsRewardDescription.push({
         text: PlayerStatsDictionary[key],
         effect:
-          value * (activity?.baseStatsMulti ? activity.baseStatsMulti() : 1),
+          value *
+          (activity.result?.baseStatsMulti
+            ? activity.result.baseStatsMulti(activity)
+            : 1),
       });
     }
   }
@@ -83,7 +86,11 @@ export default function MiningPanel(props: Props) {
     for (const [key, value] of Object.entries(result.skills)) {
       SkillsRewardDescription.push({
         text: PlayerStatsDictionary[key],
-        effect: value * (activity?.skillsMulti ? activity.skillsMulti() : 1),
+        effect:
+          value *
+          (activity.result?.skillsMulti
+            ? activity.result.skillsMulti(activity)
+            : 1),
       });
     }
   }

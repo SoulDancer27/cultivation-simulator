@@ -29,10 +29,10 @@ export default function WorldLoader(props: any) {
         );
         if (indexOf !== -1 && Trainings[indexOf].time)
           item.time = Trainings[indexOf].time;
-        if (Trainings[indexOf].baseStatsMulti)
-          item.baseStatsMulti = Trainings[indexOf].baseStatsMulti;
-        if (Trainings[indexOf].skillsMulti)
-          item.skillsMulti = Trainings[indexOf].skillsMulti;
+        if (Trainings[indexOf].result.baseStatsMulti)
+          item.result.baseStatsMulti = Trainings[indexOf].result.baseStatsMulti;
+        if (Trainings[indexOf].result.skillsMulti)
+          item.result.skillsMulti = Trainings[indexOf].result.skillsMulti;
         return item;
       });
       // Load functions
@@ -40,10 +40,10 @@ export default function WorldLoader(props: any) {
         const indexOf = Mining.findIndex((mining) => mining.name === item.name);
         if (indexOf !== -1 && Mining[indexOf].time)
           item.time = Mining[indexOf].time;
-        if (Mining[indexOf].baseStatsMulti)
-          item.baseStatsMulti = Mining[indexOf].baseStatsMulti;
-        if (Mining[indexOf].skillsMulti)
-          item.skillsMulti = Mining[indexOf].skillsMulti;
+        if (Mining[indexOf].result.baseStatsMulti)
+          item.result.baseStatsMulti = Mining[indexOf].result.baseStatsMulti;
+        if (Mining[indexOf].result.skillsMulti)
+          item.result.skillsMulti = Mining[indexOf].result.skillsMulti;
         return item;
       });
       storageData.crafting = storageData.crafting.map((item: Activity) => {

@@ -50,12 +50,12 @@ let Crafting: Activity[] = [
 ];
 
 Crafting = Crafting.map((item) => {
-  if (item.result.skills && !item.skillsMulti)
-    item.skillsMulti = function (): number {
-      const priceMulti = this.priceMulti || 1;
+  if (item.result.skills && !item.result.skillsMulti)
+    item.result.skillsMulti = function (): number {
+      const priceMulti = item.priceMulti || 1;
       return (
         (1 + 0.1 * (Math.sqrt(priceMulti) - 1)) /
-        divisionCoeff(this.timesCompleted || 0)
+        divisionCoeff(item.timesCompleted || 0)
       );
     };
   return item;

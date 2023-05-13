@@ -43,13 +43,13 @@ Mining = Mining.map((item) => {
       const multi = 1 + skills.mining;
       return this.baseTime / multi;
     };
-  if (item.result.baseStats && !item.baseStatsMulti)
-    item.baseStatsMulti = function (): number {
-      return 1 / divisionCoeff(this.timesCompleted || 0);
+  if (item.result.baseStats && !item.result.baseStatsMulti)
+    item.result.baseStatsMulti = function (): number {
+      return 1 / divisionCoeff(item.timesCompleted || 0);
     };
-  if (item.result.skills && !item.skillsMulti)
-    item.skillsMulti = function (): number {
-      return 1 / divisionCoeff(this.timesCompleted || 0);
+  if (item.result.skills && !item.result.skillsMulti)
+    item.result.skillsMulti = function (): number {
+      return 1 / divisionCoeff(item.timesCompleted || 0);
     };
   return item;
 });

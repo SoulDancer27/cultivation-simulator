@@ -10,8 +10,7 @@ export type Activity = {
   time?: (player?: PlayerContext) => number; // calculate completion time based on props
   currentTime?: number; // for progress tracking
   timesCompleted?: number; // total times completed
-  baseStatsMulti?: (player?: PlayerContextType) => number; // calculate stats reward multiplier,  #todo: rework for not using implicit self
-  skillsMulti?: (player?: PlayerContextType) => number; // calculate skills reward multiplier, #todo: rework for not using implicit self
+
   // Craft items if any are a reward
   // A dictionary of functions, if specified action manager calls corresponding function for items in result.items like generators[item.name]
   generators?: {
@@ -30,7 +29,9 @@ export type Activity = {
   // Activity result
   result: {
     baseStats?: Partial<PlayerBaseStats>;
+    baseStatsMulti?: (activity: Activity, player?: PlayerContextType) => number; // calculate stats reward multiplier
     skills?: Partial<PlayerSkills>;
+    skillsMulti?: (player?: PlayerContextType) => number; // calculate skills reward multiplier
     items?: ActivityItem[];
   };
 };

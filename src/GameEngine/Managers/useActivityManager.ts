@@ -77,8 +77,8 @@ export default function useActivityManager(timer: GameTimer) {
             baseStats,
             activity.result.baseStats,
             timesCompleted *
-              (typeof activity.baseStatsMulti === "function"
-                ? activity.baseStatsMulti()
+              (typeof activity.result.baseStatsMulti === "function"
+                ? activity.result.baseStatsMulti(activity)
                 : 1)
           );
         if (activity.result.skills)
@@ -86,8 +86,8 @@ export default function useActivityManager(timer: GameTimer) {
             baseSkills,
             activity.result.skills,
             timesCompleted *
-              (typeof activity.skillsMulti === "function"
-                ? activity.skillsMulti()
+              (typeof activity.result.skillsMulti === "function"
+                ? activity.result.skillsMulti(activity)
                 : 1)
           );
         // Process reward
