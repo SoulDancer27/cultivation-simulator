@@ -17,13 +17,14 @@ export type Stats = {
 export type CultivationRealm = {
   name: string;
   baseStats: Stats;
-  currentStats?: Stats & { currentHealth: number };
+  currentStats?: Stats & { currentHealth: number }; // currentHealth is for progress tracking
   // Additional stats for heavenly tribulations
   tribulation?: Tribulation;
   // Reward stats multipliers
   realmPowers: Partial<PlayerBaseStats>;
 };
 
+// Some placeholder content
 export const CultivationRealms: CultivationRealm[] = [
   {
     name: "Mortal 0",

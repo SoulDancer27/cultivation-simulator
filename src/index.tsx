@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
+// Entry point
 ReactDOM.render(
   <React.StrictMode>
     <App />

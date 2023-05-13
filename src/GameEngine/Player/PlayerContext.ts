@@ -3,6 +3,7 @@ import { PlayerContextType } from "GameConstants/Player";
 import { year } from "GameConstants/Constants";
 import { CultivationManuals } from "GameConstants/CultivationManuals";
 
+// Some placeholder values to fill in the player object on first launch
 export const playerContext: PlayerContextType = {
   stats: {
     age: year * 10,

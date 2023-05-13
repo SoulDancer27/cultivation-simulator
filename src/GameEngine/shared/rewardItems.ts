@@ -7,6 +7,8 @@ import {
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 
+// Basically the same as rewardActivityItems, but accepts an array of items as a parameter
+// Currently unused
 export default function rewardItems(
   inventory: InventoryItem[],
   reward: ActivityItem[],

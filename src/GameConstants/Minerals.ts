@@ -1,3 +1,4 @@
+// Placeholder content
 export const Minerals: Material[] = [
   {
     name: "Copper",

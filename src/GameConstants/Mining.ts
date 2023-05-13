@@ -2,6 +2,7 @@ import { Activity } from "./Activities";
 import { day, month } from "./Constants";
 import { PlayerContextType } from "./Player";
 
+// Placeholder activities
 let Mining: Activity[] = [
   {
     name: "Copper",

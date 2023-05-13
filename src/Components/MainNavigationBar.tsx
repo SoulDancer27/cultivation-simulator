@@ -3,21 +3,22 @@ import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
-import ActionsPane from "./ActionsPane";
-import ManualsPane from "./ManualsPane";
-import RealmBreakthroughPane from "./RealmBreakthroughPane";
+import ManualsPage from "./Pages/ManualsPage";
+import RealmBreakthroughPage from "./Pages/RealmBreakthroughPage";
 import GameContext from "GameEngine/GameContext/GameContext";
-import breakthroughSuccess from "./RealmBreakthroughPane/breakthroughSuccess";
-import MiningPage from "./MiningPage";
-import CraftingPane from "./CraftingPane";
+import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSuccess";
+import MiningPage from "./Pages/MiningPage";
+import CraftingPage from "./Pages/CraftingPage";
+import TrainingPage from "./Pages/TrainingPage";
 
 export type ActivePane =
-  | "actions"
+  | "training"
   | "manuals"
   | "breakthrough"
   | "mining"
   | "crafting";
 
+// Switches between different pages
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
   const theme = useTheme();
@@ -28,7 +29,7 @@ export default function MainNavigationBar() {
     stats,
     cultivationRealms[realm.index + 1]
   );
-  let startingPane: ActivePane = "actions";
+  let startingPane: ActivePane = "training";
   if (state.action === "cultivating") startingPane = "manuals";
   const [pane, setPane] = React.useState<ActivePane>(startingPane);
   return (
@@ -38,11 +39,11 @@ export default function MainNavigationBar() {
           <Button
             variant="outlined"
             size="large"
-            color={pane === "actions" ? "success" : "primary"}
-            onClick={() => setPane("actions")}
+            color={pane === "training" ? "success" : "primary"}
+            onClick={() => setPane("training")}
             sx={{ margin: theme.spacing(2) }}
           >
-            Actions
+            Training
           </Button>
           <Button
             variant="outlined"
@@ -71,7 +72,7 @@ export default function MainNavigationBar() {
           <Button
             variant="outlined"
             size="large"
-            color={pane === "manuals" ? "success" : "primary"}
+            color={pane === "mining" ? "success" : "primary"}
             onClick={() => setPane("mining")}
             sx={{ margin: theme.spacing(2) }}
           >
@@ -88,11 +89,11 @@ export default function MainNavigationBar() {
           </Button>
         </Box>
       </Paper>
-      {pane === "actions" ? <ActionsPane /> : ""}
-      {pane === "manuals" ? <ManualsPane /> : ""}
-      {pane === "breakthrough" ? <RealmBreakthroughPane /> : ""}
+      {pane === "training" ? <TrainingPage /> : ""}
+      {pane === "manuals" ? <ManualsPage /> : ""}
+      {pane === "breakthrough" ? <RealmBreakthroughPage /> : ""}
       {pane === "mining" ? <MiningPage /> : ""}
-      {pane === "crafting" ? <CraftingPane /> : ""}
+      {pane === "crafting" ? <CraftingPage /> : ""}
     </Box>
   );
 }

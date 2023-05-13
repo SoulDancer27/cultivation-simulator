@@ -4,6 +4,7 @@ import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 import quality from "./quality";
 
+// A function that returns treasure item as a result. Stats are based on player current skills
 export default function CraftSword(
   activity: Activity,
   player: PlayerContextType,

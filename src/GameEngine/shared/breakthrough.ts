@@ -1,3 +1,4 @@
+// Type declarations for breakthrough manager
 // Realm tribulation damage to the player during breakthrough attempt
 type PlayerDefenceStats = {
   defence: number;

@@ -10,6 +10,7 @@ import {
   TribulationDps,
 } from "GameEngine/shared/breakthrough";
 
+// Manages realm breakthroughs
 export default function useBreakthroughManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   const { cultivationRealms, updateContext: updateGameContext } =

@@ -1,5 +1,6 @@
 import { CultivationRealm } from "GameConstants/CultivationRealms";
 
+// For the breakthrough manager
 export default function calculateTribulationPower(
   index: number,
   realms: CultivationRealm[]

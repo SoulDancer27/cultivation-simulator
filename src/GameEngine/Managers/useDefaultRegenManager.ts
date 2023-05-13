@@ -2,6 +2,7 @@ import PlayerContext from "../Player/PlayerContext";
 import React from "react";
 import { GameTimer } from "GameEngine/GameRuntime";
 
+// Placeholder. #todo: replace it with some better logic.
 export default function useDefaultRegenManager(timer: GameTimer) {
   const { stats, state, updateContext } = React.useContext(PlayerContext);
   const { currentTime, previousTime } = timer;
