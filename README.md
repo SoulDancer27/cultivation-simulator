@@ -20,3 +20,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+# You are welcome to contribute to the development of the project
+you can read contribution guideline [here](/contributing.md)
+
+# Progress tracking
+We also have a notion workspace for progress tracking
+[notion](https://www.notion.so/Cultivation-Simulator-927db0045f05489294cf198071cbd216)
