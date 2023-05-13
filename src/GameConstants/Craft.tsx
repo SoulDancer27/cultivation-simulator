@@ -51,11 +51,11 @@ let Crafting: Activity[] = [
 
 Crafting = Crafting.map((item) => {
   if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = function (): number {
-      const priceMulti = item.priceMulti || 1;
+    item.result.skillsMulti = function (x): number {
+      const priceMulti = x.priceMulti || 1;
       return (
         (1 + 0.1 * (Math.sqrt(priceMulti) - 1)) /
-        divisionCoeff(item.timesCompleted || 0)
+        divisionCoeff(x.timesCompleted || 0)
       );
     };
   return item;

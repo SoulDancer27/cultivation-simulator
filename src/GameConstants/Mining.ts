@@ -44,12 +44,12 @@ Mining = Mining.map((item) => {
       return this.baseTime / multi;
     };
   if (item.result.baseStats && !item.result.baseStatsMulti)
-    item.result.baseStatsMulti = function (): number {
-      return 1 / divisionCoeff(item.timesCompleted || 0);
+    item.result.baseStatsMulti = function (x): number {
+      return 1 / divisionCoeff(x.timesCompleted || 0);
     };
   if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = function (): number {
-      return 1 / divisionCoeff(item.timesCompleted || 0);
+    item.result.skillsMulti = function (x): number {
+      return 1 / divisionCoeff(x.timesCompleted || 0);
     };
   return item;
 });
