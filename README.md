@@ -22,7 +22,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 # You are welcome to contribute to the development of the project
-you can read contribution guideline [here](/contributing.md)
+you can read contribution guideline [here](/CONTRIBUTING.md)
 
 # Progress tracking
 We also have a notion workspace for progress tracking
