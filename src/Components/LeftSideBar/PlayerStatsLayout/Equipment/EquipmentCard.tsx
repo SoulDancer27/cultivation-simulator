@@ -31,7 +31,8 @@ export default function EquipmentCard(props: Props) {
         </Box>
       </Box>
     );
-  const { imagePath, size, x, y, name, realmIndex } = treasure.stats;
+  const { image, name, realmIndex } = treasure.stats;
+  const { path, sizeX: size, x, y } = image;
   const realm = CultivationRealms[realmIndex];
 
   const TreasureDescription: TreasureDescriptionStatsLine[] = [];
@@ -56,11 +57,7 @@ export default function EquipmentCard(props: Props) {
     <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
       <Box margin={theme.spacing(1)}>
         <Box width={512} display="flex">
-          <CropSquareImage
-            path={imagePath}
-            size={size}
-            position={{ x: x, y: y }}
-          />
+          <CropSquareImage path={path} size={size} position={{ x: x, y: y }} />
           <Box marginLeft={theme.spacing(1)} marginTop={theme.spacing(-1)}>
             <Typography>
               {name} ({type})

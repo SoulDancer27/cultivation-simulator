@@ -23,9 +23,9 @@ export default function InventoryMoneyItem(props: InventoryMoney) {
       >
         <Box>
           <CropSquareImage
-            path={cellData.imagePath}
-            size={cellData.size}
-            position={{ x: cellData.x, y: cellData.y }}
+            path={cellData.image.path}
+            size={cellData.image.sizeX}
+            position={{ x: cellData.image.x, y: cellData.image.y }}
           />
         </Box>
         <Box>

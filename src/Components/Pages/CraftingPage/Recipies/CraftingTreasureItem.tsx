@@ -62,9 +62,9 @@ export default function CraftingTreasureItem(props: Props) {
         >
           <Box>
             <CropSquareImage
-              path={treasure.imagePath}
-              size={treasure.size}
-              position={{ x: treasure.x, y: treasure.y }}
+              path={treasure.image.path}
+              size={treasure.image.sizeX}
+              position={{ x: treasure.image.x, y: treasure.image.y }}
             />
           </Box>
           <Box>

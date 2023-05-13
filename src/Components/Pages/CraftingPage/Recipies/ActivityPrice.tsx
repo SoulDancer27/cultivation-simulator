@@ -24,10 +24,10 @@ export default function ActivityPrice(props: Props) {
           const result = Money.find((coin) => coin.name === name);
           if (result) {
             imageData = {
-              path: result.imagePath,
-              size: result.size,
-              x: result.x,
-              y: result.y,
+              path: result.image.path,
+              size: result.image.sizeX,
+              x: result.image.x,
+              y: result.image.y,
             };
           }
         } else if (item.type === "mineral") {
@@ -44,10 +44,10 @@ export default function ActivityPrice(props: Props) {
           const result = Treasures.find((treasure) => treasure.name === name);
           if (result) {
             imageData = {
-              path: result.imagePath,
-              size: result.size,
-              x: result.x,
-              y: result.y,
+              path: result.image.path,
+              size: result.image.sizeX,
+              x: result.image.x,
+              y: result.image.y,
             };
           }
         }

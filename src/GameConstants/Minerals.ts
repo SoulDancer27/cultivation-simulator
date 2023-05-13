@@ -1,3 +1,4 @@
+import { Image } from "./Interfaces";
 // Placeholder content
 export const Minerals: Material[] = [
   {
@@ -38,11 +39,5 @@ export const Minerals: Material[] = [
 export type Material = {
   name: string;
   description: string;
-  image: {
-    path: string;
-    x: number;
-    y: number;
-    sizeX: number;
-    sizeY: number;
-  };
+  image: Image;
 };
