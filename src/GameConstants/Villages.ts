@@ -1,5 +1,7 @@
 import { Activity } from "./Activities";
 
+// ! Travelling mechanic is not implemented yet
+// This is a total placeholder
 const Villages: Village[] = [
   {
     name: "Spring blossom village",

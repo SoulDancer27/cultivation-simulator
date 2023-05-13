@@ -1,5 +1,6 @@
 import { PlayerSkills } from "GameConstants/Player";
 
+// Function to increment player skill exp
 export default function addSkillsExp(
   skills: PlayerSkills,
   reward: Partial<PlayerSkills>,

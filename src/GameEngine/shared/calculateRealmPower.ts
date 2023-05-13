@@ -1,6 +1,7 @@
 import { CultivationRealm } from "GameConstants/CultivationRealms";
 import { PlayerBaseStats } from "GameConstants/Player";
 
+// Caclulates realm stats multiplier based on all tribulations completed
 export default function calculateRealmPower(
   index: number,
   realms: CultivationRealm[]

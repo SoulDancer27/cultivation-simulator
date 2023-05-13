@@ -22,6 +22,7 @@ export default function WorldLoader(props: any) {
     if (gameData) {
       let storageData = JSON.parse(gameData);
       // Load functions
+      // !! This is atrocious, needs a rework
       storageData.trainings = storageData.trainings.map((item: Activity) => {
         const indexOf = Trainings.findIndex(
           (training) => training.name === item.name

@@ -5,6 +5,7 @@ import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 
+// Updates cultivation manuals learning progress
 export default function useCultivationManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   let { stats, state, skills, updateContext } = player;

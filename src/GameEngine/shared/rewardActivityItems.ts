@@ -8,6 +8,7 @@ import {
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 
+// Add activity reward to the players inventory
 export default function rewardActivityItems(
   player: PlayerContextType,
   activity: Activity,

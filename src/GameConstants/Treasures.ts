@@ -1,5 +1,6 @@
 import { PlayerStats } from "./Player";
 
+// Will be reworked soon
 const Treasures: Treasure[] = [
   {
     name: "Rusty Sword",

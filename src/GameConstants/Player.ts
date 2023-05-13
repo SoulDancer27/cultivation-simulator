@@ -7,24 +7,25 @@ export type PlayerAction =
   | "fighting"
   | "breakthrough"
   | "cultivating"
-  | "activity";
+  | "activity"; // most of the actions in the game
 
 export type PlayerState = {
   action: PlayerAction;
   enemy?: PlayerEnemyType;
   realm?: RealmTribulation;
   manual?: PlayerCultivationManual;
-  activity?: { name: string; source: string }; // player action source from global lists
+  activity?: { name: string; source: string }; // player action source from global lists. Is used as a key to retrieve value from GameContext object
 };
 
 export type PlayerActivity = Activity & { currentTime?: number };
 
 export type RealmTribulation = {
-  index: number;
+  index: number; // A pointer into global tribulation array
 };
 
+// Player stats are calculated based on baseStats, equipped items, learned manuals and so on
 export type PlayerStats = {
-  age: number;
+  age: number; // in milliseconds
   currentHealth: number;
   // Calculated values. Are stored to not recalculate them on every game tick
   health: number;
@@ -39,8 +40,7 @@ export type PlayerBaseStats = {
   attack: number;
   healthRegen: number;
   defence: number;
-  // multiplier for cultivation experience gain
-  insight: number;
+  insight: number; // multiplier for cultivation manuals experience gain
 };
 
 export type PlayerSkills = {
@@ -49,13 +49,14 @@ export type PlayerSkills = {
   crafting: number;
 };
 
+// This probably needs a rework
 export type PlayerEnemyType = EnemyType & {
   currentHealth: number;
 };
 
 export type PlayerRealm = {
   index: number;
-  power: Partial<PlayerBaseStats>;
+  power: Partial<PlayerBaseStats>; // a calculated value based on passed tribulations
 };
 
 export type PlayerCultivationManual = {
@@ -93,14 +94,14 @@ export type InventoryMineral = {
 };
 
 export type PlayerContextType = {
-  stats: PlayerStats;
+  stats: PlayerStats; // calcuated stat values
   baseStats: PlayerBaseStats;
-  skills: PlayerSkills;
+  skills: PlayerSkills; // calculated skill values
   baseSkills: PlayerSkills;
-  realm: PlayerRealm;
-  manuals?: PlayerCultivationManual[];
-  inventory: InventoryItem[];
-  state: PlayerState;
+  realm: PlayerRealm; // an index pointing to the global realms array and total calculated multiplier based on passed tribulations
+  manuals?: PlayerCultivationManual[]; // an array of all learned manuals with progress tracked for each
+  inventory: InventoryItem[]; // an array of all inventory items
+  state: PlayerState; // current player action
 };
 
 export type CountableItemType = "money" | "mineral";

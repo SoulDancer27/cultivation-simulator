@@ -11,6 +11,7 @@ import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 
+// The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
   const game = React.useContext(GameContext);
@@ -26,8 +27,10 @@ export default function useActivityManager(timer: GameTimer) {
 
   React.useEffect(() => {
     try {
+      // Bail out
       if (state.action !== "activity" || !state.activity) return;
 
+      // Calculate activity progress based on time passed
       const elapsedTime = timer.currentTime - timer.previousTime;
       let activity = game[state.activity.source].find(
         (item: Activity) => state.activity && item.name === state.activity.name
@@ -43,7 +46,7 @@ export default function useActivityManager(timer: GameTimer) {
       activity.currentTime = currentTime;
       activity.timesCompleted =
         (activity?.timesCompleted || 0) + timesCompleted;
-      // Action not completed yet
+      // Action not completed yet. Just update the progress and move on
       if (timesCompleted === 0) {
         game.updateContext({ ...game });
         return;

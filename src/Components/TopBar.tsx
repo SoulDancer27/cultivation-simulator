@@ -4,6 +4,7 @@ import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 
+// Top bar with some game stats and values
 export default function TopBar() {
   const theme = useTheme();
   const { stats, realm } = React.useContext(PlayerContext);

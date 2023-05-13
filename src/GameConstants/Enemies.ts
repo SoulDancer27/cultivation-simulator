@@ -6,6 +6,7 @@ export type EnemyType = {
   attack: number;
 };
 
+// Total placeholder content
 export const Enemies: EnemyType[] = [
   {
     name: "Random Nobody",

@@ -1,17 +1,15 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
-import PlayerStatsPane from "Components/PlayerStatsPane";
 import SaveLoader from "GameEngine/PlayerLoader";
 import GameRuntime from "GameEngine/GameRuntime";
 import TopBar from "Components/TopBar";
 import useWindowDimensions, {
   getWindowDimensions,
 } from "Utils/useWindowDimensions";
-import PlayerLocationPane from "Components/PlayerLocationPane";
-import PlayerStatsLayout from "Components/PlayerStatsLayout";
 import MainNavigationBar from "Components/MainNavigationBar";
 import WorldLoader from "GameEngine/WorldLoader";
+import LeftSideBar from "Components/LeftSideBar";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
@@ -28,12 +26,7 @@ export default function App() {
                 <TopBar />
 
                 <Box display="flex">
-                  <Box borderRight={"1px solid gray"}>
-                    <PlayerStatsPane />
-                    <PlayerStatsLayout />
-                    <PlayerLocationPane />
-                  </Box>
-
+                  <LeftSideBar />
                   <MainNavigationBar />
                 </Box>
               </Box>

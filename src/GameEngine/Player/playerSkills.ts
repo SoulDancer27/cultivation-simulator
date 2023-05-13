@@ -4,6 +4,7 @@ import {
   PlayerSkills,
 } from "GameConstants/Player";
 
+// Functions that calculate total player skills values based on inGame variables
 export function playerTraining(player: PlayerContextType) {
   const cultivationMulti = manualsSkillsMultiplier("training", player.manuals);
   return player.baseSkills.training * cultivationMulti;
@@ -27,6 +28,7 @@ export function playerSkills(player: PlayerContextType): PlayerSkills {
   return skills;
 }
 
+// Calculates effect on player skills from manuals
 export function manualsSkillsMultiplier(
   skill: string,
   manuals: PlayerCultivationManual[] | undefined

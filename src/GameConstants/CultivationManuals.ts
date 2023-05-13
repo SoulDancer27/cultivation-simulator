@@ -1,5 +1,7 @@
 import { PlayerBaseStats, PlayerSkills } from "./Player";
 
+// Some example manuals for now
+// Act like training techniques which you can study and they provide player with cumulative stat bonuses
 export const CultivationManuals: CultivationManualType[] = [
   {
     name: "Fist Strike",
@@ -47,7 +49,7 @@ export const CultivationManuals: CultivationManualType[] = [
 export type CultivationManualType = {
   name: string;
   realm: string;
-  rarity: string;
+  rarity: string; // an unused parameter for now
   imagePath?: string;
   maxLevel: number;
   // Cumulative bonus to base stats
@@ -55,10 +57,12 @@ export type CultivationManualType = {
   skills?: Partial<PlayerSkills>;
 };
 
+// a placeholder
 export function levelExp(level, realm, rarity) {
   return 10 * level;
 }
 
+// also a placeholder
 export function totalExp(level) {
   return 5 * (1 + level) * level;
 }

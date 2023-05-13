@@ -1,12 +1,13 @@
-import { isTemplateMiddle } from "typescript";
 import { Activity } from "./Activities";
 import { month, day } from "./Constants";
-import { PlayerBaseStats, PlayerContextType } from "./Player";
+import { PlayerContextType } from "./Player";
 import divisionCoeff from "GameEngine/shared/divisionCoeff";
 
 // Provide bonuses to base stats
+// Placeholder values for now
 let Trainings: Activity[] = [
   {
+    // This one is totally overpowered, serves for test purposes :)
     name: "Running",
     baseTime: 0.5 * day,
     result: {

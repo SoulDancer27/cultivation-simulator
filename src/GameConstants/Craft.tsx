@@ -4,6 +4,7 @@ import { day } from "./Constants";
 import CraftSword from "./Crafting/CraftSword";
 import { PlayerContextType } from "./Player";
 
+// Some example items for now
 let Crafting: Activity[] = [
   {
     name: "Craft Coins",
@@ -30,7 +31,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Sword",
     baseTime: 30 * day,
-    priceMulti: 2,
+    priceMulti: 1,
     generators: { "Rusty Sword": CraftSword },
     price: {
       items: [

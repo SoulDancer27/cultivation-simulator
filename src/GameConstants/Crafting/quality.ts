@@ -1,3 +1,4 @@
+// An example function
 export default function quality(
   realm: number,
   crafting: number,

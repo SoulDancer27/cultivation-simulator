@@ -2,6 +2,7 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 
+// Just a function to update player age
 export default function useAgeManager(timer: GameTimer) {
   const { stats, updateContext } = React.useContext(PlayerContext);
 

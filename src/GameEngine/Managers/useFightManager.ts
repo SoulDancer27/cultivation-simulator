@@ -2,6 +2,7 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 
+// This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {
   let { stats, state, updateContext } = React.useContext(PlayerContext);
   const { currentTime, previousTime } = timer;

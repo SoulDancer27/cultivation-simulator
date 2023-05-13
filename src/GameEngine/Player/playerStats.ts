@@ -6,6 +6,7 @@ import {
   PlayerStats,
 } from "GameConstants/Player";
 
+// Functions that calculate total player stats values based on inGame variables
 export function playerHealth(player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier("health", player.manuals);
   const realmMulti = player.realm.power["health"] || 1;
@@ -55,6 +56,7 @@ export function playerInsight(player: PlayerContextType) {
   );
 }
 
+// Returns all of the player stats
 export function playerStats(player: PlayerContextType): PlayerStats {
   const stats = { ...player.stats };
   stats.health = playerHealth(player);
@@ -67,6 +69,7 @@ export function playerStats(player: PlayerContextType): PlayerStats {
   return stats;
 }
 
+// Calculates effect on player stats from manuals
 export function manualsStatsMultiplier(
   stat: string,
   manuals: PlayerCultivationManual[] | undefined
@@ -87,6 +90,7 @@ export function manualsStatsMultiplier(
   return totalPower;
 }
 
+// Treasures just provide flat bonuses for now
 export function treasuresBonus(
   stat: string,
   treasures: InventoryItem[] | undefined
@@ -109,6 +113,7 @@ type StatStructure = {
   treasures: number;
 };
 
+// Stat structure disambiguation for tooltips
 export function getStatStructure(
   stat: string,
   player: PlayerContextType

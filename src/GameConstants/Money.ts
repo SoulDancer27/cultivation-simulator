@@ -1,3 +1,4 @@
+// Placeholder content
 const Money: MoneyType[] = [
   {
     name: "Copper Coin",
