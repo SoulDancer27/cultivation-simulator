@@ -1,6 +1,8 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { Activity } from "GameConstants/Activities";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import PlayerStatsDictionary, {
+  getStatName,
+} from "GameEngine/Player/PlayerStatsDictionary";
 import ProgressBar from "./ProgressBar";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
@@ -40,7 +42,7 @@ export default function ActivityPanel(props: Props) {
   if (result.baseStats) {
     for (const [key, value] of Object.entries(result.baseStats)) {
       StatsRewardDescription.push({
-        text: PlayerStatsDictionary[key],
+        text: getStatName(key),
         effect:
           value *
           (activity.result?.baseStatsMulti
@@ -79,7 +81,7 @@ export default function ActivityPanel(props: Props) {
   if (price?.baseStats) {
     for (const [key, value] of Object.entries(price.baseStats)) {
       StatsPriceDescription.push({
-        text: PlayerStatsDictionary[key],
+        text: getStatName(key),
         effect: value,
       });
     }

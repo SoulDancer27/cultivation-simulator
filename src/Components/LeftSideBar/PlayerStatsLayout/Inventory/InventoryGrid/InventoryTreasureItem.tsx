@@ -11,13 +11,16 @@ import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
 import { TreasureType } from "GameConstants/Treasures";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import PlayerStatsDictionary, {
+  getStatName,
+} from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import EmptyCell from "./EmptyCell";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {
   const { stats: treasure } = props;
+
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const player = React.useContext(PlayerContext);
@@ -63,7 +66,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   const TreasureDescription: TreasureDescriptionStatsLine[] = [];
   for (const [key, value] of Object.entries(treasure.stats)) {
     TreasureDescription.push({
-      text: PlayerStatsDictionary[key],
+      text: getStatName(key),
       effect: value,
     });
   }

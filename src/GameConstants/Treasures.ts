@@ -64,6 +64,7 @@ const Treasures: Treasure[] = [
     stats: {
       health: 10,
       healthRegen: 0.2,
+      test: 10,
     },
   },
 ];

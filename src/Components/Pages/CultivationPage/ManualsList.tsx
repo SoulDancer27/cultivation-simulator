@@ -2,7 +2,7 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
 export default function ManualsList() {
@@ -44,7 +44,7 @@ export default function ManualsList() {
         if (manual.stats)
           for (const [key, value] of Object.entries(manual.stats)) {
             ManualStatsDescription.push({
-              text: PlayerStatsDictionary[key],
+              text: getStatName(key),
               effect: value * learningProgress.level,
             });
           }
@@ -52,7 +52,7 @@ export default function ManualsList() {
         if (manual.skills)
           for (const [key, value] of Object.entries(manual.skills)) {
             ManualSkillsDescription.push({
-              text: PlayerStatsDictionary[key],
+              text: getStatName(key),
               effect: value * learningProgress.level,
             });
           }

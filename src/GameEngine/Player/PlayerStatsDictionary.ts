@@ -11,4 +11,8 @@ const PlayerStatsDictionary = {
   crafting: "crafting",
 };
 
+export function getStatName(name: string) {
+  return PlayerStatsDictionary[name] || name;
+}
+
 export default PlayerStatsDictionary;

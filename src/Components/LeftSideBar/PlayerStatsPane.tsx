@@ -4,12 +4,13 @@ import React from "react";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
 
+type Props = { displayStats: { name: string; stat: string }[] };
+
 // Displays current player stats
-export default function PlayerStatsPane() {
+export default function PlayerStatsPane(props: Props) {
   const player = React.useContext(PlayerContext);
   const { stats } = player;
-  const { currentHealth, health, attack, defence, healthRegen, insight } =
-    stats;
+  const { currentHealth, health } = stats;
   const theme = useTheme();
 
   return (
@@ -26,20 +27,11 @@ export default function PlayerStatsPane() {
           />
         </Box>
       </StatDetailsTooltip>
-      <StatDetailsTooltip stat="healthRegen">
-        <Typography>Health regen {healthRegen.toFixed(2)}</Typography>
-      </StatDetailsTooltip>
-      <StatDetailsTooltip stat="attack">
-        <Typography>Attack: {attack.toFixed(2)}</Typography>
-      </StatDetailsTooltip>
-
-      <StatDetailsTooltip stat="defence">
-        <Typography>Defence: {defence.toFixed(2)}</Typography>
-      </StatDetailsTooltip>
-
-      <StatDetailsTooltip stat="insight">
-        <Typography>Insight: {insight.toFixed(2)}</Typography>
-      </StatDetailsTooltip>
+      {props.displayStats.map((item) => (
+        <Typography>
+          {item.name} {player.stats[item.stat].toFixed(2)}
+        </Typography>
+      ))}
     </Box>
   );
 }

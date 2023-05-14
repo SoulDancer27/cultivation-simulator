@@ -16,6 +16,7 @@ export default function InventoryGrid(props: { inventory: InventoryItem[] }) {
     item: inventory[value] || undefined,
     index: value,
   }));
+
   return (
     <Box width={512 - 128} height={512 - 128} display="flex" flexWrap="wrap">
       {Tiles.map((tile) => (

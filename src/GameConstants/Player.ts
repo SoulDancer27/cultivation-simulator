@@ -2,6 +2,29 @@ import { Activity } from "./Activities";
 import { CultivationManualType } from "./CultivationManuals";
 import { EnemyType } from "./Enemies";
 import { Treasure } from "./Treasures";
+
+/* _____________________________________________________________________
+If you want to add new player stats and skills change declarations here 
+  _____________________________________________________________________*/
+
+export type PlayerBaseStats = {
+  health: number;
+  attack: number;
+  healthRegen: number;
+  defence: number;
+  insight: number; // multiplier for cultivation manuals experience gain
+  test: number;
+};
+
+export type PlayerSkills = {
+  training: number;
+  mining: number;
+  crafting: number;
+};
+
+/* ______________________________________________________________________
+  Game engine types start here                                              
+_________________________________________________________________________*/
 export type PlayerAction =
   | "idle"
   | "fighting"
@@ -24,29 +47,9 @@ export type RealmTribulation = {
 };
 
 // Player stats are calculated based on baseStats, equipped items, learned manuals and so on
-export type PlayerStats = {
+export type PlayerStats = PlayerBaseStats & {
   age: number; // in milliseconds
   currentHealth: number;
-  // Calculated values. Are stored to not recalculate them on every game tick
-  health: number;
-  healthRegen: number;
-  defence: number;
-  attack: number;
-  insight: number;
-};
-
-export type PlayerBaseStats = {
-  health: number;
-  attack: number;
-  healthRegen: number;
-  defence: number;
-  insight: number; // multiplier for cultivation manuals experience gain
-};
-
-export type PlayerSkills = {
-  training: number;
-  mining: number;
-  crafting: number;
 };
 
 // This probably needs a rework

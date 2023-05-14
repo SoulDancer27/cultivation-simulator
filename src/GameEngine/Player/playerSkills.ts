@@ -51,7 +51,6 @@ export function manualsSkillsMultiplier(
 
 type SkillStructure = {
   base: number;
-
   manuals: number;
 };
 

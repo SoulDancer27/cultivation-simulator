@@ -11,6 +11,7 @@ type GridItemProps = {
 // Draw inventory tile based on item type
 export default function InventoryGridItem(props: GridItemProps) {
   const { item } = props;
+
   if (!item) return <EmptyCell />;
   else if (item.type === "money") return <InventoryMoneyItem {...item} />;
   else if (item.type === "mineral") return <InventoryMineralItem {...item} />;

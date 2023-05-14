@@ -42,7 +42,7 @@ export default function rewardActivityItems(
       }
       // process treasure type rewards
       if (piece.type === "treasure") {
-        let treasure;
+        let treasure = <InventoryItem | any>{};
         if (
           activity.generators &&
           typeof activity.generators[piece.name] === "function"
@@ -53,7 +53,7 @@ export default function rewardActivityItems(
           if (item) {
             treasure.type = "treasure";
             treasure.id = uuid();
-            treasure.treasure = item;
+            treasure.stats = item;
           }
         }
         if (treasure) {

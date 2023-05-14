@@ -11,6 +11,7 @@ export const CultivationManuals: CultivationManualType[] = [
     maxLevel: 10,
     stats: {
       attack: 0.01,
+      test: 0.1,
     },
   },
   {

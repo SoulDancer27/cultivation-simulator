@@ -15,6 +15,7 @@ let Trainings: Activity[] = [
         health: 0.5,
         attack: 1,
         healthRegen: 0.1,
+        test: 0.1,
       },
       skills: {
         training: 0.01,
@@ -32,6 +33,7 @@ let Trainings: Activity[] = [
       skills: {
         training: 0.01,
       },
+      items: [{ name: "Copper Pendant", amount: 1, type: "treasure" }],
     },
   },
   {

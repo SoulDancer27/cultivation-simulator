@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { levelExp, totalExp } from "GameConstants/CultivationManuals";
 import PlayerContext from "GameEngine/Player/PlayerContext";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 
 export default function ActiveManual() {
@@ -41,7 +41,7 @@ export default function ActiveManual() {
   if (manual.stats)
     for (const [key, value] of Object.entries(manual.stats)) {
       ManualStatsDescription.push({
-        text: PlayerStatsDictionary[key],
+        text: getStatName(key),
         effect: value * learningProgress.level,
       });
     }
