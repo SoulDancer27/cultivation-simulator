@@ -1,27 +1,21 @@
 import { CultivationRealm } from "GameConstants/CultivationRealms";
-import { PlayerStats } from "GameConstants/Interfaces";
+import { PlayerContextType } from "GameConstants/Interfaces";
 
 import {
   BreakthroughDps,
   TribulationDps,
-} from "GameEngine/shared/breakthrough";
+} from "GameConstants/CultivationRealms";
 
 export default function breakthroughSuccess(
-  stats: PlayerStats,
+  player: PlayerContextType,
   realm: CultivationRealm | undefined
 ) {
   if (!realm) return false;
-  const playerDps = BreakthroughDps(
-    { attack: stats.attack },
-    {
-      defence: realm.baseStats.defence,
-      healthRegen: realm.baseStats.healthRegen,
-    }
-  );
+  const playerDps = BreakthroughDps(player, realm.baseStats);
   const realmDps = TribulationDps(
-    { attack: realm.baseStats.attack },
-    { defence: stats.defence, healthRegen: stats.healthRegen }
+    realm.currentStats || realm.baseStats,
+    player
   );
   const time = realm.baseStats.health / playerDps;
-  return stats.currentHealth > realmDps * time;
+  return player.stats.currentHealth > realmDps * time;
 }

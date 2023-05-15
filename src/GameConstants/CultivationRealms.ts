@@ -1,4 +1,25 @@
+import { PlayerContextType } from "./Interfaces";
 import { PlayerBaseStats } from "./Player";
+
+//___________________________________________________________________
+// You can change breakthrough logic and Cultivation Realm stats here
+//___________________________________________________________________
+
+export function TribulationDps(
+  realm: TribulationStats,
+  player: PlayerContextType
+) {
+  return (
+    realm.attack / (1 + 0.01 * player.stats.defence) - player.stats.healthRegen
+  );
+}
+
+export function BreakthroughDps(
+  player: PlayerContextType,
+  realm: TribulationStats
+) {
+  return player.stats.attack / (1 + 0.01 * realm.defence) - realm.healthRegen;
+}
 
 export type Tribulation = {
   steps: number;
@@ -7,7 +28,7 @@ export type Tribulation = {
   stepReached?: number;
 };
 
-export type Stats = {
+export type TribulationStats = {
   health: number;
   healthRegen: number;
   attack: number;
@@ -16,8 +37,8 @@ export type Stats = {
 
 export type CultivationRealm = {
   name: string;
-  baseStats: Stats;
-  currentStats?: Stats & { currentHealth: number }; // currentHealth is for progress tracking
+  baseStats: TribulationStats;
+  currentStats?: TribulationStats & { currentHealth: number }; // currentHealth is for progress tracking
   // Additional stats for heavenly tribulations
   tribulation?: Tribulation;
   // Reward stats multipliers

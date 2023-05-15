@@ -20,7 +20,7 @@ export function calculateSkill(skill: string, player: PlayerContextType) {
 // Returns all of the player stats
 export function playerSkills(player: PlayerContextType): PlayerSkills {
   let currentSkills = { ...player.baseSkills };
-  for (const [key, value] of Object.entries(player.baseSkills)) {
+  for (const [key] of Object.entries(player.baseSkills)) {
     currentSkills[key] = calculateSkill(key, player);
   }
 

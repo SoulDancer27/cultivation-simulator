@@ -7,7 +7,7 @@ export default function calculateRealmPower(
   realms: CultivationRealm[]
 ): PlayerBaseStats {
   const power = <PlayerBaseStats>{};
-  for (const [key, value] of Object.entries(baseStats)) {
+  for (const [key] of Object.entries(baseStats)) {
     power[key] = 1;
   }
   // Take current realm into account
@@ -20,7 +20,7 @@ export default function calculateRealmPower(
     if (!realm.tribulation || !realm.tribulation.stepReached) continue;
     const powerMulti =
       realm.tribulation.statsMulti ** realm.tribulation.stepReached;
-    for (let [key, value] of Object.entries(realm.realmPowers)) {
+    for (let [key] of Object.entries(realm.realmPowers)) {
       power[key] *= powerMulti;
     }
   }

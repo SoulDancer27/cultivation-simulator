@@ -21,7 +21,7 @@ export function calculateStat(stat: string, player: PlayerContextType) {
 // Returns all of the player stats
 export function playerStats(player: PlayerContextType): PlayerStats {
   let currentStats = { ...player.baseStats };
-  for (const [key, value] of Object.entries(player.baseStats)) {
+  for (const [key] of Object.entries(player.baseStats)) {
     currentStats[key] = calculateStat(key, player);
   }
 

@@ -8,7 +8,7 @@ import calculateTribulationPower from "GameEngine/shared/calculateTribulationPow
 import {
   BreakthroughDps,
   TribulationDps,
-} from "GameEngine/shared/breakthrough";
+} from "GameConstants/CultivationRealms";
 
 // Manages realm breakthroughs
 export default function useBreakthroughManager(timer: GameTimer) {
@@ -26,18 +26,12 @@ export default function useBreakthroughManager(timer: GameTimer) {
     if (!breakthrough || !breakthrough.currentStats) return;
 
     const playerDps = BreakthroughDps(
-      { attack: stats.attack },
-      {
-        defence: breakthrough.currentStats.defence,
-        healthRegen: breakthrough.currentStats.healthRegen,
-      }
+      player,
+      breakthrough.currentStats || breakthrough.baseStats
     );
     const realmDps = TribulationDps(
-      { attack: breakthrough.currentStats.attack },
-      {
-        defence: stats.defence,
-        healthRegen: stats.healthRegen,
-      }
+      breakthrough.currentStats || breakthrough.baseStats,
+      player
     );
     const playerDamage = (playerDps * elapsedTime) / 1000;
     const realmDamage = (realmDps * elapsedTime) / 1000;

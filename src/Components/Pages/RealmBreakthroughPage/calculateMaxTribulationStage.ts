@@ -4,18 +4,21 @@ import calculateTribulationPower from "GameEngine/shared/calculateTribulationPow
 import {
   BreakthroughDps,
   TribulationDps,
-} from "GameEngine/shared/breakthrough";
-import { PlayerStats } from "GameConstants/Interfaces";
+} from "GameConstants/CultivationRealms";
+import { PlayerContextType } from "GameConstants/Interfaces";
 
 export default function calculateMaxTribulationStage(props: {
-  stats: PlayerStats;
+  player: PlayerContextType;
   cultivationRealms: CultivationRealm[];
   nextRealmIndex: number;
 }): number {
-  const { stats, cultivationRealms, nextRealmIndex } = props;
+  const { player, cultivationRealms, nextRealmIndex } = props;
+  const { stats } = player;
   let step = 0;
   let remainingHealth = stats.currentHealth;
-  const cultivationRealmsCopy = JSON.parse(JSON.stringify(cultivationRealms));
+  const cultivationRealmsCopy: CultivationRealm[] = JSON.parse(
+    JSON.stringify(cultivationRealms)
+  );
 
   const currentRealm = cultivationRealmsCopy[nextRealmIndex];
   if (!currentRealm.tribulation) return 0;
@@ -25,12 +28,12 @@ export default function calculateMaxTribulationStage(props: {
       cultivationRealmsCopy
     );
     const tribulationDps = TribulationDps(
-      { attack: tribulation.attack },
-      { defence: stats.defence, healthRegen: stats.healthRegen }
+      currentRealm.currentStats || currentRealm.baseStats,
+      player
     );
     const playerDps = BreakthroughDps(
-      { attack: stats.attack },
-      { defence: tribulation.defence, healthRegen: tribulation.healthRegen }
+      player,
+      currentRealm.currentStats || currentRealm.baseStats
     );
     if (playerDps <= 0) break;
     if (tribulationDps <= 0) {

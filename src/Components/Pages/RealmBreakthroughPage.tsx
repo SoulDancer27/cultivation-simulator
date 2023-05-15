@@ -15,7 +15,8 @@ import calculateMaxTribulationStage from "./RealmBreakthroughPage/calculateMaxTr
 // ! Some bad coding ahead. Probably should split into several files :)
 export default function RealmBreakthroughPage() {
   const theme = useTheme();
-  const { realm } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  const { realm } = player;
   const { cultivationRealms, updateContext: updateGameContext } =
     React.useContext(GameContext);
 
@@ -72,7 +73,7 @@ export default function RealmBreakthroughPage() {
   const power = calculateTribulationPower(nextRealmIndex, cultivationRealms);
   const { healthRegen, attack, defence, health } = power;
 
-  const { state, stats, updateContext } = React.useContext(PlayerContext);
+  const { state, updateContext } = React.useContext(PlayerContext);
   const isActive = state.action === "breakthrough";
   const currentHealth = nextRealm.currentStats?.currentHealth || health;
   const handleClick = () => {
@@ -224,7 +225,7 @@ export default function RealmBreakthroughPage() {
             <Typography>
               estim. stage{" "}
               {calculateMaxTribulationStage({
-                stats,
+                player,
                 cultivationRealms,
                 nextRealmIndex,
               })}

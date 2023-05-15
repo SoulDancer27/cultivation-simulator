@@ -15,22 +15,6 @@ export default function Equipment() {
   const equippedItems = inventory.filter(
     (item) => isInventoryTreasure(item) && item.isEquipped
   );
-  equippedItems as InventoryTreasure[];
-  const weapon = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.item.type === "weapon"
-  );
-  const armor = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.item.type === "armor"
-  );
-  const helmet = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.item.type === "helmet"
-  );
-  const ring = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.item.type === "ring"
-  );
-  const pendant = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.item.type === "pendant"
-  );
   const EquipCards: Array<JSX.Element> = [];
   for (let itemType of PlayerEquipment) {
     const treasure = (equippedItems as InventoryTreasure[]).find(

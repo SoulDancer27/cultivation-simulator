@@ -1,14 +1,7 @@
-import {
-  Box,
-  Button,
-  ClickAwayListener,
-  Popper,
-  Typography,
-} from "@mui/material";
+import { Box, ClickAwayListener, Popper, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
 import Treasures from "GameConstants/Treasures";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import EmptyCell from "./EmptyCell";
 import { Activity, ActivityItem } from "GameConstants/Activities";
@@ -22,12 +15,11 @@ type Props = {
 
 export default function CraftingTreasureItem(props: Props) {
   const { activity } = props;
-  const { name, amount } = (activity.result.items as ActivityItem[])[0];
+  const { name } = (activity.result.items as ActivityItem[])[0];
   const treasure = Treasures.find((treasure) => treasure.name === name);
   if (!treasure) return <EmptyCell />;
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const player = React.useContext(PlayerContext);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);

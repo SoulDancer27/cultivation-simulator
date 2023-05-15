@@ -11,7 +11,7 @@ type Props = {
 
 export default function CraftingMoneyItem(props: Props) {
   const { activity } = props;
-  const { name, amount } = (activity.result.items as ActivityItem[])[0];
+  const { name } = (activity.result.items as ActivityItem[])[0];
   // Find image
   const cellData = Money.find((coin) => coin.name === name);
   if (!cellData) return <EmptyCell />;

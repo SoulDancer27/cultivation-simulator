@@ -7,9 +7,7 @@ import ManualsPage from "./Pages/ManualsPage";
 import RealmBreakthroughPage from "./Pages/RealmBreakthroughPage";
 import GameContext from "GameEngine/GameContext/GameContext";
 import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSuccess";
-import MiningPage from "./Pages/MiningPage";
 import CraftingPage from "./Pages/CraftingPage";
-import TrainingPage from "./Pages/TrainingPage";
 import ActionsPage from "./Pages/ActionsPage";
 import ActivityCard from "./shared/ActivityCards/Activity";
 import MiningActivityCard from "./shared/ActivityCards/MiningActivity";
@@ -21,11 +19,12 @@ export type ActivePage = (typeof NavigationBarPages)[number];
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
   const theme = useTheme();
-  const { state, stats, realm } = React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  const { state, realm } = player;
   const { cultivationRealms } = React.useContext(GameContext);
   // For the breakthrough custom button color
   const canBreakthrough = breakthroughSuccess(
-    stats,
+    player,
     cultivationRealms[realm.index + 1]
   );
   let startingPage: ActivePage = "Training";

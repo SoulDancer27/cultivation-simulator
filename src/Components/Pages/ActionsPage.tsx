@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { ComponentType } from "react";
 import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "GameEngine/Player/PlayerContext";

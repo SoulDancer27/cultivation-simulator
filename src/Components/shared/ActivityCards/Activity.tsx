@@ -1,5 +1,4 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { Activity } from "GameConstants/Activities";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import ProgressBar from "../ProgressBar";
 import PlayerContext from "GameEngine/Player/PlayerContext";

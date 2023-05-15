@@ -13,7 +13,7 @@ export default function ActivityPrice(props: Props) {
   return (
     <Box>
       {price.map((item) => {
-        const { name, amount, type } = item;
+        const { name, amount } = item;
         let imageData = {
           path: "",
           size: 0,

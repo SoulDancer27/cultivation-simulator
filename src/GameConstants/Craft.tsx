@@ -1,7 +1,5 @@
 import { Activity } from "./Activities";
 import { day } from "./Constants";
-import CraftSword from "./Crafting/CraftSword";
-import { PlayerContextType } from "./Interfaces";
 
 // Some example items for now
 let Crafting: Activity[] = [
