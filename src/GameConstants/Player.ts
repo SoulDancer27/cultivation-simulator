@@ -30,3 +30,5 @@ export const playerSkills: PlayerSkills = {
   mining: 0,
   crafting: 0,
 };
+
+export const PlayerEquipment = ["weapon", "armor", "helmet", "ring", "pendant"];

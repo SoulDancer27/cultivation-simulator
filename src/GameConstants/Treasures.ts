@@ -1,4 +1,4 @@
-import { PlayerSkills, PlayerBaseStats } from "./Player";
+import { PlayerSkills, PlayerBaseStats, PlayerEquipment } from "./Player";
 import { Image } from "./Interfaces";
 
 const Treasures: Treasure[] = [
@@ -105,6 +105,6 @@ type TreasureStats = {
   skillsMulti?: Partial<PlayerSkills>;
 };
 
-export type TreasureType = "weapon" | "armor" | "helmet" | "ring" | "pendant";
+export type TreasureType = (typeof PlayerEquipment)[number];
 
 export default Treasures;

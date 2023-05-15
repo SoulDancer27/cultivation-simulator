@@ -7,6 +7,7 @@ import {
   isInventoryTreasure,
   InventoryTreasure,
 } from "GameConstants/Interfaces";
+import { PlayerEquipment } from "GameConstants/Player";
 
 // Player equipment
 export default function Equipment() {
@@ -30,13 +31,14 @@ export default function Equipment() {
   const pendant = (equippedItems as InventoryTreasure[]).find(
     (item) => item.item.type === "pendant"
   );
-  return (
-    <Box>
-      <EquipmentCard treasure={weapon} type={"weapon"} />
-      <EquipmentCard treasure={armor} type={"armor"} />
-      <EquipmentCard treasure={helmet} type={"helmet"} />
-      <EquipmentCard treasure={ring} type={"ring"} />
-      <EquipmentCard treasure={pendant} type={"pendant"} />
-    </Box>
-  );
+  const EquipCards: Array<JSX.Element> = [];
+  for (let itemType of PlayerEquipment) {
+    const treasure = (equippedItems as InventoryTreasure[]).find(
+      (item) => item.item.type === itemType
+    );
+    EquipCards.push(
+      <EquipmentCard treasure={treasure} type={itemType} key={itemType} />
+    );
+  }
+  return <Box>{EquipCards}</Box>;
 }
