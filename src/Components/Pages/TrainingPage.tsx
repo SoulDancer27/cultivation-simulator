@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import GameContext from "GameEngine/GameContext/GameContext";
-import Activity from "../shared/Activity";
+import Activity from "../shared/ActivityCards/Activity";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 
 export default function TrainingPage() {

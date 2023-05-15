@@ -1,28 +1,12 @@
-import { Activity } from "GameConstants/Activities";
-import {
-  CultivationRealm,
-  CultivationRealms,
-} from "GameConstants/CultivationRealms";
-import Trainings from "GameConstants/Trainings";
-import Mining from "GameConstants/Mining";
 import React from "react";
-import Crafting from "GameConstants/Craft";
+
+import { GameContent, gameContent } from "GameConstants/GameContent";
 
 // Declarations for the React Context type
 // Contains game data. Is stored to localStorage every autosave interval.
-export type GameContextType = {
-  trainings: Activity[]; // List of available activities for training tab
-  mining: Activity[]; // List of available activities for mining tab
-  crafting: Activity[]; // List of available activities for crafting tab
-  cultivationRealms: CultivationRealm[]; // Player cultivation realms with all tribulations passed and stat modifiers
-};
+export type GameContextType = GameContent;
 
-export const gameContext: GameContextType = {
-  trainings: Trainings,
-  mining: Mining,
-  crafting: Crafting,
-  cultivationRealms: CultivationRealms,
-};
+export const gameContext: GameContextType = gameContent;
 
 /** Context initializator */
 export const GameContext = React.createContext({

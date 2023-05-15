@@ -1,25 +1,42 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { Activity } from "GameConstants/Activities";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import ProgressBar from "./ProgressBar";
+import ProgressBar from "../ProgressBar";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import parseTime from "Utils/parseTime";
+import CropSquareImage from "Components/shared/CropImage";
+import { Minerals } from "GameConstants/Minerals";
 import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
+import { ActivityCardProps } from "./types";
 
-type Props = {
-  activity: Activity;
-  showTimesCompleted?: boolean;
-  isActive: boolean;
-  source: string;
-};
-export default function ActivityPanel(props: Props) {
-  const { activity, isActive, source, showTimesCompleted } = props;
+// Activity panel for activity without price, shows result image in the top right corner
+export default function MiningActivityCard(props: ActivityCardProps) {
+  const { activity, isActive, source } = props;
   const player = React.useContext(PlayerContext);
   const { updateContext } = player;
   const { result, price } = activity;
   const theme = useTheme();
+
+  // Make item images for each
+  const { items } = result;
+
+  let itemImages: JSX.Element[] = [];
+  if (items) {
+    let i = 0;
+    for (let item of items) {
+      i++;
+      const mineral = Minerals.find((mineral) => mineral.name === item.name);
+      if (!mineral) continue;
+      const { path, sizeX: size, x, y } = mineral.image;
+      itemImages.push(
+        <Box key={i}>
+          <CropSquareImage path={path} size={size} position={{ x, y }} />
+        </Box>
+      );
+    }
+  }
 
   const handleClick = () => {
     // If training is active
@@ -71,27 +88,6 @@ export default function ActivityPanel(props: Props) {
           (activity.result?.skillsMulti
             ? ActivitiesFunctions[activity.result.skillsMulti](activity)
             : 1),
-      });
-    }
-  }
-
-  // Display the price description
-  const StatsPriceDescription: StatsLine[] = [];
-  if (price?.baseStats) {
-    for (const [key, value] of Object.entries(price.baseStats)) {
-      StatsPriceDescription.push({
-        text: getStatName(key),
-        effect: value,
-      });
-    }
-  }
-
-  const ItemPriceDescription: ItemLine[] = [];
-  if (price?.items) {
-    for (let item of price.items) {
-      ItemPriceDescription.push({
-        name: item.name,
-        amount: item.amount,
       });
     }
   }
@@ -154,12 +150,8 @@ export default function ActivityPanel(props: Props) {
               )}
               {ItemRewardDescription.length > 0 && (
                 <Box display="flex" gap={theme.spacing(1)}>
-                  {ItemRewardDescription.map((item) => (
-                    <Typography
-                      key={item.name}
-                      variant="body1"
-                      display="inline"
-                    >
+                  {ItemRewardDescription.map((item, index) => (
+                    <Typography key={index} variant="body1" display="inline">
                       {item.name} {item.amount}
                     </Typography>
                   ))}
@@ -184,11 +176,9 @@ export default function ActivityPanel(props: Props) {
                 </Box>
               )}
             </Box>
-            {showTimesCompleted && (
-              <Box marginLeft="auto">
-                <Typography>{activity.timesCompleted}</Typography>
-              </Box>
-            )}
+            <Box marginLeft="auto" display={"flex"} marginRight={2}>
+              {itemImages}
+            </Box>
           </Box>
           <Box>
             <ProgressBar
@@ -202,31 +192,6 @@ export default function ActivityPanel(props: Props) {
             />
           </Box>
         </Box>
-        {price && (
-          <Box
-            borderLeft="1px solid gray"
-            paddingLeft={theme.spacing(2)}
-            minWidth={200}
-            minHeight={60}
-          >
-            <Typography>Price</Typography>
-            <Box display="flex" gap={theme.spacing(1)}>
-              {StatsPriceDescription.map((item) => (
-                <Typography key={item.text} variant="body1" display="inline">
-                  {item.text} {item.effect}
-                </Typography>
-              ))}
-            </Box>
-
-            <Box display="flex" gap={theme.spacing(1)}>
-              {ItemPriceDescription.map((item) => (
-                <Typography key={item.name} variant="body1" display="inline">
-                  {item.name} {item.amount}
-                </Typography>
-              ))}
-            </Box>
-          </Box>
-        )}
       </Box>
     </Paper>
   );

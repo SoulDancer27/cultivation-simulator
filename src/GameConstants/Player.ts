@@ -31,4 +31,6 @@ export const playerSkills: PlayerSkills = {
   crafting: 0,
 };
 
+// You can add player equipment types here
+// They are dumb though so multiple slots for single weapon type are currently not possible
 export const PlayerEquipment = ["weapon", "armor", "helmet", "ring", "pendant"];

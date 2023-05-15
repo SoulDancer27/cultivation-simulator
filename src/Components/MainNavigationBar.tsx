@@ -10,13 +10,12 @@ import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSucce
 import MiningPage from "./Pages/MiningPage";
 import CraftingPage from "./Pages/CraftingPage";
 import TrainingPage from "./Pages/TrainingPage";
+import ActionsPage from "./Pages/ActionsPage";
+import ActivityCard from "./shared/ActivityCards/Activity";
+import MiningActivityCard from "./shared/ActivityCards/MiningActivity";
+import { NavigationBarPages } from "GameConstants/GameContent";
 
-export type ActivePane =
-  | "training"
-  | "manuals"
-  | "breakthrough"
-  | "mining"
-  | "crafting";
+export type ActivePage = (typeof NavigationBarPages)[number];
 
 // Switches between different pages
 export default function MainNavigationBar() {
@@ -24,76 +23,54 @@ export default function MainNavigationBar() {
   const theme = useTheme();
   const { state, stats, realm } = React.useContext(PlayerContext);
   const { cultivationRealms } = React.useContext(GameContext);
-  // For the button color
+  // For the breakthrough custom button color
   const canBreakthrough = breakthroughSuccess(
     stats,
     cultivationRealms[realm.index + 1]
   );
-  let startingPane: ActivePane = "training";
-  if (state.action === "cultivating") startingPane = "manuals";
-  const [pane, setPane] = React.useState<ActivePane>(startingPane);
+  let startingPage: ActivePage = "Training";
+  if (state.action === "cultivating") startingPage = "Manuals";
+  const [page, setPage] = React.useState<ActivePage>(startingPage);
+
+  function buttonColor(page, item): any {
+    let color = "primary";
+    if (page === item) color = "success";
+    if (page !== item && canBreakthrough && item === "Breakthrough")
+      color = "warning";
+    return color;
+  }
+
   return (
     <Box width={width - 512} height={height - getSpacing(theme, 8)}>
       <Paper elevation={2}>
         <Box width={width - 512}>
-          <Button
-            variant="outlined"
-            size="large"
-            color={pane === "training" ? "success" : "primary"}
-            onClick={() => setPane("training")}
-            sx={{ margin: theme.spacing(2) }}
-          >
-            Training
-          </Button>
-          <Button
-            variant="outlined"
-            size="large"
-            color={pane === "manuals" ? "success" : "primary"}
-            onClick={() => setPane("manuals")}
-            sx={{ margin: theme.spacing(2), marginLeft: theme.spacing(1) }}
-          >
-            Manuals
-          </Button>
-          <Button
-            variant="outlined"
-            size="large"
-            color={
-              pane === "breakthrough"
-                ? "success"
-                : canBreakthrough
-                ? "warning"
-                : "primary"
-            }
-            onClick={() => setPane("breakthrough")}
-            sx={{ margin: theme.spacing(2) }}
-          >
-            Breakthrough
-          </Button>
-          <Button
-            variant="outlined"
-            size="large"
-            color={pane === "mining" ? "success" : "primary"}
-            onClick={() => setPane("mining")}
-            sx={{ margin: theme.spacing(2) }}
-          >
-            Mining
-          </Button>
-          <Button
-            variant="outlined"
-            size="large"
-            color={pane === "crafting" ? "success" : "primary"}
-            onClick={() => setPane("crafting")}
-            sx={{ margin: theme.spacing(2) }}
-          >
-            Crafting
-          </Button>
+          {NavigationBarPages.map((item) => (
+            <Button
+              variant="outlined"
+              size="large"
+              color={buttonColor(page, item)}
+              onClick={() => setPage(item)}
+              sx={{ margin: theme.spacing(2) }}
+              key={item}
+            >
+              {item}
+            </Button>
+          ))}
         </Box>
       </Paper>
-      {pane === "training" ? <TrainingPage /> : ""}
-      {pane === "manuals" ? <ManualsPage /> : ""}
-      {pane === "breakthrough" ? <RealmBreakthroughPage /> : ""}
-      {pane === "mining" ? <MiningPage /> : ""}
-      {pane === "crafting" ? <CraftingPage /> : ""}
+      {page === "Training" ? (
+        <ActionsPage source={"trainings"} Card={ActivityCard} />
+      ) : (
+        ""
+      )}
+      {page === "Manuals" ? <ManualsPage /> : ""}
+      {page === "Breakthrough" ? <RealmBreakthroughPage /> : ""}
+      {page === "Mining" ? (
+        <ActionsPage source={"mining"} Card={MiningActivityCard} />
+      ) : (
+        ""
+      )}
+      {page === "Crafting" ? <CraftingPage /> : ""}
     </Box>
   );
 }
