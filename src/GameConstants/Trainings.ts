@@ -1,7 +1,5 @@
 import { Activity } from "./Activities";
 import { month, day } from "./Constants";
-import { PlayerContextType } from "./Player";
-import divisionCoeff from "GameEngine/shared/divisionCoeff";
 
 // Provide bonuses to base stats
 // Placeholder values for now
@@ -15,7 +13,6 @@ let Trainings: Activity[] = [
         health: 0.5,
         attack: 1,
         healthRegen: 0.1,
-        test: 0.1,
       },
       skills: {
         training: 0.01,
@@ -33,7 +30,7 @@ let Trainings: Activity[] = [
       skills: {
         training: 0.01,
       },
-      items: [{ name: "Copper Pendant", amount: 1, type: "treasure" }],
+      items: [{ name: "Rusty Sword", amount: 1, type: "treasure" }],
     },
   },
   {
@@ -163,20 +160,11 @@ let Trainings: Activity[] = [
 ];
 
 Trainings = Trainings.map((item) => {
-  if (!item.time)
-    item.time = function (player: PlayerContextType) {
-      const { skills } = player;
-      const multi = 1 + skills.training;
-      return this.baseTime / multi;
-    };
+  if (!item.time) item.time = "training time";
   if (item.result.baseStats && !item.result.baseStatsMulti)
-    item.result.baseStatsMulti = function (x): number {
-      return 1 / divisionCoeff(x.timesCompleted || 0);
-    };
+    item.result.baseStatsMulti = "default";
   if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = function (x): number {
-      return 1 / divisionCoeff(x.timesCompleted || 0);
-    };
+    item.result.skillsMulti = "default";
   return item;
 });
 

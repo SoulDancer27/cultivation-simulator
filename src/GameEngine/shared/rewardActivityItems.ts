@@ -1,10 +1,12 @@
 import { Activity } from "GameConstants/Activities";
+import CraftingFunctions from "GameConstants/Crafting";
 import {
   CountableItem,
   InventoryItem,
   PlayerContextType,
   isCountableItem,
-} from "GameConstants/Player";
+} from "GameConstants/Interfaces";
+
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 
@@ -43,17 +45,18 @@ export default function rewardActivityItems(
       // process treasure type rewards
       if (piece.type === "treasure") {
         let treasure = <InventoryItem | any>{};
-        if (
-          activity.generators &&
-          typeof activity.generators[piece.name] === "function"
-        )
-          treasure = activity.generators[piece.name](activity, player, piece);
+        if (piece.generator)
+          treasure = CraftingFunctions[piece.generator](
+            activity,
+            player,
+            piece
+          );
         else {
           let item = Treasures.find((i: Treasure) => i.name === piece.name);
           if (item) {
             treasure.type = "treasure";
             treasure.id = uuid();
-            treasure.stats = item;
+            treasure.item = item;
           }
         }
         if (treasure) {

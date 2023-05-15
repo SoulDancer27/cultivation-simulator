@@ -1,10 +1,6 @@
-import { Activity } from "./Activities";
-import { CultivationManualType } from "./CultivationManuals";
-import { EnemyType } from "./Enemies";
-import { Treasure } from "./Treasures";
-
 /* _____________________________________________________________________
-If you want to add new player stats and skills change declarations here 
+If you want to add new player stats and skills change 
+type declarations and default values here
   _____________________________________________________________________*/
 
 export type PlayerBaseStats = {
@@ -13,7 +9,6 @@ export type PlayerBaseStats = {
   healthRegen: number;
   defence: number;
   insight: number; // multiplier for cultivation manuals experience gain
-  test: number;
 };
 
 export type PlayerSkills = {
@@ -22,111 +17,16 @@ export type PlayerSkills = {
   crafting: number;
 };
 
-/* ______________________________________________________________________
-  Game engine types start here                                              
-_________________________________________________________________________*/
-export type PlayerAction =
-  | "idle"
-  | "fighting"
-  | "breakthrough"
-  | "cultivating"
-  | "activity"; // most of the actions in the game
-
-export type PlayerState = {
-  action: PlayerAction;
-  enemy?: PlayerEnemyType;
-  realm?: RealmTribulation;
-  manual?: PlayerCultivationManual;
-  activity?: { name: string; source: string }; // player action source from global lists. Is used as a key to retrieve value from GameContext object
+export const baseStats: PlayerBaseStats = {
+  attack: 1,
+  health: 10,
+  healthRegen: 0.5,
+  defence: 0,
+  insight: 1,
 };
 
-export type PlayerActivity = Activity & { currentTime?: number };
-
-export type RealmTribulation = {
-  index: number; // A pointer into global tribulation array
+export const playerSkills: PlayerSkills = {
+  training: 0,
+  mining: 0,
+  crafting: 0,
 };
-
-// Player stats are calculated based on baseStats, equipped items, learned manuals and so on
-export type PlayerStats = PlayerBaseStats & {
-  age: number; // in milliseconds
-  currentHealth: number;
-};
-
-// This probably needs a rework
-export type PlayerEnemyType = EnemyType & {
-  currentHealth: number;
-};
-
-export type PlayerRealm = {
-  index: number;
-  power: Partial<PlayerBaseStats>; // a calculated value based on passed tribulations
-};
-
-export type PlayerCultivationManual = {
-  manual: CultivationManualType;
-  learningProgress: {
-    exp: number;
-    level: number;
-  };
-  isEquipped: boolean;
-};
-
-export type InventoryItem =
-  | InventoryTreasure
-  | InventoryMoney
-  | InventoryMineral;
-
-export type InventoryTreasure = {
-  type: "treasure";
-  id: string;
-  isEquipped?: boolean;
-  stats: Treasure;
-};
-export type InventoryMoney = {
-  type: "money";
-  id: string;
-  name: string;
-  amount: number;
-};
-
-export type InventoryMineral = {
-  type: "mineral";
-  id: string;
-  name: string;
-  amount: number;
-};
-
-export type PlayerContextType = {
-  stats: PlayerStats; // calcuated stat values
-  baseStats: PlayerBaseStats;
-  skills: PlayerSkills; // calculated skill values
-  baseSkills: PlayerSkills;
-  realm: PlayerRealm; // an index pointing to the global realms array and total calculated multiplier based on passed tribulations
-  manuals?: PlayerCultivationManual[]; // an array of all learned manuals with progress tracked for each
-  inventory: InventoryItem[]; // an array of all inventory items
-  state: PlayerState; // current player action
-};
-
-export type CountableItemType = "money" | "mineral";
-export type CountableItem = {
-  type: CountableItemType;
-  name: string;
-  amount: number;
-};
-
-// Lazy type guards
-export function isInventoryTreasure(item: any): item is InventoryTreasure {
-  return item.type === "treasure" && item.id && item.stats;
-}
-
-export function isInventoryMoney(item: any): item is InventoryMoney {
-  return item.type === "money" && item.id && item.name && item.amount;
-}
-
-export function isInventoryMineral(item: any): item is InventoryMineral {
-  return item.type === "mineral" && item.id && item.name && item.amount;
-}
-
-export function isCountableItem(item: any): item is CountableItem {
-  return item.name && item.amount;
-}

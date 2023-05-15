@@ -22,7 +22,7 @@ export default function SkillDetailsTooltip(
           </Typography>
 
           <Typography>
-            Manuals bonus:
+            Manuals multi:
             <Typography
               component="span"
               color={
@@ -34,6 +34,36 @@ export default function SkillDetailsTooltip(
             >
               {" "}
               x{skillStructure.manuals}
+            </Typography>
+          </Typography>
+          <Typography>
+            Treasures Multi:
+            <Typography
+              component="span"
+              color={
+                skillStructure.treasuresMulti >= 1
+                  ? theme.palette.success.main
+                  : theme.palette.error.main
+              }
+              display="inline"
+            >
+              {" "}
+              x{skillStructure.treasuresMulti}
+            </Typography>
+          </Typography>
+          <Typography>
+            Treasures bonus:
+            <Typography
+              component="span"
+              color={
+                skillStructure.treasures >= 0
+                  ? theme.palette.success.main
+                  : theme.palette.error.main
+              }
+              display="inline"
+            >
+              {" "}
+              +{skillStructure.treasures}
             </Typography>
           </Typography>
         </>

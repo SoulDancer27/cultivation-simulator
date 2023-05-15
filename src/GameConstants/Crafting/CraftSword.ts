@@ -1,5 +1,5 @@
 import { Activity, ActivityItem } from "GameConstants/Activities";
-import { PlayerContextType, InventoryTreasure } from "GameConstants/Player";
+import { PlayerContextType, InventoryTreasure } from "GameConstants/Interfaces";
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 import quality from "./quality";
@@ -16,15 +16,19 @@ export default function CraftSword(
     const invTreasure: InventoryTreasure = {
       type: "treasure",
       id: uuid(),
-      stats: treasure,
+      item: treasure as Required<Treasure>,
     };
     const itemQuality = quality(
       treasure.realmIndex,
       player.skills.crafting,
       activity?.price?.priceMulti || 1
     );
-    invTreasure.stats.quality = itemQuality;
-    invTreasure.stats.stats.attack = itemQuality / 2;
+    invTreasure.item.stats = {
+      stats: {
+        attack: itemQuality / 2,
+      },
+    };
+    invTreasure.item.quality = itemQuality;
     return invTreasure;
   } catch (error) {
     console.log(error);

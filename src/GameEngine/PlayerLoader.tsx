@@ -1,5 +1,5 @@
 import { defaultAutosaveInterval } from "GameConstants/Constants";
-import { PlayerContextType } from "GameConstants/Player";
+import { PlayerContextType } from "GameConstants/Interfaces";
 import React from "react";
 import PlayerContext, { playerContext } from "./Player/PlayerContext";
 

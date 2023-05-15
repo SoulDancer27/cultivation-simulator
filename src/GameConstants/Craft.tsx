@@ -1,19 +1,14 @@
-import divisionCoeff from "GameEngine/shared/divisionCoeff";
 import { Activity } from "./Activities";
 import { day } from "./Constants";
 import CraftSword from "./Crafting/CraftSword";
-import { PlayerContextType } from "./Player";
+import { PlayerContextType } from "./Interfaces";
 
 // Some example items for now
 let Crafting: Activity[] = [
   {
     name: "Craft Coins",
     baseTime: 10 * day,
-    time: function (player: PlayerContextType) {
-      const { skills } = player;
-      const multi = 1 + skills.crafting;
-      return this.baseTime / multi;
-    },
+    time: "crafting time",
     price: {
       items: [
         {
@@ -31,7 +26,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Sword",
     baseTime: 30 * day,
-    generators: { "Rusty Sword": CraftSword },
+
     price: {
       items: [
         {
@@ -43,20 +38,21 @@ let Crafting: Activity[] = [
     },
     result: {
       skills: { crafting: 0.1 },
-      items: [{ name: "Rusty Sword", amount: 1, type: "treasure" }],
+      items: [
+        {
+          name: "Rusty Sword",
+          amount: 1,
+          type: "treasure",
+          generator: "Rusty Sword",
+        },
+      ],
     },
   },
 ];
 
 Crafting = Crafting.map((item) => {
   if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = function (x): number {
-      const priceMulti = x.price.priceMulti || 1;
-      return (
-        (1 + 0.1 * (Math.sqrt(priceMulti) - 1)) /
-        divisionCoeff(x.timesCompleted || 0)
-      );
-    };
+    item.result.skillsMulti = "crafting skill reward";
   return item;
 });
 

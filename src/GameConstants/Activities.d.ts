@@ -7,19 +7,12 @@ export type Activity = {
   name: string;
   description?: string;
   baseTime: number; // in milliseconds
-  time?: (player?: PlayerContext) => number; // calculate completion time based on props
+  time?: string; // calculate completion time based on props
+
+  // Values for action progress tracking
   currentTime?: number; // for progress tracking
   timesCompleted?: number; // total times completed
 
-  // Craft items if any are a reward
-  // A dictionary of functions, if specified action manager calls corresponding function for items in result.items like generators[item.name]
-  generators?: {
-    [key: string]: (
-      activity: Activity,
-      player: PlayerContextType,
-      item: ActivityItem
-    ) => InventoryItem | undefined;
-  };
   // Activity price
   price?: {
     baseStats?: Partial<PlayerBaseStats>;
@@ -30,17 +23,19 @@ export type Activity = {
   // Activity result
   result: {
     baseStats?: Partial<PlayerBaseStats>;
-    baseStatsMulti?: (activity: Activity, player?: PlayerContextType) => number; // calculate stats reward multiplier
+    baseStatsMulti?: string; // calculate stats reward multiplier
     skills?: Partial<PlayerSkills>;
-    skillsMulti?: (player?: PlayerContextType) => number; // calculate skills reward multiplier
+    skillsMulti?: string; // calculate skills reward multiplier
     items?: ActivityItem[];
   };
+  data?: any; // additional custom data for activity logic
 };
 
 type ItemReward = {
   type: "treasure" | "money" | "mineral";
   name: string;
   amount: number;
+  generator?: string;
 };
 
 type ActivityItem = ItemReward;

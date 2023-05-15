@@ -1,18 +1,20 @@
 import {
+  PlayerContextType,
+  PlayerStats,
+  PlayerCultivationManual,
   InventoryItem,
   isInventoryTreasure,
-  PlayerContextType,
-  PlayerCultivationManual,
-  PlayerStats,
-} from "GameConstants/Player";
+} from "GameConstants/Interfaces";
 
 // Functions that calculate total player stats values based on inGame variables
 export function calculateStat(stat: string, player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier(stat, player.manuals);
   const realmMulti = player.realm.power[stat] || 1;
+  const treasuresMulti = treasuresStatsMultiplier(stat, player.inventory);
   const treasuresPower = treasuresBonus(stat, player.inventory);
   return (
-    player.baseStats[stat] * realmMulti * cultivationMulti + treasuresPower
+    player.baseStats[stat] * realmMulti * cultivationMulti * treasuresMulti +
+    treasuresPower
   );
 }
 
@@ -50,6 +52,23 @@ export function manualsStatsMultiplier(
   return totalPower;
 }
 
+// Treasures provide multiplier and flat bonus
+export function treasuresStatsMultiplier(
+  stat: string,
+  treasures: InventoryItem[] | undefined
+) {
+  let totalMulti = 1;
+  if (!treasures) return 0;
+  treasures.forEach((item) => {
+    if (isInventoryTreasure(item) && item.isEquipped) {
+      const statsMulti = item.item.stats.statsMulti;
+      const itemMulti = (statsMulti && statsMulti[stat]) || 1;
+      totalMulti *= 1 + itemMulti;
+    }
+  });
+  return totalMulti;
+}
+
 // Treasures just provide flat bonuses for now
 export function treasuresBonus(
   stat: string,
@@ -59,7 +78,8 @@ export function treasuresBonus(
   if (!treasures) return 0;
   treasures.forEach((item) => {
     if (isInventoryTreasure(item) && item.isEquipped) {
-      const itemBonus = item.stats.stats[stat] || 0; // omg :)
+      const stats = item.item.stats.stats;
+      const itemBonus = (stats && stats[stat]) || 0;
       totalBonus += itemBonus;
     }
   });
@@ -70,6 +90,7 @@ type StatStructure = {
   base: number;
   realm: number;
   manuals: number;
+  treasuresMulti: number;
   treasures: number;
 };
 
@@ -82,11 +103,13 @@ export function getStatStructure(
   const baseStat = baseStats[stat];
   const realmBonus = realm.power[stat] || 1;
   const manualsBonus = manualsStatsMultiplier(stat, manuals);
+  const treasuresMulti = treasuresStatsMultiplier(stat, inventory);
   const treasuresPower = treasuresBonus(stat, inventory);
   return {
     base: baseStat,
     realm: realmBonus,
     manuals: manualsBonus,
+    treasuresMulti,
     treasures: treasuresPower,
   };
 }

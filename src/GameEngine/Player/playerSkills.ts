@@ -1,30 +1,30 @@
 import {
   PlayerContextType,
   PlayerCultivationManual,
-  PlayerSkills,
-} from "GameConstants/Player";
+  InventoryItem,
+  isInventoryTreasure,
+} from "GameConstants/Interfaces";
+import { PlayerSkills } from "GameConstants/Player";
 
 // Functions that calculate total player skills values based on inGame variables
-export function playerTraining(player: PlayerContextType) {
-  const cultivationMulti = manualsSkillsMultiplier("training", player.manuals);
-  return player.baseSkills.training * cultivationMulti;
+export function calculateSkill(skill: string, player: PlayerContextType) {
+  const cultivationMulti = manualsSkillsMultiplier(skill, player.manuals);
+  const treasuresMulti = treasuresSkillsMultiplier(skill, player.inventory);
+  const treasuresPower = treasuresBonus(skill, player.inventory);
+  return (
+    player.baseSkills[skill] * cultivationMulti * treasuresMulti +
+    treasuresPower
+  );
 }
 
-export function playerMining(player: PlayerContextType) {
-  const cultivationMulti = manualsSkillsMultiplier("mining", player.manuals);
-  return player.baseSkills.mining * cultivationMulti;
-}
-
-export function playerCrafting(player: PlayerContextType) {
-  const cultivationMulti = manualsSkillsMultiplier("crafting", player.manuals);
-  return player.baseSkills.crafting * cultivationMulti;
-}
-
+// Returns all of the player stats
 export function playerSkills(player: PlayerContextType): PlayerSkills {
-  const skills = { ...player.skills };
-  skills.training = playerTraining(player);
-  skills.mining = playerMining(player);
-  skills.crafting = playerCrafting(player);
+  let currentSkills = { ...player.baseSkills };
+  for (const [key, value] of Object.entries(player.baseSkills)) {
+    currentSkills[key] = calculateSkill(key, player);
+  }
+
+  let skills = { ...player.skills, ...currentSkills };
   return skills;
 }
 
@@ -49,20 +49,59 @@ export function manualsSkillsMultiplier(
   return totalPower;
 }
 
+// Treasures provide multiplier and flat bonus
+export function treasuresSkillsMultiplier(
+  skill: string,
+  treasures: InventoryItem[] | undefined
+) {
+  let totalMulti = 1;
+  if (!treasures) return 0;
+  treasures.forEach((item) => {
+    if (isInventoryTreasure(item) && item.isEquipped) {
+      const skillsMulti = item.item.stats.skillsMulti;
+      const itemMulti = (skillsMulti && skillsMulti[skill]) || 1;
+      totalMulti *= 1 + itemMulti;
+    }
+  });
+  return totalMulti;
+}
+
+export function treasuresBonus(
+  skill: string,
+  treasures: InventoryItem[] | undefined
+) {
+  let totalBonus = 0;
+  if (!treasures) return 0;
+  treasures.forEach((item) => {
+    if (isInventoryTreasure(item) && item.isEquipped) {
+      const skills = item.item.stats.skills;
+      const itemBonus = (skills && skills[skill]) || 0;
+      totalBonus += itemBonus;
+    }
+  });
+  return totalBonus;
+}
+
 type SkillStructure = {
   base: number;
   manuals: number;
+  treasuresMulti: number;
+  treasures: number;
 };
 
 export function getSkillStructure(
   skill: string,
   player: PlayerContextType
 ): SkillStructure {
-  const { baseSkills, manuals } = player;
+  const { baseSkills, manuals, inventory } = player;
   const baseStat = baseSkills[skill];
   const manualsBonus = manualsSkillsMultiplier(skill, manuals);
+  const treasuresMulti = treasuresSkillsMultiplier(skill, inventory);
+  const treasuresPower = treasuresBonus(skill, inventory);
   return {
     base: baseStat,
     manuals: manualsBonus,
+    treasuresMulti,
+    treasures: treasuresPower,
   };
 }

@@ -6,10 +6,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { PlayerCultivationManual } from "GameConstants/Player";
+
 import { playerStats } from "GameEngine/Player/playerStats";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
+import { PlayerCultivationManual } from "GameConstants/Interfaces";
 
 export default function EquippedManualCard(props: PlayerCultivationManual) {
   const { manual, learningProgress } = props;

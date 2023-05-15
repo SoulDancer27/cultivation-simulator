@@ -1,7 +1,6 @@
-import { PlayerStats } from "./Player";
+import { PlayerSkills, PlayerBaseStats } from "./Player";
 import { Image } from "./Interfaces";
 
-// Will be reworked soon
 const Treasures: Treasure[] = [
   {
     name: "Rusty Sword",
@@ -11,7 +10,18 @@ const Treasures: Treasure[] = [
     type: "weapon",
     quality: 10,
     stats: {
-      attack: 5,
+      stats: {
+        attack: 5,
+      },
+      statsMulti: {
+        attack: 0.1,
+      },
+      skills: {
+        training: 10,
+      },
+      skillsMulti: {
+        training: 0.1,
+      },
     },
   },
   {
@@ -22,7 +32,9 @@ const Treasures: Treasure[] = [
     type: "armor",
     quality: 10,
     stats: {
-      health: 50,
+      stats: {
+        health: 50,
+      },
     },
   },
   {
@@ -33,7 +45,9 @@ const Treasures: Treasure[] = [
     type: "helmet",
     quality: 10,
     stats: {
-      defence: 10,
+      stats: {
+        defence: 10,
+      },
     },
   },
   {
@@ -44,8 +58,10 @@ const Treasures: Treasure[] = [
     type: "ring",
     quality: 10,
     stats: {
-      attack: 1,
-      defence: 2,
+      stats: {
+        attack: 1,
+        defence: 2,
+      },
     },
   },
   {
@@ -62,31 +78,32 @@ const Treasures: Treasure[] = [
     type: "pendant",
     quality: 10,
     stats: {
-      health: 10,
-      healthRegen: 0.2,
-      test: 10,
+      stats: {
+        health: 10,
+        healthRegen: 0.2,
+      },
     },
   },
 ];
 
 export type Treasure = {
   name: string;
-  stats: Partial<PlayerStats>;
+
   description: string;
   image: Image;
   type: TreasureType;
   // Index in the realms array
   realmIndex: number;
-  quality: number;
+  stats?: TreasureStats;
+  quality?: number;
 };
 
-type TreasureGrade =
-  | "Common"
-  | "Good"
-  | "Excellent"
-  | "Perfect"
-  | "Legendary"
-  | "Divine";
+type TreasureStats = {
+  stats?: Partial<PlayerBaseStats>;
+  statsMulti?: Partial<PlayerBaseStats>;
+  skills?: Partial<PlayerSkills>;
+  skillsMulti?: Partial<PlayerSkills>;
+};
 
 export type TreasureType = "weapon" | "armor" | "helmet" | "ring" | "pendant";
 

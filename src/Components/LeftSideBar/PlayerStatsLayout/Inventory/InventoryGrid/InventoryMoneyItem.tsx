@@ -2,7 +2,7 @@ import { Box, TooltipProps, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
 import Money from "GameConstants/Money";
-import { InventoryMoney } from "GameConstants/Player";
+import { InventoryMoney } from "GameConstants/Interfaces";
 import EmptyCell from "./EmptyCell";
 
 // Draw inventory money item

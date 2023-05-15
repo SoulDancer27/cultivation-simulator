@@ -1,9 +1,9 @@
 import { ActivityItem } from "GameConstants/Activities";
 import {
-  CountableItem,
   InventoryItem,
+  CountableItem,
   isCountableItem,
-} from "GameConstants/Player";
+} from "GameConstants/Interfaces";
 
 // Removes an array of items from players inventory
 export default function removeItems(
@@ -37,7 +37,7 @@ export default function removeItems(
       if (piece.type === "treasure") {
         for (let i = 0; i < times * piece.amount; i++) {
           const itemIndex = inventory.findIndex(
-            (item) => item.type === "treasure" && item.stats.name === piece.name
+            (item) => item.type === "treasure" && item.item.name === piece.name
           );
           if (itemIndex === -1)
             throw new Error(`Not enough ${piece.name} to complete action`);

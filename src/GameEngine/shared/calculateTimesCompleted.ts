@@ -1,6 +1,7 @@
 import { Activity } from "GameConstants/Activities";
 import calculateMaxActions from "./calculateMaxActions";
-import { PlayerContextType } from "GameConstants/Player";
+import { PlayerContextType } from "GameConstants/Interfaces";
+import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 
 // Calculate how many times activity can be completed considering activity price
 export default function calculateTimesCompleted(
@@ -12,7 +13,7 @@ export default function calculateTimesCompleted(
   currentTime += elapsedTime;
   // Calculate overflow
   const requiredTime = activity.time
-    ? activity.time(player)
+    ? ActivitiesFunctions[activity.time](activity, player)
     : activity.baseTime;
   let timesCompleted = Math.floor(currentTime / requiredTime);
   currentTime = currentTime - timesCompleted * requiredTime;

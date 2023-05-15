@@ -6,7 +6,7 @@ import React from "react";
 // Player baseStats display
 export default function Stats() {
   const { baseStats } = React.useContext(PlayerContext);
-  const { health, healthRegen, attack, defence } = baseStats;
+
   let description: Array<JSX.Element> = [];
   for (const [key, value] of Object.entries(baseStats)) {
     description.push(

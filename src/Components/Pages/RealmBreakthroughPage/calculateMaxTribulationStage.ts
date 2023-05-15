@@ -1,10 +1,11 @@
 import { CultivationRealm } from "GameConstants/CultivationRealms";
-import { PlayerStats } from "GameConstants/Player";
+
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import {
   BreakthroughDps,
   TribulationDps,
 } from "GameEngine/shared/breakthrough";
+import { PlayerStats } from "GameConstants/Interfaces";
 
 export default function calculateMaxTribulationStage(props: {
   stats: PlayerStats;

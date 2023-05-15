@@ -12,7 +12,6 @@ export default function LeftSideBar() {
           { name: "Attack", stat: "attack" },
           { name: "Defence", stat: "defence" },
           { name: "Insight", stat: "insight" },
-          { name: "Test", stat: "test" },
         ]}
       />
       <PlayerStatsLayout />

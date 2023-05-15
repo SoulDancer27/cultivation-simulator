@@ -1,8 +1,8 @@
-import { InventoryItem } from "GameConstants/Player";
 import EmptyCell from "./EmptyCell";
 import InventoryMoneyItem from "./InventoryMoneyItem";
 import InventoryTreasureItem from "./InventoryTreasureItem";
 import InventoryMineralItem from "./InventoryMineralItem";
+import { InventoryItem } from "GameConstants/Interfaces";
 
 type GridItemProps = {
   item: InventoryItem | undefined;

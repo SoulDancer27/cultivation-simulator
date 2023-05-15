@@ -1,8 +1,12 @@
 import { Box } from "@mui/material";
-import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
+
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import EquipmentCard from "./Equipment/EquipmentCard";
+import {
+  isInventoryTreasure,
+  InventoryTreasure,
+} from "GameConstants/Interfaces";
 
 // Player equipment
 export default function Equipment() {
@@ -12,19 +16,19 @@ export default function Equipment() {
   );
   equippedItems as InventoryTreasure[];
   const weapon = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.stats.type === "weapon"
+    (item) => item.item.type === "weapon"
   );
   const armor = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.stats.type === "armor"
+    (item) => item.item.type === "armor"
   );
   const helmet = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.stats.type === "helmet"
+    (item) => item.item.type === "helmet"
   );
   const ring = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.stats.type === "ring"
+    (item) => item.item.type === "ring"
   );
   const pendant = (equippedItems as InventoryTreasure[]).find(
-    (item) => item.stats.type === "pendant"
+    (item) => item.item.type === "pendant"
   );
   return (
     <Box>

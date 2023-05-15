@@ -1,9 +1,10 @@
 import { Box, TooltipProps, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import { InventoryMineral } from "GameConstants/Player";
+
 import EmptyCell from "./EmptyCell";
 import { Minerals } from "GameConstants/Minerals";
+import { InventoryMineral } from "GameConstants/Interfaces";
 
 // Draw inventory mineral item
 export default function InventoryMineralItem(props: InventoryMineral) {

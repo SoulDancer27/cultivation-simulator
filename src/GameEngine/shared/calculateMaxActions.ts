@@ -1,5 +1,5 @@
 import { Activity } from "GameConstants/Activities";
-import { PlayerContextType, isCountableItem } from "GameConstants/Player";
+import { PlayerContextType, isCountableItem } from "GameConstants/Interfaces";
 
 // Calculate the number of times activity can be executed
 export default function calculateMaxActions(
@@ -39,7 +39,7 @@ export default function calculateMaxActions(
         if (item.type === "treasure") {
           const items = player.inventory.filter(
             (value) =>
-              value.type === "treasure" && value.stats.name === item.name
+              value.type === "treasure" && value.item.name === item.name
           );
           const actionsNumber = Math.floor(
             items.length / item.amount / priceMulti

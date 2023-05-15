@@ -28,9 +28,11 @@ export default function PlayerStatsPane(props: Props) {
         </Box>
       </StatDetailsTooltip>
       {props.displayStats.map((item) => (
-        <Typography>
-          {item.name} {player.stats[item.stat].toFixed(2)}
-        </Typography>
+        <StatDetailsTooltip stat={item.stat} key={item.stat}>
+          <Typography>
+            {item.name} {player.stats[item.stat].toFixed(2)}
+          </Typography>
+        </StatDetailsTooltip>
       ))}
     </Box>
   );

@@ -1,13 +1,18 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
+
 import { TreasureType } from "GameConstants/Treasures";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerStatsDictionary from "GameEngine/Player/PlayerStatsDictionary";
+import { playerSkills } from "GameEngine/Player/playerSkills";
+import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
+import {
+  InventoryTreasure,
+  isInventoryTreasure,
+} from "GameConstants/Interfaces";
 
 type Props = {
   treasure: InventoryTreasure | undefined;
@@ -19,7 +24,7 @@ export default function EquipmentCard(props: Props) {
   const { treasure, type } = props;
   const theme = useTheme();
   const player = React.useContext(PlayerContext);
-  let { inventory, stats, updateContext } = player;
+  let { inventory, stats, skills, updateContext } = player;
   if (!treasure)
     return (
       <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
@@ -31,16 +36,43 @@ export default function EquipmentCard(props: Props) {
         </Box>
       </Box>
     );
-  const { image, name, realmIndex } = treasure.stats;
+  const { image, name, realmIndex, stats: itemStats } = treasure.item;
   const { path, sizeX: size, x, y } = image;
   const realm = CultivationRealms[realmIndex];
 
+  // Prepare treausre description
   const TreasureDescription: TreasureDescriptionStatsLine[] = [];
-  for (const [key, value] of Object.entries(treasure.stats.stats)) {
-    TreasureDescription.push({
-      text: PlayerStatsDictionary[key],
-      effect: value,
-    });
+  if (itemStats.stats) {
+    for (const [key, value] of Object.entries(itemStats.stats)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: value.toFixed(2),
+      });
+    }
+  }
+  if (itemStats.skills) {
+    for (const [key, value] of Object.entries(itemStats.skills)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: value.toFixed(2),
+      });
+    }
+  }
+  if (itemStats.statsMulti) {
+    for (const [key, value] of Object.entries(itemStats.statsMulti)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: (value * 100).toFixed(2) + "%",
+      });
+    }
+  }
+  if (itemStats.skillsMulti) {
+    for (const [key, value] of Object.entries(itemStats.skillsMulti)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: (value * 100).toFixed(2) + "%",
+      });
+    }
   }
 
   const unequipItem = (id: string) => {
@@ -50,8 +82,8 @@ export default function EquipmentCard(props: Props) {
     if (!isInventoryTreasure(treasure)) return;
     treasure.isEquipped = false;
     stats = playerStats(player);
-    updateContext({ inventory, stats });
-    updateContext({ inventory });
+    skills = playerSkills(player);
+    updateContext({ inventory, stats, skills });
   };
   return (
     <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
@@ -74,13 +106,13 @@ export default function EquipmentCard(props: Props) {
             Unequip
           </Button>
         </Box>
-        {TreasureDescription.map((item) => (
+        {TreasureDescription.map((item, index) => (
           <Typography
-            key={item.text}
+            key={index}
             variant="body1"
             marginLeft={`${32 + getSpacing(theme, 1)}px`}
           >
-            {item.text} {item.effect.toFixed(2)}
+            {item.text} {item.effect}
           </Typography>
         ))}
       </Box>
@@ -90,5 +122,5 @@ export default function EquipmentCard(props: Props) {
 
 type TreasureDescriptionStatsLine = {
   text: string;
-  effect: number;
+  effect: string;
 };

@@ -3,7 +3,7 @@ import {
   CountableItem,
   InventoryItem,
   isCountableItem,
-} from "GameConstants/Player";
+} from "GameConstants/Interfaces";
 import Treasures, { Treasure } from "GameConstants/Treasures";
 import { v4 as uuid } from "uuid";
 
@@ -46,7 +46,7 @@ export default function rewardItems(
             inventory.push({
               type: "treasure",
               id: uuid(),
-              stats: treasure,
+              item: treasure as Required<Treasure>,
             });
           }
         }

@@ -1,6 +1,5 @@
 import { Activity } from "./Activities";
 import { day, month } from "./Constants";
-import { PlayerContextType } from "./Player";
 
 // Placeholder activities
 let Mining: Activity[] = [
@@ -37,20 +36,11 @@ let Mining: Activity[] = [
 ];
 
 Mining = Mining.map((item) => {
-  if (!item.time)
-    item.time = function (player: PlayerContextType) {
-      const { skills } = player;
-      const multi = 1 + skills.mining;
-      return this.baseTime / multi;
-    };
+  if (!item.time) item.time = "mining time";
   if (item.result.baseStats && !item.result.baseStatsMulti)
-    item.result.baseStatsMulti = function (x): number {
-      return 1 / divisionCoeff(x.timesCompleted || 0);
-    };
+    item.result.baseStatsMulti = "default";
   if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = function (x): number {
-      return 1 / divisionCoeff(x.timesCompleted || 0);
-    };
+    item.result.skillsMulti = "default";
   return item;
 });
 

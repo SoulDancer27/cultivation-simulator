@@ -1,16 +1,8 @@
 import React from "react";
-import { PlayerContextType } from "GameConstants/Player";
+import { baseStats, playerSkills } from "GameConstants/Player";
 import { year } from "GameConstants/Constants";
 import { CultivationManuals } from "GameConstants/CultivationManuals";
-
-export const baseStats = {
-  attack: 1,
-  health: 10,
-  healthRegen: 0.5,
-  defence: 0,
-  insight: 1,
-  test: 1,
-};
+import { PlayerContextType } from "GameConstants/Interfaces";
 
 // Some placeholder values to fill in the player object on first launch
 export const playerContext: PlayerContextType = {
@@ -20,16 +12,8 @@ export const playerContext: PlayerContextType = {
     ...baseStats,
   },
   baseStats,
-  skills: {
-    training: 0,
-    mining: 0,
-    crafting: 0,
-  },
-  baseSkills: {
-    training: 0,
-    mining: 0,
-    crafting: 0,
-  },
+  skills: playerSkills,
+  baseSkills: playerSkills,
   realm: {
     index: 0,
     power: {},

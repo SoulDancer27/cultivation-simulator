@@ -7,24 +7,27 @@ import {
 } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import { InventoryTreasure, isInventoryTreasure } from "GameConstants/Player";
+
 import { TreasureType } from "GameConstants/Treasures";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerStatsDictionary, {
-  getStatName,
-} from "GameEngine/Player/PlayerStatsDictionary";
+import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import EmptyCell from "./EmptyCell";
+import { playerSkills } from "GameEngine/Player/playerSkills";
+import {
+  InventoryTreasure,
+  isInventoryTreasure,
+} from "GameConstants/Interfaces";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {
-  const { stats: treasure } = props;
+  const { item: treasure } = props;
 
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const player = React.useContext(PlayerContext);
-  let { inventory, stats, updateContext } = player;
+  let { inventory, stats, skills, updateContext } = player;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -48,14 +51,15 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     // Check equipped items
     const equippedIndex = inventory.findIndex(
       (item) =>
-        isInventoryTreasure(item) && item.isEquipped && item.stats.type === type
+        isInventoryTreasure(item) && item.isEquipped && item.item.type === type
     );
     // Unequip item of the same type
     if (equippedIndex !== -1)
       (inventory[equippedIndex] as InventoryTreasure).isEquipped = false;
     (inventory[index] as InventoryTreasure).isEquipped = true;
     stats = playerStats(player);
-    updateContext({ inventory, stats });
+    skills = playerSkills(player);
+    updateContext({ inventory, stats, skills });
     setAnchorEl(null);
   };
 
@@ -64,11 +68,38 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   if (!treasure) return <EmptyCell />;
 
   const TreasureDescription: TreasureDescriptionStatsLine[] = [];
-  for (const [key, value] of Object.entries(treasure.stats)) {
-    TreasureDescription.push({
-      text: getStatName(key),
-      effect: value,
-    });
+  const { stats: itemStats } = treasure;
+  if (itemStats.stats) {
+    for (const [key, value] of Object.entries(itemStats.stats)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: value.toFixed(2),
+      });
+    }
+  }
+  if (itemStats.skills) {
+    for (const [key, value] of Object.entries(itemStats.skills)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: value.toFixed(2),
+      });
+    }
+  }
+  if (itemStats.statsMulti) {
+    for (const [key, value] of Object.entries(itemStats.statsMulti)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: (value * 100).toFixed(2) + "%",
+      });
+    }
+  }
+  if (itemStats.skillsMulti) {
+    for (const [key, value] of Object.entries(itemStats.skillsMulti)) {
+      TreasureDescription.push({
+        text: getStatName(key),
+        effect: (value * 100).toFixed(2) + "%",
+      });
+    }
   }
 
   return (
@@ -98,15 +129,15 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
             <Typography>{treasure.name}</Typography>
             <Typography>Quality: {treasure.quality.toFixed(2)}</Typography>
-            {TreasureDescription.map((item) => (
-              <Typography key={item.text} variant="body1">
-                {item.text} {item.effect.toFixed(2)}
+            {TreasureDescription.map((item, index) => (
+              <Typography key={index} variant="body1">
+                {item.text} {item.effect}
               </Typography>
             ))}
             <Button
               variant="contained"
               color="primary"
-              onClick={() => equipItem(props.id, props.stats.type)}
+              onClick={() => equipItem(props.id, props.item.type)}
             >
               Equip
             </Button>
@@ -126,5 +157,5 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
 
 type TreasureDescriptionStatsLine = {
   text: string;
-  effect: number;
+  effect: string;
 };

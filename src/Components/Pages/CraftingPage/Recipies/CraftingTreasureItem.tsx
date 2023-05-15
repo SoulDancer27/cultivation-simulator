@@ -14,6 +14,7 @@ import EmptyCell from "./EmptyCell";
 import { Activity, ActivityItem } from "GameConstants/Activities";
 import parseTime from "Utils/parseTime";
 import ActivityPrice from "./ActivityPrice";
+import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 
 type Props = {
   activity: Activity;
@@ -40,8 +41,9 @@ export default function CraftingTreasureItem(props: Props) {
   const id = open ? "simple-popper" : undefined;
   if (!treasure) return <EmptyCell />;
 
-  const craftTime =
-    typeof activity.time === "function" ? activity.time() : activity.baseTime;
+  const craftTime = activity.time
+    ? ActivitiesFunctions[activity.time](activity)
+    : activity.baseTime;
 
   const craftTimeLabel =
     craftTime < 1000

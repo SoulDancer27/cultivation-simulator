@@ -1,13 +1,12 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { Activity } from "GameConstants/Activities";
-import PlayerStatsDictionary, {
-  getStatName,
-} from "GameEngine/Player/PlayerStatsDictionary";
+import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import ProgressBar from "./ProgressBar";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import parseTime from "Utils/parseTime";
+import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 
 type Props = {
   activity: Activity;
@@ -46,7 +45,7 @@ export default function ActivityPanel(props: Props) {
         effect:
           value *
           (activity.result?.baseStatsMulti
-            ? activity.result.baseStatsMulti(activity)
+            ? ActivitiesFunctions[activity.result.baseStatsMulti](activity)
             : 1),
       });
     }
@@ -66,11 +65,11 @@ export default function ActivityPanel(props: Props) {
   if (result.skills) {
     for (const [key, value] of Object.entries(result.skills)) {
       SkillsRewardDescription.push({
-        text: PlayerStatsDictionary[key],
+        text: getStatName(key),
         effect:
           value *
           (activity.result?.skillsMulti
-            ? activity.result.skillsMulti(activity)
+            ? ActivitiesFunctions[activity.result.skillsMulti](activity)
             : 1),
       });
     }
@@ -99,7 +98,7 @@ export default function ActivityPanel(props: Props) {
 
   // Determine remaining time for timed activities
   const requiredTime = activity.time
-    ? activity.time(player)
+    ? ActivitiesFunctions[activity.time](activity, player)
     : activity.baseTime;
   const currentTime = activity.currentTime || 0;
 

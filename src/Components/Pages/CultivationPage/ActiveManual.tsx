@@ -45,6 +45,14 @@ export default function ActiveManual() {
         effect: value * learningProgress.level,
       });
     }
+  const ManualSkillsDescription: ManualStatsDescription[] = [];
+  if (manual.skills)
+    for (const [key, value] of Object.entries(manual.skills)) {
+      ManualSkillsDescription.push({
+        text: getStatName(key),
+        effect: value * learningProgress.level,
+      });
+    }
   return (
     <Box width="60%" border="1px solid gray" borderRadius={theme.spacing(1)}>
       <Box
@@ -97,6 +105,13 @@ export default function ActiveManual() {
           return (
             <Typography key={stat.text} marginLeft={theme.spacing(2)}>
               {stat.text}: +{(stat.effect * 100).toFixed(2)}%
+            </Typography>
+          );
+        })}
+        {ManualSkillsDescription.map((skill) => {
+          return (
+            <Typography key={skill.text} marginLeft={theme.spacing(2)}>
+              {skill.text}: +{(skill.effect * 100).toFixed(2)}%
             </Typography>
           );
         })}

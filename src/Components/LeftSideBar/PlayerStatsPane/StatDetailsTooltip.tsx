@@ -50,6 +50,21 @@ export default function StatDetailsTooltip(
             </Typography>
           </Typography>
           <Typography>
+            Treasures multi:
+            <Typography
+              component="span"
+              color={
+                statStructure.treasuresMulti >= 1
+                  ? theme.palette.success.main
+                  : theme.palette.error.main
+              }
+              display="inline"
+            >
+              {" "}
+              x{statStructure.treasuresMulti}
+            </Typography>
+          </Typography>
+          <Typography>
             Treasures bonus:
             <Typography
               component="span"

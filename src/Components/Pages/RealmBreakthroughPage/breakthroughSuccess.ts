@@ -1,5 +1,6 @@
 import { CultivationRealm } from "GameConstants/CultivationRealms";
-import { PlayerStats } from "GameConstants/Player";
+import { PlayerStats } from "GameConstants/Interfaces";
+
 import {
   BreakthroughDps,
   TribulationDps,
