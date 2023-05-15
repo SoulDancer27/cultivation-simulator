@@ -11,7 +11,7 @@ export default function useDefaultRegenManager(timer: GameTimer) {
     const elapsedTime = currentTime - previousTime;
     if (
       stats.currentHealth <= stats.health &&
-      ["idle", "training", "activity"].includes(state.action)
+      ["idle", "training", "activity", "cultivating"].includes(state.action)
     )
       stats.currentHealth = Math.min(
         stats.currentHealth + (stats.healthRegen * elapsedTime) / 1000,

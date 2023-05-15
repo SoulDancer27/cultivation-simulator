@@ -1,7 +1,7 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
-import SaveLoader from "GameEngine/PlayerLoader";
+import PlayerLoader from "GameEngine/PlayerLoader";
 import GameRuntime from "GameEngine/GameRuntime";
 import TopBar from "Components/TopBar";
 import useWindowDimensions, {
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <CssBaseline>
       <ThemeProvider theme={LightTheme}>
-        <SaveLoader>
+        <PlayerLoader>
           <WorldLoader>
             <GameRuntime>
               <Box width={width} height={height} overflow="hidden">
@@ -32,7 +32,7 @@ export default function App() {
               </Box>
             </GameRuntime>
           </WorldLoader>
-        </SaveLoader>
+        </PlayerLoader>
       </ThemeProvider>
     </CssBaseline>
   );
