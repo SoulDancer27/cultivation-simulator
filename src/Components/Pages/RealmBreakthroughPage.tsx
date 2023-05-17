@@ -1,11 +1,17 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import React from "react";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import BreakthroughAnimation from "./RealmBreakthroughPage/BreakthroughAnimation";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import getSpacing from "Utils/getSpacing";
-import GameContext from "GameEngine/GameContext/GameContext";
+import {
+  useGameState,
+  useSetGameState,
+} from "GameEngine/GameContext/GameContext";
 import HtmlTooltip from "../shared/HtmlTooltip";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -15,10 +21,10 @@ import calculateMaxTribulationStage from "./RealmBreakthroughPage/calculateMaxTr
 // ! Some bad coding ahead. Probably should split into several files :)
 export default function RealmBreakthroughPage() {
   const theme = useTheme();
-  const player = React.useContext(PlayerContext);
+  const player = usePlayerState();
   const { realm } = player;
-  const { cultivationRealms, updateContext: updateGameContext } =
-    React.useContext(GameContext);
+  const { cultivationRealms } = useGameState();
+  const setGameState = useSetGameState();
 
   const nextRealmIndex =
     cultivationRealms.length >= realm.index + 2 ? realm.index + 1 : undefined;
@@ -73,7 +79,8 @@ export default function RealmBreakthroughPage() {
   const power = calculateTribulationPower(nextRealmIndex, cultivationRealms);
   const { healthRegen, attack, defence, health } = power;
 
-  const { state, updateContext } = React.useContext(PlayerContext);
+  const { state } = usePlayerState();
+  const setContext = useSetPlayerState();
   const isActive = state.action === "breakthrough";
   const currentHealth = nextRealm.currentStats?.currentHealth || health;
   const handleClick = () => {
@@ -99,8 +106,11 @@ export default function RealmBreakthroughPage() {
       if (cultivationRealms[nextRealmIndex].tribulation)
         (cultivationRealms[nextRealmIndex] as any).tribulation.stepReached = 0;
     }
-    updateContext({ state });
-    updateGameContext({ cultivationRealms: cultivationRealms.slice() });
+    setContext((prev) => ({ ...prev, ...{ state } }));
+    setGameState((prev) => ({
+      ...prev,
+      ...{ cultivationRealms: cultivationRealms.slice() },
+    }));
   };
 
   // Cultivation realm power to display

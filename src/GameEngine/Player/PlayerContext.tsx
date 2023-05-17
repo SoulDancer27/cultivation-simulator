@@ -1,11 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { baseStats, playerSkills } from "GameConstants/Player";
 import { year } from "GameConstants/Constants";
 import { CultivationManuals } from "GameConstants/CultivationManuals";
 import { PlayerContextType } from "GameConstants/Interfaces";
+import { createContainer } from "react-tracked";
 
 // Some placeholder values to fill in the player object on first launch
-export const playerContext: PlayerContextType = {
+export const playerState: PlayerContextType = {
   stats: {
     age: year * 10,
     currentHealth: 10,
@@ -27,11 +28,10 @@ export const playerContext: PlayerContextType = {
   state: { action: "idle" },
 };
 
-/** Context initializator */
-export const PlayerContext = React.createContext({
-  ...playerContext,
-  updateContext: (newData: Partial<PlayerContextType>) => {},
-  setContext: (value: React.SetStateAction<PlayerContextType>) => {},
-});
+const useState = () => React.useState(playerState);
 
-export default PlayerContext;
+export const {
+  Provider: PlayerStateProvider,
+  useTrackedState: usePlayerState,
+  useUpdate: useSetPlayerState,
+} = createContainer(useState);

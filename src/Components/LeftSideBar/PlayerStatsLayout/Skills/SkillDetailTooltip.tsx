@@ -1,14 +1,13 @@
 import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { getSkillStructure } from "GameEngine/Player/playerSkills";
-import React from "react";
 
 // Provides description
 export default function SkillDetailsTooltip(
   props: Omit<TooltipProps, "title"> & { skill: string }
 ) {
-  const player = React.useContext(PlayerContext);
+  const player = usePlayerState();
   const skillStructure = getSkillStructure(props.skill, player);
   const theme = useTheme();
 

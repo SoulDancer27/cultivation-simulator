@@ -1,15 +1,15 @@
 import { Box } from "@mui/material";
 import React, { ComponentType } from "react";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { ActivityCardProps } from "Components/shared/ActivityCards/types";
+import { useGameState } from "GameEngine/GameContext/GameContext";
 
 type Props = { source: string; Card: ComponentType<ActivityCardProps> };
 
 export default function ActionsPage(props: Props) {
   const { source, Card } = props;
-  const gameData = React.useContext(GameContext);
-  const { state } = React.useContext(PlayerContext);
+  const gameData = useGameState();
+  const { state } = usePlayerState();
 
   // Determine active action if any
   const { action, activity } = state;

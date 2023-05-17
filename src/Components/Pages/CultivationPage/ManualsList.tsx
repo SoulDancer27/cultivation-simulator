@@ -1,13 +1,16 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import React from "react";
 
 export default function ManualsList() {
-  const player = React.useContext(PlayerContext);
-  let { manuals, updateContext, stats } = player;
+  const player = usePlayerState();
+  let { manuals, stats } = player;
+  const setContext = useSetPlayerState();
   const theme = useTheme();
   if (!manuals) return <Box />;
   let storedManuals = manuals.filter((item) => !item.isEquipped);
@@ -30,7 +33,7 @@ export default function ManualsList() {
     if (index === -1) return;
     manuals[index].isEquipped = !manuals[index].isEquipped;
     stats = playerStats(player);
-    updateContext({ manuals, stats });
+    setContext((prev) => ({ ...prev, ...{ manuals, stats } }));
   };
 
   return (

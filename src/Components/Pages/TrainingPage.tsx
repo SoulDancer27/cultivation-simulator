@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import GameContext from "GameEngine/GameContext/GameContext";
+import { useGameState } from "GameEngine/GameContext/GameContext";
 import Activity from "../shared/ActivityCards/Activity";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 
 export default function TrainingPage() {
-  const { trainings } = React.useContext(GameContext);
-  const { state } = React.useContext(PlayerContext);
+  const { trainings } = useGameState();
+  const { state } = usePlayerState();
 
   // Determine active training if any
   const { action, activity } = state;

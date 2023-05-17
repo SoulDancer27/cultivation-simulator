@@ -1,8 +1,11 @@
 import { playerStats } from "../Player/playerStats";
 import React from "react";
-import PlayerContext from "../Player/PlayerContext";
+import { usePlayerState, useSetPlayerState } from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
-import GameContext from "GameEngine/GameContext/GameContext";
+import {
+  useGameState,
+  useSetGameState,
+} from "GameEngine/GameContext/GameContext";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import {
@@ -12,10 +15,11 @@ import {
 
 // Manages realm breakthroughs
 export default function useBreakthroughManager(timer: GameTimer) {
-  const player = React.useContext(PlayerContext);
-  const { cultivationRealms, updateContext: updateGameContext } =
-    React.useContext(GameContext);
-  let { stats, state, realm, updateContext } = player;
+  const { cultivationRealms } = useGameState();
+  const setGameState = useSetGameState();
+  let player = usePlayerState();
+  let { state, realm, stats } = player;
+  const setContext = useSetPlayerState();
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "breakthrough" || !state.realm) return;
@@ -64,7 +68,10 @@ export default function useBreakthroughManager(timer: GameTimer) {
           breakthrough.currentStats.attack = attack;
           breakthrough.currentStats.defence = defence;
           breakthrough.currentStats.currentHealth = health;
-          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
+          setGameState((prev) => ({
+            ...prev,
+            ...{ cultivationRealms: cultivationRealms.slice() },
+          }));
           return;
         } else {
           // All steps finished update player realm and game context
@@ -77,8 +84,11 @@ export default function useBreakthroughManager(timer: GameTimer) {
           breakthrough.currentStats = undefined;
           // Update player stats
           stats = playerStats(player);
-          updateContext({ stats, state, realm });
-          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
+          setContext((data) => ({ ...data, ...{ stats, state, realm } }));
+          setGameState((prev) => ({
+            ...prev,
+            ...{ cultivationRealms: cultivationRealms.slice() },
+          }));
           alert("Breakthrough success!");
           return;
         }
@@ -90,8 +100,11 @@ export default function useBreakthroughManager(timer: GameTimer) {
       realm.power = calculateRealmPower(realm.index, cultivationRealms);
       stats = playerStats(player);
       breakthrough.currentStats = undefined;
-      updateContext({ stats, state, realm });
-      updateGameContext({ cultivationRealms: cultivationRealms.slice() });
+      setContext((data) => ({ ...data, ...{ stats, state, realm } }));
+      setGameState((prev) => ({
+        ...prev,
+        ...{ cultivationRealms: cultivationRealms.slice() },
+      }));
       alert("Breakthrough success!");
     }
 
@@ -101,7 +114,7 @@ export default function useBreakthroughManager(timer: GameTimer) {
         const stepReached = breakthrough.tribulation.stepReached;
         if (!stepReached) {
           state = { action: "idle", realm: undefined };
-          updateContext({ state });
+          setContext((data) => ({ ...data, ...{ state } }));
           // The breakthrough was successful, albeit not stages were finished
         } else {
           realm.index = state.realm.index;
@@ -111,9 +124,12 @@ export default function useBreakthroughManager(timer: GameTimer) {
           stats = playerStats(player);
           breakthrough.currentStats = undefined;
           (breakthrough.tribulation as any).stepReached -= 1;
-          updateContext({ stats, state, realm });
+          setContext((data) => ({ ...data, ...{ stats, state, realm } }));
 
-          updateGameContext({ cultivationRealms: cultivationRealms.slice() });
+          setGameState((prev) => ({
+            ...prev,
+            ...{ cultivationRealms: cultivationRealms.slice() },
+          }));
           alert("Breakthrough success!");
           return;
         }
@@ -126,8 +142,8 @@ export default function useBreakthroughManager(timer: GameTimer) {
     else {
       stats.currentHealth = newPlayerHealth;
       breakthrough.currentStats.currentHealth = newRealmHealth;
-      updateContext({ stats, state, realm });
-      updateGameContext({ cultivationRealms });
+      setContext((data) => ({ ...data, ...{ stats, state, realm } }));
+      setGameState((prev) => ({ ...prev, ...{ cultivationRealms } }));
     }
   }, [currentTime]);
 }

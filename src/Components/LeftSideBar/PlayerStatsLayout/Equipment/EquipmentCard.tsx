@@ -3,11 +3,13 @@ import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
 
 import { TreasureType } from "GameConstants/Treasures";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import React from "react";
 import getSpacing from "Utils/getSpacing";
 import {
   InventoryTreasure,
@@ -23,8 +25,9 @@ type Props = {
 export default function EquipmentCard(props: Props) {
   const { treasure, type } = props;
   const theme = useTheme();
-  const player = React.useContext(PlayerContext);
-  let { inventory, stats, skills, updateContext } = player;
+  const player = usePlayerState();
+  let { inventory, stats, skills } = player;
+  const setContext = useSetPlayerState();
   if (!treasure)
     return (
       <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
@@ -83,7 +86,7 @@ export default function EquipmentCard(props: Props) {
     treasure.isEquipped = false;
     stats = playerStats(player);
     skills = playerSkills(player);
-    updateContext({ inventory, stats, skills });
+    setContext((prev) => ({ ...prev, ...{ inventory, stats, skills } }));
   };
   return (
     <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>

@@ -1,12 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import EquippedManualCard from "./EquippedManuals/EquippedManualCard";
 import PlaceholderCard from "./EquippedManuals/PlaceholderCard";
 
 export default function EquippedManuals() {
-  const { manuals } = React.useContext(PlayerContext);
+  const { manuals } = usePlayerState();
   const { width } = getWindowDimensions();
   const theme = useTheme();
   const equippedManuals = manuals?.filter((manual) => manual.isEquipped);

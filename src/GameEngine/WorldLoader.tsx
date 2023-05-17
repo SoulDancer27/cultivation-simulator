@@ -1,23 +1,20 @@
 import { defaultAutosaveInterval } from "GameConstants/Constants";
 import React from "react";
-import GameContext, {
-  GameContextType,
-  gameContext,
-} from "./GameContext/GameContext";
+import { GameContextType, useSetGameState } from "./GameContext/GameContext";
 
 // Wrapper for loading player save data
 export default function WorldLoader(props: any) {
-  const [data, setData] = React.useState(gameContext);
+  const setGameState = useSetGameState();
 
   const updateContext = (newData: Partial<GameContextType>) =>
-    setData((data) => ({ ...data, ...newData }));
+    setGameState((data) => ({ ...data, ...newData }));
   // Load save data from Local Storage
   const [loaded, setLoaded] = React.useState<boolean>(false);
   React.useEffect(() => {
     const gameData = localStorage.getItem("game");
     if (gameData) {
       let storageData = JSON.parse(gameData);
-      setData(storageData);
+      setGameState(storageData);
     }
 
     setLoaded(true);
@@ -26,7 +23,7 @@ export default function WorldLoader(props: any) {
   React.useEffect(() => {
     const autosaveInterval = setInterval(() => {
       // Thats a hacky way to access current state value inside useEffect run only once
-      setData((data) => {
+      setGameState((data) => {
         localStorage.setItem("game", JSON.stringify(data));
         return data;
       });
@@ -36,11 +33,5 @@ export default function WorldLoader(props: any) {
     };
   }, []);
 
-  return (
-    <GameContext.Provider
-      value={{ ...data, updateContext, setContext: setData }}
-    >
-      {loaded && props.children}
-    </GameContext.Provider>
-  );
+  return <> {loaded && props.children}</>;
 }

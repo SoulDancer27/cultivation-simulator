@@ -8,14 +8,18 @@ import {
 } from "@mui/material";
 
 import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { PlayerCultivationManual } from "GameConstants/Interfaces";
 
 export default function EquippedManualCard(props: PlayerCultivationManual) {
   const { manual, learningProgress } = props;
-  let player = React.useContext(PlayerContext);
-  let { manuals, state, updateContext, stats } = player;
+  let player = usePlayerState();
+  let { manuals, state, stats } = player;
+  const setContext = useSetPlayerState();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const theme = useTheme();
 
@@ -31,7 +35,10 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
     if (!manuals) return;
     const index = manuals.findIndex((item) => item.manual.name === manual.name);
     if (index === -1) return;
-    updateContext({ state: { action: "cultivating", manual: manuals[index] } });
+    setContext((prev) => ({
+      ...prev,
+      ...{ state: { action: "cultivating", manual: manuals![index] } },
+    }));
   };
 
   const unequipButtonClick = () => {
@@ -42,7 +49,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
     if (state.manual && state.manual.manual.name === manual.name)
       state = { action: "idle" };
     stats = playerStats(player);
-    updateContext({ manuals, state, stats });
+    setContext((prev) => ({ ...prev, ...{ manuals, state, stats } }));
   };
 
   const open = Boolean(anchorEl);

@@ -6,12 +6,11 @@ import {
   useTheme,
 } from "@mui/material";
 import { levelExp, totalExp } from "GameConstants/CultivationManuals";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import React from "react";
 
 export default function ActiveManual() {
-  const { state } = React.useContext(PlayerContext);
+  const { state } = usePlayerState();
   const theme = useTheme();
   if (state.action !== "cultivating" || !state.manual)
     return (

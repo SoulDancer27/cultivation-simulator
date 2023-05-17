@@ -1,11 +1,11 @@
 import { Box, Button, Paper, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import ManualsPage from "./Pages/ManualsPage";
 import RealmBreakthroughPage from "./Pages/RealmBreakthroughPage";
-import GameContext from "GameEngine/GameContext/GameContext";
+import { useGameState } from "GameEngine/GameContext/GameContext";
 import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSuccess";
 import CraftingPage from "./Pages/CraftingPage";
 import ActionsPage from "./Pages/ActionsPage";
@@ -19,9 +19,9 @@ export type ActivePage = (typeof NavigationBarPages)[number];
 export default function MainNavigationBar() {
   const { width, height } = getWindowDimensions();
   const theme = useTheme();
-  const player = React.useContext(PlayerContext);
+  const player = usePlayerState();
   const { state, realm } = player;
-  const { cultivationRealms } = React.useContext(GameContext);
+  const { cultivationRealms } = useGameState();
   // For the breakthrough custom button color
   const canBreakthrough = breakthroughSuccess(
     player,

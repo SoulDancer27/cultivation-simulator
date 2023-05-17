@@ -46,6 +46,7 @@ let Trainings: Activity[] = [
       skills: {
         training: 0.01,
       },
+      items: [{ name: "Rusty Sword", amount: 1, type: "treasure" }],
     },
   },
   {

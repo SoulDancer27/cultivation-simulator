@@ -1,8 +1,7 @@
 import { playerStats } from "../Player/playerStats";
 import React from "react";
-import PlayerContext from "../Player/PlayerContext";
+import { usePlayerState, useSetPlayerState } from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
-import GameContext from "GameEngine/GameContext/GameContext";
 import { Activity } from "GameConstants/Activities";
 import removeItems from "GameEngine/shared/removeItems";
 import addBaseStats from "GameEngine/shared/addBaseStats";
@@ -10,20 +9,18 @@ import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
+import {
+  useGameState,
+  useSetGameState,
+} from "GameEngine/GameContext/GameContext";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {
-  const player = React.useContext(PlayerContext);
-  const game = React.useContext(GameContext);
-  let {
-    state,
-    baseStats,
-    stats,
-    inventory,
-    baseSkills,
-    skills,
-    updateContext,
-  } = player;
+  const player = usePlayerState();
+  const game = useGameState();
+  const setGameState = useSetGameState();
+  let { state, baseStats, stats, inventory, baseSkills, skills } = player;
+  const setContext = useSetPlayerState();
 
   React.useEffect(() => {
     try {
@@ -48,11 +45,12 @@ export default function useActivityManager(timer: GameTimer) {
         (activity?.timesCompleted || 0) + timesCompleted;
       // Action not completed yet. Just update the progress and move on
       if (timesCompleted === 0) {
-        game.updateContext({ ...game });
+        setGameState({ ...game });
         return;
       }
       // Action finished. Process cost and reward
       else {
+        let inventoryIsUpdated = false;
         // Process activity price a bit of a hacky way
         if (activity.price) {
           const priceMulti = activity.priceMulti || 1;
@@ -63,12 +61,14 @@ export default function useActivityManager(timer: GameTimer) {
               -timesCompleted * priceMulti
             );
           // Process activity price in terms of items
-          if (activity.price.items)
+          if (activity.price.items) {
             inventory = removeItems(
               inventory,
               activity.price.items,
               timesCompleted * priceMulti
             );
+            inventoryIsUpdated = true;
+          }
         }
 
         // If activity increaces base stats
@@ -92,13 +92,32 @@ export default function useActivityManager(timer: GameTimer) {
           );
         // Process reward
         if (activity.result.items) {
-          inventory = rewardActivityItems(player, activity, timesCompleted);
+          const inventory = rewardActivityItems(
+            player,
+            activity,
+            timesCompleted
+          );
+          inventoryIsUpdated = true;
+        }
+        // Update calculated stat values based on new baseStats
+        stats = playerStats(player);
+        skills = playerSkills(player);
+        setContext((prev) => ({
+          ...prev,
+          ...{
+            stats,
+            baseStats,
+            baseSkills,
+            skills,
+          },
+        }));
+        if (inventoryIsUpdated) {
+          setContext((prev) => ({
+            ...prev,
+            inventory: inventory.map((x) => x),
+          }));
         }
       }
-      // Update calculated stat values based on new baseStats
-      stats = playerStats(player);
-      skills = playerSkills(player);
-      updateContext({ stats, baseStats, baseSkills, skills, inventory });
     } catch (error) {
       console.log(error);
     }

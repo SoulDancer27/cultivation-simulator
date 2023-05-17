@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import React from "react";
 import InventoryBottomPanel from "./Inventory/InventoryBottomPanel";
 import InventoryFiltersPane from "./Inventory/InventoryFilters";
@@ -10,7 +10,7 @@ import { isInventoryTreasure } from "GameConstants/Interfaces";
 export type InventoryFilters = "all" | "money" | "treasure" | "mineral";
 
 export default function Inventory() {
-  const { inventory } = React.useContext(PlayerContext);
+  const { inventory } = usePlayerState();
   const [type, setType] = React.useState<InventoryFilters>("all");
   // Filter equipped items
   let displayedInventory = inventory.filter((item) => {

@@ -1,10 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import Recipies from "./CraftingPage/Recipies";
 
 export default function CraftingPage() {
-  const { state } = React.useContext(PlayerContext);
+  const { state } = usePlayerState();
 
   // Determine active training if any
   const { action, activity } = state;

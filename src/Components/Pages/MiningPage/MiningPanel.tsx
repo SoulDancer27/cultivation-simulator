@@ -2,7 +2,10 @@ import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { Activity } from "GameConstants/Activities";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import ProgressBar from "../../shared/ProgressBar";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import parseTime from "Utils/parseTime";
@@ -18,8 +21,8 @@ type Props = {
 };
 export default function MiningPanel(props: Props) {
   const { activity, isActive, source } = props;
-  const player = React.useContext(PlayerContext);
-  const { updateContext } = player;
+  const player = usePlayerState();
+  const setContext = useSetPlayerState();
   const { result, price } = activity;
   const theme = useTheme();
 
@@ -45,15 +48,21 @@ export default function MiningPanel(props: Props) {
   const handleClick = () => {
     // If training is active
     if (isActive)
-      updateContext({ state: { action: "idle", activity: undefined } });
+      setContext((prev) => ({
+        ...prev,
+        ...{ state: { action: "idle", activity: undefined } },
+      }));
     // Set active training
     else {
-      updateContext({
-        state: {
-          action: "activity",
-          activity: { name: activity.name, source },
+      setContext((prev) => ({
+        ...prev,
+        ...{
+          state: {
+            action: "activity",
+            activity: { name: activity.name, source },
+          },
         },
-      });
+      }));
     }
   };
 

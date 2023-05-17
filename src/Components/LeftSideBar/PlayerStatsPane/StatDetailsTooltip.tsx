@@ -1,13 +1,12 @@
 import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { getStatStructure } from "GameEngine/Player/playerStats";
-import React from "react";
 
 export default function StatDetailsTooltip(
   props: Omit<TooltipProps, "title"> & { stat: string }
 ) {
-  const player = React.useContext(PlayerContext);
+  const player = usePlayerState();
   const statStructure = getStatStructure(props.stat, player);
   const theme = useTheme();
 

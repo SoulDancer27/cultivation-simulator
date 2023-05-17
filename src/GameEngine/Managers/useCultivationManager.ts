@@ -1,14 +1,15 @@
 import { levelExp, totalExp } from "GameConstants/CultivationManuals";
 import { playerStats } from "../Player/playerStats";
 import React from "react";
-import PlayerContext from "../Player/PlayerContext";
+import { usePlayerState, useSetPlayerState } from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 
 // Updates cultivation manuals learning progress
 export default function useCultivationManager(timer: GameTimer) {
-  const player = React.useContext(PlayerContext);
-  let { stats, state, skills, updateContext } = player;
+  const player = usePlayerState();
+  let { stats, state, skills } = player;
+  const setContext = useSetPlayerState();
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "cultivating" || !state.manual) return;
@@ -34,6 +35,6 @@ export default function useCultivationManager(timer: GameTimer) {
       if (manual.stats) stats = playerStats(player);
       if (manual.skills) skills = playerSkills(player);
     }
-    updateContext({ state, stats, skills });
+    setContext((data) => ({ ...data, ...{ state, stats, skills } }));
   }, [currentTime]);
 }

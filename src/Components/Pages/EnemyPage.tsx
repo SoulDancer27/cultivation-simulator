@@ -1,7 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import { Enemies, EnemyType } from "GameConstants/Enemies";
-import React from "react";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 
 // Currently unused
 export default function EnemyPage() {
@@ -21,7 +23,8 @@ type EnemyCardProps = {
 function EnemyCard(props: EnemyCardProps) {
   const { enemy } = props;
   const { name, health, attack, defence, healthRegen } = enemy;
-  const { state, updateContext } = React.useContext(PlayerContext);
+  const { state } = usePlayerState();
+  const setContext = useSetPlayerState();
   const currentEnemy = state.enemy;
   const isActive = currentEnemy && currentEnemy.name === name;
   const currentHealth = isActive
@@ -29,14 +32,17 @@ function EnemyCard(props: EnemyCardProps) {
     : health;
 
   function handleClick() {
-    updateContext({
-      state: {
-        action: isActive ? "idle" : "fighting",
-        enemy: isActive
-          ? undefined
-          : { ...structuredClone(enemy), currentHealth: enemy.health },
+    setContext((prev) => ({
+      ...prev,
+      ...{
+        state: {
+          action: isActive ? "idle" : "fighting",
+          enemy: isActive
+            ? undefined
+            : { ...structuredClone(enemy), currentHealth: enemy.health },
+        },
       },
-    });
+    }));
   }
   return (
     <Box>

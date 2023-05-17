@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import React from "react";
 import MiningPanel from "./MiningPage/MiningPanel";
+import { useGameState } from "GameEngine/GameContext/GameContext";
 
 export default function MiningPage() {
-  const { mining } = React.useContext(GameContext);
-  const { state } = React.useContext(PlayerContext);
+  const { mining } = useGameState();
+  const { state } = usePlayerState();
   // Determine active action if any
   const { action, activity } = state;
   let activityName = "";

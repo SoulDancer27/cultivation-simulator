@@ -1,11 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import React from "react";
 
 // Player baseStats display
 export default function Stats() {
-  const { baseStats } = React.useContext(PlayerContext);
+  const { baseStats } = usePlayerState();
 
   let description: Array<JSX.Element> = [];
   for (const [key, value] of Object.entries(baseStats)) {

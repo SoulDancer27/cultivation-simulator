@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import EquipmentCard from "./Equipment/EquipmentCard";
 import {
   isInventoryTreasure,
@@ -11,7 +10,7 @@ import { PlayerEquipment } from "GameConstants/Player";
 
 // Player equipment
 export default function Equipment() {
-  const { inventory } = React.useContext(PlayerContext);
+  const { inventory } = usePlayerState();
   const equippedItems = inventory.filter(
     (item) => isInventoryTreasure(item) && item.isEquipped
   );

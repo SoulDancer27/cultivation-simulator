@@ -1,10 +1,11 @@
 import React from "react";
-import PlayerContext from "../Player/PlayerContext";
+import { usePlayerState, useSetPlayerState } from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 
 // This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {
-  let { stats, state, updateContext } = React.useContext(PlayerContext);
+  let { stats, state } = usePlayerState();
+  const setContext = useSetPlayerState();
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
@@ -50,7 +51,7 @@ export default function useFightManager(timer: GameTimer) {
       stats.currentHealth = newPlayerHealth;
       state.enemy.currentHealth = newEnemyHealth;
     }
-    updateContext({ stats, state });
+    setContext((prev) => ({ ...prev, ...{ stats, state } }));
   }, [currentTime]);
 }
 

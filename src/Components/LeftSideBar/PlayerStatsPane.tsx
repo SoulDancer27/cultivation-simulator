@@ -1,6 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
 
@@ -8,7 +7,7 @@ type Props = { displayStats: { name: string; stat: string }[] };
 
 // Displays current player stats
 export default function PlayerStatsPane(props: Props) {
-  const player = React.useContext(PlayerContext);
+  const player = usePlayerState();
   const { stats } = player;
   const { currentHealth, health } = stats;
   const theme = useTheme();

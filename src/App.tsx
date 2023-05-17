@@ -10,6 +10,8 @@ import useWindowDimensions, {
 import MainNavigationBar from "Components/MainNavigationBar";
 import WorldLoader from "GameEngine/WorldLoader";
 import LeftSideBar from "Components/LeftSideBar";
+import { PlayerStateProvider } from "GameEngine/Player/PlayerContext";
+import { GameStateProvider } from "GameEngine/GameContext/GameContext";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
@@ -19,20 +21,24 @@ export default function App() {
   return (
     <CssBaseline>
       <ThemeProvider theme={LightTheme}>
-        <PlayerLoader>
-          <WorldLoader>
-            <GameRuntime>
-              <Box width={width} height={height} overflow="hidden">
-                <TopBar />
+        <PlayerStateProvider>
+          <GameStateProvider>
+            <PlayerLoader>
+              <WorldLoader>
+                <GameRuntime>
+                  <Box width={width} height={height} overflow="hidden">
+                    <TopBar />
 
-                <Box display="flex">
-                  <LeftSideBar />
-                  <MainNavigationBar />
-                </Box>
-              </Box>
-            </GameRuntime>
-          </WorldLoader>
-        </PlayerLoader>
+                    <Box display="flex">
+                      <LeftSideBar />
+                      <MainNavigationBar />
+                    </Box>
+                  </Box>
+                </GameRuntime>
+              </WorldLoader>
+            </PlayerLoader>
+          </GameStateProvider>
+        </PlayerStateProvider>
       </ThemeProvider>
     </CssBaseline>
   );

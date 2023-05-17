@@ -9,7 +9,10 @@ import CropSquareImage from "Components/shared/CropImage";
 import { CultivationRealms } from "GameConstants/CultivationRealms";
 
 import { TreasureType } from "GameConstants/Treasures";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import {
+  usePlayerState,
+  useSetPlayerState,
+} from "GameEngine/Player/PlayerContext";
 import { playerStats } from "GameEngine/Player/playerStats";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
@@ -26,8 +29,9 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
 
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const player = React.useContext(PlayerContext);
-  let { inventory, stats, skills, updateContext } = player;
+  const player = usePlayerState();
+  let { inventory, stats, skills } = player;
+  const setContext = useSetPlayerState();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -41,7 +45,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     const index = inventory.findIndex((item) => item.id === id);
     if (index === -1) return;
     inventory.splice(index, 1);
-    updateContext({ inventory });
+    setContext((prev) => ({ ...prev, ...{ inventory } }));
     setAnchorEl(null);
   };
 
@@ -59,7 +63,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     (inventory[index] as InventoryTreasure).isEquipped = true;
     stats = playerStats(player);
     skills = playerSkills(player);
-    updateContext({ inventory, stats, skills });
+    setContext((prev) => ({ ...prev, ...{ inventory, stats, skills } }));
     setAnchorEl(null);
   };
 

@@ -1,20 +1,16 @@
 import { defaultAutosaveInterval } from "GameConstants/Constants";
-import { PlayerContextType } from "GameConstants/Interfaces";
 import React from "react";
-import PlayerContext, { playerContext } from "./Player/PlayerContext";
+import { useSetPlayerState } from "./Player/PlayerContext";
 
 // Wrapper for loading player save data
 export default function PlayerContextLoader(props: any) {
-  const [player, setPlayer] = React.useState(playerContext);
-  /** Updates player context using shallow merge of UserContext attributes. */
-  const updateContext = (newData: Partial<PlayerContextType>) =>
-    setPlayer((data) => ({ ...data, ...newData }));
+  const setPlayerState = useSetPlayerState();
 
   // Load save data from Local Storage
   const [loaded, setLoaded] = React.useState<boolean>(false);
   React.useEffect(() => {
     const playerData = localStorage.getItem("player");
-    if (playerData) setPlayer(JSON.parse(playerData));
+    if (playerData) setPlayerState(JSON.parse(playerData));
     setLoaded(true);
   }, []);
 
@@ -22,7 +18,7 @@ export default function PlayerContextLoader(props: any) {
   React.useEffect(() => {
     const autosaveInterval = setInterval(() => {
       // Thats a hacky way to access current state value inside useEffect run only once
-      setPlayer((player) => {
+      setPlayerState((player) => {
         localStorage.setItem("player", JSON.stringify(player));
         return player;
       });
@@ -32,11 +28,5 @@ export default function PlayerContextLoader(props: any) {
     };
   }, []);
 
-  return (
-    <PlayerContext.Provider
-      value={{ ...player, updateContext, setContext: setPlayer }}
-    >
-      {loaded && props.children}
-    </PlayerContext.Provider>
-  );
+  return <>{loaded && props.children}</>;
 }

@@ -15,6 +15,7 @@ export default function LeftSideBar() {
         ]}
       />
       <PlayerStatsLayout />
+
       <PlayerLocationPane />
     </Box>
   );

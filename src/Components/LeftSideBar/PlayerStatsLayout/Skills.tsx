@@ -1,12 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import React from "react";
+import { usePlayerState } from "GameEngine/Player/PlayerContext";
 import SkillDetailsTooltip from "./Skills/SkillDetailTooltip";
 import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 
 // Bad coding here. #todo: make it a .map() render
 export default function Skills() {
-  const { skills } = React.useContext(PlayerContext);
+  const { skills } = usePlayerState();
 
   let description: Array<JSX.Element> = [];
   for (const [key, value] of Object.entries(skills)) {
