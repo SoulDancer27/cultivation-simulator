@@ -7,7 +7,12 @@ import InventoryFiltersPane from "./Inventory/InventoryFilters";
 import InventoryGrid from "./Inventory/InventoryGrid";
 import { isInventoryTreasure } from "GameConstants/Interfaces";
 
-export type InventoryFilters = "all" | "money" | "treasure" | "mineral";
+export type InventoryFilters =
+  | "all"
+  | "money"
+  | "treasure"
+  | "mineral"
+  | "herb";
 
 export default function Inventory() {
   const { inventory } = React.useContext(PlayerContext);

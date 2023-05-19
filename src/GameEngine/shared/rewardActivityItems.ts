@@ -2,6 +2,7 @@ import { Activity } from "GameConstants/Activities";
 import CraftingFunctions from "GameConstants/Crafting";
 import {
   CountableItem,
+  CountableItems,
   InventoryItem,
   PlayerContextType,
   isCountableItem,
@@ -21,7 +22,7 @@ export default function rewardActivityItems(
   for (let piece of activity.result.items) {
     try {
       // Process money type reward
-      if (["money", "mineral"].includes(piece.type)) {
+      if (CountableItems.includes(piece.type as any)) {
         let item = piece as CountableItem;
         const amountToAdd = item.amount * times;
         const itemIndex = inventory.findIndex(
@@ -46,13 +47,18 @@ export default function rewardActivityItems(
       if (piece.type === "treasure") {
         let treasure = <InventoryItem | any>{};
         if (piece.generator)
-          treasure = CraftingFunctions[piece.generator](
-            activity,
-            player,
-            piece
+          treasure = JSON.parse(
+            JSON.stringify(
+              CraftingFunctions[piece.generator](activity, player, piece)
+            )
           );
+        // using deep copy for the object
         else {
-          let item = Treasures.find((i: Treasure) => i.name === piece.name);
+          let item = JSON.parse(
+            JSON.stringify(
+              Treasures.find((i: Treasure) => i.name === piece.name)
+            )
+          );
           if (item) {
             treasure.type = "treasure";
             treasure.id = uuid();

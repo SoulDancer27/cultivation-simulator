@@ -7,12 +7,11 @@ import ManualsPage from "./Pages/ManualsPage";
 import RealmBreakthroughPage from "./Pages/RealmBreakthroughPage";
 import GameContext from "GameEngine/GameContext/GameContext";
 import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSuccess";
-import CraftingPage from "./Pages/CraftingPage";
 import ActionsPage from "./Pages/ActionsPage";
 import ActivityCard from "./shared/ActivityCards/Activity";
-import MiningActivityCard from "./shared/ActivityCards/MiningActivity";
 import { NavigationBarPages } from "GameConstants/GameContent";
 import CraftingActivityCard from "./shared/ActivityCards/CraftingActivity";
+import GatheringActivityCard from "./shared/ActivityCards/GatheringActivity";
 
 export type ActivePage = (typeof NavigationBarPages)[number];
 
@@ -66,12 +65,17 @@ export default function MainNavigationBar() {
       {page === "Manuals" ? <ManualsPage /> : ""}
       {page === "Breakthrough" ? <RealmBreakthroughPage /> : ""}
       {page === "Mining" ? (
-        <ActionsPage source={"mining"} Card={MiningActivityCard} />
+        <ActionsPage source={"mining"} Card={GatheringActivityCard} />
       ) : (
         ""
       )}
       {page === "Crafting" ? (
         <ActionsPage source={"crafting"} Card={CraftingActivityCard} />
+      ) : (
+        ""
+      )}
+      {page === "Gathering" ? (
+        <ActionsPage source={"gathering"} Card={GatheringActivityCard} />
       ) : (
         ""
       )}

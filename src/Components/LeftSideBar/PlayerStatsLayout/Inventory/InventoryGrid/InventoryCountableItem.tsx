@@ -1,19 +1,25 @@
 import { Box, TooltipProps, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-
+import {
+  InventoryCountableItem as Type,
+  Material,
+} from "GameConstants/Interfaces";
 import EmptyCell from "./EmptyCell";
-import { Minerals } from "GameConstants/Minerals";
-import { InventoryMineral } from "GameConstants/Interfaces";
+import findItemDescription from "GameConstants/utils/findItemDescription";
+import { MoneyType } from "GameConstants/Money";
 
-// Draw inventory mineral item
-export default function InventoryMineralItem(props: InventoryMineral) {
-  const { name, amount } = props;
+// Draw inventory money item
+export default function InventoryCountableItem(props: Type) {
+  const { name, amount, type } = props;
   // Find image
-  const cellData = Minerals.find((item) => item.name === name);
+  const cellData: MoneyType | Material | undefined = findItemDescription(
+    name,
+    type
+  );
   if (!cellData) return <EmptyCell />;
   return (
-    <MineralCellTooltip name={cellData.name} description={cellData.description}>
+    <CountableCellTooltip name={name} description={cellData.description}>
       <Box
         width={64}
         height={64}
@@ -33,16 +39,16 @@ export default function InventoryMineralItem(props: InventoryMineral) {
           <Typography variant="body2">{amount.toFixed(2)}</Typography>
         </Box>
       </Box>
-    </MineralCellTooltip>
+    </CountableCellTooltip>
   );
 }
 
-type MineralTooltipProps = Omit<TooltipProps, "title"> & {
+type CountableTooltipProps = Omit<TooltipProps, "title"> & {
   name: string;
   description: string;
 };
 
-function MineralCellTooltip(props: MineralTooltipProps) {
+function CountableCellTooltip(props: CountableTooltipProps) {
   const { name, description } = props;
   return (
     <HtmlTooltip

@@ -14,7 +14,7 @@ const Money: MoneyType[] = [
   },
 ];
 
-type MoneyType = {
+export type MoneyType = {
   name: string;
   description: string;
   image: Image;

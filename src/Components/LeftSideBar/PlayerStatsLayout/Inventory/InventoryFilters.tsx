@@ -43,6 +43,14 @@ export default function InventoryFiltersPane(props: Props) {
       >
         minerals
       </Button>
+      <Button
+        variant="outlined"
+        onClick={() => setType("herb")}
+        color={type === "herb" ? "success" : "primary"}
+        fullWidth
+      >
+        Herbs
+      </Button>
     </Box>
   );
 }

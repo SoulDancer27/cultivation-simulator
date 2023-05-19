@@ -1,4 +1,4 @@
-import { Image } from "./Interfaces";
+import { Material } from "./Interfaces";
 // Placeholder content
 export const Minerals: Material[] = [
   {
@@ -35,9 +35,3 @@ export const Minerals: Material[] = [
     },
   },
 ];
-
-export type Material = {
-  name: string;
-  description: string;
-  image: Image;
-};

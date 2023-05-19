@@ -5,13 +5,12 @@ import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import parseTime from "Utils/parseTime";
-import CropSquareImage from "Components/shared/CropImage";
-import { Minerals } from "GameConstants/Minerals";
 import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 import { ActivityCardProps } from "./types";
+import itemImages from "../itemImages";
 
 // Activity panel for activity without price, shows result image in the top right corner
-export default function MiningActivityCard(props: ActivityCardProps) {
+export default function GatheringActivityCard(props: ActivityCardProps) {
   const { activity, isActive, source } = props;
   const player = React.useContext(PlayerContext);
   const { updateContext } = player;
@@ -21,21 +20,8 @@ export default function MiningActivityCard(props: ActivityCardProps) {
   // Make item images for each
   const { items } = result;
 
-  let itemImages: JSX.Element[] = [];
-  if (items) {
-    let i = 0;
-    for (let item of items) {
-      i++;
-      const mineral = Minerals.find((mineral) => mineral.name === item.name);
-      if (!mineral) continue;
-      const { path, sizeX: size, x, y } = mineral.image;
-      itemImages.push(
-        <Box key={i}>
-          <CropSquareImage path={path} size={size} position={{ x, y }} />
-        </Box>
-      );
-    }
-  }
+  let itemDescription: JSX.Element[] = [];
+  if (items) itemDescription = itemImages(items);
 
   const handleClick = () => {
     // If training is active
@@ -176,7 +162,7 @@ export default function MiningActivityCard(props: ActivityCardProps) {
               )}
             </Box>
             <Box marginLeft="auto" display={"flex"} marginRight={2}>
-              {itemImages}
+              {itemDescription}
             </Box>
           </Box>
           <Box>

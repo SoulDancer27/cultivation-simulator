@@ -1,5 +1,6 @@
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { InventoryItem, PlayerBaseStats, PlayerSkills } from "./Player";
+import { ItemType } from "./Interfaces";
 
 // Generic activity type
 // Currently is a bit of a mess, will be restructured in the near future
@@ -32,7 +33,7 @@ export type Activity = {
 };
 
 type ItemReward = {
-  type: "treasure" | "money" | "mineral";
+  type: ItemType;
   name: string;
   amount: number;
   generator?: string;

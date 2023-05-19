@@ -53,10 +53,15 @@ export type PlayerCultivationManual = {
   isEquipped: boolean;
 };
 
-export type InventoryItem =
-  | InventoryTreasure
-  | InventoryMoney
-  | InventoryMineral;
+/* ______________________________________________________________________
+  Item types                                           
+_________________________________________________________________________*/
+
+export const CountableItems = <const>["money", "mineral", "herb"];
+export type CountableItemType = (typeof CountableItems)[number];
+export const UniqueItems = <const>["treasure", "potion"];
+export type UniqueItemType = (typeof UniqueItems)[number];
+export type ItemType = CountableItemType | UniqueItemType;
 
 export type InventoryTreasure = {
   type: "treasure";
@@ -64,19 +69,14 @@ export type InventoryTreasure = {
   isEquipped?: boolean;
   item: Required<Treasure>;
 };
-export type InventoryMoney = {
-  type: "money";
-  id: string;
-  name: string;
-  amount: number;
-};
 
-export type InventoryMineral = {
-  type: "mineral";
+export type InventoryCountableItem = {
+  type: CountableItemType;
   id: string;
   name: string;
   amount: number;
 };
+export type InventoryItem = InventoryTreasure | InventoryCountableItem;
 
 export type PlayerContextType = {
   stats: PlayerStats; // calcuated stat values
@@ -89,7 +89,6 @@ export type PlayerContextType = {
   state: PlayerState; // current player action
 };
 
-export type CountableItemType = "money" | "mineral";
 export type CountableItem = {
   type: CountableItemType;
   name: string;
@@ -99,14 +98,6 @@ export type CountableItem = {
 // Lazy type guards
 export function isInventoryTreasure(item: any): item is InventoryTreasure {
   return item.type === "treasure" && item.id && item.item;
-}
-
-export function isInventoryMoney(item: any): item is InventoryMoney {
-  return item.type === "money" && item.id && item.name && item.amount;
-}
-
-export function isInventoryMineral(item: any): item is InventoryMineral {
-  return item.type === "mineral" && item.id && item.name && item.amount;
 }
 
 export function isCountableItem(item: any): item is CountableItem {
@@ -119,4 +110,10 @@ export type Image = {
   y: number;
   sizeX: number;
   sizeY: number;
+};
+
+export type Material = {
+  name: string;
+  description: string;
+  image: Image;
 };
