@@ -1,5 +1,5 @@
 // Update interval in milliseconds
-export const defaultUpdateInterval = 100;
+export const defaultUpdateInterval = 10;
 
 // Default autosave interval
 export const defaultAutosaveInterval = 10000;

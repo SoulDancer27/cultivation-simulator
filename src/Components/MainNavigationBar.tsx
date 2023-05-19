@@ -12,6 +12,7 @@ import ActionsPage from "./Pages/ActionsPage";
 import ActivityCard from "./shared/ActivityCards/Activity";
 import MiningActivityCard from "./shared/ActivityCards/MiningActivity";
 import { NavigationBarPages } from "GameConstants/GameContent";
+import CraftingActivityCard from "./shared/ActivityCards/CraftingActivity";
 
 export type ActivePage = (typeof NavigationBarPages)[number];
 
@@ -69,7 +70,11 @@ export default function MainNavigationBar() {
       ) : (
         ""
       )}
-      {page === "Crafting" ? <CraftingPage /> : ""}
+      {page === "Crafting" ? (
+        <ActionsPage source={"crafting"} Card={CraftingActivityCard} />
+      ) : (
+        ""
+      )}
     </Box>
   );
 }

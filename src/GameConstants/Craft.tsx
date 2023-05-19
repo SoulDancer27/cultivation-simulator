@@ -32,6 +32,11 @@ let Crafting: Activity[] = [
           amount: 3,
           type: "mineral",
         },
+        {
+          name: "Steel",
+          amount: 1,
+          type: "mineral",
+        },
       ],
     },
     result: {
