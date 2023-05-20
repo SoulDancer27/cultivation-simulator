@@ -2,7 +2,7 @@
 
 ![image](https://github.com/SoulDancer27/cultivation-simulator/assets/34806883/0f999b12-c958-4996-aa41-ef5a082342e1)
 
-
+### [Project Wiki](https://github.com/SoulDancer27/cultivation-simulator/wiki)
 ## Running the project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
