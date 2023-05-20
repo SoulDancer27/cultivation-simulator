@@ -1,5 +1,6 @@
 # Cultivation Simulator browser game
 
+![image](https://github.com/SoulDancer27/cultivation-simulator/assets/34806883/0f999b12-c958-4996-aa41-ef5a082342e1)
 
 
 ## Running the project
