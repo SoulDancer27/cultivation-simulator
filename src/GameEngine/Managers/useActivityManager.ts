@@ -100,7 +100,7 @@ export default function useActivityManager(timer: GameTimer) {
       skills = playerSkills(player);
       updateContext({ stats, baseStats, baseSkills, skills, inventory });
     } catch (error) {
-      console.log(error);
+      console.log(`Error in useActivityManager: ${error}`);
     }
   }, [timer]);
 }

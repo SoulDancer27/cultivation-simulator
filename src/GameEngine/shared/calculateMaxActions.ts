@@ -50,7 +50,7 @@ export default function calculateMaxActions(
     }
     return maxActions;
   } catch (error) {
-    console.log(error);
+    console.log(`calculateMaxActions: ${error}`);
   }
   return 0;
 }

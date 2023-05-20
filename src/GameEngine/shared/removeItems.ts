@@ -45,7 +45,7 @@ export default function removeItems(
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log(`removeItems: ${error}`);
     }
   }
   return inventory;

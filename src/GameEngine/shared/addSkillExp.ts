@@ -10,7 +10,7 @@ export default function addSkillsExp(
     try {
       skills[key] += value * times;
     } catch (error) {
-      console.log(error);
+      console.log(`addSkillExp: ${error}`);
     }
   }
   return skills;

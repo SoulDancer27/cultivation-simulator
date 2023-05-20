@@ -10,7 +10,7 @@ export default function addBaseStats(
     try {
       baseStats[key] += value * times;
     } catch (error) {
-      console.log(error);
+      console.log(`addBaseStats: ${error}`);
     }
   }
   return baseStats;

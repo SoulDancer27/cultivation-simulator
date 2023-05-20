@@ -72,7 +72,7 @@ export default function rewardActivityItems(
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log(`rewardActivityItems: ${error}`);
     }
   }
   return inventory;
