@@ -29,3 +29,5 @@ you can read contribution guideline [here](/CONTRIBUTING.md)
 # Progress tracking
 We also have a notion workspace for progress tracking
 [notion](https://www.notion.so/Cultivation-Simulator-927db0045f05489294cf198071cbd216)
+
+Notion [invite link](https://www.notion.so/invite/48b707e7d61c4fd485c68b9adc7fb3e0e8856bea)
