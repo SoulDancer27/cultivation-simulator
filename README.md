@@ -23,6 +23,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 # You are welcome to contribute to the development of the project
+**You can freely fork the project and create branches on main repo, you can experiment however you want**
 you can read contribution guideline [here](/CONTRIBUTING.md)
 
 # Progress tracking
