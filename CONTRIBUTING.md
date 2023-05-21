@@ -1,8 +1,8 @@
 # Contributors' Guide
 
-First off, thanks for taking the time to contriubute to this repo.
+First off, thanks for taking the time to contribute to this repo.
 
-Bug fixes, typo fixes and Feedback is welcome. Simply submit pull request.
+Bug fixes, typo fixes and feedback are welcome. Simply submit pull request.
 
 # How To Contribute
 
