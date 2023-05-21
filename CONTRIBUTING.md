@@ -8,8 +8,14 @@ Bug fixes, typo fixes and feedback are welcome. Simply submit pull request.
 
 If you've never contributed to open source then this is your shot. Be sure to read [this guide](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution) to get the hang of everything.
 
-If you're already familiar with contributing to open source then follow these steps:
+There are 2 paths you can choose to contribute to the project, either by forking it, or by making a new branch on the main repo.
 
+To work on the main repo, follow these steps: 
+1. Clone repo to your device [here](https://github.com/SoulDancer27/cultivation-simulator)
+2. Create a branch with a concise name for your contribution.
+3. Make your contribution.
+
+To fork the repo follow these steps
 1. Fork this Repository [here.](https://github.com/SoulDancer27/cultivation-simulator)
 2. Clone the forked repository to your local machine.
 3. Create a branch with a concise name for your contribution.
