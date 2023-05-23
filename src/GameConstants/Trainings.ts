@@ -8,6 +8,9 @@ let Trainings: Activity[] = [
     // This one is totally overpowered, serves for test purposes :)
     name: "Running",
     baseTime: 0.5 * day,
+    price: {
+      items: [{ name: "Copper Coin", amount: 1, type: "money" }],
+    },
     result: {
       baseStats: {
         health: 0.5,

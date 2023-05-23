@@ -4,16 +4,18 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
+import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // Updates cultivation manuals learning progress
 export default function useCultivationManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
+  const { gameSpeed } = React.useContext(SettingsContext);
   let { stats, state, skills, updateContext } = player;
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "cultivating" || !state.manual) return;
     // Update age
-    const elapsedTime = currentTime - previousTime;
+    const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     // calculate exp gain
     const { learningProgress, manual } = state.manual;
     const { level, exp } = learningProgress;

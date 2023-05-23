@@ -1,14 +1,16 @@
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
+import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {
   let { stats, state, updateContext } = React.useContext(PlayerContext);
+  const { gameSpeed } = React.useContext(SettingsContext);
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
-    const elapsedTime = currentTime - previousTime;
+    const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     if (state.action !== "fighting" || !state.enemy) return;
     // Calculate damage dealt by both parties
     const playerDps = FightDps(

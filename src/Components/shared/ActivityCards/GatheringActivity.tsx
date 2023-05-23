@@ -8,6 +8,7 @@ import parseTime from "Utils/parseTime";
 import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 import { ActivityCardProps } from "./types";
 import itemImages from "../itemImages";
+import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // Activity panel for activity without price, shows result image in the top right corner
 export default function GatheringActivityCard(props: ActivityCardProps) {

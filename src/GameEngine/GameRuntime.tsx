@@ -1,4 +1,3 @@
-import { defaultUpdateInterval } from "GameConstants/Constants";
 import React from "react";
 
 import useAgeManager from "./Managers/useAgeManager";
@@ -7,6 +6,7 @@ import useFightManager from "./Managers/useFightManager";
 import useCultivationManager from "./Managers/useCultivationManager";
 import useActivityManager from "./Managers/useActivityManager";
 import useBreakthroughManager from "./Managers/useBreakthroughManager";
+import SettingsContext from "./SettingsContext/SettingContext";
 
 export type GameTimer = {
   previousTime: number;
@@ -15,6 +15,8 @@ export type GameTimer = {
 
 // Wrapper for loading player save data
 export default function GameRuntime(props: any) {
+  const { tickRate } = React.useContext(SettingsContext);
+
   const [timer, setTimer] = React.useState<GameTimer>({
     previousTime: Date.now(),
     currentTime: Date.now(),
@@ -28,12 +30,12 @@ export default function GameRuntime(props: any) {
         previousTime: timer.currentTime,
         currentTime: Date.now(),
       }));
-    }, defaultUpdateInterval);
+    }, 1000 / tickRate);
     // clears the timer on component unmount to prevent memory leak
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [tickRate]);
 
   // Run game managers
   useAgeManager(timer);
