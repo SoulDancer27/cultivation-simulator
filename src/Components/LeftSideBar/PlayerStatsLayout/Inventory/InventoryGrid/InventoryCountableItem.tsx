@@ -8,10 +8,12 @@ import {
 import EmptyCell from "./EmptyCell";
 import findItemDescription from "GameConstants/utils/findItemDescription";
 import { MoneyType } from "GameConstants/Money";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 // Draw inventory money item
 export default function InventoryCountableItem(props: Type) {
   const { name, amount, type } = props;
+  const parse = useNumberParser();
   // Find image
   const cellData: MoneyType | Material | undefined = findItemDescription(
     name,
@@ -36,7 +38,7 @@ export default function InventoryCountableItem(props: Type) {
           />
         </Box>
         <Box>
-          <Typography variant="body2">{amount.toFixed(2)}</Typography>
+          <Typography variant="body2">{parse(amount)}</Typography>
         </Box>
       </Box>
     </CountableCellTooltip>

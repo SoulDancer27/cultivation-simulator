@@ -18,11 +18,13 @@ export default function SettingsContextLoader(props: any) {
     try {
       let tickrate: any = accessCookie("tickrate");
       let gameSpeed: any = accessCookie("gamespeed");
+      let notation: any = accessCookie("notation");
       if (tickrate) tickrate = Number(tickrate);
       if (gameSpeed) gameSpeed = Number(gameSpeed);
       setSettings({
         tickRate: tickrate || Math.floor(1000 / defaultUpdateInterval),
         gameSpeed: gameSpeed || 1,
+        notation: notation || "trivial",
       });
       setLoaded(true);
     } catch (error) {
@@ -33,6 +35,7 @@ export default function SettingsContextLoader(props: any) {
   React.useEffect(() => {
     createCookie("tickrate", settings.tickRate.toString(), 1000);
     createCookie("gamespeed", settings.gameSpeed.toString(), 1000);
+    createCookie("notation", settings.notation, 1000);
   }, [settings]);
 
   return (

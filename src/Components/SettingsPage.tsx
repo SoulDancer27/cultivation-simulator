@@ -6,6 +6,7 @@ import GameSpeed from "./SettingsPage/GameSpeed";
 import ExportSave from "./SettingsPage/ExportSave";
 import ImportSave from "./SettingsPage/ImportSave";
 import WipeSave from "./SettingsPage/WipeSave";
+import NumberNotation from "./SettingsPage/NumberNotation";
 
 export default function SettingsPage() {
   const theme = useTheme();
@@ -28,6 +29,7 @@ export default function SettingsPage() {
         <Typography variant="h4">Settings</Typography>
         <TickRate />
         <GameSpeed />
+        <NumberNotation />
         <Box display="flex" flexDirection={"column"}>
           <Typography variant="h6">Save Manager</Typography>
         </Box>

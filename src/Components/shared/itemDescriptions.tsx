@@ -2,9 +2,11 @@ import { Box, Typography } from "@mui/material";
 import { ActivityItem } from "GameConstants/Activities";
 import findItemDescription from "GameConstants/utils/findItemDescription";
 import CropSquareImage from "./CropImage";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 // Generates item descriptions in the format Image Name Amount
 export default function itemDescriptions(items: ActivityItem[]): JSX.Element[] {
+  const parse = useNumberParser();
   let result: JSX.Element[] = [];
   let i = 0;
   for (let item of items) {
@@ -16,7 +18,7 @@ export default function itemDescriptions(items: ActivityItem[]): JSX.Element[] {
       <Box key={i} display="flex" alignItems={"center"} gap={1}>
         <CropSquareImage path={path} size={size} position={{ x, y }} />
         <Typography display="inline">
-          {item.name} {item.amount}
+          {item.name} {parse(item.amount)}
         </Typography>
       </Box>
     );
