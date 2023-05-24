@@ -13,6 +13,7 @@ import {
   InventoryTreasure,
   isInventoryTreasure,
 } from "GameConstants/Interfaces";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 type Props = {
   treasure: InventoryTreasure | undefined;
@@ -24,6 +25,7 @@ export default function EquipmentCard(props: Props) {
   const { treasure, type } = props;
   const theme = useTheme();
   const player = React.useContext(PlayerContext);
+  const parse = useNumberParser();
   let { inventory, stats, skills, updateContext } = player;
   if (!treasure)
     return (
@@ -46,7 +48,7 @@ export default function EquipmentCard(props: Props) {
     for (const [key, value] of Object.entries(itemStats.stats)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: value.toFixed(2),
+        effect: parse(value),
       });
     }
   }
@@ -54,7 +56,7 @@ export default function EquipmentCard(props: Props) {
     for (const [key, value] of Object.entries(itemStats.skills)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: value.toFixed(2),
+        effect: parse(value),
       });
     }
   }
@@ -62,7 +64,7 @@ export default function EquipmentCard(props: Props) {
     for (const [key, value] of Object.entries(itemStats.statsMulti)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: (value * 100).toFixed(2) + "%",
+        effect: parse(value * 100) + "%",
       });
     }
   }
@@ -70,7 +72,7 @@ export default function EquipmentCard(props: Props) {
     for (const [key, value] of Object.entries(itemStats.skillsMulti)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: (value * 100).toFixed(2) + "%",
+        effect: parse(value * 100) + "%",
       });
     }
   }

@@ -2,6 +2,7 @@ import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { getSkillStructure } from "GameEngine/Player/playerSkills";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 import React from "react";
 
 // Provides description
@@ -10,6 +11,7 @@ export default function SkillDetailsTooltip(
 ) {
   const player = React.useContext(PlayerContext);
   const skillStructure = getSkillStructure(props.skill, player);
+  const parse = useNumberParser();
   const theme = useTheme();
 
   return (
@@ -18,7 +20,7 @@ export default function SkillDetailsTooltip(
         <>
           <Typography color="inherit">Character {props.skill}</Typography>
           <Typography>
-            Base {props.skill}: {skillStructure.base.toFixed(2)}
+            Base {props.skill}: {parse(skillStructure.base)}
           </Typography>
 
           <Typography>

@@ -4,12 +4,14 @@ import { ActivityItem } from "GameConstants/Activities";
 import { Minerals } from "GameConstants/Minerals";
 import Money from "GameConstants/Money";
 import Treasures from "GameConstants/Treasures";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 type Props = {
   price: ActivityItem[];
 };
 export default function ActivityPrice(props: Props) {
   const { price } = props;
+  const parse = useNumberParser();
   return (
     <Box>
       {price.map((item) => {
@@ -59,7 +61,7 @@ export default function ActivityPrice(props: Props) {
               position={{ x: imageData.x, y: imageData.y }}
             />
             <Typography marginLeft={1}>
-              {name} x {amount}
+              {name} x {parse(amount)}
             </Typography>
           </Box>
         );

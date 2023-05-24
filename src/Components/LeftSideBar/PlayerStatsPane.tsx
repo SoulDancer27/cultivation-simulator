@@ -3,12 +3,14 @@ import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 type Props = { displayStats: { name: string; stat: string }[] };
 
 // Displays current player stats
 export default function PlayerStatsPane(props: Props) {
   const player = React.useContext(PlayerContext);
+  const parse = useNumberParser();
   const { stats } = player;
   const { currentHealth, health } = stats;
   const theme = useTheme();
@@ -22,7 +24,7 @@ export default function PlayerStatsPane(props: Props) {
       <StatDetailsTooltip stat="health">
         <Box>
           <HealthBar
-            label={`Health: ${currentHealth.toFixed(2)} / ${health.toFixed(2)}`}
+            label={`Health: ${parse(currentHealth)} / ${parse(health)}`}
             value={(currentHealth / health) * 100}
           />
         </Box>
@@ -30,7 +32,7 @@ export default function PlayerStatsPane(props: Props) {
       {props.displayStats.map((item) => (
         <StatDetailsTooltip stat={item.stat} key={item.stat}>
           <Typography>
-            {item.name} {player.stats[item.stat].toFixed(2)}
+            {item.name} {parse(player.stats[item.stat])}
           </Typography>
         </StatDetailsTooltip>
       ))}

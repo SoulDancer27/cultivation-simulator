@@ -9,17 +9,19 @@ import {
   BreakthroughDps,
   TribulationDps,
 } from "GameConstants/CultivationRealms";
+import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // Manages realm breakthroughs
 export default function useBreakthroughManager(timer: GameTimer) {
   const player = React.useContext(PlayerContext);
+  const { gameSpeed } = React.useContext(SettingsContext);
   const { cultivationRealms, updateContext: updateGameContext } =
     React.useContext(GameContext);
   let { stats, state, realm, updateContext } = player;
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     if (state.action !== "breakthrough" || !state.realm) return;
-    const elapsedTime = currentTime - previousTime;
+    const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     // Calculate damage dealt by both parties
     const breakthrough = cultivationRealms[state.realm.index];
 

@@ -1,23 +1,53 @@
-import { Box, Paper, Typography, useTheme } from "@mui/material";
+import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
 import { month, year } from "GameConstants/Constants";
 import GameContext from "GameEngine/GameContext/GameContext";
 import PlayerContext from "GameEngine/Player/PlayerContext";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import React from "react";
+import { getWindowDimensions } from "Utils/useWindowDimensions";
+import getSpacing from "Utils/getSpacing";
+import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+
+type Props = {
+  setSettings: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 // Top bar with some game stats and values
-export default function TopBar() {
+export default function TopBar(props: Props) {
   const theme = useTheme();
   const { stats, realm } = React.useContext(PlayerContext);
   const { cultivationRealms } = React.useContext(GameContext);
+  const { gameSpeed } = React.useContext(SettingsContext);
+
+  const { width, height } = getWindowDimensions();
   return (
-    <Paper elevation={8}>
-      <Box height={theme.spacing(8)} width="100vw">
-        <Typography variant="h5">Age: {parseAge(stats.age)}</Typography>
-        <Typography variant="h5">
-          Realm: {cultivationRealms[realm.index].name}
-        </Typography>
-      </Box>
-    </Paper>
+    <>
+      <Paper elevation={8}>
+        <Box
+          height={theme.spacing(8)}
+          width={width}
+          display="flex"
+          alignItems={"center"}
+          gap={2}
+          paddingX={2}
+        >
+          <Box>
+            <Typography variant="h5">Age: {parseAge(stats.age)}</Typography>
+            <Typography variant="h5">
+              Realm: {cultivationRealms[realm.index].name}
+            </Typography>
+          </Box>
+
+          <Box marginLeft="auto" display="flex" alignItems={"center"} gap={1}>
+            <Typography>Game Speed: x{gameSpeed}</Typography>
+            <SettingsOutlinedIcon
+              fontSize="large"
+              onClick={() => props.setSettings((settings) => !settings)}
+            />
+          </Box>
+        </Box>
+      </Paper>
+    </>
   );
 }
 function parseAge(time: number): string {

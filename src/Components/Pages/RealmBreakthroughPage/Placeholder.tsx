@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
 import { PlayerBaseStats } from "GameConstants/Player";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 
@@ -16,6 +17,7 @@ type Props = {
 
 export default function Placeholder(props: Props) {
   const { PassedTribulations, currentPower } = props;
+  const parse = useNumberParser();
   const theme = useTheme();
   const { height } = getWindowDimensions();
   return (
@@ -38,11 +40,9 @@ export default function Placeholder(props: Props) {
               title={
                 <>
                   <Typography>Multipliers:</Typography>
+                  <Typography>Player stats: {parse(item.statMulti)}</Typography>
                   <Typography>
-                    Player stats: {item.statMulti.toFixed(2)}
-                  </Typography>
-                  <Typography>
-                    Tribulation power: {item.tribulationMulti.toFixed(2)}
+                    Tribulation power: {parse(item.tribulationMulti)}
                   </Typography>
                 </>
               }
@@ -64,15 +64,13 @@ export default function Placeholder(props: Props) {
           gap={theme.spacing(4)}
         >
           <Box>
-            <Typography>Health x {currentPower.health.toFixed(2)}</Typography>
+            <Typography>Health x {parse(currentPower.health)}</Typography>
             <Typography>
-              Health regen x {currentPower.healthRegen.toFixed(2)}
+              Health regen x {parse(currentPower.healthRegen)}
             </Typography>
-            <Typography>Attack x {currentPower.attack.toFixed(2)}</Typography>
-            <Typography>Defence x {currentPower.defence.toFixed(2)}</Typography>
-            <Typography>
-              Insight x {currentPower.insight.toFixed(2)}{" "}
-            </Typography>
+            <Typography>Attack x {parse(currentPower.attack)}</Typography>
+            <Typography>Defence x {parse(currentPower.defence)}</Typography>
+            <Typography>Insight x {parse(currentPower.insight)}</Typography>
           </Box>
         </Box>
       </Box>

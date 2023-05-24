@@ -7,11 +7,13 @@ import { defaultUpdateInterval } from "GameConstants/Constants";
 import parseTime from "Utils/parseTime";
 import ActivitiesFunctions from "GameConstants/ActivitiesFunctions";
 import { ActivityCardProps } from "./types";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 // Generic activity panel without decorations suitable for any activity
 export default function ActivityCard(props: ActivityCardProps) {
   const { activity, isActive, source, showTimesCompleted } = props;
   const player = React.useContext(PlayerContext);
+  const parse = useNumberParser();
   const { updateContext } = player;
   const { result, price } = activity;
   const theme = useTheme();
@@ -140,8 +142,8 @@ export default function ActivityCard(props: ActivityCardProps) {
                     >
                       {item.text}{" "}
                       {requiredTime > 1000
-                        ? item.effect.toPrecision(3)
-                        : ((item.effect / requiredTime) * 1000).toPrecision(3)}
+                        ? parse(item.effect)
+                        : parse((item.effect / requiredTime) * 1000)}
                     </Typography>
                   ))}
                   {requiredTime < 1000 ? "/s" : ""}
@@ -155,7 +157,7 @@ export default function ActivityCard(props: ActivityCardProps) {
                       variant="body1"
                       display="inline"
                     >
-                      {item.name} {item.amount}
+                      {item.name} {parse(item.amount)}
                     </Typography>
                   ))}
                 </Box>
@@ -171,8 +173,8 @@ export default function ActivityCard(props: ActivityCardProps) {
                     >
                       {item.text}{" "}
                       {requiredTime > 1000
-                        ? item.effect.toPrecision(3)
-                        : ((item.effect / requiredTime) * 1000).toPrecision(3)}
+                        ? parse(item.effect)
+                        : parse((item.effect / requiredTime) * 1000)}
                     </Typography>
                   ))}
                   {requiredTime < 1000 ? "/s" : ""}
@@ -208,7 +210,7 @@ export default function ActivityCard(props: ActivityCardProps) {
             <Box display="flex" gap={theme.spacing(1)}>
               {StatsPriceDescription.map((item) => (
                 <Typography key={item.text} variant="body1" display="inline">
-                  {item.text} {item.effect}
+                  {item.text} {parse(item.effect)}
                 </Typography>
               ))}
             </Box>
@@ -216,7 +218,7 @@ export default function ActivityCard(props: ActivityCardProps) {
             <Box display="flex" gap={theme.spacing(1)}>
               {ItemPriceDescription.map((item) => (
                 <Typography key={item.name} variant="body1" display="inline">
-                  {item.name} {item.amount}
+                  {item.name} {parse(item.amount)}
                 </Typography>
               ))}
             </Box>

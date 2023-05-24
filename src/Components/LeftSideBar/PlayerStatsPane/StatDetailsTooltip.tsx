@@ -2,6 +2,7 @@ import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
 import PlayerContext from "GameEngine/Player/PlayerContext";
 import { getStatStructure } from "GameEngine/Player/playerStats";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 import React from "react";
 
 export default function StatDetailsTooltip(
@@ -9,6 +10,7 @@ export default function StatDetailsTooltip(
 ) {
   const player = React.useContext(PlayerContext);
   const statStructure = getStatStructure(props.stat, player);
+  const parse = useNumberParser();
   const theme = useTheme();
 
   return (
@@ -17,7 +19,7 @@ export default function StatDetailsTooltip(
         <>
           <Typography color="inherit">Character {props.stat}</Typography>
           <Typography>
-            Base {props.stat}: {statStructure.base.toFixed(2)}
+            Base {props.stat}: {parse(statStructure.base)}
           </Typography>
           <Typography>
             Realm bonus:

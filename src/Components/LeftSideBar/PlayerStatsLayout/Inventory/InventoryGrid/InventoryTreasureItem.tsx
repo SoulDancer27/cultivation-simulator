@@ -19,6 +19,7 @@ import {
   InventoryTreasure,
   isInventoryTreasure,
 } from "GameConstants/Interfaces";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {
@@ -26,6 +27,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
 
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const parse = useNumberParser();
   const player = React.useContext(PlayerContext);
   let { inventory, stats, skills, updateContext } = player;
 
@@ -73,7 +75,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     for (const [key, value] of Object.entries(itemStats.stats)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: value.toFixed(2),
+        effect: parse(value),
       });
     }
   }
@@ -81,7 +83,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     for (const [key, value] of Object.entries(itemStats.skills)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: value.toFixed(2),
+        effect: parse(value),
       });
     }
   }
@@ -89,7 +91,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     for (const [key, value] of Object.entries(itemStats.statsMulti)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: (value * 100).toFixed(2) + "%",
+        effect: parse(value * 100) + "%",
       });
     }
   }
@@ -97,7 +99,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     for (const [key, value] of Object.entries(itemStats.skillsMulti)) {
       TreasureDescription.push({
         text: getStatName(key),
-        effect: (value * 100).toFixed(2) + "%",
+        effect: parse(value * 100) + "%",
       });
     }
   }

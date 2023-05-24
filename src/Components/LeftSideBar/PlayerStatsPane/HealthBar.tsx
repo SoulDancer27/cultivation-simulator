@@ -10,7 +10,7 @@ export default function HealthBar(
 ) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Box sx={{ minWidth: 35 }}>
+      <Box sx={{ minWidth: 200 }}>
         <Typography variant="body1" color="text.primary">
           {props.label}
         </Typography>

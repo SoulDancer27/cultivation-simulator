@@ -11,6 +11,7 @@ import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Placeholder from "./RealmBreakthroughPage/Placeholder";
 import calculateMaxTribulationStage from "./RealmBreakthroughPage/calculateMaxTribulationStage";
+import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 
 // ! Some bad coding ahead. Probably should split into several files :)
 export default function RealmBreakthroughPage() {
@@ -71,6 +72,7 @@ export default function RealmBreakthroughPage() {
   // Tribulation logic
   const nextRealm = cultivationRealms[nextRealmIndex];
   const power = calculateTribulationPower(nextRealmIndex, cultivationRealms);
+  const parse = useNumberParser();
   const { healthRegen, attack, defence, health } = power;
 
   const { state, updateContext } = React.useContext(PlayerContext);
@@ -164,10 +166,10 @@ export default function RealmBreakthroughPage() {
                       <>
                         <Typography>Multipliers:</Typography>
                         <Typography>
-                          Player stats: {item.statMulti.toFixed(2)}
+                          Player stats: {parse(item.statMulti)}
                         </Typography>
                         <Typography>
-                          Tribulation power: {item.tribulationMulti.toFixed(2)}
+                          Tribulation power: {parse(item.tribulationMulti)}
                         </Typography>
                       </>
                     }
@@ -190,10 +192,10 @@ export default function RealmBreakthroughPage() {
 
             <Box marginLeft={theme.spacing(4)}>
               <Typography variant="h6">Tribulation power:</Typography>
-              <Typography>Hp: {currentHealth.toFixed(2)}</Typography>
-              <Typography>Hp.regen: {healthRegen.toFixed(2)}</Typography>
-              <Typography>Atk: {attack.toFixed(2)}</Typography>
-              <Typography>Def: {defence.toFixed(2)}</Typography>
+              <Typography>Hp: {parse(currentHealth)}</Typography>
+              <Typography>Hp.regen: {parse(healthRegen)}</Typography>
+              <Typography>Atk: {parse(attack)}</Typography>
+              <Typography>Def: {parse(defence)}</Typography>
               <Typography variant="h6">
                 {nextRealm.tribulation
                   ? `Tribulation stage: ${
@@ -205,11 +207,11 @@ export default function RealmBreakthroughPage() {
                 {nextRealm.tribulation
                   ? `Power multi: ${
                       nextRealm.tribulation.stepReached
-                        ? (
+                        ? parse(
                             TotalTribulations.tribulationMulti *
-                            nextRealm.tribulation.multiplier **
-                              nextRealm.tribulation.stepReached
-                          ).toFixed(2)
+                              nextRealm.tribulation.multiplier **
+                                nextRealm.tribulation.stepReached
+                          )
                         : 1
                     }`
                   : ""}
@@ -241,25 +243,23 @@ export default function RealmBreakthroughPage() {
           gap={theme.spacing(4)}
         >
           <Box>
-            <Typography>Health x {currentPower.health.toFixed(2)}</Typography>
+            <Typography>Health x {parse(currentPower.health)}</Typography>
             <Typography>
-              Health regen x {currentPower.healthRegen.toFixed(2)}
+              Health regen x {parse(currentPower.healthRegen)}
             </Typography>
-            <Typography>Attack x {currentPower.attack.toFixed(2)}</Typography>
-            <Typography>Defence x {currentPower.defence.toFixed(2)}</Typography>
-            <Typography>
-              Insight x {currentPower.insight.toFixed(2)}{" "}
-            </Typography>
+            <Typography>Attack x {parse(currentPower.attack)}</Typography>
+            <Typography>Defence x {parse(currentPower.defence)}</Typography>
+            <Typography>Insight x {parse(currentPower.insight)}</Typography>
           </Box>
           <ArrowForwardIcon fontSize={"large"} />
           <Box>
-            <Typography>Health x {nextPower.health.toFixed(2)}</Typography>
+            <Typography>Health x {parse(nextPower.health)}</Typography>
             <Typography>
-              Health regen x {nextPower.healthRegen.toFixed(2)}
+              Health regen x {parse(nextPower.healthRegen)}
             </Typography>
-            <Typography>Attack x {nextPower.attack.toFixed(2)}</Typography>
-            <Typography>Defence x {nextPower.defence.toFixed(2)}</Typography>
-            <Typography>Insight x {nextPower.insight.toFixed(2)} </Typography>
+            <Typography>Attack x {parse(nextPower.attack)}</Typography>
+            <Typography>Defence x {parse(nextPower.defence)}</Typography>
+            <Typography>Insight x {parse(nextPower.insight)} </Typography>
           </Box>
         </Box>
       </Box>
