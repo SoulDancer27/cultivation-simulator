@@ -7,33 +7,33 @@ import { ItemType } from "./Interfaces";
 export type Activity = {
   name: string;
   description?: string;
-  baseTime: number; // in milliseconds
+  baseTime: number; // time to complete activity in milliseconds
   time?: string; // calculate completion time based on props
 
   // Values for action progress tracking
   currentTime?: number; // for progress tracking
   timesCompleted?: number; // total times completed
 
-  // Activity price
+  // Activity price (aka cost)
   price?: {
-    baseStats?: Partial<PlayerBaseStats>;
-    items?: ActivityItem[];
+    baseStats?: Partial<PlayerBaseStats>; // character stats consumed to start activity
+    items?: ActivityItem[]; // items consumed to start activity
     priceMulti?: number; // price multiplier, has impact on some activities, like Crafting for example
   };
 
-  // Activity result
+  // Activity result (aka reward)
   result: {
-    baseStats?: Partial<PlayerBaseStats>;
+    baseStats?: Partial<PlayerBaseStats>; // character stats rewarded for completing activity
     baseStatsMulti?: string; // calculate stats reward multiplier
-    skills?: Partial<PlayerSkills>;
+    skills?: Partial<PlayerSkills>; // skill exp rewarded for completing activity
     skillsMulti?: string; // calculate skills reward multiplier
-    items?: ActivityItem[];
+    items?: ActivityItem[]; // items rewarded for completing activity
   };
   data?: any; // additional custom data for activity logic
 };
 
 type ItemReward = {
-  type: ItemType;
+  type: ItemType; 
   name: string;
   amount: number;
   generator?: string;

@@ -1,6 +1,7 @@
 import { Activity } from "./Activities";
 import { PlayerContextType } from "./Interfaces";
 
+// One function per activity type (training, crafting, mining) - determines how to calculate how long an activity takes based on skill level 
 const ActivitiesFunctions = {
   "training time": function (activity: Activity, player: PlayerContextType) {
     const { skills } = player;

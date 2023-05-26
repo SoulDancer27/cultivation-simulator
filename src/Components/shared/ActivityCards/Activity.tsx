@@ -18,11 +18,17 @@ export default function ActivityCard(props: ActivityCardProps) {
   const { result, price } = activity;
   const theme = useTheme();
 
+  // Handle click on activity card 
   const handleClick = () => {
-    // If training is active
+    // If activity is active on click, set character state.action to 'idle' (i.e. deactivate training)
     if (isActive)
-      updateContext({ state: { action: "idle", activity: undefined } });
-    // Set active training
+      updateContext({ 
+        state: {
+          action: "idle", 
+          activity: undefined 
+        } 
+      });
+    // If activity is not active on click, set character state.action to 'activity' (i.e. activate training)  
     else {
       updateContext({
         state: {
@@ -33,9 +39,12 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   };
 
-  // Display the reward description
+  // Object to display the result description for baseStat rewards
   const StatsRewardDescription: StatsLine[] = [];
+
+  // If the activity result includes baseStats
   if (result.baseStats) {
+    // For every entry of baseStats in the result object, push the baseStat name and exp reward to the StatsRewardDescription array for display
     for (const [key, value] of Object.entries(result.baseStats)) {
       StatsRewardDescription.push({
         text: getStatName(key),
@@ -48,8 +57,12 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   }
 
+  // Object to display the result description for item rewards
   const ItemRewardDescription: ItemLine[] = [];
+
+  // If the activity result includes items
   if (result.items) {
+    // For every item in the result object, push the item name and quantity to the ItemRewardDescription array for display
     for (let item of result.items) {
       ItemRewardDescription.push({
         name: item.name,
@@ -58,8 +71,12 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   }
 
+  // Object to display the result description for skill rewards
   const SkillsRewardDescription: StatsLine[] = [];
+
+  // If the activity result includes skills
   if (result.skills) {
+    // For every entry of skills in the result object, push the skill name and exp reward to the SkillsRewardDescription array for display
     for (const [key, value] of Object.entries(result.skills)) {
       SkillsRewardDescription.push({
         text: getStatName(key),
@@ -72,9 +89,12 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   }
 
-  // Display the price description
+  // Object to display the result description for prices / costs of the activity
   const StatsPriceDescription: StatsLine[] = [];
+
+  // If the activity price includes baseStats
   if (price?.baseStats) {
+    // For every entry of baseStats in the price object, push the baseStat name and exp cost to the StatsPriceDescription array for display
     for (const [key, value] of Object.entries(price.baseStats)) {
       StatsPriceDescription.push({
         text: getStatName(key),
@@ -83,8 +103,12 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   }
 
+  // Object to display the result description for item prices / costs of the activity
   const ItemPriceDescription: ItemLine[] = [];
+
+  // If the activity price includes items
   if (price?.items) {
+    // For every item in the price object, push the item name and quantity to the ItemPriceDescription array for display
     for (let item of price.items) {
       ItemPriceDescription.push({
         name: item.name,
@@ -97,14 +121,21 @@ export default function ActivityCard(props: ActivityCardProps) {
   const requiredTime = activity.time
     ? ActivitiesFunctions[activity.time](activity, player)
     : activity.baseTime;
+  
   const currentTime = activity.currentTime || 0;
 
   // Change some displayed effects if action is really fast
+  // Action is a 'fast action' if it takes less than 5 update intervals to complete
   const fastAction = requiredTime / defaultUpdateInterval < 5;
+  
+  // Adding text to the progress bar label: 
+  // If action takes less than 1000ms to complete, display the amount of actions completed per second
+  // Else, display the amount of time required to complete the action in ms
   const progressBarLabel =
     requiredTime < 1000
       ? (1000 / requiredTime).toFixed(2) + "/s"
       : parseTime(requiredTime);
+  
   return (
     <Paper
       elevation={8}
@@ -132,6 +163,9 @@ export default function ActivityCard(props: ActivityCardProps) {
           <Box display="flex">
             <Box display="flex" flexDirection={"column"}>
               <Typography>{activity.name}</Typography>
+              {/* Display for rewarded stats */}
+              {/* If baseStats are rewarded: Display a list of the stats and their exp quantities */}
+              {/* Per baseStat: If required time to complete is greater than 1s, show exp gained per completion. Else, show exp gained divided by required time multiplied by 1000 */}
               {StatsRewardDescription.length > 0 && (
                 <Box display="flex" gap={theme.spacing(1)}>
                   {StatsRewardDescription.map((item) => (
@@ -149,6 +183,8 @@ export default function ActivityCard(props: ActivityCardProps) {
                   {requiredTime < 1000 ? "/s" : ""}
                 </Box>
               )}
+              {/* Display for rewarded items */}
+              {/* If items are rewarded: Display a list of the items and their quantities */}
               {ItemRewardDescription.length > 0 && (
                 <Box display="flex" gap={theme.spacing(1)}>
                   {ItemRewardDescription.map((item) => (
@@ -162,6 +198,9 @@ export default function ActivityCard(props: ActivityCardProps) {
                   ))}
                 </Box>
               )}
+              {/* Display for rewarded skills */}
+              {/* If skills are rewarded: Display a list of the skills and their rewarded exp */}
+              {/* Per skill: If the required time for activity completion is greater than 1s, show the rewarded exp per completion. Else, show the rewarded exp divided by required time to complete and multiplied by 1000 */}
               {SkillsRewardDescription.length > 0 && (
                 <Box display="flex" gap={theme.spacing(1)}>
                   <Typography>Skill exp: </Typography>
@@ -187,7 +226,9 @@ export default function ActivityCard(props: ActivityCardProps) {
               </Box>
             )}
           </Box>
+          {/* The progress bar of the activity card */}
           <Box>
+            {/* Value of the progress bar is 100 (i.e. complete) if the action is marked 'fast' and is active, otherwise it's the percentage of the current time out of the required time */}
             <ProgressBar
               value={
                 fastAction && isActive
@@ -229,11 +270,13 @@ export default function ActivityCard(props: ActivityCardProps) {
   );
 }
 
+// Object to contain name of baseStat and exp change
 type StatsLine = {
   text: string;
   effect: number;
 };
 
+// Object to contain name and quantity of items
 type ItemLine = {
   name: string;
   amount: number;
