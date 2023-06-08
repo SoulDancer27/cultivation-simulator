@@ -16,12 +16,12 @@ import {
   playerSkills,
   getStatName,
 } from "GameEngine";
+import { CultivationRealms } from "GameConstants/Cultivation/CultivationRealms";
 import {
   InventoryTreasure,
-  CultivationRealms,
-  TreasureType,
   isInventoryTreasure,
-} from "GameConstants";
+} from "GameConstants/Interfaces";
+import { TreasureType } from "GameConstants/Items";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {

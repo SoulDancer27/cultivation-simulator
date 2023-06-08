@@ -1,17 +1,15 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import BreakthroughAnimation from "./RealmBreakthroughPage/BreakthroughAnimation";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import getSpacing from "Utils/getSpacing";
-import GameContext from "GameEngine/GameContext/GameContext";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Placeholder from "./RealmBreakthroughPage/Placeholder";
 import calculateMaxTribulationStage from "./RealmBreakthroughPage/calculateMaxTribulationStage";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
 import { HtmlTooltip } from "Components";
+import { PlayerContext, GameContext, useNumberParser } from "GameEngine";
 
 // ! Some bad coding ahead. Probably should split into several files :)
 export default function RealmBreakthroughPage() {

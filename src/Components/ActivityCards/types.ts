@@ -1,4 +1,4 @@
-import { Activity } from "GameConstants";
+import { Activity } from "GameConstants/Activities";
 
 export type ActivityCardProps = {
   activity: Activity;

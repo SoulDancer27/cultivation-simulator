@@ -1,4 +1,4 @@
-import { defaultUpdateInterval } from "GameConstants";
+import { defaultUpdateInterval } from "GameConstants/Constants";
 import { exponentialNumber, trivialNumber } from "Utils/parseNumber";
 import React from "react";
 

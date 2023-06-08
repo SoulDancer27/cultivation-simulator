@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 import InventoryGridItem from "./InventoryGrid/InventoryGridItem";
-import { InventoryItem } from "GameConstants";
+import { InventoryItem } from "GameConstants/Interfaces";
 
 // Player inventory
 export default function InventoryGrid(props: { inventory: InventoryItem[] }) {

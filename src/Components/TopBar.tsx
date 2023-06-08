@@ -4,7 +4,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import React from "react";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import { PlayerContext, GameContext, SettingsContext } from "GameEngine";
-import { year, month } from "GameConstants";
+import { year, month } from "GameConstants/Constants";
 
 type Props = {
   setSettings: React.Dispatch<React.SetStateAction<boolean>>;

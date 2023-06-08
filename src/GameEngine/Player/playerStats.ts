@@ -1,4 +1,4 @@
-import { isInventoryTreasure } from "GameConstants";
+import { isInventoryTreasure } from "GameConstants/Interfaces";
 import {
   PlayerStats,
   PlayerCultivationManual,

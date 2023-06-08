@@ -1,7 +1,7 @@
 import { Box, TooltipProps, Typography } from "@mui/material";
-import Money from "GameConstants/Items/Money";
+import { Money } from "GameConstants/Items";
 import EmptyCell from "./EmptyCell";
-import { Activity, ActivityItem } from "GameConstants/Activities/Activities";
+import { Activity, ActivityItem } from "GameConstants/Activities";
 import { CropSquareImage, HtmlTooltip } from "Components";
 
 type Props = {

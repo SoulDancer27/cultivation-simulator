@@ -1,7 +1,7 @@
 import EmptyCell from "./EmptyCell";
 import CraftingMoneyItem from "./CraftingMoneyItem";
 import CraftingTreasureItem from "./CraftingTreasureItem";
-import { Activity } from "GameConstants/Activities/Activities";
+import { Activity } from "GameConstants/Activities";
 
 type GridItemProps = {
   item: Activity | undefined;

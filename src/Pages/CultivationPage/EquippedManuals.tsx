@@ -1,9 +1,9 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import EquippedManualCard from "./EquippedManuals/EquippedManualCard";
 import PlaceholderCard from "./EquippedManuals/PlaceholderCard";
+import { PlayerContext } from "GameEngine";
 
 export default function EquippedManuals() {
   const { manuals } = React.useContext(PlayerContext);

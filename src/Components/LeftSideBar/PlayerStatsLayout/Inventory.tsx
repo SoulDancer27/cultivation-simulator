@@ -4,7 +4,7 @@ import InventoryBottomPanel from "./Inventory/InventoryBottomPanel";
 import InventoryFiltersPane from "./Inventory/InventoryFilters";
 import InventoryGrid from "./Inventory/InventoryGrid";
 import { PlayerContext } from "GameEngine";
-import { isInventoryTreasure } from "GameConstants";
+import { isInventoryTreasure } from "GameConstants/Interfaces";
 
 export type InventoryFilters =
   | "all"

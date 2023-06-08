@@ -9,8 +9,7 @@ import {
   levelExp,
   totalExp,
 } from "GameConstants/Cultivation/CultivationManuals";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
+import { PlayerContext, getStatName } from "GameEngine";
 import React from "react";
 
 export default function ActiveManual() {

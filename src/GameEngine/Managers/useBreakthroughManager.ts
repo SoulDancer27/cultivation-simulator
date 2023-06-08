@@ -6,7 +6,10 @@ import GameContext from "GameEngine/GameContext/GameContext";
 import calculateRealmPower from "GameEngine/shared/calculateRealmPower";
 import calculateTribulationPower from "GameEngine/shared/calculateTribulationPower";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
-import { BreakthroughDps, TribulationDps } from "GameConstants";
+import {
+  BreakthroughDps,
+  TribulationDps,
+} from "GameConstants/Cultivation/CultivationRealms";
 
 // Manages realm breakthroughs
 export default function useBreakthroughManager(timer: GameTimer) {

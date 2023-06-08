@@ -5,9 +5,9 @@ import EquipmentCard from "./Equipment/EquipmentCard";
 import { PlayerContext } from "GameEngine";
 import {
   isInventoryTreasure,
-  PlayerEquipment,
   InventoryTreasure,
-} from "GameConstants";
+} from "GameConstants/Interfaces";
+import { PlayerEquipment } from "GameConstants/Player";
 
 // Player equipment
 export default function Equipment() {

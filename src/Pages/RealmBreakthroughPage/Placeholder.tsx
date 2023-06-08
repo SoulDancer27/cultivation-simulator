@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { HtmlTooltip } from "Components";
 import { PlayerBaseStats } from "GameConstants/Player";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { useNumberParser } from "GameEngine";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 

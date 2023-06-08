@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import CropSquareImage from "../shared/CropImage";
 import { GridItemType } from "Components/ItemGrid";
-import { findItemDescription } from "GameConstants";
+import findItemDescription from "GameConstants/utils/findItemDescription";
 
 type Props = {
   width: number;

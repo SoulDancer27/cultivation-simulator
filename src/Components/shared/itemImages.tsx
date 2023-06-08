@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import CropSquareImage from "./CropImage";
-import { findItemDescription } from "GameConstants";
+import findItemDescription from "GameConstants/utils/findItemDescription";
 import { ActivityItem } from "GameConstants/Activities/Activities";
 
 // Generates item descriptions in the format Image Name Amount

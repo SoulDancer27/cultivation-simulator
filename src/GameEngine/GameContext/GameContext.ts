@@ -1,4 +1,4 @@
-import { GameContent, gameContent } from "GameConstants";
+import { GameContent, gameContent } from "GameConstants/GameContent";
 import React from "react";
 
 // Declarations for the React Context type

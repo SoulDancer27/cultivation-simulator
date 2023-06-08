@@ -27,14 +27,8 @@ export default function calculateMaxTribulationStage(props: {
       nextRealmIndex,
       cultivationRealmsCopy
     );
-    const tribulationDps = TribulationDps(
-      currentRealm.currentStats || currentRealm.baseStats,
-      player
-    );
-    const playerDps = BreakthroughDps(
-      player,
-      currentRealm.currentStats || currentRealm.baseStats
-    );
+    const tribulationDps = TribulationDps(tribulation, player);
+    const playerDps = BreakthroughDps(player, tribulation);
     if (playerDps <= 0) break;
     if (tribulationDps <= 0) {
       step++;

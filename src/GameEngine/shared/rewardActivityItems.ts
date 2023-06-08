@@ -1,4 +1,4 @@
-import { Activity } from "GameConstants/Activities/Activities";
+import { Activity } from "GameConstants/Activities";
 import CraftingFunctions from "GameConstants/Activities/Crafting";
 import {
   CountableItem,

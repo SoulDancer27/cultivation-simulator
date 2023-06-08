@@ -4,7 +4,8 @@ import React from "react";
 import parseTime from "Utils/parseTime";
 import { ActivityCardProps } from "./types";
 import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
-import { ActivitiesFunctions, defaultUpdateInterval } from "GameConstants";
+import { ActivitiesFunctions } from "GameConstants/Activities";
+import { defaultUpdateInterval } from "GameConstants/Constants";
 
 // Generic activity panel without decorations suitable for any activity
 export default function ActivityCard(props: ActivityCardProps) {

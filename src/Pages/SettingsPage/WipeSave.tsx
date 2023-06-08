@@ -1,7 +1,8 @@
-import { Box, Button, Input } from "@mui/material";
+import { Button } from "@mui/material";
 import { gameContent } from "GameConstants/GameContent";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext, { playerContext } from "GameEngine/Player/PlayerContext";
+import { PlayerContext, GameContext } from "GameEngine";
+import { playerContext } from "GameEngine/Player/PlayerContext";
+
 import React from "react";
 
 export default function WipeSave() {

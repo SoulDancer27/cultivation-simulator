@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
-import GameContext from "GameEngine/GameContext/GameContext";
 import CraftingGrid from "./Recipies/CraftingGrid";
+import { GameContext } from "GameEngine";
 
 export type InventoryFilters = "all" | "money" | "treasure" | "mineral";
 

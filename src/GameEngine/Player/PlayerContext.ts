@@ -1,10 +1,7 @@
-import {
-  year,
-  baseStats,
-  CultivationManuals,
-  playerSkills,
-} from "GameConstants";
+import { year } from "GameConstants/Constants";
+import { CultivationManuals } from "GameConstants/Cultivation/CultivationManuals";
 import { PlayerContextType } from "GameConstants/Interfaces";
+import { baseStats, playerSkills } from "GameConstants/Player";
 import React from "react";
 
 // Some placeholder values to fill in the player object on first launch

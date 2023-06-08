@@ -1,5 +1,5 @@
 import { Box, Slider, Typography } from "@mui/material";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { SettingsContext } from "GameEngine";
 import React from "react";
 
 const marks = [

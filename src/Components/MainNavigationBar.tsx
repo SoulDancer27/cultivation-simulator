@@ -10,7 +10,7 @@ import ActivityCard from "./ActivityCards/Activity";
 import GatheringActivityCard from "./ActivityCards/GatheringActivity";
 import CraftingPage from "Pages/CraftingPage";
 import { GameContext, PlayerContext } from "GameEngine";
-import { NavigationBarPages } from "GameConstants";
+import { NavigationBarPages } from "GameConstants/GameContent";
 
 export type ActivePage = (typeof NavigationBarPages)[number];
 

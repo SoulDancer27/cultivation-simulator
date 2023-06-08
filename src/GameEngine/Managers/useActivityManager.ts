@@ -10,7 +10,7 @@ import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
-import { Activity } from "GameConstants";
+import { Activity } from "GameConstants/Activities";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {

@@ -1,6 +1,5 @@
 import { Box, Button, Input } from "@mui/material";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { PlayerContext, GameContext } from "GameEngine";
 import React from "react";
 
 export default function ImportSave() {

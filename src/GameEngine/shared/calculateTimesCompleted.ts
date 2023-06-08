@@ -1,7 +1,7 @@
 import { Activity } from "GameConstants/Activities/Activities";
 import calculateMaxActions from "./calculateMaxActions";
 import { PlayerContextType } from "GameConstants/Interfaces";
-import { ActivitiesFunctions } from "GameConstants";
+import { ActivitiesFunctions } from "GameConstants/Activities";
 
 // Calculate how many times activity can be completed considering activity price
 export default function calculateTimesCompleted(

@@ -1,8 +1,7 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { CultivationRealms } from "GameConstants/Cultivation/CultivationRealms";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { playerStats } from "GameEngine/Player/playerStats";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
+import { PlayerContext, playerStats, getStatName } from "GameEngine";
+
 import React from "react";
 
 export default function ManualsList() {

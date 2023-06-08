@@ -10,12 +10,12 @@ import {
   playerSkills,
   PlayerContext,
 } from "GameEngine";
+import { CultivationRealms } from "GameConstants/Cultivation/CultivationRealms";
 import {
   InventoryTreasure,
-  TreasureType,
-  CultivationRealms,
   isInventoryTreasure,
-} from "GameConstants";
+} from "GameConstants/Interfaces";
+import { TreasureType } from "GameConstants/Items";
 
 type Props = {
   treasure: InventoryTreasure | undefined;

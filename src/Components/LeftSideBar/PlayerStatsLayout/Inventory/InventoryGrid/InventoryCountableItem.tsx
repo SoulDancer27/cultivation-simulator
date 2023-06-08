@@ -2,13 +2,13 @@ import { Box, TooltipProps, Typography } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
 import {
-  InventoryCountableItem as Type,
   Material,
-  MoneyType,
-  findItemDescription,
-} from "GameConstants";
+  InventoryCountableItem as Type,
+} from "GameConstants/Interfaces";
 import EmptyCell from "./EmptyCell";
 import { useNumberParser } from "GameEngine";
+import { MoneyType } from "GameConstants/Items";
+import findItemDescription from "GameConstants/utils/findItemDescription";
 
 // Draw inventory money item
 export default function InventoryCountableItem(props: Type) {

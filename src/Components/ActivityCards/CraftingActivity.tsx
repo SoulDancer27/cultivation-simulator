@@ -6,7 +6,8 @@ import { ActivityCardProps } from "./types";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import itemDescriptions from "../shared/itemDescriptions";
 import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
-import { ActivitiesFunctions, defaultUpdateInterval } from "GameConstants";
+import { ActivitiesFunctions } from "GameConstants/Activities";
+import { defaultUpdateInterval } from "GameConstants/Constants";
 
 // Activity panel for activity without price, shows result image in the top right corner
 export default function CraftingActivityCard(props: ActivityCardProps) {

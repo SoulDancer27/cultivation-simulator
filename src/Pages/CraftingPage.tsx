@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
-import Crafting from "GameConstants/Activities/Craft";
+import { Crafting } from "GameConstants/Activities";
 import TreasureTooltip from "./CraftingPage/TreasureTooltip";
 import { GridItemType, ItemGrid, BasicGridCell } from "Components";
+import { PlayerContext } from "GameEngine";
 
 export default function CraftingPage() {
   const { state } = React.useContext(PlayerContext);

@@ -2,8 +2,8 @@ import { Box, Typography } from "@mui/material";
 
 import CropSquareImage from "./CropImage";
 import { useNumberParser } from "GameEngine";
-import { findItemDescription } from "GameConstants";
 import { ActivityItem } from "GameConstants/Activities/Activities";
+import findItemDescription from "GameConstants/utils/findItemDescription";
 
 // Generates item descriptions in the format Image Name Amount
 export default function itemDescriptions(items: ActivityItem[]): JSX.Element[] {

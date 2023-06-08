@@ -1,8 +1,7 @@
 import { Box } from "@mui/material";
 import React, { ComponentType } from "react";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import { ActivityCardProps } from "Components";
+import { GameContext, PlayerContext } from "GameEngine";
 
 type Props = { source: string; Card: ComponentType<ActivityCardProps> };
 

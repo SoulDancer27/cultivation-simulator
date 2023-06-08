@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import CraftingGridItem from "./CraftingGridItem";
-import { Activity } from "GameConstants/Activities/Activities";
+import { Activity } from "GameConstants/Activities";
 
 export default function CraftingGrid(props: { items: Activity[] }) {
   const { items } = props;

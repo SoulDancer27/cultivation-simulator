@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import { Enemies, EnemyType } from "GameConstants/Enemies";
+import { PlayerContext } from "GameEngine";
 import React from "react";
 
 // Currently unused

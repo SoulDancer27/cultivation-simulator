@@ -7,10 +7,9 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { playerStats } from "GameEngine/Player/playerStats";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import { PlayerCultivationManual } from "GameConstants/Interfaces";
+import { PlayerContext, playerStats } from "GameEngine";
 
 export default function EquippedManualCard(props: PlayerCultivationManual) {
   const { manual, learningProgress } = props;

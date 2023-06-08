@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import GridItem from "./ItemGrid/GridItem";
 import EmptyCell from "./ItemGrid/EmptyCell";
-import { ItemType } from "GameConstants";
+import { ItemType } from "GameConstants/Interfaces";
 
 type Props = {
   cellWidth: number;
