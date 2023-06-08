@@ -1,11 +1,10 @@
 import { Box } from "@mui/material";
-
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import InventoryBottomPanel from "./Inventory/InventoryBottomPanel";
 import InventoryFiltersPane from "./Inventory/InventoryFilters";
 import InventoryGrid from "./Inventory/InventoryGrid";
-import { isInventoryTreasure } from "GameConstants/Interfaces";
+import { PlayerContext } from "GameEngine";
+import { isInventoryTreasure } from "GameConstants";
 
 export type InventoryFilters =
   | "all"

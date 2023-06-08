@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
-
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import EquipmentCard from "./Equipment/EquipmentCard";
+
+import { PlayerContext } from "GameEngine";
 import {
   isInventoryTreasure,
+  PlayerEquipment,
   InventoryTreasure,
-} from "GameConstants/Interfaces";
-import { PlayerEquipment } from "GameConstants/Player";
+} from "GameConstants";
 
 // Player equipment
 export default function Equipment() {

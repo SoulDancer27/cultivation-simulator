@@ -1,9 +1,8 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { PlayerContext, useNumberParser } from "GameEngine";
 
 type Props = { displayStats: { name: string; stat: string }[] };
 

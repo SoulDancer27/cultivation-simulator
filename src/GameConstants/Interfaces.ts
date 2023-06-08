@@ -1,8 +1,8 @@
-import { Activity } from "./Activities";
-import { CultivationManualType } from "./CultivationManuals";
+import { Activity } from "./Activities/Activities";
+import { CultivationManualType } from "./Cultivation/CultivationManuals";
 import { EnemyType } from "./Enemies";
 import { PlayerBaseStats, PlayerSkills } from "./Player";
-import { Treasure } from "./Treasures";
+import { Treasure } from "./Items/Treasures";
 
 /* ______________________________________________________________________
   Player Types                                             

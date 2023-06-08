@@ -1,8 +1,8 @@
+import { isInventoryTreasure } from "GameConstants";
 import {
+  InventoryItem,
   PlayerContextType,
   PlayerCultivationManual,
-  InventoryItem,
-  isInventoryTreasure,
 } from "GameConstants/Interfaces";
 import { PlayerSkills } from "GameConstants/Player";
 

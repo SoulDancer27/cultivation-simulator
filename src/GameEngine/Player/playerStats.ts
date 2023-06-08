@@ -1,9 +1,9 @@
+import { isInventoryTreasure } from "GameConstants";
 import {
-  PlayerContextType,
   PlayerStats,
   PlayerCultivationManual,
   InventoryItem,
-  isInventoryTreasure,
+  PlayerContextType,
 } from "GameConstants/Interfaces";
 
 // Functions that calculate total player stats values based on inGame variables

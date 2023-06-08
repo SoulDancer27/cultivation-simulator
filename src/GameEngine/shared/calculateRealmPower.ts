@@ -1,4 +1,4 @@
-import { CultivationRealm } from "GameConstants/CultivationRealms";
+import { CultivationRealm } from "GameConstants/Cultivation/CultivationRealms";
 import { PlayerBaseStats, baseStats } from "GameConstants/Player";
 
 // Caclulates realm stats multiplier based on all tribulations completed

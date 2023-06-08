@@ -1,8 +1,6 @@
 import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { getSkillStructure } from "GameEngine/Player/playerSkills";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { PlayerContext, getSkillStructure, useNumberParser } from "GameEngine";
 import React from "react";
 
 // Provides description

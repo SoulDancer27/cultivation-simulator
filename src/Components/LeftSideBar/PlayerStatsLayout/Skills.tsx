@@ -1,9 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import SkillDetailsTooltip from "./Skills/SkillDetailTooltip";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { PlayerContext, getStatName, useNumberParser } from "GameEngine";
 
 // Bad coding here. #todo: make it a .map() render
 export default function Skills() {

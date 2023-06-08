@@ -1,8 +1,8 @@
-import { Herbs } from "GameConstants/Herbs";
+import { Herbs } from "GameConstants/Items/Herbs";
 import { ItemType } from "GameConstants/Interfaces";
-import { Minerals } from "GameConstants/Minerals";
-import Money from "GameConstants/Money";
-import Treasures from "GameConstants/Treasures";
+import { Minerals } from "GameConstants/Items/Minerals";
+import Money from "GameConstants/Items/Money";
+import Treasures from "GameConstants/Items/Treasures";
 
 export default function findItemDescription(name: string, type: ItemType) {
   let description;

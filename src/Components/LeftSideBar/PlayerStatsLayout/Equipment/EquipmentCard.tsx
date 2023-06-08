@@ -1,19 +1,21 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
-import { CultivationRealms } from "GameConstants/CultivationRealms";
 
-import { TreasureType } from "GameConstants/Treasures";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { playerStats } from "GameEngine/Player/playerStats";
-import { playerSkills } from "GameEngine/Player/playerSkills";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import {
+  useNumberParser,
+  getStatName,
+  playerStats,
+  playerSkills,
+  PlayerContext,
+} from "GameEngine";
+import {
   InventoryTreasure,
+  TreasureType,
+  CultivationRealms,
   isInventoryTreasure,
-} from "GameConstants/Interfaces";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+} from "GameConstants";
 
 type Props = {
   treasure: InventoryTreasure | undefined;

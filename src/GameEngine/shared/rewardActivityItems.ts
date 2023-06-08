@@ -1,5 +1,5 @@
-import { Activity } from "GameConstants/Activities";
-import CraftingFunctions from "GameConstants/Crafting";
+import { Activity } from "GameConstants/Activities/Activities";
+import CraftingFunctions from "GameConstants/Activities/Crafting";
 import {
   CountableItem,
   CountableItems,
@@ -8,7 +8,7 @@ import {
   isCountableItem,
 } from "GameConstants/Interfaces";
 
-import Treasures, { Treasure } from "GameConstants/Treasures";
+import Treasures, { Treasure } from "GameConstants/Items/Treasures";
 import { v4 as uuid } from "uuid";
 
 // Add activity reward to the players inventory

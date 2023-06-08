@@ -1,4 +1,4 @@
-import { Activity } from "./Activities";
+import { Activity } from "./Activities/Activities";
 
 // ! Travelling mechanic is not implemented yet
 // This is a total placeholder

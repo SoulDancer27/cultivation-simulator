@@ -1,10 +1,10 @@
-import { levelExp, totalExp } from "GameConstants/CultivationManuals";
 import { playerStats } from "../Player/playerStats";
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { totalExp, levelExp } from "GameConstants";
 
 // Updates cultivation manuals learning progress
 export default function useCultivationManager(timer: GameTimer) {

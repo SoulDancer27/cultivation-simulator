@@ -1,17 +1,16 @@
 import { Box, Button, Paper, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
-import ManualsPage from "./Pages/ManualsPage";
-import RealmBreakthroughPage from "./Pages/RealmBreakthroughPage";
-import GameContext from "GameEngine/GameContext/GameContext";
-import breakthroughSuccess from "./Pages/RealmBreakthroughPage/breakthroughSuccess";
-import ActionsPage from "./Pages/ActionsPage";
-import ActivityCard from "./shared/ActivityCards/Activity";
-import { NavigationBarPages } from "GameConstants/GameContent";
-import CraftingActivityCard from "./shared/ActivityCards/CraftingActivity";
-import GatheringActivityCard from "./shared/ActivityCards/GatheringActivity";
+import ManualsPage from "Pages/ManualsPage";
+import RealmBreakthroughPage from "Pages/RealmBreakthroughPage";
+import breakthroughSuccess from "Pages/RealmBreakthroughPage/breakthroughSuccess";
+import ActionsPage from "Pages/ActionsPage";
+import ActivityCard from "./ActivityCards/Activity";
+import GatheringActivityCard from "./ActivityCards/GatheringActivity";
+import CraftingPage from "Pages/CraftingPage";
+import { GameContext, PlayerContext } from "GameEngine";
+import { NavigationBarPages } from "GameConstants";
 
 export type ActivePage = (typeof NavigationBarPages)[number];
 
@@ -69,11 +68,7 @@ export default function MainNavigationBar() {
       ) : (
         ""
       )}
-      {page === "Crafting" ? (
-        <ActionsPage source={"crafting"} Card={CraftingActivityCard} />
-      ) : (
-        ""
-      )}
+      {page === "Crafting" ? <CraftingPage /> : ""}
       {page === "Gathering" ? (
         <ActionsPage source={"gathering"} Card={GatheringActivityCard} />
       ) : (

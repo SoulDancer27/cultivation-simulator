@@ -1,12 +1,10 @@
-import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
-import { month, year } from "GameConstants/Constants";
-import GameContext from "GameEngine/GameContext/GameContext";
-import PlayerContext from "GameEngine/Player/PlayerContext";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
+
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import React from "react";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
-import getSpacing from "Utils/getSpacing";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { PlayerContext, GameContext, SettingsContext } from "GameEngine";
+import { year, month } from "GameConstants";
 
 type Props = {
   setSettings: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,4 +1,4 @@
-import { Activity } from "GameConstants/Activities";
+import { Activity } from "GameConstants/Activities/Activities";
 import { PlayerContextType, isCountableItem } from "GameConstants/Interfaces";
 
 // Calculate the number of times activity can be executed

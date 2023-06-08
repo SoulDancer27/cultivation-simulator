@@ -1,7 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
 import React from "react";
 
 // Player baseStats display

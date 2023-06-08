@@ -1,4 +1,4 @@
-import { ActivityItem } from "GameConstants/Activities";
+import { ActivityItem } from "GameConstants/Activities/Activities";
 import {
   InventoryItem,
   CountableItem,

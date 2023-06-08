@@ -6,20 +6,22 @@ import {
   Typography,
 } from "@mui/material";
 import CropSquareImage from "Components/shared/CropImage";
-import { CultivationRealms } from "GameConstants/CultivationRealms";
 
-import { TreasureType } from "GameConstants/Treasures";
-import PlayerContext from "GameEngine/Player/PlayerContext";
-import { playerStats } from "GameEngine/Player/playerStats";
-import { getStatName } from "GameEngine/Player/PlayerStatsDictionary";
 import React from "react";
 import EmptyCell from "./EmptyCell";
-import { playerSkills } from "GameEngine/Player/playerSkills";
+import {
+  useNumberParser,
+  PlayerContext,
+  playerStats,
+  playerSkills,
+  getStatName,
+} from "GameEngine";
 import {
   InventoryTreasure,
+  CultivationRealms,
+  TreasureType,
   isInventoryTreasure,
-} from "GameConstants/Interfaces";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+} from "GameConstants";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {

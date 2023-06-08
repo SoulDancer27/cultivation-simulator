@@ -4,11 +4,11 @@ import HtmlTooltip from "Components/shared/HtmlTooltip";
 import {
   InventoryCountableItem as Type,
   Material,
-} from "GameConstants/Interfaces";
+  MoneyType,
+  findItemDescription,
+} from "GameConstants";
 import EmptyCell from "./EmptyCell";
-import findItemDescription from "GameConstants/utils/findItemDescription";
-import { MoneyType } from "GameConstants/Money";
-import { useNumberParser } from "GameEngine/SettingsContext/SettingContext";
+import { useNumberParser } from "GameEngine";
 
 // Draw inventory money item
 export default function InventoryCountableItem(props: Type) {

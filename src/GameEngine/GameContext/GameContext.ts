@@ -1,6 +1,5 @@
+import { GameContent, gameContent } from "GameConstants";
 import React from "react";
-
-import { GameContent, gameContent } from "GameConstants/GameContent";
 
 // Declarations for the React Context type
 // Contains game data. Is stored to localStorage every autosave interval.

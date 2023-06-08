@@ -1,9 +1,12 @@
-import Trainings from "GameConstants/Trainings";
-import Mining from "GameConstants/Mining";
-import Crafting from "GameConstants/Craft";
-import { Activity } from "./Activities";
-import { CultivationRealm, CultivationRealms } from "./CultivationRealms";
-import Gathering from "./Gathering";
+import Trainings from "GameConstants/Activities/Trainings";
+import Mining from "GameConstants/Activities/Mining";
+import Crafting from "GameConstants/Activities/Craft";
+import { Activity } from "./Activities/Activities";
+import {
+  CultivationRealm,
+  CultivationRealms,
+} from "./Cultivation/CultivationRealms";
+import Gathering from "./Activities/Gathering";
 
 // Declarations for the game mechanics
 // Contains game data. Is stored to localStorage every autosave interval.

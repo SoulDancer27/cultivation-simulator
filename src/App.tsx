@@ -18,7 +18,7 @@ import WorldLoader from "GameEngine/WorldLoader";
 import LeftSideBar from "Components/LeftSideBar";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
-import SettingsPage from "Components/SettingsPage";
+import SettingsPage from "Pages/SettingsPage";
 import SettingsLoader from "GameEngine/SettingsLoader";
 
 export default function App() {

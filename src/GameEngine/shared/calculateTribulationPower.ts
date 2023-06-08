@@ -1,4 +1,4 @@
-import { CultivationRealm } from "GameConstants/CultivationRealms";
+import { CultivationRealm } from "GameConstants/Cultivation/CultivationRealms";
 
 // For the breakthrough manager
 export default function calculateTribulationPower(

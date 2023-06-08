@@ -3,7 +3,6 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import GameContext from "GameEngine/GameContext/GameContext";
-import { Activity } from "GameConstants/Activities";
 import removeItems from "GameEngine/shared/removeItems";
 import addBaseStats from "GameEngine/shared/addBaseStats";
 import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
@@ -11,6 +10,7 @@ import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { Activity } from "GameConstants";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {
