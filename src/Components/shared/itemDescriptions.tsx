@@ -5,8 +5,13 @@ import { useNumberParser } from "GameEngine";
 import { ActivityItem } from "GameConstants/Activities/Activities";
 import findItemDescription from "GameConstants/utils/findItemDescription";
 
+type Props = {
+  items: ActivityItem[];
+};
+
 // Generates item descriptions in the format Image Name Amount
-export default function itemDescriptions(items: ActivityItem[]): JSX.Element[] {
+export default function ItemDescriptions(props: Props) {
+  const { items } = props;
   const parse = useNumberParser();
   let result: JSX.Element[] = [];
   let i = 0;
@@ -24,5 +29,5 @@ export default function itemDescriptions(items: ActivityItem[]): JSX.Element[] {
       </Box>
     );
   }
-  return result;
+  return <Box>{result.map((item) => item)}</Box>;
 }

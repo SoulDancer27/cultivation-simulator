@@ -3,8 +3,13 @@ import CropSquareImage from "./CropImage";
 import findItemDescription from "GameConstants/utils/findItemDescription";
 import { ActivityItem } from "GameConstants/Activities/Activities";
 
+type Props = {
+  items: ActivityItem[];
+};
+
 // Generates item descriptions in the format Image Name Amount
-export default function itemImages(items: ActivityItem[]): JSX.Element[] {
+export default function ItemImages(props: Props) {
+  const { items } = props;
   let result: JSX.Element[] = [];
   let i = 0;
   for (let item of items) {
@@ -18,5 +23,5 @@ export default function itemImages(items: ActivityItem[]): JSX.Element[] {
       </Box>
     );
   }
-  return result;
+  return <Box>{result.map((item) => item)}</Box>;
 }

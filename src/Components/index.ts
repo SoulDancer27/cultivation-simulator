@@ -4,6 +4,7 @@ import type { ActivityCardProps } from "./ActivityCards/types";
 import ItemGrid from "./ItemGrid";
 import type { GridItemType } from "./ItemGrid";
 import BasicGridCell from "./ItemGrid/BasicGridCell";
+import itemDescriptions from "./shared/ItemDescriptions";
 
 export {
   CropSquareImage,
@@ -12,4 +13,5 @@ export {
   ItemGrid,
   BasicGridCell,
   GridItemType,
+  itemDescriptions,
 };

@@ -6,6 +6,7 @@ import { ActivityCardProps } from "./types";
 import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
 import { ActivitiesFunctions } from "GameConstants/Activities";
 import { defaultUpdateInterval } from "GameConstants/Constants";
+import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
 // Generic activity panel without decorations suitable for any activity
 export default function ActivityCard(props: ActivityCardProps) {
@@ -37,24 +38,6 @@ export default function ActivityCard(props: ActivityCardProps) {
     }
   };
 
-  // Object to display the result description for baseStat rewards
-  const StatsRewardDescription: StatsLine[] = [];
-
-  // If the activity result includes baseStats
-  if (result.baseStats) {
-    // For every entry of baseStats in the result object, push the baseStat name and exp reward to the StatsRewardDescription array for display
-    for (const [key, value] of Object.entries(result.baseStats)) {
-      StatsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.baseStatsMulti
-            ? ActivitiesFunctions[activity.result.baseStatsMulti](activity)
-            : 1),
-      });
-    }
-  }
-
   // Object to display the result description for item rewards
   const ItemRewardDescription: ItemLine[] = [];
 
@@ -68,39 +51,6 @@ export default function ActivityCard(props: ActivityCardProps) {
       });
     }
   }
-
-  // Object to display the result description for skill rewards
-  const SkillsRewardDescription: StatsLine[] = [];
-
-  // If the activity result includes skills
-  if (result.skills) {
-    // For every entry of skills in the result object, push the skill name and exp reward to the SkillsRewardDescription array for display
-    for (const [key, value] of Object.entries(result.skills)) {
-      SkillsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.skillsMulti
-            ? ActivitiesFunctions[activity.result.skillsMulti](activity)
-            : 1),
-      });
-    }
-  }
-
-  // Object to display the result description for prices / costs of the activity
-  const StatsPriceDescription: StatsLine[] = [];
-
-  // If the activity price includes baseStats
-  if (price?.baseStats) {
-    // For every entry of baseStats in the price object, push the baseStat name and exp cost to the StatsPriceDescription array for display
-    for (const [key, value] of Object.entries(price.baseStats)) {
-      StatsPriceDescription.push({
-        text: getStatName(key),
-        effect: value,
-      });
-    }
-  }
-
   // Object to display the result description for item prices / costs of the activity
   const ItemPriceDescription: ItemLine[] = [];
 
@@ -164,23 +114,15 @@ export default function ActivityCard(props: ActivityCardProps) {
               {/* Display for rewarded stats */}
               {/* If baseStats are rewarded: Display a list of the stats and their exp quantities */}
               {/* Per baseStat: If required time to complete is greater than 1s, show exp gained per completion. Else, show exp gained divided by required time multiplied by 1000 */}
-              {StatsRewardDescription.length > 0 && (
-                <Box display="flex" gap={theme.spacing(1)}>
-                  {StatsRewardDescription.map((item) => (
-                    <Typography
-                      key={item.text}
-                      variant="body1"
-                      display="inline"
-                    >
-                      {item.text}{" "}
-                      {requiredTime > 1000
-                        ? parse(item.effect)
-                        : parse((item.effect / requiredTime) * 1000)}
-                    </Typography>
-                  ))}
-                  {requiredTime < 1000 ? "/s" : ""}
-                </Box>
+              {activity.result.baseStats && (
+                <ActivityStatsDescription
+                  stats={activity.result.baseStats}
+                  activity={activity}
+                  requiredTime={requiredTime}
+                  multiplicatorFunctionName={activity.result.baseStatsMulti}
+                />
               )}
+
               {/* Display for rewarded items */}
               {/* If items are rewarded: Display a list of the items and their quantities */}
               {ItemRewardDescription.length > 0 && (
@@ -199,23 +141,13 @@ export default function ActivityCard(props: ActivityCardProps) {
               {/* Display for rewarded skills */}
               {/* If skills are rewarded: Display a list of the skills and their rewarded exp */}
               {/* Per skill: If the required time for activity completion is greater than 1s, show the rewarded exp per completion. Else, show the rewarded exp divided by required time to complete and multiplied by 1000 */}
-              {SkillsRewardDescription.length > 0 && (
-                <Box display="flex" gap={theme.spacing(1)}>
-                  <Typography>Skill exp: </Typography>
-                  {SkillsRewardDescription.map((item) => (
-                    <Typography
-                      key={item.text}
-                      variant="body1"
-                      display="inline"
-                    >
-                      {item.text}{" "}
-                      {requiredTime > 1000
-                        ? parse(item.effect)
-                        : parse((item.effect / requiredTime) * 1000)}
-                    </Typography>
-                  ))}
-                  {requiredTime < 1000 ? "/s" : ""}
-                </Box>
+              {activity.result.skills && (
+                <ActivityStatsDescription
+                  stats={activity.result.skills}
+                  activity={activity}
+                  requiredTime={requiredTime}
+                  multiplicatorFunctionName={activity.result.skillsMulti}
+                />
               )}
             </Box>
             {showTimesCompleted && (
@@ -246,13 +178,12 @@ export default function ActivityCard(props: ActivityCardProps) {
             minHeight={60}
           >
             <Typography>Price</Typography>
-            <Box display="flex" gap={theme.spacing(1)}>
-              {StatsPriceDescription.map((item) => (
-                <Typography key={item.text} variant="body1" display="inline">
-                  {item.text} {parse(item.effect)}
-                </Typography>
-              ))}
-            </Box>
+            {activity.price?.baseStats && (
+              <ActivityStatsDescription
+                stats={activity.price.baseStats}
+                activity={activity}
+              />
+            )}
 
             <Box display="flex" gap={theme.spacing(1)}>
               {ItemPriceDescription.map((item) => (
@@ -267,12 +198,6 @@ export default function ActivityCard(props: ActivityCardProps) {
     </Paper>
   );
 }
-
-// Object to contain name of baseStat and exp change
-type StatsLine = {
-  text: string;
-  effect: number;
-};
 
 // Object to contain name and quantity of items
 type ItemLine = {

@@ -3,10 +3,12 @@ import ProgressBar from "../shared/ProgressBar";
 import React from "react";
 import parseTime from "Utils/parseTime";
 import { ActivityCardProps } from "./types";
-import itemImages from "../shared/itemImages";
+import itemImages from "../shared/ItemImages";
 import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
 import { ActivitiesFunctions } from "GameConstants/Activities";
 import { defaultUpdateInterval } from "GameConstants/Constants";
+import ItemImages from "../shared/ItemImages";
+import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
 // Activity panel for activity without price, shows result image in the top right corner
 export default function GatheringActivityCard(props: ActivityCardProps) {
@@ -16,12 +18,6 @@ export default function GatheringActivityCard(props: ActivityCardProps) {
   const { updateContext } = player;
   const { result, price } = activity;
   const theme = useTheme();
-
-  // Make item images for each
-  const { items } = result;
-
-  let itemDescription: JSX.Element[] = [];
-  if (items) itemDescription = itemImages(items);
 
   const handleClick = () => {
     // If training is active
@@ -38,41 +34,12 @@ export default function GatheringActivityCard(props: ActivityCardProps) {
     }
   };
 
-  // Display the reward description
-  const StatsRewardDescription: StatsLine[] = [];
-  if (result.baseStats) {
-    for (const [key, value] of Object.entries(result.baseStats)) {
-      StatsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.baseStatsMulti
-            ? ActivitiesFunctions[activity.result.baseStatsMulti](activity)
-            : 1),
-      });
-    }
-  }
-
   const ItemRewardDescription: ItemLine[] = [];
   if (result.items) {
     for (let item of result.items) {
       ItemRewardDescription.push({
         name: item.name,
         amount: item.amount,
-      });
-    }
-  }
-
-  const SkillsRewardDescription: StatsLine[] = [];
-  if (result.skills) {
-    for (const [key, value] of Object.entries(result.skills)) {
-      SkillsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.skillsMulti
-            ? ActivitiesFunctions[activity.result.skillsMulti](activity)
-            : 1),
       });
     }
   }
@@ -116,23 +83,15 @@ export default function GatheringActivityCard(props: ActivityCardProps) {
           <Box display="flex">
             <Box display="flex" flexDirection={"column"}>
               <Typography>{activity.name}</Typography>
-              {StatsRewardDescription.length > 0 && (
-                <Box display="flex" gap={theme.spacing(1)}>
-                  {StatsRewardDescription.map((item) => (
-                    <Typography
-                      key={item.text}
-                      variant="body1"
-                      display="inline"
-                    >
-                      {item.text}{" "}
-                      {requiredTime > 1000
-                        ? parse(item.effect)
-                        : parse((item.effect / requiredTime) * 1000)}
-                    </Typography>
-                  ))}
-                  {requiredTime < 1000 ? "/s" : ""}
-                </Box>
+              {result.baseStats && (
+                <ActivityStatsDescription
+                  stats={result.baseStats}
+                  activity={activity}
+                  requiredTime={requiredTime}
+                  multiplicatorFunctionName={result.baseStatsMulti}
+                />
               )}
+
               {ItemRewardDescription.length > 0 && (
                 <Box display="flex" gap={theme.spacing(1)}>
                   {ItemRewardDescription.map((item, index) => (
@@ -142,27 +101,17 @@ export default function GatheringActivityCard(props: ActivityCardProps) {
                   ))}
                 </Box>
               )}
-              {SkillsRewardDescription.length > 0 && (
-                <Box display="flex" gap={theme.spacing(1)}>
-                  <Typography>Skill exp: </Typography>
-                  {SkillsRewardDescription.map((item) => (
-                    <Typography
-                      key={item.text}
-                      variant="body1"
-                      display="inline"
-                    >
-                      {item.text}{" "}
-                      {requiredTime > 1000
-                        ? parse(item.effect)
-                        : parse((item.effect / requiredTime) * 1000)}
-                    </Typography>
-                  ))}
-                  {requiredTime < 1000 ? "/s" : ""}
-                </Box>
+              {result.skills && (
+                <ActivityStatsDescription
+                  stats={result.skills}
+                  activity={activity}
+                  requiredTime={requiredTime}
+                  multiplicatorFunctionName={result.skillsMulti}
+                />
               )}
             </Box>
             <Box marginLeft="auto" display={"flex"} marginRight={2}>
-              {itemDescription}
+              {result.items && <ItemImages items={result.items} />}
             </Box>
           </Box>
           <Box>

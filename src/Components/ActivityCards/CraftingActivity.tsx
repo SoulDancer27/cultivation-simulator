@@ -4,26 +4,20 @@ import React from "react";
 import parseTime from "Utils/parseTime";
 import { ActivityCardProps } from "./types";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import itemDescriptions from "../shared/itemDescriptions";
-import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
+import { PlayerContext } from "GameEngine";
 import { ActivitiesFunctions } from "GameConstants/Activities";
 import { defaultUpdateInterval } from "GameConstants/Constants";
+import ItemDescriptions from "../shared/ItemDescriptions";
+import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
 // Activity panel for activity without price, shows result image in the top right corner
 export default function CraftingActivityCard(props: ActivityCardProps) {
   const { activity, isActive, source } = props;
   const player = React.useContext(PlayerContext);
   const { updateContext } = player;
-  const parse = useNumberParser();
   const { result, price } = activity;
   const theme = useTheme();
 
-  // Make result description with images
-  let resultDescription: JSX.Element[] = [];
-  if (result.items) resultDescription = itemDescriptions(result.items);
-
-  let priceDescription: JSX.Element[] = [];
-  if (price && price.items) priceDescription = itemDescriptions(price.items);
   const handleClick = () => {
     // If training is active
     if (isActive)
@@ -38,35 +32,6 @@ export default function CraftingActivityCard(props: ActivityCardProps) {
       });
     }
   };
-
-  // Display the reward description
-  const StatsRewardDescription: StatsLine[] = [];
-  if (result.baseStats) {
-    for (const [key, value] of Object.entries(result.baseStats)) {
-      StatsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.baseStatsMulti
-            ? ActivitiesFunctions[activity.result.baseStatsMulti](activity)
-            : 1),
-      });
-    }
-  }
-
-  const SkillsRewardDescription: StatsLine[] = [];
-  if (result.skills) {
-    for (const [key, value] of Object.entries(result.skills)) {
-      SkillsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.skillsMulti
-            ? ActivitiesFunctions[activity.result.skillsMulti](activity)
-            : 1),
-      });
-    }
-  }
 
   // Determine remaining time for timed activities
   const requiredTime = activity.time
@@ -110,42 +75,29 @@ export default function CraftingActivityCard(props: ActivityCardProps) {
           marginY={2}
           alignItems={"center"}
         >
-          <Box>{priceDescription}</Box>
+          {price && price.items && <ItemDescriptions items={price.items} />}
 
           <ArrowForwardIcon fontSize={"large"} />
 
           <Box display={"flex"} marginRight={2}>
-            {resultDescription}
+            {result.items && <ItemDescriptions items={result.items} />}
           </Box>
         </Box>
-
-        {StatsRewardDescription.length > 0 && (
-          <Box display="flex" gap={theme.spacing(1)}>
-            {StatsRewardDescription.map((item) => (
-              <Typography key={item.text} variant="body1" display="inline">
-                {item.text}{" "}
-                {requiredTime > 1000
-                  ? parse(item.effect)
-                  : parse((item.effect / requiredTime) * 1000)}
-              </Typography>
-            ))}
-            {requiredTime < 1000 ? "/s" : ""}
-          </Box>
+        {result.baseStats && (
+          <ActivityStatsDescription
+            stats={result.baseStats}
+            activity={activity}
+            requiredTime={requiredTime}
+            multiplicatorFunctionName={activity.result.baseStatsMulti}
+          />
         )}
-
-        {SkillsRewardDescription.length > 0 && (
-          <Box display="flex" gap={theme.spacing(1)}>
-            <Typography>Skill exp: </Typography>
-            {SkillsRewardDescription.map((item) => (
-              <Typography key={item.text} variant="body1" display="inline">
-                {item.text}{" "}
-                {requiredTime > 1000
-                  ? parse(item.effect)
-                  : parse((item.effect / requiredTime) * 1000)}
-              </Typography>
-            ))}
-            {requiredTime < 1000 ? "/s" : ""}
-          </Box>
+        {result.skills && (
+          <ActivityStatsDescription
+            stats={result.skills}
+            activity={activity}
+            requiredTime={requiredTime}
+            multiplicatorFunctionName={activity.result.skillsMulti}
+          />
         )}
         <Box>
           <ProgressBar
