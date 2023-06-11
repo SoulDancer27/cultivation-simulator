@@ -15,6 +15,7 @@ type Props = {
     Cell: (props: any) => JSX.Element;
     Tooltip: (props: any) => JSX.Element;
   }[];
+  context?: any;
 };
 
 export type GridItemType = {
@@ -55,6 +56,7 @@ export default function ItemGrid(props: Props) {
             Tooltip={tile.Tooltip}
             data={itemData[tile.index]}
             key={tile.index}
+            context={props.context}
           />
         );
       })}

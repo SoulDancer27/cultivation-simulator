@@ -1,19 +1,14 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import { Crafting } from "GameConstants/Activities";
 import TreasureTooltip from "./CraftingPage/TreasureTooltip";
 import { GridItemType, ItemGrid, BasicGridCell } from "Components";
-import { PlayerContext } from "GameEngine";
+import { GameContext } from "GameEngine";
+import ActiveItem from "./CraftingPage/ActiveItem";
 
 export default function CraftingPage() {
-  const { state } = React.useContext(PlayerContext);
-
-  // Determine active training if any
-  const { action, activity } = state;
-  let activityName = "";
-  if (action === "activity" && activity) {
-    activityName = activity.name;
-  }
+  const { crafting } = React.useContext(GameContext);
+  const [activeItem, setActiveItem] = React.useState<string | undefined>();
 
   let items: Array<GridItemType | undefined> = [];
 
@@ -34,17 +29,22 @@ export default function CraftingPage() {
 
   return (
     <Box>
-      <Typography variant="h5">Craft</Typography>
+      {activeItem && (
+        <ActiveItem
+          activity={crafting.find((activity) => activity.name === activeItem)!}
+        />
+      )}
       <ItemGrid
         cellWidth={120}
         cellHeight={64}
         sizeX={4}
         sizeY={4}
         items={items}
-        itemData={Crafting}
+        itemData={crafting}
         itemTypes={[
           { type: "treasure", Tooltip: TreasureTooltip, Cell: BasicGridCell },
         ]}
+        context={{ setActiveItem }}
       />
     </Box>
   );

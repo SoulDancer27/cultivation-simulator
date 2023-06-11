@@ -1,39 +1,28 @@
-import { Box, Paper, Typography, useTheme } from "@mui/material";
-import ProgressBar from "../shared/ProgressBar";
-import React from "react";
+import { Box, Button, Paper, useTheme } from "@mui/material";
+import { ActivityStatsDescription } from "Components";
+import ItemDescriptions from "Components/shared/ItemDescriptions";
+import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 import parseTime from "Utils/parseTime";
-import { ActivityCardProps } from "./types";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { PlayerContext } from "GameEngine";
-import { ActivitiesFunctions } from "GameConstants/Activities";
+import ProgressBar from "Components/shared/ProgressBar";
+import { GameContext, PlayerContext } from "GameEngine";
+import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
-import ItemDescriptions from "../shared/ItemDescriptions";
-import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
-// Activity panel for activity without price, shows result image in the top right corner
-export default function CraftingActivityCard(props: ActivityCardProps) {
-  const { activity, isActive, source } = props;
+type Props = {
+  activity: Activity;
+};
+
+export default function ActiveItem(props: Props) {
+  const { activity } = props;
   const player = React.useContext(PlayerContext);
-
-  const { updateContext } = player;
-  const { result, price } = activity;
+  const { crafting, updateContext: updateGameContext } =
+    React.useContext(GameContext);
   const theme = useTheme();
-
-  const handleClick = () => {
-    // If training is active
-    if (isActive)
-      updateContext({ state: { action: "idle", activity: undefined } });
-    // Set active training
-    else {
-      updateContext({
-        state: {
-          action: "activity",
-          activity: { name: activity.name, source },
-        },
-      });
-    }
-  };
-
+  const { price, result } = activity;
+  const isActive =
+    player.state.action === "activity" &&
+    player.state.activity?.name === activity.name;
   // Determine remaining time for timed activities
   const requiredTime = activity.time
     ? ActivitiesFunctions[activity.time](activity, player)
@@ -46,6 +35,25 @@ export default function CraftingActivityCard(props: ActivityCardProps) {
     requiredTime < 1000
       ? (1000 / requiredTime).toFixed(2) + "/s"
       : parseTime(requiredTime);
+
+  const craftButtonClick = () => {
+    if (isActive) {
+      player.updateContext({ state: { action: "idle", activity: undefined } });
+      const index = crafting.findIndex((craft) => craft.name === activity.name);
+      if (index !== -1) {
+        crafting[index].currentTime = 0;
+        updateGameContext({ crafting: crafting.slice() });
+      }
+    } else {
+      player.updateContext({
+        state: {
+          action: "activity",
+          activity: { name: activity.name, source: "crafting" },
+        },
+      });
+    }
+  };
+
   return (
     <Paper
       elevation={8}
@@ -67,9 +75,8 @@ export default function CraftingActivityCard(props: ActivityCardProps) {
         minWidth={price ? 400 : 600}
         minHeight={60}
         height="100%"
-        onClick={() => handleClick()}
       >
-        <Typography variant="h6">{activity.name}</Typography>
+        {" "}
         <Box
           display="flex"
           justifyContent={"space-between"}
@@ -109,12 +116,10 @@ export default function CraftingActivityCard(props: ActivityCardProps) {
             rightLabel
           />
         </Box>
+        <Button onClick={craftButtonClick}>
+          {isActive ? "stop" : "craft"}
+        </Button>
       </Box>
     </Paper>
   );
 }
-
-type StatsLine = {
-  text: string;
-  effect: number;
-};

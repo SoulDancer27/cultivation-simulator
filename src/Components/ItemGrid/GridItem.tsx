@@ -8,6 +8,7 @@ type GridItemProps = {
   Cell: (props: any) => JSX.Element;
   Tooltip?: (props: any) => JSX.Element;
   data: any;
+  context?: any;
 };
 
 export default function GridItem(props: GridItemProps) {
@@ -29,9 +30,17 @@ export default function GridItem(props: GridItemProps) {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box width={width} height={height} onClick={handleClick}>
-        <Cell width={width} height={height} item={item} data={data} />
+        <Cell
+          width={width}
+          height={height}
+          item={item}
+          data={data}
+          context={props.context}
+        />
         <Popper id={id} open={open} anchorEl={anchorEl}>
-          {Tooltip && <Tooltip item={item} data={data} />}
+          {Tooltip && (
+            <Tooltip item={item} data={data} context={props.context} />
+          )}
         </Popper>
       </Box>
     </ClickAwayListener>

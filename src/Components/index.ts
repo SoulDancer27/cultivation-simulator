@@ -5,6 +5,7 @@ import ItemGrid from "./ItemGrid";
 import type { GridItemType } from "./ItemGrid";
 import BasicGridCell from "./ItemGrid/BasicGridCell";
 import itemDescriptions from "./shared/ItemDescriptions";
+import ActivityStatsDescription from "./shared/ActivityStatsDescription";
 
 export {
   CropSquareImage,
@@ -14,4 +15,5 @@ export {
   BasicGridCell,
   GridItemType,
   itemDescriptions,
+  ActivityStatsDescription,
 };

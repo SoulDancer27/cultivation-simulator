@@ -1,19 +1,21 @@
-import { Box, Typography } from "@mui/material";
-import { GridItemType, itemDescriptions } from "Components";
+import { Box, Button, Typography } from "@mui/material";
+import { GridItemType } from "Components";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
-import { CultivationRealms } from "GameConstants/Cultivation/CultivationRealms";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { getStatName } from "GameEngine";
 import parseTime from "Utils/parseTime";
 import ItemDescriptions from "Components/shared/ItemDescriptions";
+import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
 type Props = {
   item: GridItemType;
   data: any;
+  context: {
+    setActiveItem: React.Dispatch<React.SetStateAction<string | undefined>>;
+  };
 };
 
 export default function TreasureTooltip(props: Props) {
-  const { item } = props;
+  const { item, context } = props;
   const activity: Activity = props.data;
   const craftTime = activity.time
     ? ActivitiesFunctions[activity.time](activity)
@@ -25,35 +27,6 @@ export default function TreasureTooltip(props: Props) {
       : parseTime(craftTime);
 
   const { result, price } = activity;
-
-  // Display the reward description
-  const StatsRewardDescription: StatsLine[] = [];
-  if (result.baseStats) {
-    for (const [key, value] of Object.entries(result.baseStats)) {
-      StatsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.baseStatsMulti
-            ? ActivitiesFunctions[activity.result.baseStatsMulti](activity)
-            : 1),
-      });
-    }
-  }
-
-  const SkillsRewardDescription: StatsLine[] = [];
-  if (result.skills) {
-    for (const [key, value] of Object.entries(result.skills)) {
-      SkillsRewardDescription.push({
-        text: getStatName(key),
-        effect:
-          value *
-          (activity.result?.skillsMulti
-            ? ActivitiesFunctions[activity.result.skillsMulti](activity)
-            : 1),
-      });
-    }
-  }
 
   return (
     <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
@@ -73,11 +46,28 @@ export default function TreasureTooltip(props: Props) {
           {result.items && <ItemDescriptions items={result.items} />}
         </Box>
       </Box>
+      {result.baseStats && (
+        <ActivityStatsDescription
+          stats={result.baseStats}
+          activity={activity}
+          requiredTime={craftTime}
+          multiplicatorFunctionName={activity.result.baseStatsMulti}
+        />
+      )}
+      {result.skills && (
+        <ActivityStatsDescription
+          stats={result.skills}
+          activity={activity}
+          requiredTime={craftTime}
+          multiplicatorFunctionName={activity.result.skillsMulti}
+        />
+      )}
+      <Button
+        variant="outlined"
+        onClick={() => context.setActiveItem(activity.name)}
+      >
+        Select
+      </Button>
     </Box>
   );
 }
-
-type StatsLine = {
-  text: string;
-  effect: number;
-};

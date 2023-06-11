@@ -1,4 +1,4 @@
-import { Box, Paper, Slider, Typography, useTheme } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 import getSpacing from "Utils/getSpacing";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
 import TickRate from "Pages/SettingsPage/TickRate";
