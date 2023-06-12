@@ -26,8 +26,6 @@ export function playerStats(player: PlayerContextType): PlayerStats {
   }
 
   let stats = { ...player.stats, ...currentStats };
-  // for current health to not overflow
-  stats.currentHealth = Math.min(stats.currentHealth, stats.health);
   return stats;
 }
 

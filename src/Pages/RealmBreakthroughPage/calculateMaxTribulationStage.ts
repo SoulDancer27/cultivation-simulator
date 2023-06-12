@@ -13,9 +13,9 @@ export default function calculateMaxTribulationStage(props: {
   nextRealmIndex: number;
 }): number {
   const { player, cultivationRealms, nextRealmIndex } = props;
-  const { stats } = player;
+  const { stats, currentStats } = player;
   let step = 0;
-  let remainingHealth = stats.currentHealth;
+  let remainingHealth = currentStats.health;
   const cultivationRealmsCopy: CultivationRealm[] = JSON.parse(
     JSON.stringify(cultivationRealms)
   );

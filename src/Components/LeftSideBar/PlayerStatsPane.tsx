@@ -10,8 +10,9 @@ type Props = { displayStats: { name: string; stat: string }[] };
 export default function PlayerStatsPane(props: Props) {
   const player = React.useContext(PlayerContext);
   const parse = useNumberParser();
-  const { stats } = player;
-  const { currentHealth, health } = stats;
+  const { stats, currentStats } = player;
+  const { health } = stats;
+  const currentHealth = currentStats.health;
   const theme = useTheme();
 
   return (

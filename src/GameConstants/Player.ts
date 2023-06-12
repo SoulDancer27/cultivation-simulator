@@ -11,6 +11,10 @@ export type PlayerBaseStats = {
   insight: number; // multiplier for cultivation manuals experience gain
 };
 
+export type PlayerCurrentStats = {
+  health: number;
+};
+
 export type PlayerSkills = {
   training: number;
   mining: number;
@@ -23,6 +27,10 @@ export const baseStats: PlayerBaseStats = {
   healthRegen: 0.5,
   defence: 0,
   insight: 1,
+};
+
+export const currentStats: PlayerCurrentStats = {
+  health: 10,
 };
 
 export const playerSkills: PlayerSkills = {

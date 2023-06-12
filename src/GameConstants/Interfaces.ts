@@ -1,7 +1,7 @@
 import { Activity } from "./Activities/Activities";
 import { CultivationManualType } from "./Cultivation/CultivationManuals";
 import { EnemyType } from "./Enemies";
-import { PlayerBaseStats, PlayerSkills } from "./Player";
+import { PlayerBaseStats, PlayerCurrentStats, PlayerSkills } from "./Player";
 import { Treasure } from "./Items/Treasures";
 
 /* ______________________________________________________________________
@@ -31,7 +31,6 @@ export type RealmTribulation = {
 // Player stats are calculated based on baseStats, equipped items, learned manuals and so on
 export type PlayerStats = PlayerBaseStats & {
   age: number; // in milliseconds
-  currentHealth: number;
 };
 
 // This probably needs a rework
@@ -80,6 +79,7 @@ export type InventoryItem = InventoryTreasure | InventoryCountableItem;
 
 export type PlayerContextType = {
   stats: PlayerStats; // calcuated stat values
+  currentStats: PlayerCurrentStats;
   baseStats: PlayerBaseStats;
   skills: PlayerSkills; // calculated skill values
   baseSkills: PlayerSkills;

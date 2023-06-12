@@ -17,5 +17,5 @@ export default function breakthroughSuccess(
     player
   );
   const time = realm.baseStats.health / playerDps;
-  return player.stats.currentHealth > realmDps * time;
+  return player.currentStats.health > realmDps * time;
 }

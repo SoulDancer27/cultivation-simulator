@@ -1,10 +1,4 @@
-import {
-  Box,
-  CssBaseline,
-  Paper,
-  ThemeProvider,
-  useTheme,
-} from "@mui/material";
+import { Box, CssBaseline, ThemeProvider, useTheme } from "@mui/material";
 import LightTheme from "Themes/LightTheme";
 
 import PlayerLoader from "GameEngine/PlayerLoader";
@@ -17,7 +11,6 @@ import MainNavigationBar from "Components/MainNavigationBar";
 import WorldLoader from "GameEngine/WorldLoader";
 import LeftSideBar from "Components/LeftSideBar";
 import React from "react";
-import getSpacing from "Utils/getSpacing";
 import SettingsPage from "Pages/SettingsPage";
 import SettingsLoader from "GameEngine/SettingsLoader";
 
@@ -26,7 +19,6 @@ export default function App() {
   useWindowDimensions();
   const { width, height } = getWindowDimensions();
   const [settings, setSettings] = React.useState<boolean>(false);
-  const theme = useTheme();
 
   return (
     <CssBaseline>

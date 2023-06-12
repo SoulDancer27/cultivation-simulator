@@ -5,7 +5,8 @@ import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {
-  let { stats, state, updateContext } = React.useContext(PlayerContext);
+  let { stats, currentStats, state, updateContext } =
+    React.useContext(PlayerContext);
   const { gameSpeed } = React.useContext(SettingsContext);
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
@@ -33,7 +34,7 @@ export default function useFightManager(timer: GameTimer) {
     );
 
     const newPlayerHealth = Math.min(
-      stats.currentHealth - enemyDamage,
+      currentStats.health - enemyDamage,
       stats.health
     );
 
@@ -49,10 +50,10 @@ export default function useFightManager(timer: GameTimer) {
     }
     // Update Hp values for both parties
     else {
-      stats.currentHealth = newPlayerHealth;
+      currentStats.health = newPlayerHealth;
       state.enemy.currentHealth = newEnemyHealth;
     }
-    updateContext({ stats, state });
+    updateContext({ currentStats, state });
   }, [currentTime]);
 }
 
