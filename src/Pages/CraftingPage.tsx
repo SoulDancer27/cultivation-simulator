@@ -5,6 +5,7 @@ import TreasureTooltip from "./CraftingPage/TreasureTooltip";
 import { GridItemType, ItemGrid, BasicGridCell } from "Components";
 import { GameContext } from "GameEngine";
 import ActiveItem from "./CraftingPage/ActiveItem";
+import PriceMultiplier from "./CraftingPage/PriceMultiplier";
 
 export default function CraftingPage() {
   const { crafting } = React.useContext(GameContext);
@@ -28,11 +29,20 @@ export default function CraftingPage() {
   }
 
   return (
-    <Box>
+    <Box marginLeft={2} marginTop={2}>
       {activeItem && (
-        <ActiveItem
-          activity={crafting.find((activity) => activity.name === activeItem)!}
-        />
+        <Box display="flex" gap={2} marginBottom={2}>
+          <PriceMultiplier
+            activity={
+              crafting.find((activity) => activity.name === activeItem)!
+            }
+          />
+          <ActiveItem
+            activity={
+              crafting.find((activity) => activity.name === activeItem)!
+            }
+          />
+        </Box>
       )}
       <ItemGrid
         cellWidth={120}

@@ -60,12 +60,12 @@ export default function ActiveItem(props: Props) {
       sx={{
         paddingX: theme.spacing(2),
         paddingY: theme.spacing(1),
-        margin: theme.spacing(2),
         borderRadius: theme.spacing(2),
         minHeight: 60,
         border: "1px solid lightgray",
         borderColor: isActive ? theme.palette.primary.main : "lightgray",
         padding: theme.spacing(1),
+        maxWidth: "600px",
       }}
     >
       <Box
@@ -116,7 +116,7 @@ export default function ActiveItem(props: Props) {
             rightLabel
           />
         </Box>
-        <Button onClick={craftButtonClick}>
+        <Button variant="outlined" onClick={craftButtonClick}>
           {isActive ? "stop" : "craft"}
         </Button>
       </Box>
