@@ -1,7 +1,10 @@
 import CraftSword from "./CraftSword";
+import quality from "./quality";
 
 const CraftingFunctions = {
-  "Rusty Sword": CraftSword,
+  Sword: CraftSword,
 };
 
 export default CraftingFunctions;
+
+export { quality };

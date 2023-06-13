@@ -27,6 +27,9 @@ export default function CraftSword(
       stats: {
         attack: itemQuality / 2,
       },
+      statsMulti: {
+        attack: Math.sqrt(itemQuality) / 100,
+      },
     };
     invTreasure.item.quality = itemQuality;
     return invTreasure;

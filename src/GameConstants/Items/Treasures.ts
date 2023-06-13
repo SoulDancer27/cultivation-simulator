@@ -3,26 +3,43 @@ import { Image } from "../Interfaces";
 
 const Treasures: Treasure[] = [
   {
-    name: "Rusty Sword",
+    name: "Copper Sword",
     description: "",
-    image: { path: "/treasures/swords1.png", x: 0, y: 0, sizeX: 32, sizeY: 32 },
+    image: {
+      path: "/treasures/swords1.png",
+      x: 2 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
     realmIndex: 0,
     type: "weapon",
-    quality: 10,
-    stats: {
-      stats: {
-        attack: 5,
-      },
-      statsMulti: {
-        attack: 0.1,
-      },
-      skills: {
-        training: 10,
-      },
-      skillsMulti: {
-        training: 0.1,
-      },
+  },
+  {
+    name: "Iron Sword",
+    description: "",
+    image: {
+      path: "/treasures/swords1.png",
+      x: 0 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
     },
+    realmIndex: 9,
+    type: "weapon",
+  },
+  {
+    name: "Steel Sword",
+    description: "",
+    image: {
+      path: "/treasures/swords1.png",
+      x: 4 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
+    realmIndex: 19,
+    type: "weapon",
   },
   {
     name: "Rusty Armor",
