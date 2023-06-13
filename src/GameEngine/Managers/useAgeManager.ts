@@ -5,12 +5,13 @@ import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 
 // Just a function to update player age
 export default function useAgeManager(timer: GameTimer) {
-  const { stats, updateContext } = React.useContext(PlayerContext);
+  const { stats, state, updateContext } = React.useContext(PlayerContext);
   const { gameSpeed } = React.useContext(SettingsContext);
 
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
+    if (state.action === "idle") return; // pause time if player does nothing
     const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     stats.age += elapsedTime;
     updateContext({ stats });

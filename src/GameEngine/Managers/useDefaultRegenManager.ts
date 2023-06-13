@@ -2,6 +2,7 @@ import PlayerContext from "../Player/PlayerContext";
 import React from "react";
 import { GameTimer } from "GameEngine/GameRuntime";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { month } from "GameConstants/Constants";
 
 // Placeholder. #todo: replace it with some better logic.
 export default function useDefaultRegenManager(timer: GameTimer) {
@@ -14,12 +15,18 @@ export default function useDefaultRegenManager(timer: GameTimer) {
     const elapsedTime = (currentTime - previousTime) * gameSpeed;
     if (
       currentStats.health <= stats.health &&
-      ["idle", "training", "activity", "cultivating"].includes(state.action)
-    )
+      ["training", "activity", "cultivating"].includes(state.action)
+    ) {
+      const passiveRegen = 30; // additional passive regen outside of fighting in percents of max health
+      const additionalHealth =
+        (((stats.health * passiveRegen) / 100) * elapsedTime) / month;
       currentStats.health = Math.min(
-        currentStats.health + (stats.healthRegen * elapsedTime) / 1000,
+        currentStats.health +
+          (stats.healthRegen * elapsedTime) / 1000 +
+          additionalHealth,
         stats.health
       );
-    updateContext({ stats });
+      updateContext({ stats });
+    }
   }, [currentTime]);
 }
