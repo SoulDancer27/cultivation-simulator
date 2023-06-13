@@ -7,15 +7,11 @@ let Trainings: Activity[] = [
   {
     // This one is totally overpowered, serves for test purposes :)
     name: "Running",
-    baseTime: 0.5 * day,
-    price: {
-      items: [{ name: "Copper Coin", amount: 1, type: "money" }],
-    },
+    baseTime: 5 * day,
     result: {
       baseStats: {
         health: 0.5,
-        attack: 1,
-        healthRegen: 0.1,
+        attack: 0.1,
       },
       skills: {
         training: 0.01,
@@ -33,10 +29,6 @@ let Trainings: Activity[] = [
       skills: {
         training: 0.01,
       },
-      items: [
-        { name: "Rusty Sword", amount: 1, type: "treasure" },
-        { name: "Rusty Armor", amount: 1, type: "treasure" },
-      ],
     },
   },
   {
