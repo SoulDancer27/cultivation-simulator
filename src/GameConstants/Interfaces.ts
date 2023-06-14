@@ -66,6 +66,7 @@ export type InventoryTreasure = {
   type: "treasure";
   id: string;
   isEquipped?: boolean;
+  isLocked?: boolean;
   item: Required<Treasure>;
 };
 
@@ -75,7 +76,9 @@ export type InventoryCountableItem = {
   name: string;
   amount: number;
 };
-export type InventoryItem = InventoryTreasure | InventoryCountableItem;
+
+export type InventoryUniqueItem = InventoryTreasure;
+export type InventoryItem = InventoryUniqueItem | InventoryCountableItem;
 
 export type PlayerContextType = {
   stats: PlayerStats; // calcuated stat values

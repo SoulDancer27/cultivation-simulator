@@ -5,6 +5,7 @@ import InventoryFiltersPane from "./Inventory/InventoryFilters";
 import InventoryGrid from "./Inventory/InventoryGrid";
 import { PlayerContext } from "GameEngine";
 import { isInventoryTreasure } from "GameConstants/Interfaces";
+import AutosellPanel from "./Inventory/AutosellPanel";
 
 export type InventoryFilters =
   | "all"
@@ -56,6 +57,7 @@ export default function Inventory() {
         <InventoryFiltersPane type={type} setType={setType} />
       </Box>
       <InventoryBottomPanel pages={pages} setPages={setPages} />
+      <AutosellPanel />
     </Box>
   );
 }

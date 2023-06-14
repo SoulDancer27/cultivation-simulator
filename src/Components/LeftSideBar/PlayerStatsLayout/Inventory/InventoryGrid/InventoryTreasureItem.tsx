@@ -19,13 +19,15 @@ import {
 import { CultivationRealms } from "GameConstants/Cultivation/CultivationRealms";
 import {
   InventoryTreasure,
+  InventoryUniqueItem,
   isInventoryTreasure,
 } from "GameConstants/Interfaces";
 import { TreasureType } from "GameConstants/Items";
+import LockIcon from "Components/shared/LockIcon";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {
-  const { item: treasure } = props;
+  const { item: treasure, isLocked } = props;
 
   const realmName = CultivationRealms[treasure.realmIndex].name;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -43,7 +45,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
 
   const dropItem = (id: string) => {
     const index = inventory.findIndex((item) => item.id === id);
-    if (index === -1) return;
+    if (index === -1 || (inventory[index] as any).isLocked) return;
     inventory.splice(index, 1);
     updateContext({ inventory });
     setAnchorEl(null);
@@ -65,6 +67,15 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     skills = playerSkills(player);
     updateContext({ inventory, stats, skills });
     setAnchorEl(null);
+  };
+
+  const toggleItemLock = (id: string) => {
+    const index = inventory.findIndex((item) => item.id === id);
+    if (index === -1) return;
+    (inventory[index] as InventoryUniqueItem).isLocked = !(
+      inventory[index] as InventoryUniqueItem
+    ).isLocked;
+    updateContext({ inventory: inventory.slice() });
   };
 
   const open = Boolean(anchorEl);
@@ -106,6 +117,9 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
     }
   }
 
+  const trimmedRealmName =
+    realmName.substring(0, 6) + " " + realmName.charAt(realmName.length - 1);
+
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box>
@@ -126,12 +140,18 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
             />
           </Box>
           <Box>
-            <Typography variant="body2">{realmName}</Typography>
+            <Typography variant="body2">{trimmedRealmName}</Typography>
           </Box>
         </Box>
         <Popper id={id} open={open} anchorEl={anchorEl}>
           <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
-            <Typography>{treasure.name}</Typography>
+            <Box display="flex" justifyContent={"space-between"}>
+              <Typography>{treasure.name}</Typography>
+              <Box onClick={() => toggleItemLock(props.id)}>
+                <LockIcon isLocked={isLocked || false} />
+              </Box>
+            </Box>
+
             <Typography>Quality: {treasure.quality.toFixed(2)}</Typography>
             {TreasureDescription.map((item, index) => (
               <Typography key={index} variant="body1">
