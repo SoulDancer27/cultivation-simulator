@@ -33,8 +33,7 @@ export default function MainNavigationBar() {
   function buttonColor(page, item): any {
     let color = "primary";
     if (page === item) color = "success";
-    if (page !== item && canBreakthrough && item === "Breakthrough")
-      color = "warning";
+    if (canBreakthrough && item === "Breakthrough") color = "warning";
     return color;
   }
 

@@ -8,6 +8,7 @@ import ProgressBar from "Components/shared/ProgressBar";
 import { GameContext, PlayerContext } from "GameEngine";
 import React from "react";
 import { defaultUpdateInterval } from "GameConstants/Constants";
+import ResultItemDescription from "./ResultItemDescription";
 
 type Props = {
   activity: Activity;
@@ -88,7 +89,7 @@ export default function ActiveItem(props: Props) {
           <ArrowForwardIcon fontSize={"large"} />
 
           <Box display={"flex"} marginRight={2}>
-            {result.items && <ItemDescriptions items={result.items} />}
+            {result.items && <ResultItemDescription activity={activity} />}
           </Box>
         </Box>
         {result.baseStats && (

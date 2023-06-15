@@ -10,7 +10,7 @@ import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
-import { Activity } from "GameConstants/Activities";
+import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {
@@ -79,19 +79,27 @@ export default function useActivityManager(timer: GameTimer) {
             baseStats,
             activity.result.baseStats,
             timesCompleted *
-              (typeof activity.result.baseStatsMulti === "function"
-                ? activity.result.baseStatsMulti(activity)
+              (typeof activity.result.baseStatsMulti === "string"
+                ? ActivitiesFunctions[activity.result.baseStatsMulti](
+                    activity,
+                    player
+                  )
                 : 1)
           );
-        if (activity.result.skills)
+        if (activity.result.skills) {
           baseSkills = addSkillsExp(
             baseSkills,
             activity.result.skills,
             timesCompleted *
-              (typeof activity.result.skillsMulti === "function"
-                ? activity.result.skillsMulti(activity)
+              (typeof activity.result.skillsMulti === "string"
+                ? ActivitiesFunctions[activity.result.skillsMulti](
+                    activity,
+                    player
+                  )
                 : 1)
           );
+        }
+
         // Process reward
         if (activity.result.items) {
           inventory = rewardActivityItems(player, activity, timesCompleted);

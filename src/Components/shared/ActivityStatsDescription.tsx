@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 import { PlayerBaseStats, PlayerSkills } from "GameConstants/Player";
-import { getStatName, useNumberParser } from "GameEngine";
+import { PlayerContext, getStatName, useNumberParser } from "GameEngine";
+import React from "react";
 
 type Props = {
   stats: Partial<PlayerBaseStats> | Partial<PlayerSkills>;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export default function ActivityStatsDescription(props: Props) {
+  const player = React.useContext(PlayerContext);
   const { stats, activity, multiplicatorFunctionName, requiredTime } = props;
   const parse = useNumberParser();
   // Display the  description
@@ -21,7 +23,7 @@ export default function ActivityStatsDescription(props: Props) {
       effect:
         value *
         (multiplicatorFunctionName
-          ? ActivitiesFunctions[multiplicatorFunctionName](activity)
+          ? ActivitiesFunctions[multiplicatorFunctionName](activity, player)
           : 1),
     });
   }

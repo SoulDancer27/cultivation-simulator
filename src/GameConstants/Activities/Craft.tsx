@@ -23,6 +23,7 @@ let Crafting: Activity[] = [
     },
     result: {
       skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
       items: [
         {
           name: "Copper Sword",
@@ -53,6 +54,7 @@ let Crafting: Activity[] = [
     },
     result: {
       skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
       items: [
         {
           name: "Iron Sword",
@@ -83,6 +85,7 @@ let Crafting: Activity[] = [
     },
     result: {
       skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
       items: [
         {
           name: "Steel Sword",

@@ -8,8 +8,7 @@ export default function quality(
 
   return (
     baseQuality *
-    (1 + crafting / 2 ** realmFactor) * // Crafting impact
-    6 ** realmFactor * // Item realm
+    ((1 + crafting * 10) / 8 ** realmFactor) * // Crafting impact
     (1 + 0.1 * (Math.sqrt(priceMulti || 1) - 1)) // Raw materials impact
   );
 }

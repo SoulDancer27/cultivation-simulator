@@ -11,7 +11,7 @@ export default function useAgeManager(timer: GameTimer) {
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
-    if (state.action === "idle") return; // pause time if player does nothing
+    if (["idle", "breakthrough"].includes(state.action)) return;
     const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     stats.age += elapsedTime;
     updateContext({ stats });
