@@ -25,6 +25,7 @@ export default function useCultivationManager(timer: GameTimer) {
     const expGain = (stats.insight * elapsedTime) / 1000;
     const maxExp = totalExp(manual.maxLevel);
     const newExp = Math.min(exp + expGain, maxExp);
+
     const overflowExp = newExp - totalExp(level);
     const newLevel =
       overflowExp >=
@@ -39,6 +40,7 @@ export default function useCultivationManager(timer: GameTimer) {
       if (manual.stats) stats = playerStats(player);
       if (manual.skills) skills = playerSkills(player);
     }
+    if (newExp >= maxExp) state = { action: "idle", manual: undefined }; // return to idle state if the manual is finished
     updateContext({ state, stats, skills });
   }, [currentTime]);
 }

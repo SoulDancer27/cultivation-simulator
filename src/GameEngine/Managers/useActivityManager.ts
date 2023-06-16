@@ -11,6 +11,7 @@ import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
+import calculateMaxActions from "GameEngine/shared/calculateMaxActions";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {
@@ -39,6 +40,12 @@ export default function useActivityManager(timer: GameTimer) {
       );
       if (!activity) return;
       if (!activity.currentTime) activity.currentTime = 0;
+      const maxActions = calculateMaxActions(player, activity);
+      if (maxActions === 0) {
+        // bail out if player can't complete action even a single time
+        state = { action: "idle", activity: undefined };
+        updateContext({ state });
+      }
       const { timesCompleted, currentTime } = calculateTimesCompleted(
         elapsedTime,
         activity,

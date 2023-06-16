@@ -60,7 +60,7 @@ export function treasuresStatsMultiplier(
   treasures.forEach((item) => {
     if (isInventoryTreasure(item) && item.isEquipped) {
       const statsMulti = item.item.stats.statsMulti;
-      const itemMulti = (statsMulti && statsMulti[stat]) || 1;
+      const itemMulti = (statsMulti && statsMulti[stat]) || 0;
       totalMulti *= 1 + itemMulti;
     }
   });

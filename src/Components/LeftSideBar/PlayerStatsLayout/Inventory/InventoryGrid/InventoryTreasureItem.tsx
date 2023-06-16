@@ -24,6 +24,7 @@ import {
 } from "GameConstants/Interfaces";
 import { TreasureType } from "GameConstants/Items";
 import LockIcon from "Components/shared/LockIcon";
+import { playerCurrentStats } from "GameEngine/Player/playerCurrentStats";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {
@@ -33,7 +34,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const parse = useNumberParser();
   const player = React.useContext(PlayerContext);
-  let { inventory, stats, skills, updateContext } = player;
+  let { inventory, stats, skills, currentStats, updateContext } = player;
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -64,8 +65,9 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
       (inventory[equippedIndex] as InventoryTreasure).isEquipped = false;
     (inventory[index] as InventoryTreasure).isEquipped = true;
     stats = playerStats(player);
+    currentStats = playerCurrentStats(player);
     skills = playerSkills(player);
-    updateContext({ inventory, stats, skills });
+    updateContext({ inventory, stats, currentStats, skills });
     setAnchorEl(null);
   };
 

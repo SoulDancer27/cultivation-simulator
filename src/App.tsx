@@ -29,7 +29,7 @@ export default function App() {
               <GameRuntime>
                 <Box width={width} height={height} overflow="hidden">
                   <TopBar setSettings={setSettings} />
-                  {settings && <SettingsPage />}
+                  {settings && <SettingsPage setSettings={setSettings} />}
                   {!settings && (
                     <Box display="flex">
                       <LeftSideBar />

@@ -13,11 +13,17 @@ type Props = {
 // Top bar with some game stats and values
 export default function TopBar(props: Props) {
   const theme = useTheme();
-  const { stats, realm } = React.useContext(PlayerContext);
+  const { stats, realm, state } = React.useContext(PlayerContext);
   const { cultivationRealms } = React.useContext(GameContext);
   const { gameSpeed } = React.useContext(SettingsContext);
 
-  const { width, height } = getWindowDimensions();
+  const { width } = getWindowDimensions();
+
+  let playerAction = state.action;
+  if (state.action === "activity")
+    playerAction += " (" + state.activity?.name + ")";
+  if (state.action === "cultivating")
+    playerAction += " (" + state.manual?.manual.name + ")";
   return (
     <>
       <Paper elevation={8}>
@@ -37,7 +43,11 @@ export default function TopBar(props: Props) {
           </Box>
 
           <Box marginLeft="auto" display="flex" alignItems={"center"} gap={1}>
-            <Typography>Game Speed: x{gameSpeed}</Typography>
+            <Box display="flex" flexDirection={"column"}>
+              <Typography>Game Speed: x{gameSpeed}</Typography>
+              <Typography>{playerAction}</Typography>
+            </Box>
+
             <SettingsOutlinedIcon
               fontSize="large"
               onClick={() => props.setSettings((settings) => !settings)}

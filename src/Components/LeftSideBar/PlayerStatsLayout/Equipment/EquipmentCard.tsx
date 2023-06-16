@@ -16,6 +16,8 @@ import {
   isInventoryTreasure,
 } from "GameConstants/Interfaces";
 import { TreasureType } from "GameConstants/Items";
+import { currentStats } from "GameConstants/Player";
+import { playerCurrentStats } from "GameEngine/Player/playerCurrentStats";
 
 type Props = {
   treasure: InventoryTreasure | undefined;
@@ -28,7 +30,7 @@ export default function EquipmentCard(props: Props) {
   const theme = useTheme();
   const player = React.useContext(PlayerContext);
   const parse = useNumberParser();
-  let { inventory, stats, skills, updateContext } = player;
+  let { inventory, stats, currentStats, skills, updateContext } = player;
   if (!treasure)
     return (
       <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
@@ -84,10 +86,12 @@ export default function EquipmentCard(props: Props) {
     if (index === -1) return;
     const treasure = inventory[index];
     if (!isInventoryTreasure(treasure)) return;
-    treasure.isEquipped = false;
+    (inventory[index] as InventoryTreasure).isEquipped = false;
+
     stats = playerStats(player);
+    currentStats = playerCurrentStats(player);
     skills = playerSkills(player);
-    updateContext({ inventory, stats, skills });
+    updateContext({ inventory, stats, currentStats, skills });
   };
   return (
     <Box width={512} border="1px solid gray" borderRadius={theme.spacing(1)}>
