@@ -27,7 +27,7 @@ export default function CraftSword(
     const itemPower = power(itemQuality, treasure.realmIndex);
     invTreasure.item.stats = {
       stats: {
-        attack: itemPower / 2,
+        attack: itemPower,
       },
       statsMulti: {
         attack: Math.sqrt(itemPower) / 100,

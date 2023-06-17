@@ -66,6 +66,99 @@ let Crafting: Activity[] = [
     },
   },
   {
+    name: "Copper Helmet",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Copper",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Copper Helmet",
+          amount: 1,
+          type: "treasure",
+          generator: "Helmet",
+        },
+      ],
+    },
+  },
+  {
+    name: "Copper Pendant",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Copper",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Copper Pendant",
+          amount: 1,
+          type: "treasure",
+          generator: "Pendant",
+        },
+      ],
+    },
+  },
+  {
+    name: "Copper Ring",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Copper",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Copper Ring",
+          amount: 1,
+          type: "treasure",
+          generator: "Ring",
+        },
+      ],
+    },
+  },
+  {
     name: "Iron Sword",
     baseTime: 30 * day,
 
@@ -128,6 +221,99 @@ let Crafting: Activity[] = [
     },
   },
   {
+    name: "Iron Helmet",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Steel",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Iron Helmet",
+          amount: 1,
+          type: "treasure",
+          generator: "Helmet",
+        },
+      ],
+    },
+  },
+  {
+    name: "Iron Pendant",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Steel",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Iron Pendant",
+          amount: 1,
+          type: "treasure",
+          generator: "Pendant",
+        },
+      ],
+    },
+  },
+  {
+    name: "Iron Ring",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Steel",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Iron Ring",
+          amount: 1,
+          type: "treasure",
+          generator: "Ring",
+        },
+      ],
+    },
+  },
+  {
     name: "Steel Sword",
     baseTime: 30 * day,
 
@@ -185,6 +371,99 @@ let Crafting: Activity[] = [
           amount: 1,
           type: "treasure",
           generator: "Armor",
+        },
+      ],
+    },
+  },
+  {
+    name: "Steel Helmet",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Steel",
+          amount: 5,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Steel Helmet",
+          amount: 1,
+          type: "treasure",
+          generator: "Helmet",
+        },
+      ],
+    },
+  },
+  {
+    name: "Steel Pendant",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Steel",
+          amount: 5,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Steel Pendant",
+          amount: 1,
+          type: "treasure",
+          generator: "Pendant",
+        },
+      ],
+    },
+  },
+  {
+    name: "Steel Ring",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Steel",
+          amount: 5,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Steel Ring",
+          amount: 1,
+          type: "treasure",
+          generator: "Ring",
         },
       ],
     },

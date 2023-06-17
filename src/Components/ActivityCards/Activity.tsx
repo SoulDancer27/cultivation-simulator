@@ -152,7 +152,11 @@ export default function ActivityCard(props: ActivityCardProps) {
             </Box>
             {showTimesCompleted && (
               <Box marginLeft="auto">
-                <Typography>{activity.timesCompleted}</Typography>
+                <Typography>
+                  {activity.timesCompleted && activity.timesCompleted > 10000
+                    ? parse(activity.timesCompleted)
+                    : activity.timesCompleted}
+                </Typography>
               </Box>
             )}
           </Box>

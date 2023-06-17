@@ -47,7 +47,7 @@ export default function PlayerStatsLayout() {
           Skills
         </Button>
       </Box>
-      <Box width={512} height={512}>
+      <Box width={512} height={512} overflow="auto">
         {panel === "inventory" ? <Inventory /> : ""}
         {panel === "equipment" ? <Equipment /> : ""}
         {panel === "stats" ? <Stats /> : ""}

@@ -33,7 +33,7 @@ export default function SkillDetailsTooltip(
               display="inline"
             >
               {" "}
-              x{skillStructure.manuals}
+              x{parse(skillStructure.manuals)}
             </Typography>
           </Typography>
           <Typography>
@@ -48,7 +48,7 @@ export default function SkillDetailsTooltip(
               display="inline"
             >
               {" "}
-              x{skillStructure.treasuresMulti}
+              x{parse(skillStructure.treasuresMulti)}
             </Typography>
           </Typography>
           <Typography>
@@ -63,7 +63,7 @@ export default function SkillDetailsTooltip(
               display="inline"
             >
               {" "}
-              +{skillStructure.treasures}
+              +{parse(skillStructure.treasures)}
             </Typography>
           </Typography>
         </>

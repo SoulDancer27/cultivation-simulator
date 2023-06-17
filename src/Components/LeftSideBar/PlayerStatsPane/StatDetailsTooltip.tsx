@@ -32,7 +32,7 @@ export default function StatDetailsTooltip(
               display="inline"
             >
               {" "}
-              x{statStructure.realm}
+              x{parse(statStructure.realm)}
             </Typography>
           </Typography>
           <Typography>
@@ -47,7 +47,7 @@ export default function StatDetailsTooltip(
               display="inline"
             >
               {" "}
-              x{statStructure.manuals}
+              x{parse(statStructure.manuals)}
             </Typography>
           </Typography>
           <Typography>
@@ -62,7 +62,7 @@ export default function StatDetailsTooltip(
               display="inline"
             >
               {" "}
-              x{statStructure.treasuresMulti}
+              x{parse(statStructure.treasuresMulti)}
             </Typography>
           </Typography>
           <Typography>
@@ -77,7 +77,7 @@ export default function StatDetailsTooltip(
               display="inline"
             >
               {" "}
-              +{statStructure.treasures}
+              +{parse(statStructure.treasures)}
             </Typography>
           </Typography>
         </>

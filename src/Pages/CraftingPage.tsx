@@ -47,8 +47,8 @@ export default function CraftingPage() {
       <ItemGrid
         cellWidth={120}
         cellHeight={64}
-        sizeX={4}
-        sizeY={4}
+        sizeX={5}
+        sizeY={3}
         items={items}
         itemData={crafting}
         itemTypes={[

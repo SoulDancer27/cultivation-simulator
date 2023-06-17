@@ -6,7 +6,7 @@ import quality from "./quality";
 import power from "./power";
 
 // A function that returns treasure item as a result. Stats are based on player current skills
-export default function CraftArmor(
+export default function CraftHelmet(
   activity: Activity,
   player: PlayerContextType,
   item: ActivityItem
@@ -27,10 +27,12 @@ export default function CraftArmor(
     const itemPower = power(itemQuality, treasure.realmIndex);
     invTreasure.item.stats = {
       stats: {
-        health: itemPower * 5,
+        health: itemPower,
+        defence: Math.sqrt(itemPower),
       },
       statsMulti: {
         health: Math.sqrt(itemPower) / 200,
+        defence: Math.sqrt(itemPower) / 1000,
       },
     };
     invTreasure.item.quality = itemQuality;
