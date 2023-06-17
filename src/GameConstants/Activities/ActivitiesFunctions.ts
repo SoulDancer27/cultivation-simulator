@@ -3,6 +3,7 @@ import { PlayerContextType } from "../Interfaces";
 import { quality } from "./Crafting";
 import { Treasures } from "GameConstants/Items";
 import { Treasure } from "GameConstants/Items/Treasures";
+import power from "./Crafting/power";
 
 // One function per activity type (training, crafting, mining) - determines how to calculate how long an activity takes based on skill level
 const ActivitiesFunctions = {
@@ -32,7 +33,8 @@ const ActivitiesFunctions = {
       player.skills.crafting,
       priceMulti
     );
-    return itemQuality;
+    const itemPower = power(itemQuality, treasure.realmIndex);
+    return Math.max(1, Math.sqrt(0.1 * itemPower));
   },
   default: function (activity: Activity): number {
     return 1 / divisionCoeff(activity.timesCompleted || 0);

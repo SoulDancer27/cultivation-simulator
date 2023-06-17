@@ -35,6 +35,37 @@ let Crafting: Activity[] = [
     },
   },
   {
+    name: "Copper Armor",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Copper",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Copper Armor",
+          amount: 1,
+          type: "treasure",
+          generator: "Armor",
+        },
+      ],
+    },
+  },
+  {
     name: "Iron Sword",
     baseTime: 30 * day,
 
@@ -66,6 +97,37 @@ let Crafting: Activity[] = [
     },
   },
   {
+    name: "Iron Armor",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+        {
+          name: "Steel",
+          amount: 1,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Iron Armor",
+          amount: 1,
+          type: "treasure",
+          generator: "Armor",
+        },
+      ],
+    },
+  },
+  {
     name: "Steel Sword",
     baseTime: 30 * day,
 
@@ -92,6 +154,37 @@ let Crafting: Activity[] = [
           amount: 1,
           type: "treasure",
           generator: "Sword",
+        },
+      ],
+    },
+  },
+  {
+    name: "Steel Armor",
+    baseTime: 30 * day,
+
+    price: {
+      items: [
+        {
+          name: "Steel",
+          amount: 5,
+          type: "mineral",
+        },
+        {
+          name: "Iron",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Steel Armor",
+          amount: 1,
+          type: "treasure",
+          generator: "Armor",
         },
       ],
     },

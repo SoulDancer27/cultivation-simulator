@@ -16,6 +16,19 @@ const Treasures: Treasure[] = [
     type: "weapon",
   },
   {
+    name: "Copper Armor",
+    description: "",
+    image: {
+      path: "/treasures/armors.png",
+      x: 1 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
+    realmIndex: 0,
+    type: "armor",
+  },
+  {
     name: "Iron Sword",
     description: "",
     image: {
@@ -27,6 +40,19 @@ const Treasures: Treasure[] = [
     },
     realmIndex: 9,
     type: "weapon",
+  },
+  {
+    name: "Iron Armor",
+    description: "",
+    image: {
+      path: "/treasures/armors.png",
+      x: 2 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
+    realmIndex: 0,
+    type: "armor",
   },
   {
     name: "Steel Sword",
@@ -42,17 +68,17 @@ const Treasures: Treasure[] = [
     type: "weapon",
   },
   {
-    name: "Rusty Armor",
+    name: "Steel Armor",
     description: "",
-    image: { path: "/treasures/armors.png", x: 0, y: 0, sizeX: 32, sizeY: 32 },
+    image: {
+      path: "/treasures/armors.png",
+      x: 3 * 32,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
     realmIndex: 0,
     type: "armor",
-    quality: 10,
-    stats: {
-      stats: {
-        health: 50,
-      },
-    },
   },
   {
     name: "Rusty Helmet",

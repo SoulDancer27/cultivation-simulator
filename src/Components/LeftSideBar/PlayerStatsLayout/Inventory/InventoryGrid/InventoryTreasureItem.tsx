@@ -154,7 +154,7 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
               </Box>
             </Box>
 
-            <Typography>Quality: {treasure.quality.toFixed(2)}</Typography>
+            <Typography>Quality: {parse(treasure.quality)}</Typography>
             {TreasureDescription.map((item, index) => (
               <Typography key={index} variant="body1">
                 {item.text} {item.effect}
