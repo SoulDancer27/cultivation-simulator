@@ -6,6 +6,7 @@ import { GridItemType, ItemGrid, BasicGridCell } from "Components";
 import { GameContext } from "GameEngine";
 import ActiveItem from "./CraftingPage/ActiveItem";
 import PriceMultiplier from "./CraftingPage/PriceMultiplier";
+import TreasureCell from "./CraftingPage/TreasureCell";
 
 export default function CraftingPage() {
   const { crafting } = React.useContext(GameContext);
@@ -49,11 +50,9 @@ export default function CraftingPage() {
         cellHeight={64}
         sizeX={5}
         sizeY={3}
-        items={items}
-        itemData={crafting}
-        itemTypes={[
-          { type: "treasure", Tooltip: TreasureTooltip, Cell: BasicGridCell },
-        ]}
+        items={crafting}
+        Cell={TreasureCell}
+        Tooltip={TreasureTooltip}
         context={{ setActiveItem }}
       />
     </Box>

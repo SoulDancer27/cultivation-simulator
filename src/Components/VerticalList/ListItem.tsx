@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, ClickAwayListener, Popper } from "@mui/material";
-type GridItemProps = {
-  width: number;
-  height: number;
+type ListItemProps = {
+  width: number | string;
+  height: number | string;
   item: any;
-  Cell: (props: any) => JSX.Element;
+  Item: (props: any) => JSX.Element;
   Tooltip?: (props: any) => JSX.Element;
   context?: any;
 };
 
-export default function GridItem(props: GridItemProps) {
-  const { width, height, item, Cell, Tooltip } = props;
+export default function ListItem(props: ListItemProps) {
+  const { width, height, item, Item, Tooltip } = props;
 
   // For the tooltip handling
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,7 +28,7 @@ export default function GridItem(props: GridItemProps) {
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box width={width} height={height} onClick={handleClick}>
-        <Cell
+        <Item
           width={width}
           height={height}
           item={item}

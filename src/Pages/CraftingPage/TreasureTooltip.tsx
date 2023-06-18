@@ -7,8 +7,7 @@ import ItemDescriptions from "Components/shared/ItemDescriptions";
 import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
 
 type Props = {
-  item: GridItemType;
-  data: any;
+  item: any;
   context: {
     setActiveItem: React.Dispatch<React.SetStateAction<string | undefined>>;
   };
@@ -16,7 +15,7 @@ type Props = {
 
 export default function TreasureTooltip(props: Props) {
   const { item, context } = props;
-  const activity: Activity = props.data;
+  const activity: Activity = item;
   const craftTime = activity.time
     ? ActivitiesFunctions[activity.time](activity)
     : activity.baseTime;

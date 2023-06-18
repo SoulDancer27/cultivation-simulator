@@ -4,6 +4,7 @@ import quality from "./quality";
 import CraftHelmet from "./CraftHelmet";
 import CraftRing from "./CraftRing";
 import CraftPendant from "./CraftPendant";
+import power from "./power";
 
 const CraftingFunctions = {
   Sword: CraftSword,
@@ -15,4 +16,4 @@ const CraftingFunctions = {
 
 export default CraftingFunctions;
 
-export { quality };
+export { quality, power };

@@ -11,6 +11,7 @@ import GatheringActivityCard from "./ActivityCards/GatheringActivity";
 import CraftingPage from "Pages/CraftingPage";
 import { GameContext, PlayerContext } from "GameEngine";
 import { NavigationBarPages } from "GameConstants/GameContent";
+import FightingPage from "Pages/FightingPage";
 
 export type ActivePage = (typeof NavigationBarPages)[number];
 
@@ -73,6 +74,7 @@ export default function MainNavigationBar() {
       ) : (
         ""
       )}
+      {page === "Fighting" ? <FightingPage /> : ""}
     </Box>
   );
 }

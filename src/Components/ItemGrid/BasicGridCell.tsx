@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import CropSquareImage from "../shared/CropImage";
-import { GridItemType } from "Components/ItemGrid";
 import findItemDescription from "GameConstants/utils/findItemDescription";
+import { ItemType } from "GameConstants/Interfaces";
 
 type Props = {
   width: number;
   height: number;
-  item: GridItemType;
+  item: { name: string; type: ItemType };
 };
 
 export default function BasicGridCell(props: Props) {

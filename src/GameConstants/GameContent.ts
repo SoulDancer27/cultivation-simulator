@@ -7,6 +7,7 @@ import {
   CultivationRealms,
 } from "./Cultivation/CultivationRealms";
 import Gathering from "./Activities/Gathering";
+import { Enemies, EnemyType } from "./Enemies";
 
 // Declarations for the game mechanics
 // Contains game data. Is stored to localStorage every autosave interval.
@@ -16,6 +17,7 @@ export type GameContent = {
   crafting: Activity[]; // List of available activities for crafting tab
   gathering: Activity[]; // List of activities for gathering tab
   cultivationRealms: CultivationRealm[]; // Player cultivation realms with all tribulations passed and stat modifiers
+  enemies: EnemyType[];
 };
 
 export const gameContent: GameContent = {
@@ -24,6 +26,7 @@ export const gameContent: GameContent = {
   crafting: Crafting,
   gathering: Gathering,
   cultivationRealms: CultivationRealms,
+  enemies: Enemies,
 };
 
 export const NavigationBarPages = [
@@ -33,4 +36,5 @@ export const NavigationBarPages = [
   "Mining",
   "Crafting",
   "Gathering",
+  "Fighting",
 ];
