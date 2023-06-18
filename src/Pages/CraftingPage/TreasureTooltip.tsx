@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import { GridItemType } from "Components";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import parseTime from "Utils/parseTime";

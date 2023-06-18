@@ -7,7 +7,8 @@ import {
   TableRow,
   Popper,
   ClickAwayListener,
-  Box,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import React from "react";
 
@@ -19,20 +20,18 @@ type TableProps = {
   HeaderRow: (props: any) => JSX.Element;
   Row: (props: any) => JSX.Element;
   RowTooltip?: (props: any) => JSX.Element;
+  paper?: boolean;
 };
 
 export default function CustomTable(props: TableProps) {
-  const { width, height, maxHeight, items, HeaderRow, Row, RowTooltip } = props;
+  const { width, height, maxHeight, items, HeaderRow, Row, RowTooltip, paper } =
+    props;
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{
-          width: width,
-          height: height,
-          maxHeight: maxHeight,
-          overflow: "auto",
-        }}
-      >
+    <TableContainer
+      component={paper ? Paper : "div"}
+      sx={{ width: width, height: height, overflow: "auto" }}
+    >
+      <Table>
         <TableHead>
           <TableRow>
             <HeaderRow />

@@ -8,7 +8,7 @@ import EnemyTooltip from "./FightingPage/EnemyTooltip";
 export default function FightingPage() {
   const { enemies } = React.useContext(GameContext);
   return (
-    <Box>
+    <Box marginTop={2} marginLeft={2}>
       <Table
         width={600}
         maxHeight={600}
@@ -16,6 +16,7 @@ export default function FightingPage() {
         HeaderRow={HeaderRow}
         Row={EnemyRow}
         RowTooltip={EnemyTooltip}
+        paper
       />
     </Box>
   );
