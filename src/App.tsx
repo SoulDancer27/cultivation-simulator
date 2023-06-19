@@ -13,6 +13,7 @@ import LeftSideBar from "Components/LeftSideBar";
 import React from "react";
 import SettingsPage from "Pages/SettingsPage";
 import SettingsLoader from "GameEngine/SettingsLoader";
+import { MainWindow, states } from "Components/shared/useComponentSelector";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
@@ -33,7 +34,7 @@ export default function App() {
                   {!settings && (
                     <Box display="flex">
                       <LeftSideBar />
-                      <MainNavigationBar />
+                      <MainWindow states={states} />
                     </Box>
                   )}
                 </Box>
