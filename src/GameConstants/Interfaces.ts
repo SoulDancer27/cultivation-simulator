@@ -1,6 +1,6 @@
 import { Activity } from "./Activities/Activities";
 import { CultivationManualType } from "./Cultivation/CultivationManuals";
-import { EnemyType } from "./Enemies";
+import { EnemyType } from "./Fighting/Enemies";
 import { PlayerBaseStats, PlayerCurrentStats, PlayerSkills } from "./Player";
 import { Treasure } from "./Items/Treasures";
 

@@ -7,7 +7,7 @@ import {
   CultivationRealms,
 } from "./Cultivation/CultivationRealms";
 import Gathering from "./Activities/Gathering";
-import { Enemies, EnemyType } from "./Enemies";
+import { Enemies, EnemyType } from "./Fighting/Enemies";
 
 // Declarations for the game mechanics
 // Contains game data. Is stored to localStorage every autosave interval.

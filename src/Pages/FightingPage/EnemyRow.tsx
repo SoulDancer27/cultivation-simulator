@@ -1,6 +1,6 @@
 import { Box, Button, TableCell, TableRow } from "@mui/material";
 import withTooltip, { WithTooltipType } from "Components/shared/withTooltip";
-import { EnemyType } from "GameConstants/Enemies";
+import { EnemyType } from "GameConstants/Fighting/Enemies";
 import { PlayerContext, useNumberParser } from "GameEngine";
 import React from "react";
 import EnemyTooltip from "./EnemyTooltip";

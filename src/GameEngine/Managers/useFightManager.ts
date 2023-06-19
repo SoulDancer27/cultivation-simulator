@@ -1,36 +1,46 @@
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
+import { playerSkills } from "GameEngine/Player/playerSkills";
+import { playerStats } from "../Player/playerStats";
 import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { EnemyFightDps, PlayerFightDps } from "GameConstants/Fighting/fightDps";
+import enemyTimesDefeated from "GameEngine/shared/enemyTimesDefeated";
+import addBaseStats from "GameEngine/shared/addBaseStats";
+import addSkillsExp from "GameEngine/shared/addSkillExp";
+import rewardItems from "GameEngine/shared/rewardItems";
 
 // This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {
-  let { stats, currentStats, state, updateContext } =
-    React.useContext(PlayerContext);
+  const player = React.useContext(PlayerContext);
+  let {
+    stats,
+    baseStats,
+    baseSkills,
+    currentStats,
+    state,
+    skills,
+    inventory,
+    updateContext,
+  } = player;
   const { gameSpeed } = React.useContext(SettingsContext);
   const { currentTime, previousTime } = timer;
   React.useEffect(() => {
     // Update age
     const elapsedTime = (timer.currentTime - timer.previousTime) * gameSpeed;
     if (state.action !== "fighting" || !state.enemy) return;
+    const enemy = state.enemy;
     // Calculate damage dealt by both parties
-    const playerDps = FightDps(
-      { attack: stats.attack },
-      { defence: state.enemy.defence, healthRegen: state.enemy.healthRegen }
-    );
-    const enemyDps = FightDps(
-      { attack: state.enemy.attack },
-      {
-        defence: stats.defence,
-        healthRegen: stats.healthRegen,
-      }
-    );
+    const playerDps = PlayerFightDps(player, enemy);
+    const enemyDps = EnemyFightDps(enemy, player);
     const playerDamage = (playerDps * elapsedTime) / 1000;
     const enemyDamage = (enemyDps * elapsedTime) / 1000;
 
+    const timesCompleted = enemyTimesDefeated(elapsedTime, enemy, player);
+
     const newEnemyHealth = Math.min(
-      state.enemy.currentHealth - playerDamage,
-      state.enemy.health
+      enemy.currentHealth - (playerDamage - enemy.health * timesCompleted),
+      enemy.health
     );
 
     const newPlayerHealth = Math.min(
@@ -38,34 +48,49 @@ export default function useFightManager(timer: GameTimer) {
       stats.health
     );
 
-    // Victory condition
-    if (newEnemyHealth <= 0) {
-      state = { action: "idle", enemy: undefined };
-      alert("You defeated an enemy!");
+    // Process reward
+    if (timesCompleted > 0) {
+      // If activity increaces base stats
+      if (enemy.result.baseStats)
+        baseStats = addBaseStats(
+          baseStats,
+          enemy.result.baseStats,
+          timesCompleted
+        );
+      if (enemy.result.skills) {
+        baseSkills = addSkillsExp(
+          baseSkills,
+          enemy.result.skills,
+          timesCompleted
+        );
+      }
+
+      // Process reward
+      if (enemy.result.items) {
+        inventory = rewardItems(player, enemy.result.items, timesCompleted);
+      }
     }
+
     // Loss condition
-    else if (newPlayerHealth <= 0) {
+    if (newPlayerHealth <= 0) {
       state = { action: "idle", enemy: undefined };
-      alert("Enemy was too strong and you had to escape");
     }
     // Update Hp values for both parties
     else {
       currentStats.health = newPlayerHealth;
       state.enemy.currentHealth = newEnemyHealth;
     }
-    updateContext({ currentStats, state });
+    // Update calculated stat values based on new baseStats
+    stats = playerStats(player);
+    skills = playerSkills(player);
+    updateContext({
+      currentStats,
+      baseStats,
+      baseSkills,
+      inventory,
+      state,
+      stats,
+      skills,
+    });
   }, [currentTime]);
-}
-
-// Stats that matter for the fighting actor
-type AttackerStats = {
-  attack: number;
-};
-
-type DefenderStats = {
-  defence: number;
-  healthRegen: number;
-};
-function FightDps(attacker: AttackerStats, defender: DefenderStats) {
-  return attacker.attack / (1 + 0.01 * defender.defence) - defender.healthRegen;
 }
