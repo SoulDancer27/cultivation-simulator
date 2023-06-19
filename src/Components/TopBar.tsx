@@ -24,6 +24,8 @@ export default function TopBar(props: Props) {
     playerAction += " (" + state.activity?.name + ")";
   if (state.action === "cultivating")
     playerAction += " (" + state.manual?.manual.name + ")";
+  if (state.action === "fighting")
+    playerAction += " (" + state.enemy?.name + ")";
   return (
     <>
       <Paper elevation={8}>
