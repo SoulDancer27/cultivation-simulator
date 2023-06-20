@@ -29,10 +29,10 @@ export default function CraftingPage() {
         </Box>
       )}
       <ItemGrid
-        cellWidth={120}
+        cellWidth={160}
         cellHeight={64}
         sizeX={5}
-        sizeY={3}
+        sizeY={5}
         items={crafting}
         Cell={TreasureCell}
         Tooltip={TreasureTooltip}

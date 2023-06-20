@@ -6,7 +6,7 @@ let Crafting: Activity[] = [
   {
     name: "Copper Sword",
     baseTime: 30 * day,
-
+    description: "boosts attack",
     price: {
       items: [
         {
@@ -37,7 +37,7 @@ let Crafting: Activity[] = [
   {
     name: "Copper Armor",
     baseTime: 30 * day,
-
+    description: "boosts health",
     price: {
       items: [
         {
@@ -68,7 +68,7 @@ let Crafting: Activity[] = [
   {
     name: "Copper Helmet",
     baseTime: 30 * day,
-
+    description: "boosts health and defence",
     price: {
       items: [
         {
@@ -99,7 +99,7 @@ let Crafting: Activity[] = [
   {
     name: "Copper Pendant",
     baseTime: 30 * day,
-
+    description: "boosts health and regen",
     price: {
       items: [
         {
@@ -130,7 +130,7 @@ let Crafting: Activity[] = [
   {
     name: "Copper Ring",
     baseTime: 30 * day,
-
+    description: "boosts attack and training",
     price: {
       items: [
         {
@@ -161,7 +161,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Sword",
     baseTime: 30 * day,
-
+    description: "boosts attack",
     price: {
       items: [
         {
@@ -192,7 +192,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Armor",
     baseTime: 30 * day,
-
+    description: "boosts health",
     price: {
       items: [
         {
@@ -223,7 +223,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Helmet",
     baseTime: 30 * day,
-
+    description: "boosts health and defence",
     price: {
       items: [
         {
@@ -254,7 +254,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Pendant",
     baseTime: 30 * day,
-
+    description: "boosts health and regen",
     price: {
       items: [
         {
@@ -285,7 +285,7 @@ let Crafting: Activity[] = [
   {
     name: "Iron Ring",
     baseTime: 30 * day,
-
+    description: "boosts attack and training",
     price: {
       items: [
         {
@@ -316,7 +316,7 @@ let Crafting: Activity[] = [
   {
     name: "Steel Sword",
     baseTime: 30 * day,
-
+    description: "boosts attack",
     price: {
       items: [
         {
@@ -347,7 +347,7 @@ let Crafting: Activity[] = [
   {
     name: "Steel Armor",
     baseTime: 30 * day,
-
+    description: "boosts health",
     price: {
       items: [
         {
@@ -378,7 +378,7 @@ let Crafting: Activity[] = [
   {
     name: "Steel Helmet",
     baseTime: 30 * day,
-
+    description: "boosts health and defence",
     price: {
       items: [
         {
@@ -409,7 +409,7 @@ let Crafting: Activity[] = [
   {
     name: "Steel Pendant",
     baseTime: 30 * day,
-
+    description: "boosts health and regen",
     price: {
       items: [
         {
@@ -440,7 +440,7 @@ let Crafting: Activity[] = [
   {
     name: "Steel Ring",
     baseTime: 30 * day,
-
+    description: "boosts attack and training",
     price: {
       items: [
         {
@@ -461,6 +461,266 @@ let Crafting: Activity[] = [
       items: [
         {
           name: "Steel Ring",
+          amount: 1,
+          type: "treasure",
+          generator: "Ring",
+        },
+      ],
+    },
+  },
+  {
+    name: "Cold Steel Sword",
+    baseTime: 30 * day,
+    description: "boosts attack",
+    price: {
+      items: [
+        {
+          name: "Cold Steel",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Cold Steel Sword",
+          amount: 1,
+          type: "treasure",
+          generator: "Sword",
+        },
+      ],
+    },
+  },
+  {
+    name: "Cold Steel Armor",
+    baseTime: 30 * day,
+    description: "boosts health",
+    price: {
+      items: [
+        {
+          name: "Cold Steel",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Cold Steel Armor",
+          amount: 1,
+          type: "treasure",
+          generator: "Armor",
+        },
+      ],
+    },
+  },
+  {
+    name: "Cold Steel Helmet",
+    baseTime: 30 * day,
+    description: "boosts health and defence",
+    price: {
+      items: [
+        {
+          name: "Cold Steel",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Cold Steel Helmet",
+          amount: 1,
+          type: "treasure",
+          generator: "Helmet",
+        },
+      ],
+    },
+  },
+  {
+    name: "Cold Steel Pendant",
+    baseTime: 30 * day,
+    description: "boosts health and regen",
+    price: {
+      items: [
+        {
+          name: "Cold Steel",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Cold Steel Pendant",
+          amount: 1,
+          type: "treasure",
+          generator: "Pendant",
+        },
+      ],
+    },
+  },
+  {
+    name: "Cold Steel Ring",
+    baseTime: 30 * day,
+    description: "boosts attack and training",
+    price: {
+      items: [
+        {
+          name: "Cold Steel",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Cold Steel Ring",
+          amount: 1,
+          type: "treasure",
+          generator: "Ring",
+        },
+      ],
+    },
+  },
+  {
+    name: "Golden Sword",
+    baseTime: 30 * day,
+    description: "boosts attack",
+    price: {
+      items: [
+        {
+          name: "Celestial Gold",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Golden Sword",
+          amount: 1,
+          type: "treasure",
+          generator: "Sword",
+        },
+      ],
+    },
+  },
+  {
+    name: "Golden Armor",
+    baseTime: 30 * day,
+    description: "boosts health",
+    price: {
+      items: [
+        {
+          name: "Celestial Gold",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Golden Armor",
+          amount: 1,
+          type: "treasure",
+          generator: "Armor",
+        },
+      ],
+    },
+  },
+  {
+    name: "Golden Helmet",
+    baseTime: 30 * day,
+    description: "boosts health and defence",
+    price: {
+      items: [
+        {
+          name: "Celestial Gold",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Golden Helmet",
+          amount: 1,
+          type: "treasure",
+          generator: "Helmet",
+        },
+      ],
+    },
+  },
+  {
+    name: "Golden Pendant",
+    baseTime: 30 * day,
+    description: "boosts health and regen",
+    price: {
+      items: [
+        {
+          name: "Celestial Gold",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Golden Pendant",
+          amount: 1,
+          type: "treasure",
+          generator: "Pendant",
+        },
+      ],
+    },
+  },
+  {
+    name: "Golden Ring",
+    baseTime: 30 * day,
+    description: "boosts attack and training",
+    price: {
+      items: [
+        {
+          name: "Celestial Gold",
+          amount: 3,
+          type: "mineral",
+        },
+      ],
+    },
+    result: {
+      skills: { crafting: 0.1 },
+      skillsMulti: "crafting skill reward",
+      items: [
+        {
+          name: "Golden Ring",
           amount: 1,
           type: "treasure",
           generator: "Ring",

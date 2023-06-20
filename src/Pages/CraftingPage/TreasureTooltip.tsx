@@ -30,6 +30,7 @@ export default function TreasureTooltip(props: Props) {
     <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
       <Typography variant="h6">{item.name}</Typography>
       <Typography>Craft time: {craftTimeLabel}</Typography>
+      <Typography>{item.description}</Typography>
       <Box
         display="flex"
         justifyContent={"space-between"}

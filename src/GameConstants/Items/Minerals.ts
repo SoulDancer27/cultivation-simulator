@@ -25,9 +25,31 @@ export const Minerals: Material[] = [
   },
   {
     name: "Steel",
-    description: "The best material",
+    description: "Ordinary Steel",
     image: {
       path: "/minerals/icon2.png",
+      x: 0,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
+  },
+  {
+    name: "Cold Steel",
+    description: "Much harder than regular Steel",
+    image: {
+      path: "/minerals/icon1.png",
+      x: 0,
+      y: 0,
+      sizeX: 32,
+      sizeY: 32,
+    },
+  },
+  {
+    name: "Celestial Gold",
+    description: "The best material for treasures",
+    image: {
+      path: "/minerals/icon7.png",
       x: 0,
       y: 0,
       sizeX: 32,

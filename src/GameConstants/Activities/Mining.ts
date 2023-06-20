@@ -33,6 +33,26 @@ let Mining: Activity[] = [
       items: [{ type: "mineral", name: "Steel", amount: 1 }],
     },
   },
+  {
+    name: "Cold Steel",
+    baseTime: 30 * month,
+    result: {
+      skills: {
+        mining: 0.3,
+      },
+      items: [{ type: "mineral", name: "Cold Steel", amount: 1 }],
+    },
+  },
+  {
+    name: "Celestial Gold",
+    baseTime: 150 * month,
+    result: {
+      skills: {
+        mining: 1,
+      },
+      items: [{ type: "mineral", name: "Celestial Gold", amount: 1 }],
+    },
+  },
 ];
 
 Mining = Mining.map((item) => {
