@@ -8,7 +8,7 @@ let Gathering: Activity[] = [
     baseTime: 5 * day,
     result: {
       skills: {
-        crafting: 0.01,
+        gathering: 0.01,
       },
       items: [{ type: "herb", name: "Grass Stalk", amount: 1 }],
     },
@@ -18,7 +18,7 @@ let Gathering: Activity[] = [
     baseTime: month,
     result: {
       skills: {
-        crafting: 0.03,
+        gathering: 0.03,
       },
       items: [{ type: "herb", name: "Oak leaf", amount: 1 }],
     },
@@ -26,7 +26,7 @@ let Gathering: Activity[] = [
 ];
 
 Gathering = Gathering.map((item) => {
-  if (!item.time) item.time = "mining time";
+  if (!item.time) item.time = "gathering time";
   if (item.result.baseStats && !item.result.baseStatsMulti)
     item.result.baseStatsMulti = "default";
   if (item.result.skills && !item.result.skillsMulti)

@@ -1,17 +1,20 @@
-import CraftSword from "./CraftSword";
-import CraftArmor from "./CraftArmor";
 import quality from "./quality";
-import CraftHelmet from "./CraftHelmet";
-import CraftRing from "./CraftRing";
-import CraftPendant from "./CraftPendant";
 import power from "./power";
+import CraftTreasure from "./CraftTreasure";
+import {
+  armorStats,
+  helmetStats,
+  pendantStats,
+  ringStats,
+  swordStats,
+} from "./CraftingFunctions";
 
 const CraftingFunctions = {
-  Sword: CraftSword,
-  Armor: CraftArmor,
-  Helmet: CraftHelmet,
-  Ring: CraftRing,
-  Pendant: CraftPendant,
+  Sword: CraftTreasure(swordStats),
+  Armor: CraftTreasure(armorStats),
+  Helmet: CraftTreasure(helmetStats),
+  Ring: CraftTreasure(ringStats),
+  Pendant: CraftTreasure(pendantStats),
 };
 
 export default CraftingFunctions;

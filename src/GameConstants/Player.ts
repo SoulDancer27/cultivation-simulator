@@ -19,6 +19,7 @@ export type PlayerSkills = {
   training: number;
   mining: number;
   crafting: number;
+  gathering: number;
 };
 
 export const baseStats: PlayerBaseStats = {
@@ -37,6 +38,7 @@ export const playerSkills: PlayerSkills = {
   training: 0,
   mining: 0,
   crafting: 0,
+  gathering: 0,
 };
 
 // You can add player equipment types here

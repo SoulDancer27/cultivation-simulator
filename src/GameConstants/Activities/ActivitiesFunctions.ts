@@ -17,6 +17,11 @@ const ActivitiesFunctions = {
     const multi = 1 + skills.mining;
     return activity.baseTime / multi;
   },
+  "gathering time": function (activity: Activity, player: PlayerContextType) {
+    const { skills } = player;
+    const multi = 1 + skills.gathering;
+    return activity.baseTime / multi;
+  },
   "crafting skill reward": function (
     activity: Activity,
     player: PlayerContextType

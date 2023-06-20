@@ -43,7 +43,7 @@ export const MainWindow = (props: { states: Record<string, JSX.Element> }) => {
   return (
     <Box width={width - 512} height={height - getSpacing(theme, 8)}>
       <Menu state={state} setState={setState} states={states} />
-      <Content />
+      {state && <Content />}
     </Box>
   );
 };

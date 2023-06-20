@@ -205,7 +205,7 @@ export type Treasure = {
   quality?: number;
 };
 
-type TreasureStats = {
+export type TreasureStats = {
   stats?: Partial<PlayerBaseStats>;
   statsMulti?: Partial<PlayerBaseStats>;
   skills?: Partial<PlayerSkills>;

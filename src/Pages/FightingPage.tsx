@@ -16,15 +16,6 @@ export default function FightingPage() {
   const { enemies } = React.useContext(GameContext);
   return (
     <Box marginTop={2} marginLeft={2}>
-      {/*<Table
-        width={600}
-        maxHeight={600}
-        items={enemies}
-        HeaderRow={HeaderRow}
-        Row={EnemyRow}
-        RowTooltip={EnemyTooltip}
-        paper
-  />*/}
       <TableContainer sx={{ width: 600, height: 600, overflow: "auto" }}>
         <Table>
           <TableHead>
@@ -45,8 +36,4 @@ export default function FightingPage() {
       </TableContainer>
     </Box>
   );
-}
-
-function HeaderRow() {
-  return <></>;
 }
