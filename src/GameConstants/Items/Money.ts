@@ -12,6 +12,28 @@ const Money: MoneyType[] = [
       sizeY: 36,
     },
   },
+  {
+    name: "Silver Coin",
+    description: "Currency for slighter wealthier mortals",
+    image: {
+      path: "money/coins.png",
+      x: 0,
+      y: 72,
+      sizeX: 36,
+      sizeY: 36,
+    },
+  },
+  {
+    name: "Golden Coin",
+    description: "The eternal store of value, at least for mortals",
+    image: {
+      path: "money/coins.png",
+      x: 0,
+      y: 0,
+      sizeX: 36,
+      sizeY: 36,
+    },
+  },
 ];
 
 export type MoneyType = {

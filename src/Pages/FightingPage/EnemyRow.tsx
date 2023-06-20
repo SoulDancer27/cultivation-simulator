@@ -34,11 +34,17 @@ const EnemyRow = withTooltip<Props>((props) => {
       : parse(health);
   return (
     <TableRow>
-      <TableCell onClick={props.toggleTooltip}>{name}</TableCell>
+      <TableCell
+        onClick={props.toggleTooltip}
+        onMouseOver={props.showTooltip}
+        onMouseOut={props.hideTooltip}
+      >
+        {name}
+      </TableCell>
       <TableCell onClick={props.toggleTooltip}>{enemyHealthLabel}</TableCell>
-      <TableCell onClick={props.toggleTooltip}>{attack}</TableCell>
-      <TableCell onClick={props.toggleTooltip}>{defence}</TableCell>
-      <TableCell onClick={props.toggleTooltip}>{healthRegen}</TableCell>
+      <TableCell onClick={props.toggleTooltip}>{parse(attack)}</TableCell>
+      <TableCell onClick={props.toggleTooltip}>{parse(defence)}</TableCell>
+      <TableCell onClick={props.toggleTooltip}>{parse(healthRegen)}</TableCell>
       <TableCell>
         <Button
           variant="contained"

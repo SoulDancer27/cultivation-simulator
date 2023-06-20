@@ -3,6 +3,8 @@ import React from "react";
 
 export type WithTooltipType = {
   toggleTooltip: () => void;
+  showTooltip: () => void;
+  hideTooltip: () => void;
 };
 
 export default function withTooltip<P>(
@@ -17,6 +19,10 @@ export default function withTooltip<P>(
       setAnchorEl(anchorEl ? null : event.currentTarget);
     };
 
+    const handleMouseOver = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+
     const handleClickAway = () => {
       setAnchorEl(null);
     };
@@ -25,7 +31,12 @@ export default function withTooltip<P>(
     return (
       <ClickAwayListener onClickAway={handleClickAway}>
         <>
-          <WrappedComponent toggleTooltip={handleClick} {...props} />
+          <WrappedComponent
+            toggleTooltip={handleClick}
+            showTooltip={(event) => setAnchorEl(event.currentTarget)}
+            hideTooltip={() => setAnchorEl(null)}
+            {...props}
+          />
           <Popper id={id} open={open} anchorEl={anchorEl}>
             {Tooltip && <Tooltip {...props} />}
           </Popper>
