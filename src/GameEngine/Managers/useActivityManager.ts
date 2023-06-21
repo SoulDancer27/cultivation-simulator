@@ -9,9 +9,9 @@ import calculateTimesCompleted from "GameEngine/shared/calculateTimesCompleted";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import rewardActivityItems from "GameEngine/shared/rewardActivityItems";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 import calculateMaxActions from "GameEngine/shared/calculateMaxActions";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 // The main function for inGame player actions processing
 export default function useActivityManager(timer: GameTimer) {

@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 
 import CropSquareImage from "./CropImage";
-import { useNumberParser } from "GameEngine";
 import { ActivityItem } from "GameConstants/Activities/Activities";
 import findItemDescription from "GameConstants/utils/findItemDescription";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = {
   items: ActivityItem[];

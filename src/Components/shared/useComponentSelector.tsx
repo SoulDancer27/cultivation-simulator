@@ -1,3 +1,8 @@
+import {
+  useWindowDimensions,
+  useContentSelector,
+  getSpacing,
+} from "@SoulDancer27/idle-rpg-lib";
 import { Box, Button, Paper, useTheme } from "@mui/material";
 import ActivityCard from "Components/ActivityCards/Activity";
 import GatheringActivityCard from "Components/ActivityCards/GatheringActivity";
@@ -8,8 +13,8 @@ import FightingPage from "Pages/FightingPage";
 import ManualsPage from "Pages/ManualsPage";
 import RealmBreakthroughPage from "Pages/RealmBreakthroughPage";
 import breakthroughSuccess from "Pages/RealmBreakthroughPage/breakthroughSuccess";
-import getSpacing from "Utils/getSpacing";
-import useWindowDimensions from "Utils/useWindowDimensions";
+import ShopsPage from "Pages/ShopsPage";
+
 import React from "react";
 
 export type State = { [key: string]: () => JSX.Element };
@@ -22,21 +27,13 @@ export const states = {
   Crafting: <CraftingPage />,
   Gathering: <ActionsPage source={"gathering"} Card={GatheringActivityCard} />,
   Fighting: <FightingPage />,
+  Shops: <ShopsPage />,
 };
-
-export default function useComponentSelector(
-  defaultComponent: string,
-  components: Record<string, JSX.Element>
-) {
-  const [state, setState] = React.useState<string>(defaultComponent);
-  const Content = () => components[state];
-  return { state, Content, setState, states: Object.keys(components) };
-}
 
 export const MainWindow = (props: { states: Record<string, JSX.Element> }) => {
   const { width, height } = useWindowDimensions();
   const theme = useTheme();
-  const { state, setState, states, Content } = useComponentSelector(
+  const { state, setState, states, Content } = useContentSelector(
     "Training",
     props.states
   );

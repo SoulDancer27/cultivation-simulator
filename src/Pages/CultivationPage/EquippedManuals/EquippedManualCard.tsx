@@ -64,7 +64,7 @@ export default function EquippedManualCard(props: PlayerCultivationManual) {
           justifyContent={"center"}
         >
           <img
-            src={manual.imagePath || "/manuals/placeholder.png"}
+            src={manual.image.path || "/manuals/placeholder.png"}
             width="60px"
             height="auto"
             alt=""

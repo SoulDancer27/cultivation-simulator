@@ -10,7 +10,6 @@ import CropSquareImage from "Components/shared/CropImage";
 import React from "react";
 import EmptyCell from "./EmptyCell";
 import {
-  useNumberParser,
   PlayerContext,
   playerStats,
   playerSkills,
@@ -25,6 +24,7 @@ import {
 import { TreasureType } from "GameConstants/Items";
 import LockIcon from "Components/shared/LockIcon";
 import { playerCurrentStats } from "GameEngine/Player/playerCurrentStats";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // Draw inventory treasure item
 export default function InventoryTreasureItem(props: InventoryTreasure) {

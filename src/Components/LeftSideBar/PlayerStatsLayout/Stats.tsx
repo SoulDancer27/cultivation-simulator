@@ -1,5 +1,6 @@
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 import { Box, Typography, useTheme } from "@mui/material";
-import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
+import { PlayerContext, getStatName } from "GameEngine";
 import React from "react";
 
 // Player baseStats display

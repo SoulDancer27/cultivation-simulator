@@ -5,10 +5,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import {
-  levelExp,
-  totalExp,
-} from "GameConstants/Cultivation/CultivationManuals";
+import { levelExp, totalExp } from "GameConstants/Items/CultivationManuals";
 import { PlayerContext, getStatName } from "GameEngine";
 import React from "react";
 
@@ -71,7 +68,7 @@ export default function ActiveManual() {
           justifyContent={"center"}
         >
           <img
-            src={manual.imagePath || "/manuals/placeholder.png"}
+            src={manual.image.path || "/manuals/placeholder.png"}
             width="60px"
             height="auto"
             alt=""

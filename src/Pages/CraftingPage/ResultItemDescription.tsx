@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { PlayerContext, useNumberParser } from "GameEngine";
+import { PlayerContext } from "GameEngine";
 import { Activity } from "GameConstants/Activities/Activities";
 import findItemDescription from "GameConstants/utils/findItemDescription";
 import { CropSquareImage } from "Components";
@@ -7,6 +7,7 @@ import { UniqueItems } from "GameConstants/Interfaces";
 import { quality } from "GameConstants/Activities/Crafting";
 import React from "react";
 import power from "GameConstants/Activities/Crafting/power";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = {
   activity: Activity;

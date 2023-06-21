@@ -1,8 +1,8 @@
 import PlayerContext from "../Player/PlayerContext";
 import React from "react";
 import { GameTimer } from "GameEngine/GameRuntime";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 import { month } from "GameConstants/Constants";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 // Placeholder. #todo: replace it with some better logic.
 export default function useDefaultRegenManager(timer: GameTimer) {

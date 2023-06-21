@@ -4,7 +4,6 @@ import CropSquareImage from "Components/shared/CropImage";
 import React from "react";
 import getSpacing from "Utils/getSpacing";
 import {
-  useNumberParser,
   getStatName,
   playerStats,
   playerSkills,
@@ -18,6 +17,7 @@ import {
 import { TreasureType } from "GameConstants/Items";
 import { currentStats } from "GameConstants/Player";
 import { playerCurrentStats } from "GameEngine/Player/playerCurrentStats";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = {
   treasure: InventoryTreasure | undefined;

@@ -1,7 +1,8 @@
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 import { Box, Typography } from "@mui/material";
 import { ActivitiesFunctions, Activity } from "GameConstants/Activities";
 import { PlayerBaseStats, PlayerSkills } from "GameConstants/Player";
-import { PlayerContext, getStatName, useNumberParser } from "GameEngine";
+import { PlayerContext, getStatName } from "GameEngine";
 import React from "react";
 
 type Props = {

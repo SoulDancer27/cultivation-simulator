@@ -1,7 +1,8 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import SkillDetailsTooltip from "./Skills/SkillDetailTooltip";
-import { PlayerContext, getStatName, useNumberParser } from "GameEngine";
+import { PlayerContext, getStatName } from "GameEngine";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // Bad coding here. #todo: make it a .map() render
 export default function Skills() {

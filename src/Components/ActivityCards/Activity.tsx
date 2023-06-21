@@ -3,10 +3,11 @@ import ProgressBar from "../shared/ProgressBar";
 import React from "react";
 import parseTime from "Utils/parseTime";
 import { ActivityCardProps } from "./types";
-import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
+import { PlayerContext } from "GameEngine";
 import { ActivitiesFunctions } from "GameConstants/Activities";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // Generic activity panel without decorations suitable for any activity
 export default function ActivityCard(props: ActivityCardProps) {

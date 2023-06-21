@@ -1,7 +1,8 @@
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 import { Box, Typography } from "@mui/material";
 import ItemDescriptions from "Components/shared/ItemDescriptions";
 import { EnemyType } from "GameConstants/Fighting/Enemies";
-import { getStatName, useNumberParser } from "GameEngine";
+import { getStatName } from "GameEngine";
 
 export default function EnemyTooltip(props: { item: EnemyType }) {
   const enemy = props.item;

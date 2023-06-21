@@ -4,11 +4,12 @@ import React from "react";
 import parseTime from "Utils/parseTime";
 import { ActivityCardProps } from "./types";
 import itemImages from "../shared/ItemImages";
-import { PlayerContext, useNumberParser, getStatName } from "GameEngine";
+import { PlayerContext } from "GameEngine";
 import { ActivitiesFunctions } from "GameConstants/Activities";
 import { defaultUpdateInterval } from "GameConstants/Constants";
 import ItemImages from "../shared/ItemImages";
 import ActivityStatsDescription from "Components/shared/ActivityStatsDescription";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // Activity panel for activity without price, shows result image in the top right corner
 export default function GatheringActivityCard(props: ActivityCardProps) {

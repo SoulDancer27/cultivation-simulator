@@ -6,7 +6,7 @@ import useFightManager from "./Managers/useFightManager";
 import useCultivationManager from "./Managers/useCultivationManager";
 import useActivityManager from "./Managers/useActivityManager";
 import useBreakthroughManager from "./Managers/useBreakthroughManager";
-import SettingsContext from "./SettingsContext/SettingContext";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 export type GameTimer = {
   previousTime: number;

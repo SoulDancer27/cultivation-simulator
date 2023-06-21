@@ -1,6 +1,7 @@
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 import { TooltipProps, Typography, useTheme } from "@mui/material";
 import HtmlTooltip from "Components/shared/HtmlTooltip";
-import { PlayerContext, getStatStructure, useNumberParser } from "GameEngine";
+import { PlayerContext, getStatStructure } from "GameEngine";
 
 import React from "react";
 

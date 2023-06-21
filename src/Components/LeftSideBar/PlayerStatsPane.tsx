@@ -2,7 +2,8 @@ import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import HealthBar from "./PlayerStatsPane/HealthBar";
 import StatDetailsTooltip from "./PlayerStatsPane/StatDetailsTooltip";
-import { PlayerContext, useNumberParser } from "GameEngine";
+import { PlayerContext } from "GameEngine";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = { displayStats: { name: string; stat: string }[] };
 

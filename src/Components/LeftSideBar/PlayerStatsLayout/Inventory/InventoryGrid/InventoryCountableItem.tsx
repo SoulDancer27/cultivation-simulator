@@ -6,9 +6,9 @@ import {
   InventoryCountableItem as Type,
 } from "GameConstants/Interfaces";
 import EmptyCell from "./EmptyCell";
-import { useNumberParser } from "GameEngine";
 import { MoneyType } from "GameConstants/Items";
 import findItemDescription from "GameConstants/utils/findItemDescription";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // Draw inventory money item
 export default function InventoryCountableItem(props: Type) {

@@ -3,8 +3,9 @@ import { Box, Paper, Typography, useTheme } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import React from "react";
 import { getWindowDimensions } from "Utils/useWindowDimensions";
-import { PlayerContext, GameContext, SettingsContext } from "GameEngine";
+import { PlayerContext, GameContext } from "GameEngine";
 import { year, month } from "GameConstants/Constants";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = {
   setSettings: React.Dispatch<React.SetStateAction<boolean>>;

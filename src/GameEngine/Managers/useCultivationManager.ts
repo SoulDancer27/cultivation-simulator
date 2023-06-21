@@ -3,11 +3,8 @@ import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
-import {
-  totalExp,
-  levelExp,
-} from "GameConstants/Cultivation/CultivationManuals";
+import { totalExp, levelExp } from "GameConstants/Items/CultivationManuals";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 // Updates cultivation manuals learning progress
 export default function useCultivationManager(timer: GameTimer) {

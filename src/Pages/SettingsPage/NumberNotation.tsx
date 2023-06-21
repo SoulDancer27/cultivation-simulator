@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { SettingsContext } from "GameEngine";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 import React from "react";
 
 export default function NumberNotation() {

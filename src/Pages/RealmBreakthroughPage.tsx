@@ -9,7 +9,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Placeholder from "./RealmBreakthroughPage/Placeholder";
 import calculateMaxTribulationStage from "./RealmBreakthroughPage/calculateMaxTribulationStage";
 import { HtmlTooltip } from "Components";
-import { PlayerContext, GameContext, useNumberParser } from "GameEngine";
+import { PlayerContext, GameContext } from "GameEngine";
+import { useNumberParser } from "@SoulDancer27/idle-rpg-lib";
 
 // ! Some bad coding ahead. Probably should split into several files :)
 export default function RealmBreakthroughPage() {

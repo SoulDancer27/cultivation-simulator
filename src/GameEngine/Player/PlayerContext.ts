@@ -1,5 +1,5 @@
 import { year } from "GameConstants/Constants";
-import { CultivationManuals } from "GameConstants/Cultivation/CultivationManuals";
+import { CultivationManuals } from "GameConstants/Items/CultivationManuals";
 import { PlayerContextType } from "GameConstants/Interfaces";
 import { baseStats, currentStats, playerSkills } from "GameConstants/Player";
 import React from "react";

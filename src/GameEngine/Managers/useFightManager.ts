@@ -3,12 +3,12 @@ import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
 import { playerSkills } from "GameEngine/Player/playerSkills";
 import { playerStats } from "../Player/playerStats";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
 import { EnemyFightDps, PlayerFightDps } from "GameConstants/Fighting/fightDps";
 import enemyTimesDefeated from "GameEngine/shared/enemyTimesDefeated";
 import addBaseStats from "GameEngine/shared/addBaseStats";
 import addSkillsExp from "GameEngine/shared/addSkillExp";
 import rewardItems from "GameEngine/shared/rewardItems";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 // This is not yet properly tested, beware
 export default function useFightManager(timer: GameTimer) {

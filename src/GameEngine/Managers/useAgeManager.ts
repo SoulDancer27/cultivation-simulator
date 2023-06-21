@@ -1,7 +1,7 @@
 import React from "react";
 import PlayerContext from "../Player/PlayerContext";
 import { GameTimer } from "GameEngine/GameRuntime";
-import SettingsContext from "GameEngine/SettingsContext/SettingContext";
+import { SettingsContext } from "@SoulDancer27/idle-rpg-lib";
 
 // Just a function to update player age
 export default function useAgeManager(timer: GameTimer) {

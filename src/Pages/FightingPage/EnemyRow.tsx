@@ -1,9 +1,9 @@
-import { Box, Button, TableCell, TableRow } from "@mui/material";
-import withTooltip, { WithTooltipType } from "Components/shared/withTooltip";
+import { Button, TableCell, TableRow } from "@mui/material";
 import { EnemyType } from "GameConstants/Fighting/Enemies";
-import { PlayerContext, useNumberParser } from "GameEngine";
+import { PlayerContext } from "GameEngine";
 import React from "react";
 import EnemyTooltip from "./EnemyTooltip";
+import { useNumberParser, withTooltip } from "@SoulDancer27/idle-rpg-lib";
 
 type Props = {
   item: any;
