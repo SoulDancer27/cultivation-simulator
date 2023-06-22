@@ -7,11 +7,10 @@ import useWindowDimensions, {
 } from "Utils/useWindowDimensions";
 import LeftSideBar from "Components/LeftSideBar";
 import React from "react";
-import SettingsPage from "Pages/SettingsPage";
+import { ContextManagerProps, SettingsPage } from "@SoulDancer27/idle-rpg-lib";
 import { MainWindow, states } from "Components/shared/useComponentSelector";
 import {
   DataManager,
-  DataManagerProps,
   SettingsContext,
   settingsContextDefault,
 } from "@SoulDancer27/idle-rpg-lib";
@@ -33,7 +32,9 @@ export default function App() {
           <GameRuntime>
             <Box width={width} height={height} overflow="hidden">
               <TopBar setSettings={setSettings} />
-              {settings && <SettingsPage setSettings={setSettings} />}
+              {settings && (
+                <SettingsPage setOpened={setSettings} data={appData} />
+              )}
               {!settings && (
                 <Box display="flex">
                   <LeftSideBar />
@@ -48,7 +49,7 @@ export default function App() {
   );
 }
 
-const appData: DataManagerProps<any>[] = [
+const appData: ContextManagerProps<any>[] = [
   {
     Context: SettingsContext,
     defaultContextValue: settingsContextDefault,
