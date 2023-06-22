@@ -9,8 +9,11 @@ import { PlayerSkills } from "GameConstants/Player";
 // Functions that calculate total player skills values based on inGame variables
 export function calculateSkill(skill: string, player: PlayerContextType) {
   const cultivationMulti = manualsSkillsMultiplier(skill, player.manuals);
-  const treasuresMulti = treasuresSkillsMultiplier(skill, player.inventory);
-  const treasuresPower = treasuresBonus(skill, player.inventory);
+  const treasuresMulti = treasuresSkillsMultiplier(
+    skill,
+    player.inventory.items as any
+  );
+  const treasuresPower = treasuresBonus(skill, player.inventory.items as any);
   return (
     player.baseSkills[skill] * cultivationMulti * treasuresMulti +
     treasuresPower
@@ -96,8 +99,11 @@ export function getSkillStructure(
   const { baseSkills, manuals, inventory } = player;
   const baseStat = baseSkills[skill];
   const manualsBonus = manualsSkillsMultiplier(skill, manuals);
-  const treasuresMulti = treasuresSkillsMultiplier(skill, inventory);
-  const treasuresPower = treasuresBonus(skill, inventory);
+  const treasuresMulti = treasuresSkillsMultiplier(
+    skill,
+    inventory.items as any
+  );
+  const treasuresPower = treasuresBonus(skill, inventory.items as any);
   return {
     base: baseStat,
     manuals: manualsBonus,

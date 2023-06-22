@@ -10,8 +10,11 @@ import {
 export function calculateStat(stat: string, player: PlayerContextType) {
   const cultivationMulti = manualsStatsMultiplier(stat, player.manuals);
   const realmMulti = player.realm.power[stat] || 1;
-  const treasuresMulti = treasuresStatsMultiplier(stat, player.inventory);
-  const treasuresPower = treasuresBonus(stat, player.inventory);
+  const treasuresMulti = treasuresStatsMultiplier(
+    stat,
+    player.inventory.items as any
+  );
+  const treasuresPower = treasuresBonus(stat, player.inventory.items as any);
   return (
     player.baseStats[stat] * realmMulti * cultivationMulti * treasuresMulti +
     treasuresPower
@@ -101,8 +104,8 @@ export function getStatStructure(
   const baseStat = baseStats[stat];
   const realmBonus = realm.power[stat] || 1;
   const manualsBonus = manualsStatsMultiplier(stat, manuals);
-  const treasuresMulti = treasuresStatsMultiplier(stat, inventory);
-  const treasuresPower = treasuresBonus(stat, inventory);
+  const treasuresMulti = treasuresStatsMultiplier(stat, inventory.items as any);
+  const treasuresPower = treasuresBonus(stat, inventory.items as any);
   return {
     base: baseStat,
     realm: realmBonus,

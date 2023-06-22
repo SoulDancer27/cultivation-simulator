@@ -3,6 +3,7 @@ import { CultivationManualType } from "./Items/CultivationManuals";
 import { EnemyType } from "./Fighting/Enemies";
 import { PlayerBaseStats, PlayerCurrentStats, PlayerSkills } from "./Player";
 import { Treasure } from "./Items/Treasures";
+import { Inventory as InventoryClass } from "@SoulDancer27/idle-rpg-lib";
 
 /* ______________________________________________________________________
   Player Types                                             
@@ -88,7 +89,7 @@ export type PlayerContextType = {
   baseSkills: PlayerSkills;
   realm: PlayerRealm; // an index pointing to the global realms array and total calculated multiplier based on passed tribulations
   manuals?: PlayerCultivationManual[]; // an array of all learned manuals with progress tracked for each
-  inventory: InventoryItem[]; // an array of all inventory items
+  inventory: InventoryClass; // an array of all inventory items
   state: PlayerState; // current player action
 };
 

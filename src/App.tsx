@@ -7,17 +7,24 @@ import useWindowDimensions, {
 } from "Utils/useWindowDimensions";
 import LeftSideBar from "Components/LeftSideBar";
 import React from "react";
-import { ContextManagerProps, SettingsPage } from "@SoulDancer27/idle-rpg-lib";
+import {
+  ContextManagerProps,
+  RuntimeContextDict,
+  SettingsPage,
+} from "@SoulDancer27/idle-rpg-lib";
 import { MainWindow, states } from "Components/shared/useComponentSelector";
 import {
   DataManager,
   SettingsContext,
   settingsContextDefault,
+  GameRuntime as Test,
+  useAgeManager,
 } from "@SoulDancer27/idle-rpg-lib";
 import PlayerContext, { playerContext } from "GameEngine/Player/PlayerContext";
 import { GameContext } from "GameEngine";
 
 import { gameContent } from "GameConstants/GameContent";
+import { PlayerContextType } from "GameConstants/Interfaces";
 
 export default function App() {
   // Re-render page on innerWidth and innerHeight change
@@ -48,6 +55,10 @@ export default function App() {
     </CssBaseline>
   );
 }
+
+const managers = [
+  { hook: useAgeManager, context: { PlayerContext: PlayerContext } },
+];
 
 const appData: ContextManagerProps<any>[] = [
   {

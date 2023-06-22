@@ -4,7 +4,7 @@ import InventoryGridItem from "./InventoryGrid/InventoryGridItem";
 import { InventoryItem } from "GameConstants/Interfaces";
 
 // Player inventory
-export default function InventoryGrid(props: { inventory: InventoryItem[] }) {
+export default function InventoryGrid(props: { inventory: any[] }) {
   const { inventory } = props;
 
   const length =

@@ -66,9 +66,11 @@ export default function useFightManager(timer: GameTimer) {
       }
 
       // Process reward
+      /*
       if (enemy.result.items) {
         inventory = rewardItems(player, enemy.result.items, timesCompleted);
       }
+      */
     }
 
     // Loss condition

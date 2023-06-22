@@ -12,9 +12,7 @@ import { PlayerEquipment } from "GameConstants/Player";
 // Player equipment
 export default function Equipment() {
   const { inventory } = React.useContext(PlayerContext);
-  const equippedItems = inventory.filter(
-    (item) => isInventoryTreasure(item) && item.isEquipped
-  );
+  const equippedItems = inventory.getEquippedItems();
   const EquipCards: Array<JSX.Element> = [];
   for (let itemType of PlayerEquipment) {
     const treasure = (equippedItems as InventoryTreasure[]).find(

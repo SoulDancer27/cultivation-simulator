@@ -45,18 +45,18 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   };
 
   const dropItem = (id: string) => {
-    const index = inventory.findIndex((item) => item.id === id);
+    const index = inventory.items.findIndex((item) => item.id === id);
     if (index === -1 || (inventory[index] as any).isLocked) return;
-    inventory.splice(index, 1);
+    inventory.items.splice(index, 1);
     updateContext({ inventory });
     setAnchorEl(null);
   };
 
   const equipItem = (id: string, type: TreasureType) => {
-    const index = inventory.findIndex((item) => item.id === id);
+    const index = inventory.items.findIndex((item) => item.id === id);
     if (index === -1) return;
     // Check equipped items
-    const equippedIndex = inventory.findIndex(
+    const equippedIndex = inventory.items.findIndex(
       (item) =>
         isInventoryTreasure(item) && item.isEquipped && item.item.type === type
     );
@@ -72,12 +72,12 @@ export default function InventoryTreasureItem(props: InventoryTreasure) {
   };
 
   const toggleItemLock = (id: string) => {
-    const index = inventory.findIndex((item) => item.id === id);
+    const index = inventory.items.findIndex((item) => item.id === id);
     if (index === -1) return;
     (inventory[index] as InventoryUniqueItem).isLocked = !(
       inventory[index] as InventoryUniqueItem
     ).isLocked;
-    updateContext({ inventory: inventory.slice() });
+    updateContext({ inventory });
   };
 
   const open = Boolean(anchorEl);

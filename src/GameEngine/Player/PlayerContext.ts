@@ -3,6 +3,10 @@ import { CultivationManuals } from "GameConstants/Items/CultivationManuals";
 import { PlayerContextType } from "GameConstants/Interfaces";
 import { baseStats, currentStats, playerSkills } from "GameConstants/Player";
 import React from "react";
+import { Inventory } from "@SoulDancer27/idle-rpg-lib";
+
+export const CountableItems = ["money", "mineral", "herb"];
+export const UniqueItems = ["treasure", "potion"];
 
 // Some placeholder values to fill in the player object on first launch
 export const playerContext: PlayerContextType = {
@@ -23,7 +27,11 @@ export const playerContext: PlayerContextType = {
     learningProgress: { exp: 0, level: 0 },
     isEquipped: false,
   })),
-  inventory: [],
+  inventory: new Inventory({
+    countableItemTypes: CountableItems,
+    uniqueItemTypes: UniqueItems,
+    items: [],
+  }),
   state: { action: "idle" },
 };
 

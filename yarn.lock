@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@SoulDancer27/idle-rpg-lib@^0.0.12":
-  version "0.0.12"
-  resolved "https://npm.pkg.github.com/download/@SoulDancer27/idle-rpg-lib/0.0.12/0dcf8d08c4700a0e6d366805611085a183f5ce16#0dcf8d08c4700a0e6d366805611085a183f5ce16"
-  integrity sha512-ywcHnegrlOo1NSnDkAQxGPgJf++SgVzJoHKyQ3wMewBzjaXrpmjAgL42AG3TFcHCJY6UJg1fKj/x5YHwMFMJkA==
+"@SoulDancer27/idle-rpg-lib@^0.0.15":
+  version "0.0.15"
+  resolved "https://npm.pkg.github.com/download/@SoulDancer27/idle-rpg-lib/0.0.15/a8926126a30f43a8a4d304913aa1f551739a80c1#a8926126a30f43a8a4d304913aa1f551739a80c1"
+  integrity sha512-ZPo3vVFSGQAgAFQKBcyc2FApayvPDJ5oYj2sBfVNK8jnXZj8O7aXmjGvNJZzv+BIyqWnu4hkjbza0UhzZo3n5w==
 
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"

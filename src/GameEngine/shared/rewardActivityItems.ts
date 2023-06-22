@@ -25,14 +25,14 @@ export default function rewardActivityItems(
       if (CountableItems.includes(piece.type as any)) {
         let item = piece as CountableItem;
         const amountToAdd = item.amount * times;
-        const itemIndex = inventory.findIndex(
+        const itemIndex = inventory.items.findIndex(
           (value) =>
             value.type === item.type &&
             (value as CountableItem).name === item.name
         );
         const currentItem = inventory[itemIndex];
         if (itemIndex === -1) {
-          /* don't have this type of money yet */ inventory.push({
+          /* don't have this type of money yet */ inventory.items.push({
             type: item.type,
             id: uuid(),
             name: item.name,
@@ -67,7 +67,7 @@ export default function rewardActivityItems(
         }
         if (treasure) {
           for (let i = 0; i < times * piece.amount; i++) {
-            inventory.push(treasure);
+            inventory.items.push(treasure);
           }
         }
       }
@@ -75,5 +75,5 @@ export default function rewardActivityItems(
       console.log(`rewardActivityItems: ${error}`);
     }
   }
-  return inventory;
+  return inventory as any;
 }

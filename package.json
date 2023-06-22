@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@SoulDancer27/idle-rpg-lib": "^0.0.12",
+    "@SoulDancer27/idle-rpg-lib": "^0.0.15",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.11.0",

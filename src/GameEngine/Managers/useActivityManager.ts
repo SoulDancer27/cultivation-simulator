@@ -72,12 +72,15 @@ export default function useActivityManager(timer: GameTimer) {
               -timesCompleted * priceMulti
             );
           // Process activity price in terms of items
-          if (activity.price.items)
+          /*
+          if (activity.price.items) 
+          
             inventory = removeItems(
               inventory,
               activity.price.items,
               timesCompleted * priceMulti
             );
+            */
         }
 
         // If activity increaces base stats
@@ -109,7 +112,7 @@ export default function useActivityManager(timer: GameTimer) {
 
         // Process reward
         if (activity.result.items) {
-          inventory = rewardActivityItems(player, activity, timesCompleted);
+          /*inventory = rewardActivityItems(player, activity, timesCompleted);*/
         }
       }
       // Update calculated stat values based on new baseStats

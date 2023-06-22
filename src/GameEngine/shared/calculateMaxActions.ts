@@ -22,7 +22,7 @@ export default function calculateMaxActions(
       for (const item of action.price.items) {
         // Process money
         if (["money", "mineral"].includes(item.type)) {
-          const itemIndex = player.inventory.findIndex(
+          const itemIndex = player.inventory.items.findIndex(
             (value) =>
               value.type === item.type && (value as any).name === item.name
           );
@@ -37,9 +37,10 @@ export default function calculateMaxActions(
         }
         // Process treasures
         if (item.type === "treasure") {
-          const items = player.inventory.filter(
+          const items = player.inventory.items.filter(
             (value) =>
-              value.type === "treasure" && value.item.name === item.name
+              value.type === "treasure" &&
+              (value as any).item.name === item.name
           );
           const actionsNumber = Math.floor(
             items.length / item.amount / priceMulti

@@ -68,7 +68,7 @@ export default function AutosellPanel() {
   React.useEffect(() => {
     const autosellInterval = setInterval(() => {
       if (!isActive) return;
-      const newInventory = inventory.filter((item) => {
+      inventory.items = inventory.items.filter((item) => {
         if (CountableItems.includes(item.type as any)) return true; // autosell does not sell countable items
         // For InventoryUniqueItems
         const uItem = item as InventoryUniqueItem;
@@ -82,7 +82,7 @@ export default function AutosellPanel() {
         }
         return true;
       });
-      updateContext({ inventory: newInventory.slice() });
+      updateContext({ inventory: JSON.parse(JSON.stringify(inventory)) });
     }, 1000);
     return () => {
       clearInterval(autosellInterval);

@@ -82,7 +82,7 @@ export default function EquipmentCard(props: Props) {
   }
 
   const unequipItem = (id: string) => {
-    const index = inventory.findIndex((item) => item.id === id);
+    const index = inventory.items.findIndex((item) => item.id === id);
     if (index === -1) return;
     const treasure = inventory[index];
     if (!isInventoryTreasure(treasure)) return;

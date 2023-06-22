@@ -18,7 +18,7 @@ export default function Inventory() {
   const { inventory } = React.useContext(PlayerContext);
   const [type, setType] = React.useState<InventoryFilters>("all");
   // Filter equipped items
-  let displayedInventory = inventory.filter((item) => {
+  let displayedInventory = inventory.items.filter((item) => {
     if (!isInventoryTreasure(item)) return true;
     else {
       return !item.isEquipped;
