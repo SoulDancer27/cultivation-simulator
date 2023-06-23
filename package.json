@@ -9,6 +9,7 @@
     "@mui/material": "^5.2.3",
     "@popperjs/core": "^2.11.6",
     "file-saver": "^2.0.5",
+    "gh-pages": "^5.0.0",
     "js-abbreviation-number": "^1.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -20,6 +21,8 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
