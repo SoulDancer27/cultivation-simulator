@@ -6,7 +6,7 @@ const Treasures: Treasure[] = [
     name: "Copper Sword",
     description: "",
     image: {
-      path: "/treasures/swords1.png",
+      path: "./treasures/swords1.png",
       x: 2 * 32,
       y: 0,
       sizeX: 32,
@@ -19,7 +19,7 @@ const Treasures: Treasure[] = [
     name: "Copper Armor",
     description: "",
     image: {
-      path: "/treasures/armors.png",
+      path: "./treasures/armors.png",
       x: 1 * 32,
       y: 0,
       sizeX: 32,
@@ -32,7 +32,7 @@ const Treasures: Treasure[] = [
     name: "Copper Helmet",
     description: "",
     image: {
-      path: "/treasures/helmets.png",
+      path: "./treasures/helmets.png",
       x: 1 * 32,
       y: 0,
       sizeX: 32,
@@ -45,7 +45,7 @@ const Treasures: Treasure[] = [
     name: "Copper Pendant",
     description: "",
     image: {
-      path: "/treasures/pendants.png",
+      path: "./treasures/pendants.png",
       x: 0,
       y: 0,
       sizeX: 32,
@@ -57,7 +57,7 @@ const Treasures: Treasure[] = [
   {
     name: "Copper Ring",
     description: "",
-    image: { path: "/treasures/rings.png", x: 0, y: 0, sizeX: 32, sizeY: 32 },
+    image: { path: "./treasures/rings.png", x: 0, y: 0, sizeX: 32, sizeY: 32 },
     realmIndex: 0,
     type: "ring",
   },
@@ -65,7 +65,7 @@ const Treasures: Treasure[] = [
     name: "Iron Sword",
     description: "",
     image: {
-      path: "/treasures/swords1.png",
+      path: "./treasures/swords1.png",
       x: 0 * 32,
       y: 0,
       sizeX: 32,
@@ -78,7 +78,7 @@ const Treasures: Treasure[] = [
     name: "Iron Armor",
     description: "",
     image: {
-      path: "/treasures/armors.png",
+      path: "./treasures/armors.png",
       x: 2 * 32,
       y: 0,
       sizeX: 32,
@@ -91,7 +91,7 @@ const Treasures: Treasure[] = [
     name: "Iron Helmet",
     description: "",
     image: {
-      path: "/treasures/helmets.png",
+      path: "./treasures/helmets.png",
       x: 2 * 32,
       y: 0,
       sizeX: 32,
@@ -104,7 +104,7 @@ const Treasures: Treasure[] = [
     name: "Iron Pendant",
     description: "",
     image: {
-      path: "/treasures/pendants.png",
+      path: "./treasures/pendants.png",
       x: 1 * 32,
       y: 0,
       sizeX: 32,
@@ -117,7 +117,7 @@ const Treasures: Treasure[] = [
     name: "Iron Ring",
     description: "",
     image: {
-      path: "/treasures/rings.png",
+      path: "./treasures/rings.png",
       x: 1 * 32,
       y: 0,
       sizeX: 32,
@@ -130,7 +130,7 @@ const Treasures: Treasure[] = [
     name: "Steel Sword",
     description: "",
     image: {
-      path: "/treasures/swords1.png",
+      path: "./treasures/swords1.png",
       x: 4 * 32,
       y: 0,
       sizeX: 32,
@@ -143,7 +143,7 @@ const Treasures: Treasure[] = [
     name: "Steel Armor",
     description: "",
     image: {
-      path: "/treasures/armors.png",
+      path: "./treasures/armors.png",
       x: 3 * 32,
       y: 0,
       sizeX: 32,
@@ -156,7 +156,7 @@ const Treasures: Treasure[] = [
     name: "Steel Helmet",
     description: "",
     image: {
-      path: "/treasures/helmets.png",
+      path: "./treasures/helmets.png",
       x: 3 * 32,
       y: 0,
       sizeX: 32,
@@ -169,7 +169,7 @@ const Treasures: Treasure[] = [
     name: "Steel Pendant",
     description: "",
     image: {
-      path: "/treasures/pendants.png",
+      path: "./treasures/pendants.png",
       x: 2 * 32,
       y: 0,
       sizeX: 32,
@@ -182,7 +182,7 @@ const Treasures: Treasure[] = [
     name: "Steel Ring",
     description: "",
     image: {
-      path: "/treasures/rings.png",
+      path: "./treasures/rings.png",
       x: 2 * 32,
       y: 0,
       sizeX: 32,
@@ -195,7 +195,7 @@ const Treasures: Treasure[] = [
     name: "Cold Steel Sword",
     description: "",
     image: {
-      path: "/treasures/swords1.png",
+      path: "./treasures/swords1.png",
       x: 5 * 32,
       y: 0,
       sizeX: 32,
@@ -208,7 +208,7 @@ const Treasures: Treasure[] = [
     name: "Cold Steel Armor",
     description: "",
     image: {
-      path: "/treasures/armors.png",
+      path: "./treasures/armors.png",
       x: 5 * 32,
       y: 0,
       sizeX: 32,
@@ -221,7 +221,7 @@ const Treasures: Treasure[] = [
     name: "Cold Steel Helmet",
     description: "",
     image: {
-      path: "/treasures/helmets.png",
+      path: "./treasures/helmets.png",
       x: 5 * 32,
       y: 0,
       sizeX: 32,
@@ -234,7 +234,7 @@ const Treasures: Treasure[] = [
     name: "Cold Steel Pendant",
     description: "",
     image: {
-      path: "/treasures/pendants.png",
+      path: "./treasures/pendants.png",
       x: 4 * 32,
       y: 0,
       sizeX: 32,
@@ -247,7 +247,7 @@ const Treasures: Treasure[] = [
     name: "Cold Steel Ring",
     description: "",
     image: {
-      path: "/treasures/rings.png",
+      path: "./treasures/rings.png",
       x: 4 * 32,
       y: 0,
       sizeX: 32,
@@ -260,7 +260,7 @@ const Treasures: Treasure[] = [
     name: "Golden Sword",
     description: "",
     image: {
-      path: "/treasures/swords1.png",
+      path: "./treasures/swords1.png",
       x: 1 * 32,
       y: 0,
       sizeX: 32,
@@ -273,7 +273,7 @@ const Treasures: Treasure[] = [
     name: "Golden Armor",
     description: "",
     image: {
-      path: "/treasures/armors.png",
+      path: "./treasures/armors.png",
       x: 13 * 32,
       y: 0,
       sizeX: 32,
@@ -286,7 +286,7 @@ const Treasures: Treasure[] = [
     name: "Golden Helmet",
     description: "",
     image: {
-      path: "/treasures/helmets.png",
+      path: "./treasures/helmets.png",
       x: 13 * 32,
       y: 0,
       sizeX: 32,
@@ -299,7 +299,7 @@ const Treasures: Treasure[] = [
     name: "Golden Pendant",
     description: "",
     image: {
-      path: "/treasures/pendants.png",
+      path: "./treasures/pendants.png",
       x: 3 * 32,
       y: 0,
       sizeX: 32,
@@ -312,7 +312,7 @@ const Treasures: Treasure[] = [
     name: "Golden Ring",
     description: "",
     image: {
-      path: "/treasures/rings.png",
+      path: "./treasures/rings.png",
       x: 3 * 32,
       y: 0,
       sizeX: 32,

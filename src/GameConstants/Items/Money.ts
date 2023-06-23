@@ -5,7 +5,7 @@ const Money: MoneyType[] = [
     name: "Copper Coin",
     description: "The most common currency of the Mortal World",
     image: {
-      path: "money/coins.png",
+      path: "./money/coins.png",
       x: 0,
       y: 36,
       sizeX: 36,
@@ -16,7 +16,7 @@ const Money: MoneyType[] = [
     name: "Silver Coin",
     description: "Currency for slighter wealthier mortals",
     image: {
-      path: "money/coins.png",
+      path: "./money/coins.png",
       x: 0,
       y: 72,
       sizeX: 36,
@@ -27,7 +27,7 @@ const Money: MoneyType[] = [
     name: "Golden Coin",
     description: "The eternal store of value, at least for mortals",
     image: {
-      path: "money/coins.png",
+      path: "./money/coins.png",
       x: 0,
       y: 0,
       sizeX: 36,
