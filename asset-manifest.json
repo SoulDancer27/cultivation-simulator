@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/cultivation-simulator/static/js/main.35413f01.chunk.js",
-    "main.js.map": "/cultivation-simulator/static/js/main.35413f01.chunk.js.map",
+    "main.js": "/cultivation-simulator/static/js/main.db33111c.chunk.js",
+    "main.js.map": "/cultivation-simulator/static/js/main.db33111c.chunk.js.map",
     "runtime-main.js": "/cultivation-simulator/static/js/runtime-main.26a36bad.js",
     "runtime-main.js.map": "/cultivation-simulator/static/js/runtime-main.26a36bad.js.map",
     "static/js/2.af61436e.chunk.js": "/cultivation-simulator/static/js/2.af61436e.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.26a36bad.js",
     "static/js/2.af61436e.chunk.js",
-    "static/js/main.35413f01.chunk.js"
+    "static/js/main.db33111c.chunk.js"
   ]
 }
