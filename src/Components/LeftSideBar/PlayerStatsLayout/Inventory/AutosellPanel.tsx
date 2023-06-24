@@ -39,7 +39,8 @@ const ItemTypes: Array<string> = UniqueItems.map((x) => x);
 ItemTypes.unshift("all");
 
 export default function AutosellPanel() {
-  const { inventory, updateContext } = React.useContext(PlayerContext);
+  const { inventory, updateContext, setContext } =
+    React.useContext(PlayerContext);
   // Type field manager
   const [type, setType] = React.useState<string>(ItemTypes[0]);
   const typeSelectChange = (event: SelectChangeEvent) => {
@@ -68,21 +69,24 @@ export default function AutosellPanel() {
   React.useEffect(() => {
     const autosellInterval = setInterval(() => {
       if (!isActive) return;
-      const newInventory = inventory.filter((item) => {
-        if (CountableItems.includes(item.type as any)) return true; // autosell does not sell countable items
-        // For InventoryUniqueItems
-        const uItem = item as InventoryUniqueItem;
-        if (uItem.isEquipped || uItem.isLocked) return true; // equipped and locked items are not sold
-        const itemType = uItem.type;
-        const itemRealm = uItem.item.realmIndex;
-        const itemQuality = uItem.item.quality;
-        if (type !== "all" && itemType !== type) return true; // types does not match
-        if (type === "all" || itemType === type) {
-          if (itemRealm <= realm.index && itemQuality <= quality) return false; // sell item
-        }
-        return true;
+      setContext((context) => {
+        context.inventory = context.inventory.filter((item) => {
+          if (CountableItems.includes(item.type as any)) return true; // autosell does not sell countable items
+          // For InventoryUniqueItems
+          const uItem = item as InventoryUniqueItem;
+          if (uItem.isEquipped || uItem.isLocked) return true; // equipped and locked items are not sold
+          const itemType = uItem.type;
+          const itemRealm = uItem.item.realmIndex;
+          const itemQuality = uItem.item.quality;
+          if (type !== "all" && itemType !== type) return true; // types does not match
+          if (type === "all" || itemType === type) {
+            if (itemRealm <= realm.index && itemQuality <= quality)
+              return false; // sell item
+          }
+          return true;
+        });
+        return context;
       });
-      updateContext({ inventory: newInventory.slice() });
     }, 1000);
     return () => {
       clearInterval(autosellInterval);

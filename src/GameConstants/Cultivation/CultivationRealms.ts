@@ -92,16 +92,16 @@ for (let realm of LargeRealms) {
     CultivationRealms.push({
       name,
       baseStats: {
-        health: 100 * statMulti,
+        health: 50 * statMulti,
         healthRegen: 0,
         defence: 0,
-        attack: 3 * statMulti,
+        attack: 6 * statMulti,
       },
       realmPowers: {
         health: 1 * powerMulti,
         healthRegen: 1 * powerMulti,
         attack: 1 * powerMulti,
-        defence: 1 * powerMulti,
+        defence: 1,
         insight: 1 * powerMulti,
       },
       tribulation: smallIndex === 1 ? tribulation : undefined,
