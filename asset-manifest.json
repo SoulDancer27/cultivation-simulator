@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/cultivation-simulator/static/js/main.d4bdf8ee.chunk.js",
-    "main.js.map": "/cultivation-simulator/static/js/main.d4bdf8ee.chunk.js.map",
-    "runtime-main.js": "/cultivation-simulator/static/js/runtime-main.26a36bad.js",
-    "runtime-main.js.map": "/cultivation-simulator/static/js/runtime-main.26a36bad.js.map",
-    "static/js/2.e713741c.chunk.js": "/cultivation-simulator/static/js/2.e713741c.chunk.js",
-    "static/js/2.e713741c.chunk.js.map": "/cultivation-simulator/static/js/2.e713741c.chunk.js.map",
-    "index.html": "/cultivation-simulator/index.html",
-    "static/js/2.e713741c.chunk.js.LICENSE.txt": "/cultivation-simulator/static/js/2.e713741c.chunk.js.LICENSE.txt"
+    "main.js": "/static/js/main.7e1e28a2.chunk.js",
+    "main.js.map": "/static/js/main.7e1e28a2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e610a556.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e610a556.js.map",
+    "static/js/2.e713741c.chunk.js": "/static/js/2.e713741c.chunk.js",
+    "static/js/2.e713741c.chunk.js.map": "/static/js/2.e713741c.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.e713741c.chunk.js.LICENSE.txt": "/static/js/2.e713741c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.26a36bad.js",
+    "static/js/runtime-main.e610a556.js",
     "static/js/2.e713741c.chunk.js",
-    "static/js/main.d4bdf8ee.chunk.js"
+    "static/js/main.7e1e28a2.chunk.js"
   ]
 }
