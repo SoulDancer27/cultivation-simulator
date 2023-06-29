@@ -15,7 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^8.1.1",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "typescript": "^5.0.4",
     "uuid": "^9.0.0"
   },
@@ -26,7 +26,9 @@
     "typedoc": "npx typedoc --entryPointStrategy expand --excludeNotDocumented ./src",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,14 +48,27 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.0.24",
+    "@storybook/addon-interactions": "7.0.24",
+    "@storybook/addon-links": "7.0.24",
+    "@storybook/blocks": "7.0.24",
+    "@storybook/preset-create-react-app": "7.0.24",
+    "@storybook/react": "7.0.24",
+    "@storybook/react-webpack5": "7.0.24",
+    "@storybook/testing-library": "0.0.14-next.2",
     "@types/node": "^16.11.12",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
+    "babel-plugin-named-exports-order": "0.0.2",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-storybook": "^0.6.12",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "typedoc": "^0.24.8"
+    "prop-types": "15.8.1",
+    "storybook": "7.0.24",
+    "typedoc": "^0.24.8",
+    "webpack": "5.88.1"
   }
 }
