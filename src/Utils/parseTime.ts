@@ -1,4 +1,4 @@
-import { year, month } from "GameConstants/Constants";
+import { month, year } from "GameConstants/Constants";
 
 // Parses time from milliseconds to human readable ingame format
 export default function parseTime(time: number): string {

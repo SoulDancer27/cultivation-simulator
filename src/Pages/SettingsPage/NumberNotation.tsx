@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { changeNotation, selectNotation } from "engine/features/settingsSlice";
-import { useAppSelector, useAppDispatch } from "engine/hooks";
+import { useAppDispatch, useAppSelector } from "engine/hooks";
 
 export default function NumberNotation() {
   const notation = useAppSelector(selectNotation);

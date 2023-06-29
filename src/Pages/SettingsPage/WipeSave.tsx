@@ -1,7 +1,5 @@
 import { Button } from "@mui/material";
 
-import React from "react";
-
 export default function WipeSave() {
   const handleClick = () => {
     localStorage.removeItem("player");

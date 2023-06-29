@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import SettingsPage from "Pages/SettingsPage";
 import store from "engine/store";
 import React from "react";

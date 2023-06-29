@@ -3,7 +3,7 @@ import {
   changeGameSpeed,
   selectGameSpeed,
 } from "engine/features/settingsSlice";
-import { useAppSelector, useAppDispatch } from "engine/hooks";
+import { useAppDispatch, useAppSelector } from "engine/hooks";
 
 const marks = [
   {
