@@ -1,6 +1,6 @@
 import { Box, Slider, Typography } from "@mui/material";
-import { SettingsContext } from "GameEngine";
-import React from "react";
+import { changeTickRate, selectTickRate } from "engine/features/settingsSlice";
+import { useAppSelector, useAppDispatch } from "engine/hooks";
 
 const marks = [
   {
@@ -30,7 +30,8 @@ const marks = [
 ];
 
 export default function TickRate() {
-  const { tickRate, updateContext } = React.useContext(SettingsContext);
+  const tickRate = useAppSelector(selectTickRate);
+  const dispatch = useAppDispatch();
 
   return (
     <Box>
@@ -43,7 +44,7 @@ export default function TickRate() {
           valueLabelDisplay="auto"
           marks={marks}
           onChangeCommitted={(event, value) => {
-            updateContext({ tickRate: value as number });
+            dispatch(changeTickRate({ tickRate: value as number }));
           }}
         />
       </Box>

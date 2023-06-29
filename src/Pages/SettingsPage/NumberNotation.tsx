@@ -6,11 +6,12 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { SettingsContext } from "GameEngine";
-import React from "react";
+import { changeNotation, selectNotation } from "engine/features/settingsSlice";
+import { useAppSelector, useAppDispatch } from "engine/hooks";
 
 export default function NumberNotation() {
-  const { notation, updateContext } = React.useContext(SettingsContext);
+  const notation = useAppSelector(selectNotation);
+  const dispatch = useAppDispatch();
   return (
     <Box>
       <Typography variant="h6">Number Notation</Typography>
@@ -20,13 +21,15 @@ export default function NumberNotation() {
             value="trivial"
             control={<Radio />}
             label="trivial"
-            onClick={() => updateContext({ notation: "trivial" })}
+            onClick={() => dispatch(changeNotation({ notation: "trivial" }))}
           />
           <FormControlLabel
             value="exponential"
             control={<Radio />}
             label="exponential"
-            onClick={() => updateContext({ notation: "exponential" })}
+            onClick={() =>
+              dispatch(changeNotation({ notation: "exponential" }))
+            }
           />
         </RadioGroup>
       </FormControl>

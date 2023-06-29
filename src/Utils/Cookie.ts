@@ -18,6 +18,7 @@ export function createCookie(name: string, value: string, days: number): void {
 /**
  * Gets specified cookie value or returns empty string if cookie doesn't exist.
  * @param cookieName - name of the cookie
+ * @returns - cookie value or an empty string if there is no cookie with such name
  */
 export function accessCookie(cookieName: string): string {
   const name: string = cookieName + "=";

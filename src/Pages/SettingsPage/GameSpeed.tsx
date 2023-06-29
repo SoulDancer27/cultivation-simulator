@@ -1,6 +1,9 @@
 import { Box, Slider, Typography } from "@mui/material";
-import { SettingsContext } from "GameEngine";
-import React from "react";
+import {
+  changeGameSpeed,
+  selectGameSpeed,
+} from "engine/features/settingsSlice";
+import { useAppSelector, useAppDispatch } from "engine/hooks";
 
 const marks = [
   {
@@ -26,7 +29,8 @@ const marks = [
 ];
 
 export default function GameSpeed() {
-  const { gameSpeed, updateContext } = React.useContext(SettingsContext);
+  const gameSpeed = useAppSelector(selectGameSpeed);
+  const dispatch = useAppDispatch();
 
   return (
     <Box>
@@ -40,7 +44,7 @@ export default function GameSpeed() {
           valueLabelDisplay="auto"
           marks={marks}
           onChangeCommitted={(event, value) => {
-            updateContext({ gameSpeed: value as number });
+            dispatch(changeGameSpeed({ gameSpeed: value as number }));
           }}
         />
       </Box>
