@@ -1,6 +1,13 @@
 import { month, year } from "GameConstants/Constants";
 
-// Parses time from milliseconds to human readable ingame format
+/**
+ * Parses time from milliseconds to human readable ingame format.
+ *
+ * Uses month and year length specified im milliseconds to parse the time.
+ * @param time - time specified in milliseconds
+ * @returns - returns time in the format of "${years} y ${months} m"
+ * @group Parsing
+ */
 export default function parseTime(time: number): string {
   const years = Math.floor(time / year);
   // Just in case to not overflow 12 due to rounding

@@ -9,7 +9,10 @@ export function getWindowDimensions() {
   };
 }
 
-// Re-renders page on screen size change
+/**
+ * Custom hook, rerenders page on window size change
+ * @returns - window.innerWidth, window.innerHeight
+ */
 export default function useWindowDimensions() {
   const [windowDimensions, setWindowDimensions] = React.useState(
     getWindowDimensions()

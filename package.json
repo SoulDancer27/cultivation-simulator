@@ -23,7 +23,7 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
-    "typedoc": "npx typedoc --entryPointStrategy expand --excludeNotDocumented ./src",
+    "typedoc": "npx typedoc --tsconfig tsconfig.json",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
@@ -69,6 +69,8 @@
     "prop-types": "15.8.1",
     "storybook": "7.0.24",
     "typedoc": "^0.24.8",
+    "typedoc-plugin-rename-defaults": "^0.6.5",
+    "typedoc-theme-hierarchy": "^4.0.0",
     "webpack": "5.88.1"
   }
 }

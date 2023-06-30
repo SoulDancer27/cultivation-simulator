@@ -12069,6 +12069,18 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
+typedoc-plugin-rename-defaults@^0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-rename-defaults/-/typedoc-plugin-rename-defaults-0.6.5.tgz#4c6bb17ae3461cc5cc4cdaabc6f5d5f69be48131"
+  integrity sha512-DwkgwRMxgu3UrDR3VUAdnF9jYzM6p7rw6UcVIh4MD7yjEmFDR8WWyOlk6oYgELmRYHxTDx0f0GK6iSgoxSh/Qw==
+
+typedoc-theme-hierarchy@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/typedoc-theme-hierarchy/-/typedoc-theme-hierarchy-4.0.0.tgz#1b56d274b2aa068c041842f930fabeebcb9483cf"
+  integrity sha512-/y8QfmkLN+NS57hoxsS/vD1fdAPdkd7JtC7xWp2Lk3rE6/cRweFdEfaKD6GJCQMD3CuSD7Ldcc5vjwwrF4UqyQ==
+  dependencies:
+    fs-extra "^10.0.0"
+
 typedoc@^0.24.8:
   version "0.24.8"
   resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.24.8.tgz#cce9f47ba6a8d52389f5e583716a2b3b4335b63e"

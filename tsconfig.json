@@ -26,7 +26,14 @@
     "src"
   ],
   "typedocOptions": {
-    "entryPoints": ["./src/index.tsx"],
-    "out": "docs"
-}
+    "entryPoints": [
+      "./src/Utils/index.ts",
+      "./src/engine"
+    ],
+    "entryPointStrategy": "expand",
+    "excludeNotDocumented": true,
+    "basePath": "src",
+    "out": "docs",
+    "plugin": "typedoc-plugin-rename-defaults"
+  }
 }

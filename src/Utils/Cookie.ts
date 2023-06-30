@@ -1,8 +1,15 @@
 /**
  * Creates a cookie which expires after a certain amount of days.
+ *
  * @param name - name for the cookie
  * @param value - value for the cookie
- * @param days - expires after certain amount of days
+ * @param days - expiration period specified in days
+ * @example
+ *
+ * ```
+ * createCookie('token', authToken, 1000)
+ * ```
+ * @group Cookies
  */
 export function createCookie(name: string, value: string, days: number): void {
   let expires = "";
@@ -19,6 +26,7 @@ export function createCookie(name: string, value: string, days: number): void {
  * Gets specified cookie value or returns empty string if cookie doesn't exist.
  * @param cookieName - name of the cookie
  * @returns - cookie value or an empty string if there is no cookie with such name
+ * @group Cookies
  */
 export function accessCookie(cookieName: string): string {
   const name: string = cookieName + "=";
