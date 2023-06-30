@@ -1,9 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import settingsReducer from "./features/settingsSlice";
 
-/**
- * Redux store
- */
+// Redux store
 const store = configureStore({
   reducer: {
     settings: settingsReducer,

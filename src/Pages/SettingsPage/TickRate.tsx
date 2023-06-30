@@ -1,6 +1,9 @@
 import { Box, Slider, Typography } from "@mui/material";
-import { changeTickRate, selectTickRate } from "engine/features/settingsSlice";
-import { useAppDispatch, useAppSelector } from "engine/hooks";
+import {
+  changeTickRate,
+  selectTickRate,
+} from "engine/store/features/settingsSlice";
+import { useAppDispatch, useAppSelector } from "engine/store/hooks";
 
 const marks = [
   {

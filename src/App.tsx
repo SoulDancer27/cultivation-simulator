@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import SettingsPage from "Pages/SettingsPage";
-import store from "engine/store";
+import store from "engine/store/store";
 import React from "react";
 import { Provider } from "react-redux";
 

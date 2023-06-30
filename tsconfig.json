@@ -28,7 +28,7 @@
   "typedocOptions": {
     "entryPoints": [
       "./src/Utils/index.ts",
-      "./src/engine"
+      "./src/engine/store/index.ts",
     ],
     "entryPointStrategy": "expand",
     "excludeNotDocumented": true,

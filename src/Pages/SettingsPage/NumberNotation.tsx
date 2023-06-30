@@ -6,8 +6,11 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { changeNotation, selectNotation } from "engine/features/settingsSlice";
-import { useAppDispatch, useAppSelector } from "engine/hooks";
+import {
+  changeNotation,
+  selectNotation,
+} from "engine/store/features/settingsSlice";
+import { useAppDispatch, useAppSelector } from "engine/store/hooks";
 
 export default function NumberNotation() {
   const notation = useAppSelector(selectNotation);

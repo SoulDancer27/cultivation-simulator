@@ -2,8 +2,8 @@ import { Box, Slider, Typography } from "@mui/material";
 import {
   changeGameSpeed,
   selectGameSpeed,
-} from "engine/features/settingsSlice";
-import { useAppDispatch, useAppSelector } from "engine/hooks";
+} from "engine/store/features/settingsSlice";
+import { useAppDispatch, useAppSelector } from "engine/store/hooks";
 
 const marks = [
   {
