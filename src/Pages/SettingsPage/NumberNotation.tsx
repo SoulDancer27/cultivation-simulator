@@ -9,8 +9,8 @@ import {
 import {
   changeNotation,
   selectNotation,
-} from "engine/store/features/settingsSlice";
-import { useAppDispatch, useAppSelector } from "engine/store/hooks";
+} from "GameEngine/store/features/settingsSlice";
+import { useAppDispatch, useAppSelector } from "GameEngine/store/hooks";
 
 export default function NumberNotation() {
   const notation = useAppSelector(selectNotation);

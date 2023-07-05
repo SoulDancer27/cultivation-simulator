@@ -3,6 +3,7 @@
  * @module Utilities
  */
 import { accessCookie, createCookie } from "./Cookie";
+import { loadState, saveState } from "./LocalStorage";
 import getSpacing from "./getSpacing";
 import { exponentialNumber, trivialNumber } from "./parseNumber";
 import parseTime from "./parseTime";
@@ -13,7 +14,9 @@ export {
   createCookie,
   exponentialNumber,
   getSpacing,
+  loadState,
   parseTime,
+  saveState,
   trivialNumber,
   useWindowDimensions,
 };

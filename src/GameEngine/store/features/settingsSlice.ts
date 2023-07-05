@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "engine/store/store";
+import { RootState } from "GameEngine/store/store";
 
 /**
  * Number notation type to display on screen
@@ -24,6 +24,7 @@ const initialState: SettingsState = {
   notation: "trivial",
 };
 
+/**Slice for redux store */
 export const settingsSlice = createSlice({
   name: "settings",
   initialState,

@@ -2,7 +2,11 @@
  * Redux state store for the application
  * @module Store
  */
-import type { NumberNotation, SettingsState } from "./features/settingsSlice";
+import type {
+  NumberNotation,
+  SettingsState,
+  settingsSlice,
+} from "./features/settingsSlice";
 import {
   changeGameSpeed,
   changeNotation,
@@ -14,6 +18,7 @@ export {
   changeGameSpeed,
   changeNotation,
   changeTickRate,
+  settingsSlice,
   store,
   useAppDispatch,
   useAppSelector,

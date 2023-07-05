@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
+import DataManager from "GameEngine/DataManager";
+import { store } from "GameEngine/store";
+
 import SettingsPage from "Pages/SettingsPage";
-import store from "engine/store/store";
 import React from "react";
 import { Provider } from "react-redux";
 
@@ -8,9 +10,11 @@ export default function App() {
   const [settings, setSettings] = React.useState<boolean>(true);
   return (
     <Provider store={store}>
-      <Box>
-        <SettingsPage setSettings={setSettings} />
-      </Box>
+      <DataManager>
+        <Box>
+          <SettingsPage setSettings={setSettings} />
+        </Box>
+      </DataManager>
     </Provider>
   );
 }
