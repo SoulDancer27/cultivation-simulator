@@ -1,13 +1,18 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { loadState, saveState } from "Utils";
+import playerReducer from "./features/playerSlice";
 import settingsReducer from "./features/settingsSlice";
 
 // Redux store
 const store = configureStore({
   reducer: {
     settings: settingsReducer,
+    player: playerReducer,
   },
-  preloadedState: loadState("data"),
+  preloadedState: {
+    settings: loadState("settings"),
+    player: loadState("player"),
+  },
 });
 
 export default store;
@@ -24,7 +29,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 export const saveStoreData = (): AppThunk<void> => {
   return function saveStoreDataThunk(dispatch, getState) {
     const state = getState();
-    saveState(state, "data");
+    saveState(state.settings, "settings");
+    saveState(state.player, "player");
   };
 };
 
