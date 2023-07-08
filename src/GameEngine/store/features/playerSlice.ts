@@ -15,12 +15,15 @@ export interface PlayerState {
   baseStats: PlayerBaseStats;
   /** player stats that can have a value between min and max, like hp, mana etc */
   currentStats: PlayerCurrentStats;
+  /** current cultivation realm index */
+  cultivation: number;
 }
 
 const initialState = {
   age: 10 * year,
   baseStats,
   currentStats,
+  cultivation: 0,
 };
 
 /** Slice for the redux store, contains player stats data */
