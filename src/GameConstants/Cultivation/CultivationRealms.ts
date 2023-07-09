@@ -20,7 +20,6 @@ export type TribulationStats = {
 export type CultivationRealm = {
   name: string;
   baseStats: TribulationStats;
-  currentStats?: TribulationStats & { currentHealth: number }; // currentHealth is for progress tracking
   // Additional stats for heavenly tribulations
   tribulation?: Tribulation;
   // Reward stats multipliers
