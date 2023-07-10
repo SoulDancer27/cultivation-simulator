@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Trainings from "GameConstants/Activities/Trainings";
-import createNormalizedState from "./createNormalizedState";
+import { createNormalizedActivityState } from "./createNormalizedState";
 
 let initialState = {
-  trainings: createNormalizedState(Trainings, "name"),
+  trainings: createNormalizedActivityState(Trainings, "name"),
 };
 
 export const contentSlice = createSlice({

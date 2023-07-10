@@ -1,5 +1,5 @@
-import { Activity } from "./Activities";
 import { day, month } from "../Constants";
+import { Activity } from "./Activities";
 
 // Placeholder activities
 let Gathering: Activity[] = [
@@ -7,7 +7,7 @@ let Gathering: Activity[] = [
     name: "Collect grass",
     baseTime: 5 * day,
     result: {
-      skills: {
+      baseStats: {
         gathering: 0.01,
       },
       items: [{ type: "herb", name: "Grass Stalk", amount: 1 }],
@@ -17,7 +17,7 @@ let Gathering: Activity[] = [
     name: "Pick tree leaves",
     baseTime: month,
     result: {
-      skills: {
+      baseStats: {
         gathering: 0.03,
       },
       items: [{ type: "herb", name: "Oak leaf", amount: 1 }],
@@ -27,10 +27,8 @@ let Gathering: Activity[] = [
 
 Gathering = Gathering.map((item) => {
   if (!item.time) item.time = "gathering time";
-  if (item.result.baseStats && !item.result.baseStatsMulti)
-    item.result.baseStatsMulti = "default";
-  if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = "default";
+  if (item.result.baseStats && !item.result.baseStatsFunc)
+    item.result.baseStatsFunc = "default";
   return item;
 });
 

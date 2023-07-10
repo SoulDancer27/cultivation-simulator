@@ -1,5 +1,5 @@
-import { Activity } from "./Activities";
 import { day } from "../Constants";
+import { Activity } from "./Activities";
 
 // Some example items for now
 let Crafting: Activity[] = [
@@ -22,8 +22,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Copper Sword",
@@ -53,8 +53,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Copper Armor",
@@ -84,8 +84,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Copper Helmet",
@@ -115,8 +115,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Copper Pendant",
@@ -146,8 +146,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Copper Ring",
@@ -177,8 +177,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Iron Sword",
@@ -208,8 +208,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Iron Armor",
@@ -239,8 +239,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Iron Helmet",
@@ -270,8 +270,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Iron Pendant",
@@ -301,8 +301,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Iron Ring",
@@ -332,8 +332,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Steel Sword",
@@ -363,8 +363,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Steel Armor",
@@ -394,8 +394,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Steel Helmet",
@@ -425,8 +425,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Steel Pendant",
@@ -456,8 +456,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Steel Ring",
@@ -482,8 +482,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Cold Steel Sword",
@@ -508,8 +508,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Cold Steel Armor",
@@ -534,8 +534,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Cold Steel Helmet",
@@ -560,8 +560,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Cold Steel Pendant",
@@ -586,8 +586,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Cold Steel Ring",
@@ -612,8 +612,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Golden Sword",
@@ -638,8 +638,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Golden Armor",
@@ -664,8 +664,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Golden Helmet",
@@ -690,8 +690,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Golden Pendant",
@@ -716,8 +716,8 @@ let Crafting: Activity[] = [
       ],
     },
     result: {
-      skills: { crafting: 0.1 },
-      skillsMulti: "crafting skill reward",
+      baseStats: { crafting: 0.1 },
+      baseStatsFunc: "crafting skill reward",
       items: [
         {
           name: "Golden Ring",
@@ -729,11 +729,5 @@ let Crafting: Activity[] = [
     },
   },
 ];
-
-Crafting = Crafting.map((item) => {
-  if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = "crafting skill reward";
-  return item;
-});
 
 export default Crafting;

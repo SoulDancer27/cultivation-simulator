@@ -1,12 +1,11 @@
 import { Activity, ActivityItem } from "GameConstants/Activities/Activities";
-import { PlayerContextType, InventoryTreasure } from "GameConstants/Interfaces";
 import Treasures, {
   Treasure,
   TreasureStats,
 } from "GameConstants/Items/Treasures";
 import { v4 as uuid } from "uuid";
-import quality from "./quality";
 import power from "./power";
+import quality from "./quality";
 
 // A function that returns treasure item as a result. Stats are based on player current skills
 export default function CraftTreasure(stats: (power: number) => TreasureStats) {

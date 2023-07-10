@@ -1,5 +1,5 @@
-import { Activity } from "./Activities";
 import { day, month } from "../Constants";
+import { Activity } from "./Activities";
 
 // Placeholder activities
 let Mining: Activity[] = [
@@ -7,7 +7,7 @@ let Mining: Activity[] = [
     name: "Copper",
     baseTime: 5 * day,
     result: {
-      skills: {
+      baseStats: {
         mining: 0.01,
       },
       items: [{ type: "mineral", name: "Copper", amount: 1 }],
@@ -17,7 +17,7 @@ let Mining: Activity[] = [
     name: "Iron",
     baseTime: month,
     result: {
-      skills: {
+      baseStats: {
         mining: 0.03,
       },
       items: [{ type: "mineral", name: "Iron", amount: 1 }],
@@ -27,7 +27,7 @@ let Mining: Activity[] = [
     name: "Steel",
     baseTime: 6 * month,
     result: {
-      skills: {
+      baseStats: {
         mining: 0.1,
       },
       items: [{ type: "mineral", name: "Steel", amount: 1 }],
@@ -37,7 +37,7 @@ let Mining: Activity[] = [
     name: "Cold Steel",
     baseTime: 30 * month,
     result: {
-      skills: {
+      baseStats: {
         mining: 0.3,
       },
       items: [{ type: "mineral", name: "Cold Steel", amount: 1 }],
@@ -47,7 +47,7 @@ let Mining: Activity[] = [
     name: "Celestial Gold",
     baseTime: 150 * month,
     result: {
-      skills: {
+      baseStats: {
         mining: 1,
       },
       items: [{ type: "mineral", name: "Celestial Gold", amount: 1 }],
@@ -57,10 +57,8 @@ let Mining: Activity[] = [
 
 Mining = Mining.map((item) => {
   if (!item.time) item.time = "mining time";
-  if (item.result.baseStats && !item.result.baseStatsMulti)
-    item.result.baseStatsMulti = "default";
-  if (item.result.skills && !item.result.skillsMulti)
-    item.result.skillsMulti = "default";
+  if (item.result.baseStats && !item.result.baseStatsFunc)
+    item.result.baseStatsFunc = "default";
   return item;
 });
 

@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { loadState, saveState } from "Utils";
 import cultivationReducer from "./features/cultivationSlice";
+import inventoryReducer from "./features/inventorySlice";
 import manualsReducer from "./features/manualsSlice";
 import playerReducer from "./features/playerSlice";
 import settingsReducer from "./features/settingsSlice";
@@ -12,12 +13,14 @@ const store = configureStore({
     player: playerReducer,
     cultivation: cultivationReducer,
     manuals: manualsReducer,
+    inventory: inventoryReducer,
   },
   preloadedState: {
     settings: loadState("settings"),
     player: loadState("player"),
     cultivation: loadState("cultivation"),
     manuals: loadState("manuals"),
+    inventory: loadState("inventory"),
   },
 });
 
@@ -39,6 +42,7 @@ export const saveStoreData = (): AppThunk<void> => {
     saveState(state.player, "player");
     saveState(state.cultivation, "cultivation");
     saveState(state.manuals, "manuals");
+    saveState(state.inventory, "inventory");
   };
 };
 

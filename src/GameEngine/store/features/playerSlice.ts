@@ -8,6 +8,7 @@ import {
   baseStats,
   currentStats,
 } from "GameConstants/Player";
+import { RootState } from "../store";
 
 /** Player states */
 
@@ -141,5 +142,6 @@ export const playerSlice = createSlice({
 });
 
 export const { changePlayerAge } = playerSlice.actions;
+export const selectPlayerState = (state: RootState) => state.player.state;
 
 export default playerSlice.reducer;
